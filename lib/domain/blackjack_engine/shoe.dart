@@ -8,16 +8,27 @@ import 'game_rules.dart';
 
 class Shoe {
   Shoe({required this.rules, Random? random})
-    : _random = random ?? Random.secure() {
+    : _random = random ?? Random.secure(),
+      _scriptedCards = null {
+    reset();
+  }
+
+  Shoe.scripted({required this.rules, required Iterable<PlayingCard> cards})
+    : _random = Random(0),
+      _scriptedCards = List<PlayingCard>.unmodifiable(cards) {
+    if (_scriptedCards!.isEmpty) {
+      throw ArgumentError.value(cards, 'cards', 'A shoe cannot be empty.');
+    }
     reset();
   }
 
   final GameRulesProfile rules;
   final Random _random;
+  final List<PlayingCard>? _scriptedCards;
   final List<PlayingCard> _cards = [];
   var _nextCardIndex = 0;
 
-  int get totalCards => rules.deckCount * 52;
+  int get totalCards => _cards.length;
   int get dealtCount => _nextCardIndex;
   int get remainingCount => _cards.length - _nextCardIndex;
   double get dealtFraction => dealtCount / totalCards;
@@ -26,8 +37,10 @@ class Shoe {
   void reset() {
     _cards
       ..clear()
-      ..addAll(_buildCards());
-    _fisherYatesShuffle(_cards);
+      ..addAll(_scriptedCards ?? _buildCards());
+    if (_scriptedCards == null) {
+      _fisherYatesShuffle(_cards);
+    }
     _nextCardIndex = 0;
   }
 

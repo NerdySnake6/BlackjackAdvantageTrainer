@@ -151,6 +151,65 @@ class ExerciseAttempt {
   final DateTime answeredAt;
 }
 
+class ExerciseReviewState {
+  const ExerciseReviewState({
+    this.attempts = 0,
+    this.successfulReviewStreak = 0,
+    this.nextReviewAt,
+  });
+
+  factory ExerciseReviewState.fromJson(Map<String, Object?> json) {
+    return ExerciseReviewState(
+      attempts: json['attempts'] as int? ?? 0,
+      successfulReviewStreak: json['successfulReviewStreak'] as int? ?? 0,
+      nextReviewAt: json['nextReviewAt'] == null
+          ? null
+          : DateTime.parse(json['nextReviewAt']! as String),
+    );
+  }
+
+  final int attempts;
+  final int successfulReviewStreak;
+  final DateTime? nextReviewAt;
+
+  bool isDue(DateTime now) =>
+      nextReviewAt == null || !nextReviewAt!.isAfter(now);
+
+  Map<String, Object?> toJson() => {
+    'attempts': attempts,
+    'successfulReviewStreak': successfulReviewStreak,
+    'nextReviewAt': nextReviewAt?.toIso8601String(),
+  };
+}
+
+class ConsentState {
+  const ConsentState({
+    this.isGranted = false,
+    this.policyVersion = 0,
+    this.updatedAt,
+  });
+
+  factory ConsentState.fromJson(Map<String, Object?> json) {
+    return ConsentState(
+      isGranted: json['isGranted'] as bool? ?? false,
+      policyVersion: json['policyVersion'] as int? ?? 0,
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt']! as String),
+    );
+  }
+
+  final bool isGranted;
+  final int policyVersion;
+  final DateTime? updatedAt;
+
+  Map<String, Object?> toJson() => {
+    'isGranted': isGranted,
+    'policyVersion': policyVersion,
+    'updatedAt': updatedAt?.toIso8601String(),
+  };
+}
+
 class LessonSessionProgress {
   const LessonSessionProgress({
     required this.nextExerciseIndex,
@@ -185,8 +244,12 @@ class ProgressSnapshot {
   const ProgressSnapshot({
     this.lessonScores = const {},
     this.activeSessions = const {},
+    this.exerciseReviewStates = const {},
     this.experienceLevel,
     this.hasSeenCountDrillIntro = false,
+    this.hasSeenTelemetryConsent = false,
+    this.analyticsConsent = const ConsentState(),
+    this.crashReportsConsent = const ConsentState(),
     this.xp = 0,
     this.streakDays = 0,
     this.lastActivityDate,
@@ -195,6 +258,8 @@ class ProgressSnapshot {
   factory ProgressSnapshot.fromJson(Map<String, Object?> json) {
     final rawScores = json['lessonScores'] as Map<String, Object?>? ?? {};
     final rawSessions = json['activeSessions'] as Map<String, Object?>? ?? {};
+    final rawReviewStates =
+        json['exerciseReviewStates'] as Map<String, Object?>? ?? {};
     return ProgressSnapshot(
       lessonScores: rawScores.map(
         (key, value) => MapEntry(key, (value! as num).toDouble()),
@@ -205,10 +270,28 @@ class ProgressSnapshot {
           LessonSessionProgress.fromJson(value! as Map<String, Object?>),
         ),
       ),
+      exerciseReviewStates: rawReviewStates.map(
+        (key, value) => MapEntry(
+          key,
+          ExerciseReviewState.fromJson(value! as Map<String, Object?>),
+        ),
+      ),
       experienceLevel: ExperienceLevel.fromStorage(
         json['experienceLevel'] as String?,
       ),
       hasSeenCountDrillIntro: json['hasSeenCountDrillIntro'] as bool? ?? false,
+      hasSeenTelemetryConsent:
+          json['hasSeenTelemetryConsent'] as bool? ?? false,
+      analyticsConsent: json['analyticsConsent'] == null
+          ? const ConsentState()
+          : ConsentState.fromJson(
+              json['analyticsConsent']! as Map<String, Object?>,
+            ),
+      crashReportsConsent: json['crashReportsConsent'] == null
+          ? const ConsentState()
+          : ConsentState.fromJson(
+              json['crashReportsConsent']! as Map<String, Object?>,
+            ),
       xp: json['xp'] as int? ?? 0,
       streakDays: json['streakDays'] as int? ?? 0,
       lastActivityDate: json['lastActivityDate'] == null
@@ -219,8 +302,12 @@ class ProgressSnapshot {
 
   final Map<String, double> lessonScores;
   final Map<String, LessonSessionProgress> activeSessions;
+  final Map<String, ExerciseReviewState> exerciseReviewStates;
   final ExperienceLevel? experienceLevel;
   final bool hasSeenCountDrillIntro;
+  final bool hasSeenTelemetryConsent;
+  final ConsentState analyticsConsent;
+  final ConsentState crashReportsConsent;
   final int xp;
   final int streakDays;
   final DateTime? lastActivityDate;
@@ -237,8 +324,14 @@ class ProgressSnapshot {
     'activeSessions': activeSessions.map(
       (key, value) => MapEntry(key, value.toJson()),
     ),
+    'exerciseReviewStates': exerciseReviewStates.map(
+      (key, value) => MapEntry(key, value.toJson()),
+    ),
     'experienceLevel': experienceLevel?.name,
     'hasSeenCountDrillIntro': hasSeenCountDrillIntro,
+    'hasSeenTelemetryConsent': hasSeenTelemetryConsent,
+    'analyticsConsent': analyticsConsent.toJson(),
+    'crashReportsConsent': crashReportsConsent.toJson(),
     'xp': xp,
     'streakDays': streakDays,
     'lastActivityDate': lastActivityDate?.toIso8601String(),
@@ -247,8 +340,12 @@ class ProgressSnapshot {
   ProgressSnapshot copyWith({
     Map<String, double>? lessonScores,
     Map<String, LessonSessionProgress>? activeSessions,
+    Map<String, ExerciseReviewState>? exerciseReviewStates,
     ExperienceLevel? experienceLevel,
     bool? hasSeenCountDrillIntro,
+    bool? hasSeenTelemetryConsent,
+    ConsentState? analyticsConsent,
+    ConsentState? crashReportsConsent,
     int? xp,
     int? streakDays,
     DateTime? lastActivityDate,
@@ -257,9 +354,14 @@ class ProgressSnapshot {
     return ProgressSnapshot(
       lessonScores: lessonScores ?? this.lessonScores,
       activeSessions: activeSessions ?? this.activeSessions,
+      exerciseReviewStates: exerciseReviewStates ?? this.exerciseReviewStates,
       experienceLevel: experienceLevel ?? this.experienceLevel,
       hasSeenCountDrillIntro:
           hasSeenCountDrillIntro ?? this.hasSeenCountDrillIntro,
+      hasSeenTelemetryConsent:
+          hasSeenTelemetryConsent ?? this.hasSeenTelemetryConsent,
+      analyticsConsent: analyticsConsent ?? this.analyticsConsent,
+      crashReportsConsent: crashReportsConsent ?? this.crashReportsConsent,
       xp: xp ?? this.xp,
       streakDays: streakDays ?? this.streakDays,
       lastActivityDate: clearLastActivityDate

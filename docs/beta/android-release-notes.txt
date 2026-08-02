@@ -1,0 +1,9 @@
+Closed beta candidate
+
+- Deterministic lesson answer order and 54 original exercises.
+- Guided and Practice table training with strategy and count feedback.
+- Quick Review with local spaced-review scheduling.
+- Optional analytics and crash-report choices, both off by default.
+
+This build is an educational, self-contained blackjack simulation. It has no
+real-money wagering, casino connection, ads, or live-table input.

@@ -13,7 +13,7 @@ import '../domain/blackjack_engine/shoe.dart';
 enum CountDrillPhase { idle, running, checkpoint, complete }
 
 class CountDrillViewModel extends ChangeNotifier {
-  CountDrillViewModel({Random? random})
+  CountDrillViewModel({Random? random, this.onEvent})
     : _shoe = Shoe(
         rules: const GameRulesProfile(
           id: 'countdown_single_deck',
@@ -31,6 +31,7 @@ class CountDrillViewModel extends ChangeNotifier {
 
   final Shoe _shoe;
   final CountingEngine _countingEngine = CountingEngine();
+  final void Function(String, Map<String, Object?>)? onEvent;
   CountDrillPhase _phase = CountDrillPhase.idle;
   PlayingCard? _currentCard;
   var _submittedCount = 0;
@@ -57,6 +58,7 @@ class CountDrillViewModel extends ChangeNotifier {
     _revealedCorrectCount = null;
     _checkpointNumber = 0;
     revealNext();
+    onEvent?.call('drill_started', {'session_type': 'one_deck'});
   }
 
   void revealNext() {
@@ -90,6 +92,11 @@ class CountDrillViewModel extends ChangeNotifier {
     }
     _revealedCorrectCount = _countingEngine.runningCount;
     _lastAnswerCorrect = _submittedCount == _countingEngine.runningCount;
+    onEvent?.call('count_check', {
+      'session_type': 'drill',
+      'is_correct': _lastAnswerCorrect!,
+      'cards_seen': cardsSeen,
+    });
     notifyListeners();
   }
 
@@ -99,6 +106,10 @@ class CountDrillViewModel extends ChangeNotifier {
     }
     if (_shoe.remainingCount == 0) {
       _phase = CountDrillPhase.complete;
+      onEvent?.call('drill_completed', {
+        'session_type': 'one_deck',
+        'cards_seen': cardsSeen,
+      });
       notifyListeners();
       return;
     }

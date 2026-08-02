@@ -196,6 +196,54 @@ abstract class AppLocalizations {
   /// **'This changes your recommended starting point, not your saved progress.'**
   String get experienceLevelNote;
 
+  /// No description provided for @telemetryConsentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help improve the training'**
+  String get telemetryConsentTitle;
+
+  /// No description provided for @telemetryConsentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose separately whether to share anonymous usage events and technical crash reports.'**
+  String get telemetryConsentBody;
+
+  /// No description provided for @usageAnalyticsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage analytics'**
+  String get usageAnalyticsTitle;
+
+  /// No description provided for @usageAnalyticsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share stable lesson IDs, session types, and aggregate correctness. Answer text and card sequences are never sent.'**
+  String get usageAnalyticsDescription;
+
+  /// No description provided for @crashReportsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Crash reports'**
+  String get crashReportsTitle;
+
+  /// No description provided for @crashReportsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share fatal technical diagnostics so crashes can be fixed. No gameplay content or personal profile is attached.'**
+  String get crashReportsDescription;
+
+  /// No description provided for @telemetryOptionalNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Both choices are optional. Saying no does not limit the app, and you can change them in Progress.'**
+  String get telemetryOptionalNote;
+
+  /// No description provided for @saveAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save and continue'**
+  String get saveAndContinue;
+
   /// No description provided for @recommendedStart.
   ///
   /// In en, this message translates to:
@@ -259,8 +307,26 @@ abstract class AppLocalizations {
   /// No description provided for @lessonCompleteSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Accuracy unlocks the next node. Mastery still requires repetition.'**
+  /// **'Accuracy unlocked the next node. Keep reviewing to retain the skill.'**
   String get lessonCompleteSubtitle;
+
+  /// No description provided for @lessonNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson finished — review required'**
+  String get lessonNeedsReview;
+
+  /// No description provided for @lessonNeedsReviewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach at least 80% accuracy to unlock the next lesson.'**
+  String get lessonNeedsReviewSubtitle;
+
+  /// No description provided for @retryLesson.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and try again'**
+  String get retryLesson;
 
   /// No description provided for @lessonResult.
   ///
@@ -297,6 +363,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back to path'**
   String get backToPath;
+
+  /// No description provided for @quickReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Review'**
+  String get quickReviewTitle;
+
+  /// No description provided for @quickReviewReadyLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak and due exercises will appear here.'**
+  String get quickReviewReadyLater;
+
+  /// No description provided for @quickReviewDue.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} exercises ready · about 3–5 min'**
+  String quickReviewDue(int count);
+
+  /// No description provided for @quickReviewProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Review {current} of {total}'**
+  String quickReviewProgress(int current, int total);
+
+  /// No description provided for @quickReviewEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to review yet'**
+  String get quickReviewEmptyTitle;
+
+  /// No description provided for @quickReviewEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete a few lesson exercises, then return for a focused review.'**
+  String get quickReviewEmptyBody;
+
+  /// No description provided for @quickReviewComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Review complete'**
+  String get quickReviewComplete;
+
+  /// No description provided for @quickReviewResult.
+  ///
+  /// In en, this message translates to:
+  /// **'{correct} of {total} correct. Your next review dates were updated.'**
+  String quickReviewResult(int correct, int total);
 
   /// No description provided for @countdownTitle.
   ///
@@ -343,7 +457,7 @@ abstract class AppLocalizations {
   /// No description provided for @countDrillIntroDeckNote.
   ///
   /// In en, this message translates to:
-  /// **'One deck has 52 cards and its tags balance back to 0. The standard table uses six decks (312 cards); the count resets only when the shoe is shuffled.'**
+  /// **'All 52 cards of one complete deck sum to 0 in Hi-Lo. In a multi-deck shoe, any 52 cards are only a mixed segment: keep the running count until the shoe is shuffled.'**
   String get countDrillIntroDeckNote;
 
   /// No description provided for @countDrillIntroKnown.
@@ -556,6 +670,144 @@ abstract class AppLocalizations {
   /// **'GUIDED TABLE'**
   String get guidedMode;
 
+  /// No description provided for @practiceMode.
+  ///
+  /// In en, this message translates to:
+  /// **'PRACTICE TABLE'**
+  String get practiceMode;
+
+  /// No description provided for @guidedModeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided'**
+  String get guidedModeName;
+
+  /// No description provided for @practiceModeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get practiceModeName;
+
+  /// No description provided for @tableRoundProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {completed} / {total}'**
+  String tableRoundProgress(int completed, int total);
+
+  /// No description provided for @recommendedAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended: {action}'**
+  String recommendedAction(String action);
+
+  /// No description provided for @continueAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueAction;
+
+  /// No description provided for @tableCountPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'What is the running count?'**
+  String get tableCountPrompt;
+
+  /// No description provided for @tableSessionComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Five-round session complete'**
+  String get tableSessionComplete;
+
+  /// No description provided for @strategyAccuracy.
+  ///
+  /// In en, this message translates to:
+  /// **'Strategy {percent}%'**
+  String strategyAccuracy(int percent);
+
+  /// No description provided for @countAccuracy.
+  ///
+  /// In en, this message translates to:
+  /// **'Count {percent}%'**
+  String countAccuracy(int percent);
+
+  /// No description provided for @startAnotherSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Another session'**
+  String get startAnotherSession;
+
+  /// No description provided for @strategyReasonSplitPair.
+  ///
+  /// In en, this message translates to:
+  /// **'Splitting this pair creates the stronger long-run play.'**
+  String get strategyReasonSplitPair;
+
+  /// No description provided for @strategyReasonStandPair.
+  ///
+  /// In en, this message translates to:
+  /// **'This pair should stay together against this dealer card.'**
+  String get strategyReasonStandPair;
+
+  /// No description provided for @strategyReasonDoublePair.
+  ///
+  /// In en, this message translates to:
+  /// **'Play these cards as a hard ten and double against this dealer card.'**
+  String get strategyReasonDoublePair;
+
+  /// No description provided for @strategyReasonHitPair.
+  ///
+  /// In en, this message translates to:
+  /// **'This pair is stronger when played as a regular hand.'**
+  String get strategyReasonHitPair;
+
+  /// No description provided for @strategyReasonSurrenderHard.
+  ///
+  /// In en, this message translates to:
+  /// **'Late surrender loses less than playing this weak hard total.'**
+  String get strategyReasonSurrenderHard;
+
+  /// No description provided for @strategyReasonDoubleSoft.
+  ///
+  /// In en, this message translates to:
+  /// **'The soft total has enough upside to double against this dealer card.'**
+  String get strategyReasonDoubleSoft;
+
+  /// No description provided for @strategyReasonStandSoft.
+  ///
+  /// In en, this message translates to:
+  /// **'This soft total is already strong enough to stand.'**
+  String get strategyReasonStandSoft;
+
+  /// No description provided for @strategyReasonHitSoft.
+  ///
+  /// In en, this message translates to:
+  /// **'The ace protects the hand while another card can improve it.'**
+  String get strategyReasonHitSoft;
+
+  /// No description provided for @strategyReasonDoubleHard.
+  ///
+  /// In en, this message translates to:
+  /// **'This hard total has an advantage against the dealer\'s up-card.'**
+  String get strategyReasonDoubleHard;
+
+  /// No description provided for @strategyReasonStandHard.
+  ///
+  /// In en, this message translates to:
+  /// **'The dealer is more likely to break; avoid taking another card.'**
+  String get strategyReasonStandHard;
+
+  /// No description provided for @strategyReasonHitHard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standing is too weak here; take another card.'**
+  String get strategyReasonHitHard;
+
+  /// No description provided for @strategyReasonFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'The preferred move is unavailable, so use the safest legal fallback.'**
+  String get strategyReasonFallback;
+
   /// No description provided for @standardRulesName.
   ///
   /// In en, this message translates to:
@@ -661,8 +913,20 @@ abstract class AppLocalizations {
   /// No description provided for @masteryLabel.
   ///
   /// In en, this message translates to:
-  /// **'Path mastery'**
+  /// **'Lesson accuracy'**
   String get masteryLabel;
+
+  /// No description provided for @experienceSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience level'**
+  String get experienceSettingTitle;
+
+  /// No description provided for @experienceSettingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change your recommended starting point without deleting progress.'**
+  String get experienceSettingSubtitle;
 
   /// No description provided for @lessonsCompleted.
   ///
@@ -670,10 +934,22 @@ abstract class AppLocalizations {
   /// **'{completed} of {total} prototype lessons completed'**
   String lessonsCompleted(int completed, int total);
 
+  /// No description provided for @privacyChoicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy choices'**
+  String get privacyChoicesTitle;
+
+  /// No description provided for @privacyChoicesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional collection stays off unless you enable it.'**
+  String get privacyChoicesSubtitle;
+
   /// No description provided for @privacyNote.
   ///
   /// In en, this message translates to:
-  /// **'Analytics and crash reporting are off in this prototype.'**
+  /// **'Telemetry follows your separate opt-in choices. Answer text, card sequences, and personal data are not collected.'**
   String get privacyNote;
 
   /// No description provided for @educationDisclaimer.

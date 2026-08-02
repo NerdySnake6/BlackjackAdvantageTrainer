@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../app/theme.dart';
+import '../../domain/learning/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
 
@@ -48,6 +49,77 @@ class ProgressScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 12),
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(
+                      Icons.privacy_tip_outlined,
+                      color: AppColors.mint,
+                    ),
+                    title: Text(strings.privacyChoicesTitle),
+                    subtitle: Text(strings.privacyChoicesSubtitle),
+                  ),
+                  SwitchListTile(
+                    value: progress.analyticsConsent.isGranted,
+                    onChanged: (value) => appState.setTelemetryConsent(
+                      analyticsEnabled: value,
+                      crashReportsEnabled:
+                          progress.crashReportsConsent.isGranted,
+                    ),
+                    title: Text(strings.usageAnalyticsTitle),
+                  ),
+                  SwitchListTile(
+                    value: progress.crashReportsConsent.isGranted,
+                    onChanged: (value) => appState.setTelemetryConsent(
+                      analyticsEnabled: progress.analyticsConsent.isGranted,
+                      crashReportsEnabled: value,
+                    ),
+                    title: Text(strings.crashReportsTitle),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      strings.experienceSettingTitle,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      strings.experienceSettingSubtitle,
+                      style: const TextStyle(color: Colors.white60),
+                    ),
+                    const SizedBox(height: 14),
+                    DropdownButtonFormField<ExperienceLevel>(
+                      initialValue: progress.experienceLevel,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
+                      items: [
+                        for (final level in ExperienceLevel.values)
+                          DropdownMenuItem(
+                            value: level,
+                            child: Text(_experienceLabel(strings, level)),
+                          ),
+                      ],
+                      onChanged: (level) {
+                        if (level != null) {
+                          appState.chooseExperienceLevel(level);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(height: 12),
             Card(
@@ -126,6 +198,14 @@ class ProgressScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _experienceLabel(AppLocalizations strings, ExperienceLevel level) {
+    return switch (level) {
+      ExperienceLevel.beginner => strings.beginnerLevelTitle,
+      ExperienceLevel.basics => strings.basicsLevelTitle,
+      ExperienceLevel.experienced => strings.experiencedLevelTitle,
+    };
   }
 
   Future<void> _confirmReset(BuildContext context, AppState appState) async {

@@ -78,14 +78,14 @@ class _LessonView extends StatelessWidget {
                     const SizedBox(height: 28),
                     for (
                       var index = 0;
-                      index < exercise.options.length;
+                      index < viewModel.currentOptions.length;
                       index++
                     ) ...[
                       _AnswerOption(
                         index: index,
-                        label: exercise.options[index],
+                        label: viewModel.currentOptions[index],
                         selectedIndex: viewModel.selectedIndex,
-                        correctIndex: exercise.correctIndex,
+                        correctIndex: viewModel.currentCorrectIndex,
                         onPressed: () => viewModel.answer(index),
                       ),
                       const SizedBox(height: 12),
@@ -212,14 +212,18 @@ class _LessonCompleteView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Icon(
-                Icons.verified_rounded,
-                color: AppColors.mint,
+              Icon(
+                viewModel.passed
+                    ? Icons.verified_rounded
+                    : Icons.replay_circle_filled_rounded,
+                color: viewModel.passed ? AppColors.mint : AppColors.gold,
                 size: 96,
               ),
               const SizedBox(height: 24),
               Text(
-                strings.lessonComplete,
+                viewModel.passed
+                    ? strings.lessonComplete
+                    : strings.lessonNeedsReview,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
@@ -236,15 +240,29 @@ class _LessonCompleteView extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                strings.lessonCompleteSubtitle,
+                viewModel.passed
+                    ? strings.lessonCompleteSubtitle
+                    : strings.lessonNeedsReviewSubtitle,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white60),
               ),
               const SizedBox(height: 32),
-              FilledButton(
-                onPressed: () => context.go('/learn'),
-                child: Text(strings.backToPath),
-              ),
+              if (viewModel.passed)
+                FilledButton(
+                  onPressed: () => context.go('/learn'),
+                  child: Text(strings.backToPath),
+                )
+              else ...[
+                FilledButton(
+                  onPressed: viewModel.retry,
+                  child: Text(strings.retryLesson),
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => context.go('/learn'),
+                  child: Text(strings.backToPath),
+                ),
+              ],
             ],
           ),
         ),
