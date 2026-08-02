@@ -102,6 +102,10 @@ Pro открывает:
 - проверенные rule profiles;
 - расширенную статистику и Full-Shoe Certification.
 
+В продукте нет постоянного bankroll, покупаемых фишек или внутренней валюты. Раздел Betting & Risk использует только абстрактные betting units внутри математических упражнений и отдельных учебных сессий. Эти units нельзя купить, вывести, обменять или сохранить как пользовательский денежный баланс; у них нет реальной стоимости.
+
+I18 и Fab 4 нельзя копировать вместе с индексами, таблицами, формулировками или упражнениями из коммерческих материалов. Каждый используемый индекс должен быть независимо рассчитан или проверен, иметь зафиксированный provenance и, если он получен из внешнего набора данных, явную совместимую лицензию.
+
 В v1 нет рекламы, аккаунтов, подписок, мультиплеера и реальных денег. Store-независимая граница состоит из `PurchaseGateway`, `FakePurchaseGateway`, восстановления покупок через `restorePurchases()` и `FeatureAccessPolicy`. Реальные адаптеры App Store и Google Play запланированы, но не реализованы.
 
 Lifetime-покупка восстанавливается в рамках соответствующего магазина. Покупка iOS не переносится автоматически на Android и наоборот без отдельного аккаунта и серверной entitlement-системы, которых в v1 нет.
@@ -141,17 +145,76 @@ v1 публикуется на английском. Следующий язык
 
 ## Дорожная карта при 8–12 часах в неделю
 
-| Недели | Результат |
+| Месяцы | Результат |
 | --- | --- |
-| 1–2 | Dart, Flutter и чистый domain foundation |
+| 1–2 | Dart, Flutter и clean domain |
 | 3–4 | Сквозной vertical prototype |
-| 5–8 | Free-путь, mastery и consent-aware analytics |
-| 9–11 | Pro-математика, проверенные profiles и certification |
-| 12–14 | Реальные IAP, restore, закрытая beta и исправления |
-| 15–16 | Release preparation и stabilization |
-| После v1 | Русская локализация за ориентировочно 1–2 месяца |
+| 5–8 | Engine, Free path, review, mastery и analytics |
+| 9–11 | Pro math, validated profiles и certification |
+| 12–14 | Purchases, restore, closed beta и fixes |
+| 15–16 | Publication и stabilization |
+| После English v1 | Russian localization за ориентировочно 1–2 месяца |
 
-Сроки являются рабочей оценкой, а не обещанием. Математическая проверка и store review могут увеличить этап.
+Итоговый ориентир для English commercial v1 — 12–16 месяцев при загрузке 8–12 часов в неделю. Сроки являются рабочей оценкой, а не обещанием. Математическая проверка и store review могут увеличить этап.
+
+## Обучение разработчика
+
+Обучение идёт вместе с roadmap, а не отдельным теоретическим курсом. На каждом этапе обязателен один и тот же цикл:
+
+1. Выбрать и пройти 2–4 материала из списка этапа.
+2. Кратко объяснить изученное на русском своими словами, включая связь с текущей архитектурой проекта.
+3. Выполнить практическое задание на небольшом, проверяемом изменении.
+4. Подтвердить критерий перехода тестами или работающим сценарием.
+5. Провести review написанного кода до перехода к следующему этапу; автор должен уметь объяснить каждое решение и исправить замечания.
+
+### Этап 1. Dart и clean domain
+
+Материалы:
+
+- [Stepik: Основы программирования на Dart](https://stepik.org/course/109361/promo)
+- [Dart language](https://dart.dev/language)
+- [Flutter: introduction to unit testing](https://docs.flutter.dev/cookbook/testing/unit/introduction)
+
+Краткое объяснение на русском должно покрывать types, null safety, collections, functions, classes, enums, async/await и причину, по которой domain не импортирует Flutter. Практическое задание — изменить или добавить небольшое pure-Dart поведение и deterministic unit tests без UI. Критерий перехода: код отформатирован, `flutter analyze` и focused/full tests проходят, а разработчик может объяснить dependency direction. Review проверяет API, naming, edge cases и достаточность тестов.
+
+### Этап 2. Flutter foundation и vertical flow
+
+Материалы:
+
+- [Flutter install](https://docs.flutter.dev/install/quick)
+- [Flutter first app](https://docs.flutter.dev/get-started/codelab)
+
+Краткое объяснение на русском должно покрывать widgets, state, rebuild, navigation, assets и hot reload. Практическое задание — проследить один поток от locale asset через ViewModel до View и внести небольшое локализованное UI-изменение. Критерий перехода: сценарий работает на целевой платформе, видимые строки локализованы, state переживает ожидаемые rebuild. Review проверяет отсутствие business logic во View и соответствие существующему UI-паттерну.
+
+### Этап 3. Архитектура и тестируемые границы
+
+Материалы:
+
+- [Flutter guide to app architecture](https://docs.flutter.dev/app-architecture/guide)
+- [Flutter testing overview](https://docs.flutter.dev/testing/overview)
+
+Краткое объяснение на русском должно различать View, ViewModel, Repository, Service и Domain, а также unit, widget и integration tests. Практическое задание — провести небольшую функцию через существующие слои с fake repository или gateway и тестами. Критерий перехода: зависимости направлены внутрь, platform boundary заменяется fake, UI и domain тестируются отдельно. Review проверяет необходимость каждой абстракции и отсутствие лишнего слоя.
+
+### Этап 4. Математика блэкджека
+
+Материалы:
+
+- [Wizard of Odds: blackjack rules and basics](https://wizardofodds.com/games/blackjack/basics/)
+- [Wizard of Odds: basic-strategy calculator](https://wizardofodds.com/games/blackjack/strategy/calculator/)
+- [Wizard of Odds: Hi-Lo introduction](https://wizardofodds.com/games/blackjack/card-counting/high-low/)
+- [MIT OpenCourseWare 18.05: Introduction to Probability and Statistics](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/)
+
+Краткое объяснение на русском должно связывать rules, conditional strategy, expected value, variance, running count и true count. Практическое задание — создать независимые reference fixtures и deterministic tests для ограниченного набора уже поддержанных правил, не добавляя новый profile. Критерий перехода: QA-инварианты выполняются, полный Hi-Lo shoe заканчивается на нуле, а reference не использует production-алгоритм как собственное доказательство. Review проходят разработчик и независимый специалист по математике блэкджека.
+
+### Этап 5. Risk, purchases и выпуск
+
+Материалы:
+
+- [Wizard of Odds: risk of ruin](https://wizardofodds.com/games/blackjack/risk-of-ruin/)
+- [Flutter IAP codelab](https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases)
+- [Flutter in_app_purchase plugin](https://pub.dev/packages/in_app_purchase)
+
+Краткое объяснение на русском должно различать variance, risk of ruin, абстрактные betting units, non-consumable purchase, entitlement, verification и restore. Практическое задание — пройти purchase lifecycle сначала через `FakePurchaseGateway`, затем в store sandbox для `pro_lifetime_v1`, не добавляя subscriptions, покупаемые фишки или постоянный bankroll. Критерий перехода: success, pending, cancel, failure и restore проверены на обеих платформах, а entitlement не выдаётся без подтверждения. Review проверяет store requirements, безопасность, idempotency и отсутствие реальных денег.
 
 ## Математические и QA-инварианты
 
@@ -210,7 +273,7 @@ v1 публикуется на английском. Следующий язык
 - [Wizard of Odds: Hi-Lo introduction](https://wizardofodds.com/games/blackjack/card-counting/high-low/)
 - [Wizard of Odds: risk of ruin](https://wizardofodds.com/games/blackjack/risk-of-ruin/)
 - [Blackjack Apprenticeship training drills](https://www.blackjackapprenticeship.com/blackjack-training-drills/)
-- [MIT OpenCourseWare: Introduction to Probability](https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/)
+- [MIT OpenCourseWare 18.05: Introduction to Probability and Statistics](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/)
 
 Blackjack Apprenticeship — коммерческий источник и ориентир по структуре практики. Нельзя копировать его wording, charts, videos, proprietary drills или платные материалы.
 
