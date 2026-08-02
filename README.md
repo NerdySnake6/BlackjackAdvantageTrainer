@@ -15,7 +15,7 @@ and Codex. Read them before changing the product or code:
 
 ## Implemented vertical slice
 
-- A six-node learning path with 52 original exercises.
+- A six-node learning path with 53 original exercises.
 - Resume-safe lesson sessions, 80% completion threshold, XP, streak, and mastery.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table. Each seat can be Human, Bot, or Empty;

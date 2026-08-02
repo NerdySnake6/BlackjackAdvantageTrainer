@@ -1,5 +1,5 @@
 {
-  "contentVersion": 1,
+  "contentVersion": 2,
   "locale": "en",
   "sections": [
     {
@@ -86,6 +86,13 @@
               "options": ["10", "12", "1 or 11"],
               "correctIndex": 0,
               "explanation": "Every face card is worth 10."
+            },
+            {
+              "id": "values-ten-ranks",
+              "prompt": "Which ranks are all worth 10?",
+              "options": ["10, J, Q, K", "A, J, Q, K", "9, 10, J, Q"],
+              "correctIndex": 0,
+              "explanation": "Tens and all three face-card ranks are worth 10."
             },
             {
               "id": "values-soft-17",
