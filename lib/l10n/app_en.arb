@@ -1,0 +1,129 @@
+{
+  "@@locale": "en",
+  "appTitle": "Blackjack Advantage",
+  "learnTab": "Learn",
+  "drillTab": "Drill",
+  "tableTab": "Table",
+  "profileTab": "Progress",
+  "learningPath": "Learning path",
+  "learningPathSubtitle": "Build perfect decisions before adding speed.",
+  "prototypeBuild": "6-lesson validation build",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {"minutes": {"type": "int"}}
+  },
+  "mastered": "Mastered",
+  "inProgress": "In progress",
+  "freeLabel": "FREE",
+  "proLabel": "PRO",
+  "startLesson": "Start lesson",
+  "continueLesson": "Continue lesson",
+  "lockedLesson": "Complete the previous lesson to unlock",
+  "lessonComplete": "Lesson complete",
+  "lessonCompleteSubtitle": "Accuracy unlocks the next node. Mastery still requires repetition.",
+  "lessonResult": "{correct} of {total} correct",
+  "@lessonResult": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "correctAnswer": "Correct",
+  "incorrectAnswer": "Not quite",
+  "next": "Next",
+  "finish": "Finish",
+  "backToPath": "Back to path",
+  "countdownTitle": "Running count",
+  "countdownSubtitle": "Keep a Hi-Lo count as each card is revealed.",
+  "startDrill": "Start one-deck drill",
+  "nextCard": "Reveal next card",
+  "submitCount": "Check count",
+  "yourCount": "Your count",
+  "cardsSeen": "{count} cards seen",
+  "@cardsSeen": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "checkpoint": "Checkpoint",
+  "countCorrect": "Count is correct. Keep going.",
+  "countIncorrect": "The exact count was {count}.",
+  "@countIncorrect": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "drillComplete": "Deck complete",
+  "drillCompleteSubtitle": "A complete Hi-Lo deck always returns to zero.",
+  "restartDrill": "Run another deck",
+  "revealInstruction": "Memorize the count, then reveal the next card.",
+  "adjustCountInstruction": "Set the running count you have in mind.",
+  "newRound": "New round",
+  "hit": "Hit",
+  "stand": "Stand",
+  "doubleAction": "Double",
+  "split": "Split",
+  "surrender": "Surrender",
+  "dealer": "Dealer",
+  "seat": "Seat {number}",
+  "@seat": {
+    "placeholders": {"number": {"type": "int"}}
+  },
+  "human": "Human",
+  "bot": "Bot",
+  "empty": "Empty",
+  "configureSeats": "Configure seats",
+  "configureSeatsHint": "Tap a seat to cycle Human → Bot → Empty. Keep at least one Human.",
+  "done": "Done",
+  "currentCount": "Running count: {count}",
+  "@currentCount": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "shoeStatus": "{dealt} / {total} cards dealt",
+  "@shoeStatus": {
+    "placeholders": {
+      "dealt": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "turnPrompt": "Choose the best action",
+  "roundComplete": "Round complete",
+  "startFirstRound": "Deal the first round",
+  "guidedMode": "GUIDED TABLE",
+  "hiddenCard": "Hidden card",
+  "handTotal": "Total {total}",
+  "@handTotal": {
+    "placeholders": {"total": {"type": "int"}}
+  },
+  "resultUnits": "{outcome} · {units} units",
+  "@resultUnits": {
+    "placeholders": {
+      "outcome": {"type": "String"},
+      "units": {"type": "String"}
+    }
+  },
+  "outcomeBlackjack": "Blackjack",
+  "outcomeWin": "Win",
+  "outcomePush": "Push",
+  "outcomeLoss": "Loss",
+  "outcomeSurrender": "Surrender",
+  "reshuffled": "The shoe was reshuffled at 75% penetration.",
+  "progressTitle": "Your progress",
+  "progressSubtitle": "Motivation and mastery are measured separately.",
+  "xpLabel": "XP",
+  "streakLabel": "day streak",
+  "masteryLabel": "Path mastery",
+  "lessonsCompleted": "{completed} of {total} prototype lessons completed",
+  "@lessonsCompleted": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "privacyNote": "Analytics and crash reporting are off in this prototype.",
+  "educationDisclaimer": "Training simulation only. Skill does not guarantee gambling profit.",
+  "proComingSoon": "Pro course coming later",
+  "settings": "Settings",
+  "resetProgress": "Reset prototype progress",
+  "resetConfirmation": "Reset all lesson progress and XP?",
+  "cancel": "Cancel",
+  "reset": "Reset",
+  "loadFailureTitle": "The training content could not be loaded",
+  "loadFailureBody": "Restart the app. If the problem continues, reinstall this prototype."
+}

@@ -1,0 +1,162 @@
+/// Basic-strategy recommendations for the validated standard rule profile.
+library;
+
+import 'card.dart';
+import 'game_rules.dart';
+import 'hand.dart';
+
+class StrategyEngine {
+  const StrategyEngine({this.evaluator = const HandEvaluator()});
+
+  final HandEvaluator evaluator;
+
+  PlayerAction recommend({
+    required BlackjackHand hand,
+    required PlayingCard dealerUpCard,
+    required GameRulesProfile rules,
+    required Set<PlayerAction> availableActions,
+  }) {
+    if (hand.cards.length == 2 && _isPair(hand)) {
+      final pairAction = _pairAction(
+        hand.cards.first.rank.blackjackValue,
+        dealerUpCard.rank.blackjackValue,
+        rules,
+      );
+      if (pairAction == PlayerAction.split &&
+          availableActions.contains(PlayerAction.split)) {
+        return PlayerAction.split;
+      }
+      if (pairAction != PlayerAction.split) {
+        return _availableOrFallback(pairAction, availableActions);
+      }
+    }
+
+    final evaluation = evaluator.evaluate(hand.cards);
+    final dealerValue = dealerUpCard.rank.blackjackValue;
+
+    if (!evaluation.isSoft &&
+        availableActions.contains(PlayerAction.surrender) &&
+        ((evaluation.total == 16 && dealerValue >= 9) ||
+            (evaluation.total == 15 && dealerValue == 10))) {
+      return PlayerAction.surrender;
+    }
+
+    final preferred = evaluation.isSoft
+        ? _softAction(evaluation.total, dealerValue)
+        : _hardAction(evaluation.total, dealerValue);
+    return _availableOrFallback(preferred, availableActions);
+  }
+
+  bool _isPair(BlackjackHand hand) {
+    return hand.cards[0].rank.blackjackValue ==
+        hand.cards[1].rank.blackjackValue;
+  }
+
+  PlayerAction _pairAction(
+    int pairValue,
+    int dealerValue,
+    GameRulesProfile rules,
+  ) {
+    return switch (pairValue) {
+      1 || 8 => PlayerAction.split,
+      10 => PlayerAction.stand,
+      9 =>
+        (dealerValue >= 2 && dealerValue <= 6) ||
+                dealerValue == 8 ||
+                dealerValue == 9
+            ? PlayerAction.split
+            : PlayerAction.stand,
+      7 =>
+        dealerValue >= 2 && dealerValue <= 7
+            ? PlayerAction.split
+            : PlayerAction.hit,
+      6 =>
+        dealerValue >= (rules.doubleAfterSplit ? 2 : 3) && dealerValue <= 6
+            ? PlayerAction.split
+            : PlayerAction.hit,
+      5 =>
+        dealerValue >= 2 && dealerValue <= 9
+            ? PlayerAction.doubleDown
+            : PlayerAction.hit,
+      4 =>
+        rules.doubleAfterSplit && dealerValue >= 5 && dealerValue <= 6
+            ? PlayerAction.split
+            : PlayerAction.hit,
+      2 || 3 =>
+        dealerValue >= (rules.doubleAfterSplit ? 2 : 4) && dealerValue <= 7
+            ? PlayerAction.split
+            : PlayerAction.hit,
+      _ => PlayerAction.hit,
+    };
+  }
+
+  PlayerAction _softAction(int total, int dealerValue) {
+    if (total >= 19) {
+      return PlayerAction.stand;
+    }
+    if (total == 18) {
+      if (dealerValue >= 3 && dealerValue <= 6) {
+        return PlayerAction.doubleDown;
+      }
+      if (dealerValue == 2 || dealerValue == 7 || dealerValue == 8) {
+        return PlayerAction.stand;
+      }
+      return PlayerAction.hit;
+    }
+    if (total == 17 && dealerValue >= 3 && dealerValue <= 6) {
+      return PlayerAction.doubleDown;
+    }
+    if ((total == 15 || total == 16) && dealerValue >= 4 && dealerValue <= 6) {
+      return PlayerAction.doubleDown;
+    }
+    if ((total == 13 || total == 14) && dealerValue >= 5 && dealerValue <= 6) {
+      return PlayerAction.doubleDown;
+    }
+    return PlayerAction.hit;
+  }
+
+  PlayerAction _hardAction(int total, int dealerValue) {
+    if (total >= 17) {
+      return PlayerAction.stand;
+    }
+    if (total >= 13) {
+      return dealerValue >= 2 && dealerValue <= 6
+          ? PlayerAction.stand
+          : PlayerAction.hit;
+    }
+    if (total == 12) {
+      return dealerValue >= 4 && dealerValue <= 6
+          ? PlayerAction.stand
+          : PlayerAction.hit;
+    }
+    if (total == 11) {
+      return dealerValue == 1 ? PlayerAction.hit : PlayerAction.doubleDown;
+    }
+    if (total == 10) {
+      return dealerValue >= 2 && dealerValue <= 9
+          ? PlayerAction.doubleDown
+          : PlayerAction.hit;
+    }
+    if (total == 9) {
+      return dealerValue >= 3 && dealerValue <= 6
+          ? PlayerAction.doubleDown
+          : PlayerAction.hit;
+    }
+    return PlayerAction.hit;
+  }
+
+  PlayerAction _availableOrFallback(
+    PlayerAction preferred,
+    Set<PlayerAction> availableActions,
+  ) {
+    if (availableActions.contains(preferred)) {
+      return preferred;
+    }
+    if (preferred == PlayerAction.doubleDown ||
+        preferred == PlayerAction.surrender ||
+        preferred == PlayerAction.split) {
+      return PlayerAction.hit;
+    }
+    return PlayerAction.stand;
+  }
+}
