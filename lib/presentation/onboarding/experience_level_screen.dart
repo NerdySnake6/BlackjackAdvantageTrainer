@@ -94,46 +94,50 @@ class _ExperienceLevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        await context.read<AppState>().chooseExperienceLevel(level);
-        if (context.mounted) {
-          context.go('/learn');
-        }
-      },
+    final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
-      child: Ink(
-        padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.055),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.mint.withValues(alpha: 0.35)),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              backgroundColor: AppColors.mint.withValues(alpha: 0.18),
-              foregroundColor: AppColors.mint,
-              child: Icon(icon),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: Theme.of(context).textTheme.titleMedium),
-                  const SizedBox(height: 4),
-                  Text(
-                    description,
-                    style: const TextStyle(color: Colors.white70),
-                  ),
-                ],
+      side: BorderSide(color: AppColors.mint.withValues(alpha: 0.35)),
+    );
+    return Material(
+      color: Colors.white.withValues(alpha: 0.055),
+      shape: shape,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () async {
+          await context.read<AppState>().chooseExperienceLevel(level);
+          if (context.mounted) {
+            context.go('/learn');
+          }
+        },
+        customBorder: shape,
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundColor: AppColors.mint.withValues(alpha: 0.18),
+                foregroundColor: AppColors.mint,
+                child: Icon(icon),
               ),
-            ),
-            const SizedBox(width: 8),
-            const Icon(Icons.chevron_right, color: AppColors.mint),
-          ],
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: Theme.of(context).textTheme.titleMedium),
+                    const SizedBox(height: 4),
+                    Text(
+                      description,
+                      style: const TextStyle(color: Colors.white70),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Icon(Icons.chevron_right, color: AppColors.mint),
+            ],
+          ),
         ),
       ),
     );

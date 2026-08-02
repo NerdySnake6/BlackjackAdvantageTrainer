@@ -74,6 +74,34 @@ flutter run
 The table switches to landscape while open and returns the app to portrait when
 closed.
 
+### Android UI review in a standalone emulator
+
+For manual scrolling and layout checks, use the separate Android Emulator window
+instead of Android Studio's embedded device view. The prepared Pixel AVD is
+`blackjack_pixel_7_api_36`.
+
+Start the emulator from any terminal:
+
+```sh
+flutter emulators --launch blackjack_pixel_7_api_36
+```
+
+Wait until the Android home screen is fully loaded. Then open a second terminal
+and run the app from the project root (the directory containing `pubspec.yaml`):
+
+```sh
+cd /Users/nerdysnake6/Documents/BlackjackAdvantageTrainer
+flutter devices
+flutter run -d emulator-5554
+```
+
+The device ID can change, so use the ID printed by `flutter devices` when it is
+different from `emulator-5554`. `flutter run` must be run from the project root;
+the emulator itself can be launched from any directory. If Android Studio shows
+`Missing system image`, point its Android SDK location to
+`/opt/homebrew/share/android-commandlinetools` or install the API 36 Google APIs
+ARM64 image through SDK Manager.
+
 ## Adding a language
 
 1. Copy `lib/l10n/app_en.arb` to a locale-specific ARB file such as

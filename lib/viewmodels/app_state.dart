@@ -49,6 +49,8 @@ class AppState extends ChangeNotifier {
 
   bool get hasExperienceLevel => _progress.experienceLevel != null;
 
+  bool get hasSeenCountDrillIntro => _progress.hasSeenCountDrillIntro;
+
   int get completedLessonCount =>
       catalog.lessons.where((lesson) => isLessonCompleted(lesson.id)).length;
 
@@ -80,6 +82,15 @@ class AppState extends ChangeNotifier {
 
   Future<void> chooseExperienceLevel(ExperienceLevel level) async {
     _progress = _progress.copyWith(experienceLevel: level);
+    notifyListeners();
+    await _progressRepository.save(_progress);
+  }
+
+  Future<void> markCountDrillIntroSeen() async {
+    if (_progress.hasSeenCountDrillIntro) {
+      return;
+    }
+    _progress = _progress.copyWith(hasSeenCountDrillIntro: true);
     notifyListeners();
     await _progressRepository.save(_progress);
   }

@@ -310,6 +310,54 @@ abstract class AppLocalizations {
   /// **'Keep a Hi-Lo count as each card is revealed.'**
   String get countdownSubtitle;
 
+  /// No description provided for @countDrillIntroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Before your first count'**
+  String get countDrillIntroTitle;
+
+  /// No description provided for @countDrillIntroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi-Lo tracks exposed cards in the current shoe. Start at 0 and keep one running total.'**
+  String get countDrillIntroBody;
+
+  /// No description provided for @countDrillIntroLowCards.
+  ///
+  /// In en, this message translates to:
+  /// **'2–6  →  +1'**
+  String get countDrillIntroLowCards;
+
+  /// No description provided for @countDrillIntroNeutralCards.
+  ///
+  /// In en, this message translates to:
+  /// **'7–9  →  0'**
+  String get countDrillIntroNeutralCards;
+
+  /// No description provided for @countDrillIntroHighCards.
+  ///
+  /// In en, this message translates to:
+  /// **'10, J, Q, K, A  →  −1'**
+  String get countDrillIntroHighCards;
+
+  /// No description provided for @countDrillIntroDeckNote.
+  ///
+  /// In en, this message translates to:
+  /// **'One deck has 52 cards and its tags balance back to 0. The standard table uses six decks (312 cards); the count resets only when the shoe is shuffled.'**
+  String get countDrillIntroDeckNote;
+
+  /// No description provided for @countDrillIntroKnown.
+  ///
+  /// In en, this message translates to:
+  /// **'I know these rules — don\'t show this again'**
+  String get countDrillIntroKnown;
+
+  /// No description provided for @countDrillIntroContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get countDrillIntroContinue;
+
   /// No description provided for @startDrill.
   ///
   /// In en, this message translates to:

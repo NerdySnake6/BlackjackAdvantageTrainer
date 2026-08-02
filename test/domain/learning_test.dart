@@ -63,6 +63,7 @@ void main() {
           ),
         },
         experienceLevel: ExperienceLevel.experienced,
+        hasSeenCountDrillIntro: true,
         xp: 140,
         streakDays: 2,
         lastActivityDate: DateTime.utc(2026, 8, 2),
@@ -75,6 +76,7 @@ void main() {
       expect(decoded.lessonScores['quick-start'], 0.875);
       expect(decoded.activeSessions['card-values']!.nextExerciseIndex, 3);
       expect(decoded.experienceLevel, ExperienceLevel.experienced);
+      expect(decoded.hasSeenCountDrillIntro, isTrue);
       expect(decoded.xp, 140);
       expect(decoded.streakDays, 2);
     });

@@ -129,6 +129,33 @@ class AppLocalizationsEn extends AppLocalizations {
       'Keep a Hi-Lo count as each card is revealed.';
 
   @override
+  String get countDrillIntroTitle => 'Before your first count';
+
+  @override
+  String get countDrillIntroBody =>
+      'Hi-Lo tracks exposed cards in the current shoe. Start at 0 and keep one running total.';
+
+  @override
+  String get countDrillIntroLowCards => '2–6  →  +1';
+
+  @override
+  String get countDrillIntroNeutralCards => '7–9  →  0';
+
+  @override
+  String get countDrillIntroHighCards => '10, J, Q, K, A  →  −1';
+
+  @override
+  String get countDrillIntroDeckNote =>
+      'One deck has 52 cards and its tags balance back to 0. The standard table uses six decks (312 cards); the count resets only when the shoe is shuffled.';
+
+  @override
+  String get countDrillIntroKnown =>
+      'I know these rules — don\'t show this again';
+
+  @override
+  String get countDrillIntroContinue => 'Got it';
+
+  @override
   String get startDrill => 'Start one-deck drill';
 
   @override

@@ -277,123 +277,127 @@ class _LessonNode extends StatelessWidget {
         : unlocked
         ? AppColors.gold
         : Colors.white24;
-
-    return InkWell(
-      onTap: unlocked ? () => context.push('/lesson/${lesson.id}') : null,
+    final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
-      child: Ink(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: unlocked
-              ? Colors.white.withValues(alpha: 0.055)
-              : Colors.white.withValues(alpha: 0.025),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: nodeColor.withValues(alpha: 0.38)),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 56,
-              height: 56,
-              decoration: BoxDecoration(
-                color: nodeColor.withValues(alpha: unlocked ? 1 : 0.35),
-                shape: BoxShape.circle,
+      side: BorderSide(color: nodeColor.withValues(alpha: 0.38)),
+    );
+
+    return Material(
+      color: unlocked
+          ? Colors.white.withValues(alpha: 0.055)
+          : Colors.white.withValues(alpha: 0.025),
+      shape: shape,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: unlocked ? () => context.push('/lesson/${lesson.id}') : null,
+        customBorder: shape,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: nodeColor.withValues(alpha: unlocked ? 1 : 0.35),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: completed
+                    ? const Icon(Icons.check, color: AppColors.ink, size: 30)
+                    : unlocked
+                    ? Text(
+                        '${index + 1}',
+                        style: const TextStyle(
+                          color: AppColors.ink,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20,
+                        ),
+                      )
+                    : const Icon(Icons.lock_outline, size: 22),
               ),
-              alignment: Alignment.center,
-              child: completed
-                  ? const Icon(Icons.check, color: AppColors.ink, size: 30)
-                  : unlocked
-                  ? Text(
-                      '${index + 1}',
-                      style: const TextStyle(
-                        color: AppColors.ink,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20,
-                      ),
-                    )
-                  : const Icon(Icons.lock_outline, size: 22),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    lesson.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    lesson.subtitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: unlocked ? Colors.white60 : Colors.white30,
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      lesson.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
-                  ),
-                  const SizedBox(height: 7),
-                  Wrap(
-                    spacing: 10,
-                    runSpacing: 4,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.schedule, size: 14, color: nodeColor),
-                          const SizedBox(width: 4),
+                    const SizedBox(height: 3),
+                    Text(
+                      lesson.subtitle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: unlocked ? Colors.white60 : Colors.white30,
+                      ),
+                    ),
+                    const SizedBox(height: 7),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.schedule, size: 14, color: nodeColor),
+                            const SizedBox(width: 4),
+                            Text(
+                              strings.minutesShort(lesson.estimatedMinutes),
+                              style: TextStyle(
+                                color: nodeColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (recommended && !completed) ...[
                           Text(
-                            strings.minutesShort(lesson.estimatedMinutes),
-                            style: TextStyle(
-                              color: nodeColor,
+                            strings.recommendedStart,
+                            style: const TextStyle(
+                              color: AppColors.mint,
                               fontSize: 12,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ],
-                      ),
-                      if (recommended && !completed) ...[
-                        Text(
-                          strings.recommendedStart,
-                          style: const TextStyle(
-                            color: AppColors.mint,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w800,
+                        if (completed && score != null) ...[
+                          Text(
+                            '${(score! * 100).round()}%',
+                            style: const TextStyle(
+                              color: AppColors.mint,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
-                        ),
+                        ] else if (hasSession) ...[
+                          const SizedBox(width: 10),
+                          Text(
+                            strings.inProgress,
+                            style: const TextStyle(
+                              color: AppColors.gold,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
                       ],
-                      if (completed && score != null) ...[
-                        Text(
-                          '${(score! * 100).round()}%',
-                          style: const TextStyle(
-                            color: AppColors.mint,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ] else if (hasSession) ...[
-                        const SizedBox(width: 10),
-                        Text(
-                          strings.inProgress,
-                          style: const TextStyle(
-                            color: AppColors.gold,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Icon(
-              Icons.chevron_right,
-              color: unlocked ? nodeColor : Colors.white12,
-            ),
-          ],
+              Icon(
+                Icons.chevron_right,
+                color: unlocked ? nodeColor : Colors.white12,
+              ),
+            ],
+          ),
         ),
       ),
     );

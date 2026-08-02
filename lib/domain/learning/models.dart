@@ -186,6 +186,7 @@ class ProgressSnapshot {
     this.lessonScores = const {},
     this.activeSessions = const {},
     this.experienceLevel,
+    this.hasSeenCountDrillIntro = false,
     this.xp = 0,
     this.streakDays = 0,
     this.lastActivityDate,
@@ -207,6 +208,7 @@ class ProgressSnapshot {
       experienceLevel: ExperienceLevel.fromStorage(
         json['experienceLevel'] as String?,
       ),
+      hasSeenCountDrillIntro: json['hasSeenCountDrillIntro'] as bool? ?? false,
       xp: json['xp'] as int? ?? 0,
       streakDays: json['streakDays'] as int? ?? 0,
       lastActivityDate: json['lastActivityDate'] == null
@@ -218,6 +220,7 @@ class ProgressSnapshot {
   final Map<String, double> lessonScores;
   final Map<String, LessonSessionProgress> activeSessions;
   final ExperienceLevel? experienceLevel;
+  final bool hasSeenCountDrillIntro;
   final int xp;
   final int streakDays;
   final DateTime? lastActivityDate;
@@ -235,6 +238,7 @@ class ProgressSnapshot {
       (key, value) => MapEntry(key, value.toJson()),
     ),
     'experienceLevel': experienceLevel?.name,
+    'hasSeenCountDrillIntro': hasSeenCountDrillIntro,
     'xp': xp,
     'streakDays': streakDays,
     'lastActivityDate': lastActivityDate?.toIso8601String(),
@@ -244,6 +248,7 @@ class ProgressSnapshot {
     Map<String, double>? lessonScores,
     Map<String, LessonSessionProgress>? activeSessions,
     ExperienceLevel? experienceLevel,
+    bool? hasSeenCountDrillIntro,
     int? xp,
     int? streakDays,
     DateTime? lastActivityDate,
@@ -253,6 +258,8 @@ class ProgressSnapshot {
       lessonScores: lessonScores ?? this.lessonScores,
       activeSessions: activeSessions ?? this.activeSessions,
       experienceLevel: experienceLevel ?? this.experienceLevel,
+      hasSeenCountDrillIntro:
+          hasSeenCountDrillIntro ?? this.hasSeenCountDrillIntro,
       xp: xp ?? this.xp,
       streakDays: streakDays ?? this.streakDays,
       lastActivityDate: clearLastActivityDate
