@@ -104,6 +104,10 @@
   "roundComplete": "Round complete",
   "startFirstRound": "Deal the first round",
   "guidedMode": "GUIDED TABLE",
+  "standardRulesName": "Standard six-deck · S17 · DAS · late surrender · 3:2",
+  "practiceUnits": "Practice unit",
+  "dealingCards": "Dealing cards...",
+  "dealerTurn": "Dealer is resolving the round.",
   "hiddenCard": "Hidden card",
   "handTotal": "Total {total}",
   "@handTotal": {

@@ -31,6 +31,21 @@ The rest of the 76-lesson commercial plan, real in-app purchases, Firebase,
 additional validated rule profiles, Russian content, and store submission are
 intentionally later stages.
 
+## Privacy
+
+The current prototype stores learning progress only in the device's local app
+storage. It has no accounts, ads, production analytics, crash reporting,
+tracking, server database, or sensitive device permissions, and it does not
+send personal data or training activity to the developer. Operating-system
+backups and app-store services remain subject to Apple or Google policies. See
+the full [Privacy Policy](PRIVACY_POLICY.md).
+
+Before an external beta or store release, publish the current policy at a
+publicly accessible URL and verify that the
+[App Store privacy details](https://developer.apple.com/app-store/app-privacy-details/)
+and [Google Play Data safety form](https://support.google.com/googleplay/android-developer/answer/10787469)
+match the exact build and every included third-party SDK.
+
 ## Architecture
 
 ```text

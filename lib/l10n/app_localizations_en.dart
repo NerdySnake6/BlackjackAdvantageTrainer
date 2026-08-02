@@ -269,6 +269,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get guidedMode => 'GUIDED TABLE';
 
   @override
+  String get standardRulesName =>
+      'Standard six-deck · S17 · DAS · late surrender · 3:2';
+
+  @override
+  String get practiceUnits => 'Practice unit';
+
+  @override
+  String get dealingCards => 'Dealing cards...';
+
+  @override
+  String get dealerTurn => 'Dealer is resolving the round.';
+
+  @override
   String get hiddenCard => 'Hidden card';
 
   @override

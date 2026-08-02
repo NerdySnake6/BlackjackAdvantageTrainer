@@ -556,6 +556,30 @@ abstract class AppLocalizations {
   /// **'GUIDED TABLE'**
   String get guidedMode;
 
+  /// No description provided for @standardRulesName.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard six-deck · S17 · DAS · late surrender · 3:2'**
+  String get standardRulesName;
+
+  /// No description provided for @practiceUnits.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice unit'**
+  String get practiceUnits;
+
+  /// No description provided for @dealingCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Dealing cards...'**
+  String get dealingCards;
+
+  /// No description provided for @dealerTurn.
+  ///
+  /// In en, this message translates to:
+  /// **'Dealer is resolving the round.'**
+  String get dealerTurn;
+
   /// No description provided for @hiddenCard.
   ///
   /// In en, this message translates to:
