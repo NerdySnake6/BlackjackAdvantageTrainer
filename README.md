@@ -4,6 +4,15 @@ An English-first Flutter prototype for learning blackjack basic strategy and the
 Hi-Lo running count. It is an offline training simulation, not a live casino
 assistant and not a real-money game.
 
+## Start here
+
+These documents are the canonical project context for contributors, reviewers,
+and Codex. Read them before changing the product or code:
+
+- [Product context and durable decisions](docs/PROJECT_CONTEXT.md)
+- [Architecture and implementation status](docs/ARCHITECTURE.md)
+- [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
+
 ## Implemented vertical slice
 
 - A six-node learning path with 52 original exercises.
@@ -39,7 +48,7 @@ use deterministic shoes while production uses `Random.secure()`.
 
 Important locations:
 
-- `lib/domain/blackjack/` — cards, hands, shoe, Hi-Lo, strategy, and round engine.
+- `lib/domain/blackjack_engine/` — cards, hands, shoe, Hi-Lo, strategy, and round engine.
 - `lib/domain/learning/` — content, progress, mastery, and review policies.
 - `assets/content/en/` — versioned course content and terminology glossary.
 - `lib/l10n/app_en.arb` — localizable interface strings.
@@ -52,7 +61,8 @@ Requirements:
 
 1. Flutter stable.
 2. Android Studio plus Android SDK for Android builds.
-3. Full Xcode plus CocoaPods for iOS builds.
+3. Full Xcode for iOS builds. The current project uses Swift Package Manager;
+   CocoaPods remains a compatibility fallback.
 
 ```sh
 flutter pub get
