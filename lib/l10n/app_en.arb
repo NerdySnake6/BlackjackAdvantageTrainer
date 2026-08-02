@@ -8,6 +8,16 @@
   "learningPath": "Learning path",
   "learningPathSubtitle": "Build perfect decisions before adding speed.",
   "prototypeBuild": "6-lesson validation build",
+  "experienceLevelTitle": "Where should we start?",
+  "experienceLevelSubtitle": "Choose the starting point that fits your blackjack experience. You can review every earlier lesson later.",
+  "beginnerLevelTitle": "I'm new to blackjack",
+  "beginnerLevelDescription": "Start with the rules, the first hand, and the decisions you need at the table.",
+  "basicsLevelTitle": "I know the basics",
+  "basicsLevelDescription": "Skip the introduction and begin with hard and soft hands.",
+  "experiencedLevelTitle": "I'm an experienced player",
+  "experiencedLevelDescription": "Jump into common basic-strategy decisions and use earlier lessons as optional review.",
+  "experienceLevelNote": "This changes your recommended starting point, not your saved progress.",
+  "recommendedStart": "Start here",
   "minutesShort": "{minutes} min",
   "@minutesShort": {
     "placeholders": {"minutes": {"type": "int"}}

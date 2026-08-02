@@ -3,25 +3,34 @@ import 'package:blackjack_advantage_trainer/core/persistence/progress_repository
 import 'package:blackjack_advantage_trainer/data/content_repository.dart';
 import 'package:blackjack_advantage_trainer/domain/learning/models.dart';
 import 'package:blackjack_advantage_trainer/viewmodels/app_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('learning path opens the first interactive lesson', (
+  testWidgets('first launch selects an experience level and adapts the path', (
     tester,
   ) async {
-    final catalog = await ContentRepository().loadEnglishCatalog();
-    final repository = _MemoryProgressRepository();
-    final appState = AppState(
-      catalog: catalog,
-      progress: const ProgressSnapshot(),
-      progressRepository: repository,
-    );
+    addTearDown(() async {
+      await tester.pumpWidget(const SizedBox());
+      tester.view.reset();
+    });
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(320, 720);
+    final appState = await _createAppState();
 
     await tester.pumpWidget(BlackjackTrainerApp(appState: appState));
     await tester.pumpAndSettle();
 
+    expect(find.text('Where should we start?'), findsOneWidget);
+    expect(find.text("I'm new to blackjack"), findsOneWidget);
+    expect(find.text('I know the basics'), findsOneWidget);
+    expect(find.text("I'm an experienced player"), findsOneWidget);
+    await tester.tap(find.text("I'm new to blackjack"));
+    await tester.pumpAndSettle();
+
     expect(find.text('Learning path'), findsOneWidget);
     expect(find.text('Your first hand'), findsOneWidget);
+    expect(appState.progress.experienceLevel, ExperienceLevel.beginner);
 
     await tester.tap(find.text('Your first hand'));
     await tester.pumpAndSettle();
@@ -30,7 +39,22 @@ void main() {
       find.text('What is the main goal of a blackjack hand?'),
       findsOneWidget,
     );
+
+    await appState.chooseExperienceLevel(ExperienceLevel.experienced);
+    await tester.pump();
+    expect(appState.progress.experienceLevel, ExperienceLevel.experienced);
+    expect(appState.isLessonUnlocked('first-strategy'), isTrue);
+    expect(appState.isLessonCompleted('quick-start'), isFalse);
   });
+}
+
+Future<AppState> _createAppState() async {
+  final catalog = await ContentRepository().loadEnglishCatalog();
+  return AppState(
+    catalog: catalog,
+    progress: const ProgressSnapshot(),
+    progressRepository: _MemoryProgressRepository(),
+  );
 }
 
 class _MemoryProgressRepository implements ProgressRepository {

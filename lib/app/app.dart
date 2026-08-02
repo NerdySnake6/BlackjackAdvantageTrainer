@@ -20,7 +20,7 @@ class BlackjackTrainerApp extends StatefulWidget {
 }
 
 class _BlackjackTrainerAppState extends State<BlackjackTrainerApp> {
-  late final _router = createRouter();
+  late final _router = createRouter(appState: widget.appState);
 
   @override
   void dispose() {

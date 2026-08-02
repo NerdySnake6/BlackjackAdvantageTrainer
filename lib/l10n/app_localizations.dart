@@ -142,6 +142,66 @@ abstract class AppLocalizations {
   /// **'6-lesson validation build'**
   String get prototypeBuild;
 
+  /// No description provided for @experienceLevelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where should we start?'**
+  String get experienceLevelTitle;
+
+  /// No description provided for @experienceLevelSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the starting point that fits your blackjack experience. You can review every earlier lesson later.'**
+  String get experienceLevelSubtitle;
+
+  /// No description provided for @beginnerLevelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m new to blackjack'**
+  String get beginnerLevelTitle;
+
+  /// No description provided for @beginnerLevelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with the rules, the first hand, and the decisions you need at the table.'**
+  String get beginnerLevelDescription;
+
+  /// No description provided for @basicsLevelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'I know the basics'**
+  String get basicsLevelTitle;
+
+  /// No description provided for @basicsLevelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip the introduction and begin with hard and soft hands.'**
+  String get basicsLevelDescription;
+
+  /// No description provided for @experiencedLevelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m an experienced player'**
+  String get experiencedLevelTitle;
+
+  /// No description provided for @experiencedLevelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump into common basic-strategy decisions and use earlier lessons as optional review.'**
+  String get experiencedLevelDescription;
+
+  /// No description provided for @experienceLevelNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This changes your recommended starting point, not your saved progress.'**
+  String get experienceLevelNote;
+
+  /// No description provided for @recommendedStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start here'**
+  String get recommendedStart;
+
   /// No description provided for @minutesShort.
   ///
   /// In en, this message translates to:

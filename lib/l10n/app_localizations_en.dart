@@ -34,6 +34,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get prototypeBuild => '6-lesson validation build';
 
   @override
+  String get experienceLevelTitle => 'Where should we start?';
+
+  @override
+  String get experienceLevelSubtitle =>
+      'Choose the starting point that fits your blackjack experience. You can review every earlier lesson later.';
+
+  @override
+  String get beginnerLevelTitle => 'I\'m new to blackjack';
+
+  @override
+  String get beginnerLevelDescription =>
+      'Start with the rules, the first hand, and the decisions you need at the table.';
+
+  @override
+  String get basicsLevelTitle => 'I know the basics';
+
+  @override
+  String get basicsLevelDescription =>
+      'Skip the introduction and begin with hard and soft hands.';
+
+  @override
+  String get experiencedLevelTitle => 'I\'m an experienced player';
+
+  @override
+  String get experiencedLevelDescription =>
+      'Jump into common basic-strategy decisions and use earlier lessons as optional review.';
+
+  @override
+  String get experienceLevelNote =>
+      'This changes your recommended starting point, not your saved progress.';
+
+  @override
+  String get recommendedStart => 'Start here';
+
+  @override
   String minutesShort(int minutes) {
     return '$minutes min';
   }

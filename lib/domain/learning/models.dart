@@ -1,6 +1,25 @@
 /// Versioned learning-content and progress models.
 library;
 
+enum ExperienceLevel {
+  beginner('quick-start'),
+  basics('hard-and-soft'),
+  experienced('first-strategy');
+
+  const ExperienceLevel(this.startLessonId);
+
+  final String startLessonId;
+
+  static ExperienceLevel? fromStorage(String? value) {
+    return switch (value) {
+      'beginner' => ExperienceLevel.beginner,
+      'basics' => ExperienceLevel.basics,
+      'experienced' => ExperienceLevel.experienced,
+      _ => null,
+    };
+  }
+}
+
 class CourseCatalog {
   const CourseCatalog({
     required this.contentVersion,
@@ -166,6 +185,7 @@ class ProgressSnapshot {
   const ProgressSnapshot({
     this.lessonScores = const {},
     this.activeSessions = const {},
+    this.experienceLevel,
     this.xp = 0,
     this.streakDays = 0,
     this.lastActivityDate,
@@ -184,6 +204,9 @@ class ProgressSnapshot {
           LessonSessionProgress.fromJson(value! as Map<String, Object?>),
         ),
       ),
+      experienceLevel: ExperienceLevel.fromStorage(
+        json['experienceLevel'] as String?,
+      ),
       xp: json['xp'] as int? ?? 0,
       streakDays: json['streakDays'] as int? ?? 0,
       lastActivityDate: json['lastActivityDate'] == null
@@ -194,6 +217,7 @@ class ProgressSnapshot {
 
   final Map<String, double> lessonScores;
   final Map<String, LessonSessionProgress> activeSessions;
+  final ExperienceLevel? experienceLevel;
   final int xp;
   final int streakDays;
   final DateTime? lastActivityDate;
@@ -210,6 +234,7 @@ class ProgressSnapshot {
     'activeSessions': activeSessions.map(
       (key, value) => MapEntry(key, value.toJson()),
     ),
+    'experienceLevel': experienceLevel?.name,
     'xp': xp,
     'streakDays': streakDays,
     'lastActivityDate': lastActivityDate?.toIso8601String(),
@@ -218,6 +243,7 @@ class ProgressSnapshot {
   ProgressSnapshot copyWith({
     Map<String, double>? lessonScores,
     Map<String, LessonSessionProgress>? activeSessions,
+    ExperienceLevel? experienceLevel,
     int? xp,
     int? streakDays,
     DateTime? lastActivityDate,
@@ -226,6 +252,7 @@ class ProgressSnapshot {
     return ProgressSnapshot(
       lessonScores: lessonScores ?? this.lessonScores,
       activeSessions: activeSessions ?? this.activeSessions,
+      experienceLevel: experienceLevel ?? this.experienceLevel,
       xp: xp ?? this.xp,
       streakDays: streakDays ?? this.streakDays,
       lastActivityDate: clearLastActivityDate

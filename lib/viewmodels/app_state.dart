@@ -47,6 +47,8 @@ class AppState extends ChangeNotifier {
   ProgressSnapshot get progress => _progress;
   EntitlementState entitlement = EntitlementState.free;
 
+  bool get hasExperienceLevel => _progress.experienceLevel != null;
+
   int get completedLessonCount =>
       catalog.lessons.where((lesson) => isLessonCompleted(lesson.id)).length;
 
@@ -61,11 +63,26 @@ class AppState extends ChangeNotifier {
     if (lessonIndex <= 0) {
       return lessonIndex == 0;
     }
+    final recommendedStartIndex = _recommendedStartIndex;
+    if (lessonIndex <= recommendedStartIndex) {
+      return true;
+    }
     return isLessonCompleted(catalog.lessons[lessonIndex - 1].id);
+  }
+
+  bool isRecommendedStart(String lessonId) {
+    return lessonId ==
+        (_progress.experienceLevel?.startLessonId ?? catalog.lessons.first.id);
   }
 
   LessonSessionProgress? sessionFor(String lessonId) =>
       _progress.activeSessions[lessonId];
+
+  Future<void> chooseExperienceLevel(ExperienceLevel level) async {
+    _progress = _progress.copyWith(experienceLevel: level);
+    notifyListeners();
+    await _progressRepository.save(_progress);
+  }
 
   Future<void> initializeEntitlement() async {
     entitlement = await _purchaseGateway.currentEntitlement();
@@ -133,6 +150,15 @@ class AppState extends ChangeNotifier {
     await _progressRepository.clear();
     _progress = const ProgressSnapshot();
     notifyListeners();
+  }
+
+  int get _recommendedStartIndex {
+    final startLessonId =
+        _progress.experienceLevel?.startLessonId ?? catalog.lessons.first.id;
+    final index = catalog.lessons.indexWhere(
+      (lesson) => lesson.id == startLessonId,
+    );
+    return index < 0 ? 0 : index;
   }
 
   int _updatedStreak(DateTime activityDate) {
