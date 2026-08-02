@@ -4,7 +4,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
-import '../../domain/blackjack/card.dart';
+import '../../domain/blackjack_engine/card.dart';
 
 class PlayingCardView extends StatelessWidget {
   const PlayingCardView({

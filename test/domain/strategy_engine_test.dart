@@ -1,7 +1,7 @@
-import 'package:blackjack_advantage_trainer/domain/blackjack/card.dart';
-import 'package:blackjack_advantage_trainer/domain/blackjack/game_rules.dart';
-import 'package:blackjack_advantage_trainer/domain/blackjack/hand.dart';
-import 'package:blackjack_advantage_trainer/domain/blackjack/strategy_engine.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/card.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/game_rules.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/hand.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/strategy_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

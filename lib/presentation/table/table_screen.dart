@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../app/theme.dart';
-import '../../domain/blackjack/blackjack_engine.dart';
-import '../../domain/blackjack/game_rules.dart';
-import '../../domain/blackjack/hand.dart';
+import '../../domain/blackjack_engine/blackjack_engine.dart';
+import '../../domain/blackjack_engine/game_rules.dart';
+import '../../domain/blackjack_engine/hand.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/table_view_model.dart';
 import '../widgets/playing_card_view.dart';

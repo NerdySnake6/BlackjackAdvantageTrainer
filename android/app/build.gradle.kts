@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.blackjackadvantage.blackjack_advantage_trainer"
+    namespace = "com.blackjackadvantage.trainer"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.blackjackadvantage.blackjack_advantage_trainer"
+        applicationId = "com.blackjackadvantage.trainer"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

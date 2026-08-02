@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:blackjack_advantage_trainer/domain/blackjack/counting_engine.dart';
-import 'package:blackjack_advantage_trainer/domain/blackjack/game_rules.dart';
-import 'package:blackjack_advantage_trainer/domain/blackjack/shoe.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/counting_engine.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/game_rules.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/shoe.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -5,10 +5,10 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
-import '../domain/blackjack/card.dart';
-import '../domain/blackjack/counting_engine.dart';
-import '../domain/blackjack/game_rules.dart';
-import '../domain/blackjack/shoe.dart';
+import '../domain/blackjack_engine/card.dart';
+import '../domain/blackjack_engine/counting_engine.dart';
+import '../domain/blackjack_engine/game_rules.dart';
+import '../domain/blackjack_engine/shoe.dart';
 
 enum CountDrillPhase { idle, running, checkpoint, complete }
 

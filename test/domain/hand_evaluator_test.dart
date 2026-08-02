@@ -1,5 +1,5 @@
-import 'package:blackjack_advantage_trainer/domain/blackjack/card.dart';
-import 'package:blackjack_advantage_trainer/domain/blackjack/hand.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/card.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/hand.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

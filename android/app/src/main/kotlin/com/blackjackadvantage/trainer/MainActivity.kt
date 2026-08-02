@@ -1,4 +1,4 @@
-package com.blackjackadvantage.blackjack_advantage_trainer
+package com.blackjackadvantage.trainer
 
 import io.flutter.embedding.android.FlutterActivity
 

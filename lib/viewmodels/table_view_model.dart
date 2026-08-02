@@ -3,8 +3,8 @@ library;
 
 import 'package:flutter/foundation.dart';
 
-import '../domain/blackjack/blackjack_engine.dart';
-import '../domain/blackjack/game_rules.dart';
+import '../domain/blackjack_engine/blackjack_engine.dart';
+import '../domain/blackjack_engine/game_rules.dart';
 
 class TableViewModel extends ChangeNotifier {
   TableViewModel({BlackjackEngine? engine})
