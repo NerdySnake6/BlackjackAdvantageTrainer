@@ -31,6 +31,9 @@ class LessonViewModel extends ChangeNotifier {
 
   final AppState appState;
   final LessonDefinition lesson;
+  late final List<List<int>> _optionOrders = deterministicAnswerOrders(
+    lesson.exercises,
+  );
   var _exerciseIndex = 0;
   var _correctAnswers = 0;
   int? _selectedIndex;
@@ -48,10 +51,7 @@ class LessonViewModel extends ChangeNotifier {
   bool get passed => _finalScore >= 0.8;
   bool get isLastExercise => _exerciseIndex == lesson.exercises.length - 1;
   LessonExercise get currentExercise => lesson.exercises[_exerciseIndex];
-  List<int> get currentOptionOrder => deterministicAnswerOrder(
-    currentExercise.id,
-    currentExercise.options.length,
-  );
+  List<int> get currentOptionOrder => _optionOrders[_exerciseIndex];
   List<String> get currentOptions => [
     for (final index in currentOptionOrder) currentExercise.options[index],
   ];

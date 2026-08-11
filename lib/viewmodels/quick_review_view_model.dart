@@ -21,6 +21,9 @@ class QuickReviewViewModel extends ChangeNotifier {
 
   final AppState appState;
   final List<LessonExercise> exercises;
+  late final List<List<int>> _optionOrders = deterministicAnswerOrders(
+    exercises,
+  );
   var _index = 0;
   int? _selectedIndex;
   var _answerIsCorrect = false;
@@ -35,10 +38,7 @@ class QuickReviewViewModel extends ChangeNotifier {
   bool get hasAnswered => _selectedIndex != null;
   bool get answerIsCorrect => _answerIsCorrect;
   LessonExercise get currentExercise => exercises[_index];
-  List<int> get currentOptionOrder => deterministicAnswerOrder(
-    currentExercise.id,
-    currentExercise.options.length,
-  );
+  List<int> get currentOptionOrder => _optionOrders[_index];
   List<String> get currentOptions => [
     for (final optionIndex in currentOptionOrder)
       currentExercise.options[optionIndex],

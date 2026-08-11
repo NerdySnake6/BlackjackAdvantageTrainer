@@ -63,17 +63,14 @@ void main() {
       final correctPositions = <int>[];
 
       for (final lesson in catalog.lessons) {
-        final lessonPositions = <int>{};
-        for (final exercise in lesson.exercises) {
-          final firstOrder = deterministicAnswerOrder(
-            exercise.id,
-            exercise.options.length,
-          );
-          final secondOrder = deterministicAnswerOrder(
-            exercise.id,
-            exercise.options.length,
-          );
-          expect(secondOrder, firstOrder);
+        final firstOrders = deterministicAnswerOrders(lesson.exercises);
+        final secondOrders = deterministicAnswerOrders(lesson.exercises);
+        final lessonPositions = <int>[];
+
+        expect(secondOrders, firstOrders);
+        for (var index = 0; index < lesson.exercises.length; index++) {
+          final exercise = lesson.exercises[index];
+          final firstOrder = firstOrders[index];
           expect(firstOrder.toSet(), {
             for (var index = 0; index < exercise.options.length; index++) index,
           });
@@ -81,7 +78,15 @@ void main() {
           correctPositions.add(correctPosition);
           lessonPositions.add(correctPosition);
         }
-        expect(lessonPositions.length, greaterThan(1));
+
+        expect(lessonPositions.toSet(), containsAll(<int>{0, 1, 2}));
+        for (var index = 2; index < lessonPositions.length; index++) {
+          expect(
+            lessonPositions.sublist(index - 2, index + 1).toSet().length,
+            greaterThan(1),
+            reason: '${lesson.id} repeats one correct position three times',
+          );
+        }
       }
 
       expect(correctPositions.toSet(), containsAll(<int>{0, 1, 2}));
