@@ -120,6 +120,18 @@ the emulator itself can be launched from any directory. If Android Studio shows
 `/opt/homebrew/share/android-commandlinetools` or install the API 36 Google APIs
 ARM64 image through SDK Manager.
 
+### Android build from GitHub Actions
+
+The `Build Android APK` workflow runs automatically for changes to `main` and
+for pull requests, and it can also be started manually from the repository's
+Actions tab. It checks formatting, runs analysis and all tests, then builds a
+debug APK.
+
+After a successful run, open its `Artifacts` section and download the archive
+named `blackjack-advantage-trainer-android-debug-<commit SHA>`. GitHub keeps the
+artifact for 14 days. The APK uses debug signing and is intended only for
+development and testing, not for Google Play distribution.
+
 ## Adding a language
 
 1. Copy `lib/l10n/app_en.arb` to a locale-specific ARB file such as
