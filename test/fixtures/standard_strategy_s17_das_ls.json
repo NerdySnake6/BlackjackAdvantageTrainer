@@ -1,0 +1,51 @@
+{
+  "profileId": "standard_6d_s17_das_ls_peek_3to2",
+  "source": "https://wizardofodds.com/games/blackjack/strategy/4-decks/",
+  "sourceCheckedAt": "2026-08-02",
+  "license": "Independently transcribed mathematical decisions; no commercial wording or artwork copied.",
+  "dealerOrder": ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"],
+  "codes": {
+    "H": "hit",
+    "S": "stand",
+    "D": "doubleDown",
+    "P": "split",
+    "R": "surrender"
+  },
+  "hard": {
+    "5":  "HHHHHHHHHH",
+    "6":  "HHHHHHHHHH",
+    "7":  "HHHHHHHHHH",
+    "8":  "HHHHHHHHHH",
+    "9":  "HDDDDHHHHH",
+    "10": "DDDDDDDDHH",
+    "11": "DDDDDDDDDH",
+    "12": "HHSSSHHHHH",
+    "13": "SSSSSHHHHH",
+    "14": "SSSSSHHHHH",
+    "15": "SSSSSHHHRH",
+    "16": "SSSSSHHRRR",
+    "17": "SSSSSSSSSS"
+  },
+  "soft": {
+    "13": "HHHDDHHHHH",
+    "14": "HHHDDHHHHH",
+    "15": "HHDDDHHHHH",
+    "16": "HHDDDHHHHH",
+    "17": "HDDDDHHHHH",
+    "18": "SDDDDSSHHH",
+    "19": "SSSSSSSSSS",
+    "20": "SSSSSSSSSS"
+  },
+  "pairs": {
+    "2":  "PPPPPPHHHH",
+    "3":  "PPPPPPHHHH",
+    "4":  "HHHPPHHHHH",
+    "5":  "DDDDDDDDHH",
+    "6":  "PPPPPHHHHH",
+    "7":  "PPPPPPHHHH",
+    "8":  "PPPPPPPPPP",
+    "9":  "PPPPPSPPSS",
+    "10": "SSSSSSSSSS",
+    "A":  "PPPPPPPPPP"
+  }
+}

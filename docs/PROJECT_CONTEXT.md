@@ -242,16 +242,17 @@ v1 публикуется на английском. Следующий язык
 
 На 2026-08-02 в репозитории реализованы:
 
-- шесть английских уроков и 53 оригинальных упражнения;
+- шесть английских уроков и 54 оригинальных упражнения;
 - one-deck Hi-Lo drill с контрольными точками;
-- стандартный five-seat table с конфигурациями `Human`/`Bot`/`Empty`;
+- Quick Review до десяти просроченных или слабых упражнений;
+- стандартный five-seat table с конфигурациями `Human`/`Bot`/`Empty`, режимами Guided/Practice, проверкой running count и пятираундовым summary;
 - pure-Dart engines для карт, hands, shoe, Hi-Lo, basic strategy и раунда;
-- локальный progress и восстановление незавершённого урока;
+- локальный progress, review state и восстановление незавершённого урока;
 - английская UI-локализация и versioned English content/glossary;
-- fake purchase boundary и отключённая по умолчанию analytics boundary;
-- unit и widget tests критической математики и учебного потока.
+- fake purchase boundary, отдельные consent-aware analytics/crash boundaries и opt-in UI;
+- scripted shoes, полный standard strategy fixture и сценарные domain/layout/widget tests.
 
-Не реализованы полный 76-урочный курс, реальные IAP, Firebase/Crashlytics, дополнительные rule profiles, production analytics, русская локализация, store signing и публикация.
+Не реализованы полный 76-урочный курс, реальные IAP, внешняя конфигурация Firebase/Crashlytics, дополнительные rule profiles, русская локализация, store signing, реальные device gates и публикация beta.
 
 ## Источники и provenance
 

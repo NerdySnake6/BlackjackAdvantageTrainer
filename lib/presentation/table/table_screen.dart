@@ -1,6 +1,8 @@
 /// Landscape guided blackjack practice table.
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +12,11 @@ import '../../app/theme.dart';
 import '../../domain/blackjack_engine/blackjack_engine.dart';
 import '../../domain/blackjack_engine/game_rules.dart';
 import '../../domain/blackjack_engine/hand.dart';
+import '../../domain/blackjack_engine/strategy_engine.dart';
+import '../../domain/learning/models.dart';
+import '../../domain/learning/table_training.dart';
 import '../../l10n/app_localizations.dart';
+import '../../viewmodels/app_state.dart';
 import '../../viewmodels/table_view_model.dart';
 import '../widgets/playing_card_view.dart';
 
@@ -39,8 +45,17 @@ class _TableScreenState extends State<TableScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.read<AppState>();
+    final experienceLevel = appState.progress.experienceLevel;
     return ChangeNotifierProvider(
-      create: (context) => TableViewModel(),
+      create: (context) => TableViewModel(
+        mode: experienceLevel == ExperienceLevel.experienced
+            ? TableTrainingMode.practice
+            : TableTrainingMode.guided,
+        onEvent: (eventName, parameters) {
+          unawaited(appState.trackTrainingEvent(eventName, parameters));
+        },
+      ),
       child: const _TableView(),
     );
   }
@@ -85,6 +100,9 @@ class _TableHeader extends StatelessWidget {
         !viewModel.isDealing &&
         engine.phase != RoundPhase.playerTurn &&
         engine.phase != RoundPhase.dealerTurn;
+    final width = MediaQuery.sizeOf(context).width;
+    final isCompact = width < 1000;
+    final isPortraitTransition = width < 480;
     return Row(
       children: [
         IconButton(
@@ -93,38 +111,83 @@ class _TableHeader extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_rounded),
         ),
         const SizedBox(width: 4),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              strings.guidedMode,
-              style: const TextStyle(
-                color: AppColors.gold,
-                fontSize: 12,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.2,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PopupMenuButton<TableTrainingMode>(
+                enabled: viewModel.canChangeMode,
+                initialValue: viewModel.mode,
+                onSelected: viewModel.setMode,
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: TableTrainingMode.guided,
+                    child: Text(strings.guidedModeName),
+                  ),
+                  PopupMenuItem(
+                    value: TableTrainingMode.practice,
+                    child: Text(strings.practiceModeName),
+                  ),
+                ],
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      viewModel.mode == TableTrainingMode.guided
+                          ? strings.guidedMode
+                          : strings.practiceMode,
+                      style: const TextStyle(
+                        color: AppColors.gold,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    const SizedBox(width: 3),
+                    const Icon(
+                      Icons.arrow_drop_down,
+                      size: 16,
+                      color: AppColors.gold,
+                    ),
+                  ],
+                ),
               ),
+              Text(
+                engine.rules.id == GameRulesProfile.standard.id
+                    ? strings.standardRulesName
+                    : engine.rules.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: Colors.white70, fontSize: 11),
+              ),
+            ],
+          ),
+        ),
+        if (!isPortraitTransition && viewModel.showsRunningCount) ...[
+          _HeaderPill(
+            icon: Icons.speed_rounded,
+            label: strings.currentCount(engine.countingEngine.runningCount),
+            color: AppColors.mint,
+          ),
+          const SizedBox(width: 6),
+        ],
+        if (!isCompact && !isPortraitTransition)
+          _HeaderPill(
+            icon: Icons.flag_outlined,
+            label: strings.tableRoundProgress(
+              viewModel.roundsCompleted,
+              viewModel.roundsPerSession,
             ),
-            Text(
-              engine.rules.id == GameRulesProfile.standard.id
-                  ? strings.standardRulesName
-                  : engine.rules.name,
-              style: const TextStyle(color: Colors.white70, fontSize: 11),
-            ),
-          ],
-        ),
-        const Spacer(),
-        _HeaderPill(
-          icon: Icons.speed_rounded,
-          label: strings.currentCount(engine.countingEngine.runningCount),
-          color: AppColors.mint,
-        ),
-        const SizedBox(width: 8),
-        _HeaderPill(
-          icon: Icons.layers_outlined,
-          label: strings.shoeStatus(engine.dealtCards, engine.totalCards),
-          color: Colors.white70,
-        ),
+            color: AppColors.gold,
+          ),
+        if (!isCompact) ...[
+          const SizedBox(width: 6),
+          _HeaderPill(
+            icon: Icons.layers_outlined,
+            label: strings.shoeStatus(engine.dealtCards, engine.totalCards),
+            color: Colors.white70,
+          ),
+        ],
         const SizedBox(width: 4),
         IconButton(
           onPressed: canConfigure
@@ -341,6 +404,158 @@ class _DealerSpot extends StatelessWidget {
   }
 }
 
+class _DecisionFeedbackBar extends StatelessWidget {
+  const _DecisionFeedbackBar({required this.viewModel, required this.feedback});
+
+  final TableViewModel viewModel;
+  final TableDecisionAttempt feedback;
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+    return Container(
+      constraints: const BoxConstraints(minHeight: 54),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      decoration: BoxDecoration(
+        color: const Color(0xFF4B2529),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.danger),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.school_outlined, color: AppColors.gold),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  strings.recommendedAction(
+                    _actionLabel(strings, feedback.recommendedAction),
+                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w900),
+                ),
+                Text(
+                  _reasonLabel(strings, feedback.reason),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.white70, fontSize: 11),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          FilledButton(
+            onPressed: viewModel.dismissDecisionFeedback,
+            child: Text(strings.continueAction),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CountCheckBar extends StatelessWidget {
+  const _CountCheckBar({required this.viewModel});
+
+  final TableViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+    final answered = viewModel.countWasCorrect != null;
+    return SizedBox(
+      height: 58,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            answered
+                ? viewModel.countWasCorrect!
+                      ? strings.countCorrect
+                      : strings.countIncorrect(viewModel.revealedCount!)
+                : strings.tableCountPrompt,
+            style: TextStyle(
+              color: answered && !viewModel.countWasCorrect!
+                  ? AppColors.danger
+                  : Colors.white70,
+              fontWeight: FontWeight.w800,
+              fontSize: 12,
+            ),
+          ),
+          const SizedBox(width: 12),
+          if (!answered) ...[
+            IconButton.filledTonal(
+              onPressed: () => viewModel.changeSubmittedCount(-1),
+              icon: const Icon(Icons.remove),
+            ),
+            SizedBox(
+              width: 54,
+              child: Text(
+                '${viewModel.submittedCount >= 0 ? '+' : ''}${viewModel.submittedCount}',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            IconButton.filledTonal(
+              onPressed: () => viewModel.changeSubmittedCount(1),
+              icon: const Icon(Icons.add),
+            ),
+          ],
+          const SizedBox(width: 12),
+          FilledButton(
+            onPressed: answered
+                ? viewModel.continueAfterCountCheck
+                : viewModel.submitCount,
+            child: Text(
+              answered ? strings.continueAction : strings.submitCount,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SessionSummaryBar extends StatelessWidget {
+  const _SessionSummaryBar({required this.viewModel, required this.summary});
+
+  final TableViewModel viewModel;
+  final TableSessionSummary summary;
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+    return SizedBox(
+      height: 58,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.verified_outlined, color: AppColors.mint),
+          const SizedBox(width: 8),
+          Text(
+            strings.tableSessionComplete,
+            style: const TextStyle(fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(width: 16),
+          Text(
+            strings.strategyAccuracy((summary.strategyAccuracy * 100).round()),
+          ),
+          if (summary.countAccuracy case final accuracy?) ...[
+            const SizedBox(width: 12),
+            Text(strings.countAccuracy((accuracy * 100).round())),
+          ],
+          const SizedBox(width: 16),
+          FilledButton(
+            onPressed: viewModel.startNewSession,
+            child: Text(strings.startAnotherSession),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _PlayerRow extends StatelessWidget {
   const _PlayerRow({required this.viewModel});
 
@@ -390,10 +605,15 @@ class _PlayerSpot extends StatelessWidget {
         : seat.role == SeatRole.human
         ? AppColors.mint
         : Colors.white38;
+    final compactHeight = MediaQuery.sizeOf(context).height <= 340;
+    final usesLargeText = MediaQuery.textScalerOf(context).scale(1) > 1.1;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
-      constraints: const BoxConstraints(minHeight: 112),
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+      constraints: BoxConstraints(minHeight: compactHeight ? 104 : 112),
+      padding: EdgeInsets.symmetric(
+        horizontal: 6,
+        vertical: compactHeight ? 4 : 7,
+      ),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: isActive ? 0.32 : 0.18),
         borderRadius: BorderRadius.circular(18),
@@ -448,28 +668,39 @@ class _PlayerSpot extends StatelessWidget {
                 const SizedBox(height: 3),
                 if (seat.hands.isEmpty ||
                     viewModel.visibleCardsForSeat(seat.index) == 0)
-                  const SizedBox(height: 59)
+                  SizedBox(height: compactHeight ? 52 : 59)
                 else
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (
-                        var handIndex = 0;
-                        handIndex < seat.hands.length;
-                        handIndex++
-                      )
-                        if (handIndex > 0) const SizedBox(width: 3),
-                      for (final handState in seat.hands.take(2))
-                        _PlayerHand(
-                          viewModel: viewModel,
-                          seatIndex: seat.index,
-                          handState: handState,
-                          isActive: isActive,
-                        ),
-                    ],
+                  SizedBox(
+                    height: compactHeight ? 52 : 59,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (
+                            var handIndex = 0;
+                            handIndex < seat.hands.length;
+                            handIndex++
+                          )
+                            if (handIndex > 0) const SizedBox(width: 3),
+                          for (final handState in seat.hands.take(2))
+                            _PlayerHand(
+                              viewModel: viewModel,
+                              seatIndex: seat.index,
+                              handState: handState,
+                              isActive: isActive,
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
-                const SizedBox(height: 3),
-                _PracticeUnitChip(label: strings.practiceUnits, color: accent),
+                if (!compactHeight && !usesLargeText) ...[
+                  const SizedBox(height: 3),
+                  _PracticeUnitChip(
+                    label: strings.practiceUnits,
+                    color: accent,
+                  ),
+                ],
               ],
             ),
     );
@@ -601,6 +832,15 @@ class _TableActionTray extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final engine = viewModel.engine;
+    if (viewModel.sessionSummary case final summary?) {
+      return _SessionSummaryBar(viewModel: viewModel, summary: summary);
+    }
+    if (viewModel.decisionFeedback case final feedback?) {
+      return _DecisionFeedbackBar(viewModel: viewModel, feedback: feedback);
+    }
+    if (viewModel.awaitingCountCheck) {
+      return _CountCheckBar(viewModel: viewModel);
+    }
     if (viewModel.isDealing) {
       return SizedBox(
         height: 48,
@@ -663,25 +903,39 @@ class _ActionBar extends StatelessWidget {
       (PlayerAction.split, strings.split),
       (PlayerAction.surrender, strings.surrender),
     ];
+    final isCompact = MediaQuery.sizeOf(context).width < 1000;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          strings.turnPrompt,
-          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
-        ),
-        const SizedBox(width: 10),
+        if (!isCompact) ...[
+          Text(
+            strings.turnPrompt,
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
+          ),
+          const SizedBox(width: 10),
+        ],
         for (final item in actions)
           if (available.contains(item.$1))
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: FilledButton.tonal(
-                onPressed: () => viewModel.applyAction(item.$1),
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size(78, 42),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: FilledButton.tonal(
+                  onPressed: () => viewModel.applyAction(item.$1),
+                  style: FilledButton.styleFrom(
+                    minimumSize: Size(isCompact ? 0 : 78, 42),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isCompact ? 6 : 10,
+                    ),
+                  ),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      item.$2,
+                      textScaler: isCompact ? TextScaler.noScaling : null,
+                      style: TextStyle(fontSize: isCompact ? 11 : null),
+                    ),
+                  ),
                 ),
-                child: Text(item.$2),
               ),
             ),
       ],
@@ -831,3 +1085,29 @@ String _formatUnits(double units) {
       : units.toStringAsFixed(1);
   return '$sign$value';
 }
+
+String _actionLabel(AppLocalizations strings, PlayerAction action) =>
+    switch (action) {
+      PlayerAction.hit => strings.hit,
+      PlayerAction.stand => strings.stand,
+      PlayerAction.doubleDown => strings.doubleAction,
+      PlayerAction.split => strings.split,
+      PlayerAction.surrender => strings.surrender,
+    };
+
+String _reasonLabel(AppLocalizations strings, StrategyReason reason) =>
+    switch (reason) {
+      StrategyReason.splitPair => strings.strategyReasonSplitPair,
+      StrategyReason.standPair => strings.strategyReasonStandPair,
+      StrategyReason.doublePair => strings.strategyReasonDoublePair,
+      StrategyReason.hitPair => strings.strategyReasonHitPair,
+      StrategyReason.surrenderHardTotal => strings.strategyReasonSurrenderHard,
+      StrategyReason.doubleSoftTotal => strings.strategyReasonDoubleSoft,
+      StrategyReason.standSoftTotal => strings.strategyReasonStandSoft,
+      StrategyReason.hitSoftTotal => strings.strategyReasonHitSoft,
+      StrategyReason.doubleHardTotal => strings.strategyReasonDoubleHard,
+      StrategyReason.standHardTotal => strings.strategyReasonStandHard,
+      StrategyReason.hitHardTotal => strings.strategyReasonHitHard,
+      StrategyReason.unavailableActionFallback =>
+        strings.strategyReasonFallback,
+    };

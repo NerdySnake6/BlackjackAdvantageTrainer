@@ -57,6 +57,7 @@ class PlayingCardView extends StatelessWidget {
         children: [
           Text(
             card.rank.label,
+            textScaler: TextScaler.noScaling,
             style: TextStyle(
               color: cardColor,
               fontSize: width * 0.28,
@@ -66,6 +67,7 @@ class PlayingCardView extends StatelessWidget {
           ),
           Text(
             card.suitSymbol,
+            textScaler: TextScaler.noScaling,
             style: TextStyle(
               color: cardColor,
               fontSize: width * 0.25,
@@ -77,6 +79,7 @@ class PlayingCardView extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: Text(
               card.suitSymbol,
+              textScaler: TextScaler.noScaling,
               style: TextStyle(color: cardColor, fontSize: width * 0.34),
             ),
           ),

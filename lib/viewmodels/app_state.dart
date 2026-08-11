@@ -4,6 +4,7 @@ library;
 import 'package:flutter/foundation.dart';
 
 import '../core/analytics/analytics_gateway.dart';
+import '../core/analytics/crash_reporter_gateway.dart';
 import '../core/persistence/progress_repository.dart';
 import '../domain/learning/mastery.dart';
 import '../domain/learning/models.dart';
@@ -15,16 +16,22 @@ class AppState extends ChangeNotifier {
     required ProgressSnapshot progress,
     required ProgressRepository progressRepository,
     AnalyticsGateway analytics = const NoOpAnalyticsGateway(),
+    CrashReporterGateway crashReporter = const NoOpCrashReporterGateway(),
     PurchaseGateway purchaseGateway = const FakePurchaseGateway(),
     SessionScorer scorer = const SessionScorer(),
+    ReviewScheduler reviewScheduler = const ReviewScheduler(),
+    DateTime Function()? clock,
   }) {
     return AppState._(
       catalog,
       progress,
       progressRepository,
-      analytics,
+      ConsentAwareAnalyticsGateway(analytics),
+      ConsentAwareCrashReporterGateway(crashReporter),
       purchaseGateway,
       scorer,
+      reviewScheduler,
+      clock ?? DateTime.now,
     );
   }
 
@@ -33,15 +40,21 @@ class AppState extends ChangeNotifier {
     this._progress,
     this._progressRepository,
     this._analytics,
+    this._crashReporter,
     this._purchaseGateway,
     this._scorer,
+    this._reviewScheduler,
+    this._clock,
   );
 
   final CourseCatalog catalog;
   final ProgressRepository _progressRepository;
   final AnalyticsGateway _analytics;
+  final CrashReporterGateway _crashReporter;
   final PurchaseGateway _purchaseGateway;
   final SessionScorer _scorer;
+  final ReviewScheduler _reviewScheduler;
+  final DateTime Function() _clock;
   ProgressSnapshot _progress;
 
   ProgressSnapshot get progress => _progress;
@@ -50,6 +63,7 @@ class AppState extends ChangeNotifier {
   bool get hasExperienceLevel => _progress.experienceLevel != null;
 
   bool get hasSeenCountDrillIntro => _progress.hasSeenCountDrillIntro;
+  bool get hasSeenTelemetryConsent => _progress.hasSeenTelemetryConsent;
 
   int get completedLessonCount =>
       catalog.lessons.where((lesson) => isLessonCompleted(lesson.id)).length;
@@ -80,8 +94,65 @@ class AppState extends ChangeNotifier {
   LessonSessionProgress? sessionFor(String lessonId) =>
       _progress.activeSessions[lessonId];
 
+  List<LessonExercise> reviewExercises({int limit = 10, DateTime? now}) {
+    final exerciseById = {
+      for (final lesson in catalog.lessons)
+        for (final exercise in lesson.exercises) exercise.id: exercise,
+    };
+    final currentTime = now ?? _clock();
+    final candidates =
+        _progress.exerciseReviewStates.entries
+            .where((entry) => exerciseById.containsKey(entry.key))
+            .where(
+              (entry) =>
+                  entry.value.isDue(currentTime) ||
+                  entry.value.successfulReviewStreak < 2,
+            )
+            .toList()
+          ..sort((left, right) {
+            final leftDate =
+                left.value.nextReviewAt ??
+                DateTime.fromMillisecondsSinceEpoch(0);
+            final rightDate =
+                right.value.nextReviewAt ??
+                DateTime.fromMillisecondsSinceEpoch(0);
+            return leftDate.compareTo(rightDate);
+          });
+    return [
+      for (final entry in candidates.take(limit)) exerciseById[entry.key]!,
+    ];
+  }
+
   Future<void> chooseExperienceLevel(ExperienceLevel level) async {
     _progress = _progress.copyWith(experienceLevel: level);
+    notifyListeners();
+    await _progressRepository.save(_progress);
+    await _analytics.track('experience_level_selected', {
+      'experience_level': level.name,
+    });
+  }
+
+  Future<void> setTelemetryConsent({
+    required bool analyticsEnabled,
+    required bool crashReportsEnabled,
+  }) async {
+    const policyVersion = 1;
+    final now = _clock();
+    _progress = _progress.copyWith(
+      hasSeenTelemetryConsent: true,
+      analyticsConsent: ConsentState(
+        isGranted: analyticsEnabled,
+        policyVersion: policyVersion,
+        updatedAt: now,
+      ),
+      crashReportsConsent: ConsentState(
+        isGranted: crashReportsEnabled,
+        policyVersion: policyVersion,
+        updatedAt: now,
+      ),
+    );
+    await _analytics.setCollectionEnabled(analyticsEnabled);
+    await _crashReporter.setCollectionEnabled(crashReportsEnabled);
     notifyListeners();
     await _progressRepository.save(_progress);
   }
@@ -100,12 +171,27 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> initializeTelemetry() async {
+    await _analytics.setCollectionEnabled(_progress.analyticsConsent.isGranted);
+    await _crashReporter.setCollectionEnabled(
+      _progress.crashReportsConsent.isGranted,
+    );
+  }
+
+  Future<void> trackTrainingEvent(
+    String eventName, [
+    Map<String, Object?> parameters = const {},
+  ]) {
+    return _analytics.track(eventName, parameters);
+  }
+
   Future<void> saveSession({
     required String lessonId,
     required int nextExerciseIndex,
     required int correctAnswers,
     required int selectedIndex,
     required bool answerWasCorrect,
+    required String exerciseId,
   }) async {
     final sessions =
         Map<String, LessonSessionProgress>.of(_progress.activeSessions)
@@ -115,9 +201,39 @@ class AppState extends ChangeNotifier {
             lastSelectedIndex: selectedIndex,
             lastAnswerWasCorrect: answerWasCorrect,
           );
-    _progress = _progress.copyWith(activeSessions: sessions);
+    final reviewStates = _reviewStatesAfterAttempt(
+      exerciseId: exerciseId,
+      wasCorrect: answerWasCorrect,
+    );
+    _progress = _progress.copyWith(
+      activeSessions: sessions,
+      exerciseReviewStates: reviewStates,
+    );
     notifyListeners();
     await _progressRepository.save(_progress);
+    await _analytics.track('exercise_answered', {
+      'lesson_id': lessonId,
+      'exercise_id': exerciseId,
+      'is_correct': answerWasCorrect,
+    });
+  }
+
+  Future<void> recordReviewAttempt({
+    required String exerciseId,
+    required bool wasCorrect,
+  }) async {
+    _progress = _progress.copyWith(
+      exerciseReviewStates: _reviewStatesAfterAttempt(
+        exerciseId: exerciseId,
+        wasCorrect: wasCorrect,
+      ),
+    );
+    notifyListeners();
+    await _progressRepository.save(_progress);
+    await _analytics.track('quick_review_answered', {
+      'exercise_id': exerciseId,
+      'is_correct': wasCorrect,
+    });
   }
 
   Future<double> completeLesson({
@@ -135,7 +251,7 @@ class AppState extends ChangeNotifier {
     final sessions = Map<String, LessonSessionProgress>.of(
       _progress.activeSessions,
     )..remove(lesson.id);
-    final now = DateTime.now();
+    final now = _clock();
     final activityDate = DateTime(now.year, now.month, now.day);
     final streak = _updatedStreak(activityDate);
     final completionBonus =
@@ -158,6 +274,8 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> resetProgress() async {
+    await _analytics.setCollectionEnabled(false);
+    await _crashReporter.setCollectionEnabled(false);
     await _progressRepository.clear();
     _progress = const ProgressSnapshot();
     notifyListeners();
@@ -186,5 +304,26 @@ class AppState extends ChangeNotifier {
       return _progress.streakDays + 1;
     }
     return 1;
+  }
+
+  Map<String, ExerciseReviewState> _reviewStatesAfterAttempt({
+    required String exerciseId,
+    required bool wasCorrect,
+  }) {
+    final reviewStates = Map<String, ExerciseReviewState>.of(
+      _progress.exerciseReviewStates,
+    );
+    final previous = reviewStates[exerciseId] ?? const ExerciseReviewState();
+    final nextStreak = wasCorrect ? previous.successfulReviewStreak + 1 : 0;
+    reviewStates[exerciseId] = ExerciseReviewState(
+      attempts: previous.attempts + 1,
+      successfulReviewStreak: nextStreak,
+      nextReviewAt: _reviewScheduler.nextReview(
+        completedAt: _clock(),
+        successfulReviews: wasCorrect ? previous.successfulReviewStreak : 0,
+        wasCorrect: wasCorrect,
+      ),
+    );
+    return reviewStates;
   }
 }

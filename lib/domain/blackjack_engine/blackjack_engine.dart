@@ -38,9 +38,10 @@ class BlackjackEngine {
     this.rules = GameRulesProfile.standard,
     SeatConfiguration? seatConfiguration,
     Random? random,
+    Shoe? shoe,
     this.strategyEngine = const StrategyEngine(),
     this.handEvaluator = const HandEvaluator(),
-  }) : _shoe = Shoe(rules: rules, random: random),
+  }) : _shoe = shoe ?? Shoe(rules: rules, random: random),
        seats = [
          for (var index = 0; index < 5; index++)
            TableSeat(

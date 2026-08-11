@@ -17,6 +17,7 @@ Future<void> main() async {
     progress: progress,
     progressRepository: progressRepository,
   );
+  await appState.initializeTelemetry();
   await appState.initializeEntitlement();
 
   runApp(BlackjackTrainerApp(appState: appState));

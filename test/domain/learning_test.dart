@@ -80,5 +80,47 @@ void main() {
       expect(decoded.xp, 140);
       expect(decoded.streakDays, 2);
     });
+
+    test('older progress loads with safe review and consent defaults', () {
+      final decoded = ProgressSnapshot.fromJson({
+        'lessonScores': <String, Object?>{'quick-start': 0.8},
+        'activeSessions': <String, Object?>{},
+      });
+
+      expect(decoded.exerciseReviewStates, isEmpty);
+      expect(decoded.hasSeenTelemetryConsent, isFalse);
+      expect(decoded.analyticsConsent.isGranted, isFalse);
+      expect(decoded.crashReportsConsent.isGranted, isFalse);
+    });
+
+    test('review state JSON preserves attempts, streak, and due date', () {
+      final dueAt = DateTime.utc(2026, 8, 9);
+      final snapshot = ProgressSnapshot(
+        exerciseReviewStates: {
+          'values-ten-ranks': ExerciseReviewState(
+            attempts: 3,
+            successfulReviewStreak: 2,
+            nextReviewAt: dueAt,
+          ),
+        },
+        hasSeenTelemetryConsent: true,
+        analyticsConsent: ConsentState(
+          isGranted: true,
+          policyVersion: 1,
+          updatedAt: DateTime.utc(2026, 8, 2),
+        ),
+      );
+
+      final decoded = ProgressSnapshot.fromJson(
+        jsonDecode(jsonEncode(snapshot.toJson()))! as Map<String, Object?>,
+      );
+
+      final review = decoded.exerciseReviewStates['values-ten-ranks']!;
+      expect(review.attempts, 3);
+      expect(review.successfulReviewStreak, 2);
+      expect(review.nextReviewAt, dueAt);
+      expect(decoded.analyticsConsent.isGranted, isTrue);
+      expect(decoded.analyticsConsent.policyVersion, 1);
+    });
   });
 }

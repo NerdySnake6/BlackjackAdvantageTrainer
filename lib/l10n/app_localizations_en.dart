@@ -66,6 +66,34 @@ class AppLocalizationsEn extends AppLocalizations {
       'This changes your recommended starting point, not your saved progress.';
 
   @override
+  String get telemetryConsentTitle => 'Help improve the training';
+
+  @override
+  String get telemetryConsentBody =>
+      'Choose separately whether to share anonymous usage events and technical crash reports.';
+
+  @override
+  String get usageAnalyticsTitle => 'Usage analytics';
+
+  @override
+  String get usageAnalyticsDescription =>
+      'Share stable lesson IDs, session types, and aggregate correctness. Answer text and card sequences are never sent.';
+
+  @override
+  String get crashReportsTitle => 'Crash reports';
+
+  @override
+  String get crashReportsDescription =>
+      'Share fatal technical diagnostics so crashes can be fixed. No gameplay content or personal profile is attached.';
+
+  @override
+  String get telemetryOptionalNote =>
+      'Both choices are optional. Saying no does not limit the app, and you can change them in Progress.';
+
+  @override
+  String get saveAndContinue => 'Save and continue';
+
+  @override
   String get recommendedStart => 'Start here';
 
   @override
@@ -99,7 +127,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lessonCompleteSubtitle =>
-      'Accuracy unlocks the next node. Mastery still requires repetition.';
+      'Accuracy unlocked the next node. Keep reviewing to retain the skill.';
+
+  @override
+  String get lessonNeedsReview => 'Lesson finished — review required';
+
+  @override
+  String get lessonNeedsReviewSubtitle =>
+      'Reach at least 80% accuracy to unlock the next lesson.';
+
+  @override
+  String get retryLesson => 'Review and try again';
 
   @override
   String lessonResult(int correct, int total) {
@@ -120,6 +158,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backToPath => 'Back to path';
+
+  @override
+  String get quickReviewTitle => 'Quick Review';
+
+  @override
+  String get quickReviewReadyLater =>
+      'Weak and due exercises will appear here.';
+
+  @override
+  String quickReviewDue(int count) {
+    return '$count exercises ready · about 3–5 min';
+  }
+
+  @override
+  String quickReviewProgress(int current, int total) {
+    return 'Review $current of $total';
+  }
+
+  @override
+  String get quickReviewEmptyTitle => 'Nothing to review yet';
+
+  @override
+  String get quickReviewEmptyBody =>
+      'Complete a few lesson exercises, then return for a focused review.';
+
+  @override
+  String get quickReviewComplete => 'Review complete';
+
+  @override
+  String quickReviewResult(int correct, int total) {
+    return '$correct of $total correct. Your next review dates were updated.';
+  }
 
   @override
   String get countdownTitle => 'Running count';
@@ -146,7 +216,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get countDrillIntroDeckNote =>
-      'One deck has 52 cards and its tags balance back to 0. The standard table uses six decks (312 cards); the count resets only when the shoe is shuffled.';
+      'All 52 cards of one complete deck sum to 0 in Hi-Lo. In a multi-deck shoe, any 52 cards are only a mixed segment: keep the running count until the shoe is shuffled.';
 
   @override
   String get countDrillIntroKnown =>
@@ -269,6 +339,95 @@ class AppLocalizationsEn extends AppLocalizations {
   String get guidedMode => 'GUIDED TABLE';
 
   @override
+  String get practiceMode => 'PRACTICE TABLE';
+
+  @override
+  String get guidedModeName => 'Guided';
+
+  @override
+  String get practiceModeName => 'Practice';
+
+  @override
+  String tableRoundProgress(int completed, int total) {
+    return 'Round $completed / $total';
+  }
+
+  @override
+  String recommendedAction(String action) {
+    return 'Recommended: $action';
+  }
+
+  @override
+  String get continueAction => 'Continue';
+
+  @override
+  String get tableCountPrompt => 'What is the running count?';
+
+  @override
+  String get tableSessionComplete => 'Five-round session complete';
+
+  @override
+  String strategyAccuracy(int percent) {
+    return 'Strategy $percent%';
+  }
+
+  @override
+  String countAccuracy(int percent) {
+    return 'Count $percent%';
+  }
+
+  @override
+  String get startAnotherSession => 'Another session';
+
+  @override
+  String get strategyReasonSplitPair =>
+      'Splitting this pair creates the stronger long-run play.';
+
+  @override
+  String get strategyReasonStandPair =>
+      'This pair should stay together against this dealer card.';
+
+  @override
+  String get strategyReasonDoublePair =>
+      'Play these cards as a hard ten and double against this dealer card.';
+
+  @override
+  String get strategyReasonHitPair =>
+      'This pair is stronger when played as a regular hand.';
+
+  @override
+  String get strategyReasonSurrenderHard =>
+      'Late surrender loses less than playing this weak hard total.';
+
+  @override
+  String get strategyReasonDoubleSoft =>
+      'The soft total has enough upside to double against this dealer card.';
+
+  @override
+  String get strategyReasonStandSoft =>
+      'This soft total is already strong enough to stand.';
+
+  @override
+  String get strategyReasonHitSoft =>
+      'The ace protects the hand while another card can improve it.';
+
+  @override
+  String get strategyReasonDoubleHard =>
+      'This hard total has an advantage against the dealer\'s up-card.';
+
+  @override
+  String get strategyReasonStandHard =>
+      'The dealer is more likely to break; avoid taking another card.';
+
+  @override
+  String get strategyReasonHitHard =>
+      'Standing is too weak here; take another card.';
+
+  @override
+  String get strategyReasonFallback =>
+      'The preferred move is unavailable, so use the safest legal fallback.';
+
+  @override
   String get standardRulesName =>
       'Standard six-deck · S17 · DAS · late surrender · 3:2';
 
@@ -326,7 +485,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get streakLabel => 'day streak';
 
   @override
-  String get masteryLabel => 'Path mastery';
+  String get masteryLabel => 'Lesson accuracy';
+
+  @override
+  String get experienceSettingTitle => 'Experience level';
+
+  @override
+  String get experienceSettingSubtitle =>
+      'Change your recommended starting point without deleting progress.';
 
   @override
   String lessonsCompleted(int completed, int total) {
@@ -334,8 +500,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get privacyChoicesTitle => 'Privacy choices';
+
+  @override
+  String get privacyChoicesSubtitle =>
+      'Optional collection stays off unless you enable it.';
+
+  @override
   String get privacyNote =>
-      'Analytics and crash reporting are off in this prototype.';
+      'Telemetry follows your separate opt-in choices. Answer text, card sequences, and personal data are not collected.';
 
   @override
   String get educationDisclaimer =>

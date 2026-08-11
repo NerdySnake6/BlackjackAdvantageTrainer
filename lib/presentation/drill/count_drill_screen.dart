@@ -1,6 +1,8 @@
 /// One-deck Hi-Lo countdown drill.
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +48,14 @@ class _CountDrillScreenState extends State<CountDrillScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => CountDrillViewModel(),
+      create: (context) {
+        final appState = context.read<AppState>();
+        return CountDrillViewModel(
+          onEvent: (eventName, parameters) {
+            unawaited(appState.trackTrainingEvent(eventName, parameters));
+          },
+        );
+      },
       child: const _CountDrillView(),
     );
   }

@@ -15,7 +15,7 @@ void main() {
       tester.view.reset();
     });
     tester.view.devicePixelRatio = 1;
-    tester.view.physicalSize = const Size(320, 720);
+    tester.view.physicalSize = const Size(320, 568);
     final appState = await _createAppState();
 
     await tester.pumpWidget(BlackjackTrainerApp(appState: appState));
@@ -28,9 +28,25 @@ void main() {
     await tester.tap(find.text("I'm new to blackjack"));
     await tester.pumpAndSettle();
 
+    expect(find.text('Help improve the training'), findsOneWidget);
+    await tester.ensureVisible(find.text('Save and continue'));
+    await tester.tap(find.text('Save and continue'));
+    await tester.pumpAndSettle();
+
     expect(find.text('Learning path'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Your first hand'),
+      240,
+      scrollable: find.byType(Scrollable).last,
+    );
     expect(find.text('Your first hand'), findsOneWidget);
     expect(appState.progress.experienceLevel, ExperienceLevel.beginner);
+    await Scrollable.ensureVisible(
+      tester.element(find.text('Your first hand')),
+      alignment: 0.3,
+      duration: Duration.zero,
+    );
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('Your first hand'));
     await tester.pumpAndSettle();

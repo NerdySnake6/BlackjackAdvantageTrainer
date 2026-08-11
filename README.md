@@ -15,30 +15,33 @@ and Codex. Read them before changing the product or code:
 
 ## Implemented vertical slice
 
-- A six-node learning path with 53 original exercises.
-- Resume-safe lesson sessions, 80% completion threshold, XP, streak, and mastery.
+- A six-node learning path with 54 original exercises.
+- Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
-- A six-deck, five-seat blackjack table. Each seat can be Human, Bot, or Empty;
-  one person can occupy all five seats.
-- Standard validated profile: 6D, S17, DAS, late surrender, dealer peek, 3:2,
+- A six-deck, five-seat blackjack table with Guided and Practice modes,
+  strategy feedback, per-round count checks, and five-round summaries. Each
+  seat can be Human, Bot, or Empty; one person can occupy all five seats.
+- Standard reference-tested profile: 6D, S17, DAS, late surrender, dealer peek, 3:2,
   and 75% penetration.
 - Pure-Dart hand evaluation, shoe, counting, basic-strategy, and round engines.
 - English ARB UI localization and versioned English lesson/glossary assets.
-- Store-independent purchase interfaces and disabled-by-default analytics boundary.
+- Spaced-review state plus a Quick Review session of up to ten due or weak exercises.
+- Separate analytics and crash-report consent, both disabled by default, behind
+  store- and vendor-independent gateways.
 - Unit and widget tests for the critical mathematical and learning behavior.
 
-The rest of the 76-lesson commercial plan, real in-app purchases, Firebase,
-additional validated rule profiles, Russian content, and store submission are
-intentionally later stages.
+The rest of the 76-lesson commercial plan, real in-app purchases, Firebase
+project configuration, additional validated rule profiles, Russian content,
+and store submission are intentionally later stages. See the
+[closed-beta release checklist](docs/BETA_RELEASE.md).
 
 ## Privacy
 
-The current prototype stores learning progress only in the device's local app
-storage. It has no accounts, ads, production analytics, crash reporting,
-tracking, server database, or sensitive device permissions, and it does not
-send personal data or training activity to the developer. Operating-system
-backups and app-store services remain subject to Apple or Google policies. See
-the full [Privacy Policy](PRIVACY_POLICY.md).
+The app stores learning progress in local app storage and has no accounts, ads,
+server gameplay history, or sensitive device permissions. Firebase-enabled beta
+builds may offer separate optional usage-analytics and crash-report choices;
+both are off by default and never include answer text or card sequences. See the
+full [Privacy Policy](PRIVACY_POLICY.md).
 
 Before an external beta or store release, publish the current policy at a
 publicly accessible URL and verify that the

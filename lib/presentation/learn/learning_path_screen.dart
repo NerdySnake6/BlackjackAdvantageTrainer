@@ -39,37 +39,43 @@ class LearningPathScreen extends StatelessWidget {
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                 sliver: SliverToBoxAdapter(
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [AppColors.feltLight, AppColors.felt],
-                      ),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          strings.freeLabel,
-                          style: const TextStyle(
-                            color: AppColors.gold,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 1.3,
+                  child: Column(
+                    children: [
+                      _QuickReviewCard(appState: appState),
+                      const SizedBox(height: 12),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [AppColors.feltLight, AppColors.felt],
                           ),
+                          borderRadius: BorderRadius.circular(24),
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          section.title,
-                          style: Theme.of(context).textTheme.titleLarge,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              strings.freeLabel,
+                              style: const TextStyle(
+                                color: AppColors.gold,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 1.3,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              section.title,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              section.summary,
+                              style: const TextStyle(color: Colors.white70),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          section.summary,
-                          style: const TextStyle(color: Colors.white70),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -141,6 +147,36 @@ class LearningPathScreen extends StatelessWidget {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _QuickReviewCard extends StatelessWidget {
+  const _QuickReviewCard({required this.appState});
+
+  final AppState appState;
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+    final count = appState.reviewExercises().length;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: ListTile(
+        onTap: () => context.push('/review'),
+        leading: const CircleAvatar(
+          backgroundColor: AppColors.mint,
+          foregroundColor: AppColors.ink,
+          child: Icon(Icons.replay_rounded),
+        ),
+        title: Text(strings.quickReviewTitle),
+        subtitle: Text(
+          count == 0
+              ? strings.quickReviewReadyLater
+              : strings.quickReviewDue(count),
+        ),
+        trailing: const Icon(Icons.chevron_right_rounded),
       ),
     );
   }

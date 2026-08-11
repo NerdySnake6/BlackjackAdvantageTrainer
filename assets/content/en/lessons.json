@@ -1,5 +1,5 @@
 {
-  "contentVersion": 2,
+  "contentVersion": 3,
   "locale": "en",
   "sections": [
     {
@@ -403,15 +403,26 @@
               "correctIndex": 0,
               "explanation": "The count continues across hands until a shuffle begins a new shoe."
             },
-            {
-              "id": "hilo-balanced",
+        {
+          "id": "hilo-balanced",
               "prompt": "What should the final running count of one complete deck be?",
               "options": ["0", "+4", "-4"],
               "correctIndex": 0,
-              "explanation": "Hi-Lo is balanced: all tags in a full deck sum to zero."
-            },
-            {
-              "id": "hilo-visible",
+          "explanation": "Hi-Lo is balanced: all tags in a full deck sum to zero."
+        },
+        {
+          "id": "hilo-multideck-carry",
+          "prompt": "A six-deck shoe has dealt 52 cards and the running count is +6. What happens next?",
+          "options": [
+            "Continue from +6 until the shoe is shuffled",
+            "Reset to zero because 52 cards have passed",
+            "Start a separate count for the next 52 cards"
+          ],
+          "correctIndex": 0,
+          "explanation": "Those 52 cards are only a mixed part of the six-deck shoe. The running count continues until the shoe is shuffled."
+        },
+        {
+          "id": "hilo-visible",
               "prompt": "When should the dealer's hole card enter the count?",
               "options": ["When it is revealed", "As soon as it is dealt face down", "Never"],
               "correctIndex": 0,

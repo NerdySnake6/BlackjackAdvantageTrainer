@@ -5,12 +5,46 @@ import 'card.dart';
 import 'game_rules.dart';
 import 'hand.dart';
 
+enum StrategyReason {
+  splitPair,
+  standPair,
+  doublePair,
+  hitPair,
+  surrenderHardTotal,
+  doubleSoftTotal,
+  standSoftTotal,
+  hitSoftTotal,
+  doubleHardTotal,
+  standHardTotal,
+  hitHardTotal,
+  unavailableActionFallback,
+}
+
+class StrategyRecommendation {
+  const StrategyRecommendation({required this.action, required this.reason});
+
+  final PlayerAction action;
+  final StrategyReason reason;
+}
+
 class StrategyEngine {
   const StrategyEngine({this.evaluator = const HandEvaluator()});
 
   final HandEvaluator evaluator;
 
   PlayerAction recommend({
+    required BlackjackHand hand,
+    required PlayingCard dealerUpCard,
+    required GameRulesProfile rules,
+    required Set<PlayerAction> availableActions,
+  }) => recommendWithReason(
+    hand: hand,
+    dealerUpCard: dealerUpCard,
+    rules: rules,
+    availableActions: availableActions,
+  ).action;
+
+  StrategyRecommendation recommendWithReason({
     required BlackjackHand hand,
     required PlayingCard dealerUpCard,
     required GameRulesProfile rules,
@@ -24,10 +58,21 @@ class StrategyEngine {
       );
       if (pairAction == PlayerAction.split &&
           availableActions.contains(PlayerAction.split)) {
-        return PlayerAction.split;
+        return const StrategyRecommendation(
+          action: PlayerAction.split,
+          reason: StrategyReason.splitPair,
+        );
       }
       if (pairAction != PlayerAction.split) {
-        return _availableOrFallback(pairAction, availableActions);
+        return _recommendAvailable(
+          pairAction,
+          availableActions,
+          switch (pairAction) {
+            PlayerAction.stand => StrategyReason.standPair,
+            PlayerAction.doubleDown => StrategyReason.doublePair,
+            _ => StrategyReason.hitPair,
+          },
+        );
       }
     }
 
@@ -36,15 +81,29 @@ class StrategyEngine {
 
     if (!evaluation.isSoft &&
         availableActions.contains(PlayerAction.surrender) &&
-        ((evaluation.total == 16 && dealerValue >= 9) ||
+        ((evaluation.total == 16 && (dealerValue == 1 || dealerValue >= 9)) ||
             (evaluation.total == 15 && dealerValue == 10))) {
-      return PlayerAction.surrender;
+      return const StrategyRecommendation(
+        action: PlayerAction.surrender,
+        reason: StrategyReason.surrenderHardTotal,
+      );
     }
 
     final preferred = evaluation.isSoft
         ? _softAction(evaluation.total, dealerValue)
         : _hardAction(evaluation.total, dealerValue);
-    return _availableOrFallback(preferred, availableActions);
+    final reason = evaluation.isSoft
+        ? switch (preferred) {
+            PlayerAction.doubleDown => StrategyReason.doubleSoftTotal,
+            PlayerAction.stand => StrategyReason.standSoftTotal,
+            _ => StrategyReason.hitSoftTotal,
+          }
+        : switch (preferred) {
+            PlayerAction.doubleDown => StrategyReason.doubleHardTotal,
+            PlayerAction.stand => StrategyReason.standHardTotal,
+            _ => StrategyReason.hitHardTotal,
+          };
+    return _recommendAvailable(preferred, availableActions, reason);
   }
 
   bool _isPair(BlackjackHand hand) {
@@ -158,5 +217,19 @@ class StrategyEngine {
       return PlayerAction.hit;
     }
     return PlayerAction.stand;
+  }
+
+  StrategyRecommendation _recommendAvailable(
+    PlayerAction preferred,
+    Set<PlayerAction> availableActions,
+    StrategyReason reason,
+  ) {
+    final action = _availableOrFallback(preferred, availableActions);
+    return StrategyRecommendation(
+      action: action,
+      reason: action == preferred
+          ? reason
+          : StrategyReason.unavailableActionFallback,
+    );
   }
 }

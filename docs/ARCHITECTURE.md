@@ -32,10 +32,10 @@ View отвечает за отображение и пользовательс�
 
 | Путь | Статус и ответственность |
 | --- | --- |
-| `lib/presentation/` | **Реализовано.** Views для learning path, lesson, count drill, table и progress. |
-| `lib/viewmodels/` | **Реализовано.** `AppState`, `LessonViewModel`, `CountDrillViewModel`, `TableViewModel`. |
+| `lib/presentation/` | **Реализовано.** Views для onboarding/consent, learning path, lesson, Quick Review, count drill, Guided/Practice table и progress. |
+| `lib/viewmodels/` | **Реализовано.** `AppState`, `LessonViewModel`, `QuickReviewViewModel`, `CountDrillViewModel`, `TableViewModel`. |
 | `lib/data/` | **Реализовано.** Загрузка English content и локальное хранение прогресса. |
-| `lib/core/` | **Реализовано.** Контракты persistence и consent-aware analytics boundary. |
+| `lib/core/` | **Реализовано.** Контракты persistence, consent-aware analytics и crash-reporting boundaries. |
 | `lib/domain/blackjack_engine/` | **Реализовано.** Pure-Dart cards, hands, shoe, counting, strategy и round engine. |
 | `lib/domain/learning/` | **Частично реализовано.** Content/progress models, session scoring и базовый review schedule. |
 | `lib/domain/purchase/` | **Граница реализована.** Store API пока заменён `FakePurchaseGateway`. |
@@ -48,21 +48,21 @@ View отвечает за отображение и пользовательс�
 ### Реализовано
 
 - `BlackjackEngine` управляет одной автономной раздачей, пятью местами, действиями игрока/ботов, dealer play, split и settlement.
-- `Shoe` создаёт и перемешивает карты для `GameRulesProfile`, контролирует остаток и penetration.
+- `Shoe` создаёт и перемешивает карты для `GameRulesProfile`, контролирует остаток и penetration; `Shoe.scripted` задаёт точную последовательность для сценарных тестов.
 - `HandEvaluator` вычисляет total, soft/hard, bust и natural blackjack; состояние руки представляет `BlackjackHand`.
-- `StrategyEngine` рекомендует действие для единственного проверенного standard profile и учитывает доступные действия.
+- `StrategyEngine` рекомендует действие для единственного проверенного standard profile, возвращает `StrategyRecommendation` с локализуемым `StrategyReason` и сохраняет совместимую обёртку `recommend()`.
 - `CountingEngine` ведёт running count, оценивает оставшиеся колоды и делегирует true-count conversion политике.
 - `TrueCountPolicy` — интерфейс политики округления; текущая `NearestWholeTrueCountPolicy` использует ближайшее целое. Поведение отрицательных значений должно оставаться явно протестированным.
 
-Основные реализованные types: `PlayingCard`, `CardRank`, `CardSuit`, `HandEvaluation`, `BlackjackHand`, `GameRulesProfile`, `BlackjackPayout`, `SeatConfiguration`, `SeatRole`, `PlayerAction`, `RoundPhase`, `HandOutcome`, `PlayerHandState` и `TableSeat`.
+Основные реализованные types: `PlayingCard`, `CardRank`, `CardSuit`, `HandEvaluation`, `BlackjackHand`, `GameRulesProfile`, `BlackjackPayout`, `SeatConfiguration`, `SeatRole`, `PlayerAction`, `RoundPhase`, `HandOutcome`, `PlayerHandState`, `TableSeat`, `StrategyRecommendation`, `StrategyReason`, `TableTrainingMode`, `TableDecisionAttempt` и `TableSessionSummary`.
 
 В production `Shoe` по умолчанию использует `Random.secure()`. Тесты передают seeded `Random`, чтобы shoe и сценарий были воспроизводимыми. Любая новая случайность должна сохранять такой способ внедрения; нельзя делать математические тесты зависимыми от недетерминированной последовательности.
 
 ### Запланировано
 
-- независимые reference fixtures или solver export для каждого rule profile;
+- второй независимый solver export или экспертная проверка текущего reference fixture перед внешней beta;
 - расширенные профили 1/2/6/8 decks, H17/S17, DAS, surrender и 3:2/6:5;
-- полная матрица resplit/split aces и profile-specific restrictions;
+- profile-specific restrictions для будущих проверенных профилей;
 - deviations, включая I18/Fab4, только после математической валидации;
 - отдельные session/report types для certification, deck estimation и full-shoe exams.
 
@@ -71,18 +71,20 @@ View отвечает за отображение и пользовательс�
 ### Реализовано
 
 - `CourseCatalog`, `CourseSection`, `LessonDefinition` и `LessonExercise` загружают versioned content.
-- `ExerciseAttempt`, `LessonSessionProgress` и `ProgressSnapshot` представляют результаты и resume state.
+- `ExerciseAttempt`, `ExerciseReviewState`, `LessonSessionProgress`, consent state и `ProgressSnapshot` представляют результаты, resume, review и настройки telemetry.
 - `SessionScorer` вычисляет точность и порог 80% для текущего урока.
-- `ReviewScheduler` содержит интервалы 1/3/7/14/30 дней, но полноценная очередь review ещё не подключена к UI.
+- `ReviewScheduler` применяет интервалы 1/3/7/14/30 дней; ошибка сбрасывает серию и назначает следующий review через день.
+- Quick Review выбирает до десяти просроченных или слабых упражнений по stable exercise ID.
+- Ответы показываются в детерминированном порядке, вычисленном только по stable exercise ID, поэтому resume не меняет правильную позицию.
 - `AppState` связывает каталог, progress repository, scoring, analytics и entitlement boundary.
 
 ### Запланировано
 
 - `LessonEngine` для последовательности упражнений, branching и единых правил resume;
 - `MasteryCalculator` для lesson, checkpoint, skill и certification mastery;
-- расширение `ReviewScheduler` до устойчивой очереди интервального повторения;
+- дальнейшая настройка приоритетов очереди review на данных beta;
 - `SessionScorer` для speed, accuracy, streaks ошибок и exam constraints, а не только доли правильных ответов;
-- Placement Test, Quick Review и migration policies для новых `contentVersion`.
+- Placement Test и формальные migration policies для будущих `contentVersion`.
 
 Стабильные `lessonId`, `skillId` и exercise IDs — ключи прогресса, а не переводимый текст. Их нельзя переименовывать после публикации.
 
@@ -92,7 +94,7 @@ View отвечает за отображение и пользовательс�
 
 - `ContentRepository` загружает текущий English catalog из bundle assets.
 - `ProgressRepository` задаёт контракт, а `LocalProgressRepository` сохраняет `ProgressSnapshot` в `shared_preferences`.
-- `AnalyticsGateway` отделяет приложение от telemetry SDK; `NoOpAnalyticsGateway` ничего не отправляет.
+- `AnalyticsGateway` и `CrashReporterGateway` отделяют приложение от telemetry SDK; consent-aware decorators блокируют передачу до opt-in, а NoOp implementations ничего не отправляют.
 - `PurchaseGateway` задаёт entitlement, purchase и restore operations.
 - `FakePurchaseGateway` возвращает Free/unavailable и позволяет разрабатывать без магазина.
 - `FeatureAccessPolicy` централизует проверку Pro entitlement.
@@ -101,7 +103,7 @@ View отвечает за отображение и пользовательс�
 
 - locale-aware content и glossary repositories вместо жёсткого `loadEnglishCatalog()`;
 - store adapters для App Store и Google Play, transaction verification и idempotent restore;
-- consent-aware production analytics и crash-reporting adapters;
+- Firebase Analytics/Crashlytics adapters и platform configuration после создания внешнего Firebase-проекта;
 - versioned repository migrations и резервное восстановление повреждённого progress;
 - отдельные services для profile catalog, session history, statistics и certification.
 
