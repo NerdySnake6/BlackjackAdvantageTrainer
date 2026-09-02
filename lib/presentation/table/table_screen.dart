@@ -257,6 +257,7 @@ class _TableTop extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final tableRadius = (constraints.maxWidth * 0.18).clamp(90.0, 220.0);
+        final compact = constraints.maxHeight < 300;
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2),
           child: DecoratedBox(
@@ -299,8 +300,16 @@ class _TableTop extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(12, 54, 12, 14),
-                        child: _PlayerRow(viewModel: viewModel),
+                        padding: EdgeInsets.fromLTRB(
+                          12,
+                          compact ? 30 : 54,
+                          12,
+                          14,
+                        ),
+                        child: _PlayerRow(
+                          viewModel: viewModel,
+                          compact: compact,
+                        ),
                       ),
                     ),
                     if (viewModel.isDealing)
@@ -552,9 +561,10 @@ class _SessionSummaryBar extends StatelessWidget {
 }
 
 class _PlayerRow extends StatelessWidget {
-  const _PlayerRow({required this.viewModel});
+  const _PlayerRow({required this.viewModel, required this.compact});
 
   final TableViewModel viewModel;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -572,6 +582,7 @@ class _PlayerRow extends StatelessWidget {
                 isActive:
                     seat.index == engine.activeSeatIndex &&
                     engine.phase == RoundPhase.playerTurn,
+                compact: compact,
               ),
             ),
           ),
@@ -585,11 +596,13 @@ class _PlayerSpot extends StatelessWidget {
     required this.viewModel,
     required this.seat,
     required this.isActive,
+    required this.compact,
   });
 
   final TableViewModel viewModel;
   final TableSeat seat;
   final bool isActive;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -600,15 +613,11 @@ class _PlayerSpot extends StatelessWidget {
         : seat.role == SeatRole.human
         ? AppColors.mint
         : Colors.white38;
-    final compactHeight = MediaQuery.sizeOf(context).height <= 340;
     final usesLargeText = MediaQuery.textScalerOf(context).scale(1) > 1.1;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
-      constraints: BoxConstraints(minHeight: compactHeight ? 104 : 112),
-      padding: EdgeInsets.symmetric(
-        horizontal: 6,
-        vertical: compactHeight ? 4 : 7,
-      ),
+      constraints: BoxConstraints(minHeight: compact ? 104 : 112),
+      padding: EdgeInsets.symmetric(horizontal: 6, vertical: compact ? 4 : 7),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: isActive ? 0.32 : 0.18),
         borderRadius: BorderRadius.circular(18),
@@ -663,10 +672,10 @@ class _PlayerSpot extends StatelessWidget {
                 const SizedBox(height: 3),
                 if (seat.hands.isEmpty ||
                     viewModel.visibleCardsForSeat(seat.index) == 0)
-                  SizedBox(height: compactHeight ? 52 : 59)
+                  SizedBox(height: compact ? 52 : 59)
                 else
                   SizedBox(
-                    height: compactHeight ? 52 : 59,
+                    height: compact ? 52 : 59,
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Row(
@@ -689,7 +698,7 @@ class _PlayerSpot extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (!compactHeight && !usesLargeText) ...[
+                if (!compact && !usesLargeText) ...[
                   const SizedBox(height: 3),
                   _PracticeUnitChip(
                     label: strings.practiceUnits,

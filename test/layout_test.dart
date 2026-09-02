@@ -35,6 +35,9 @@ void main() {
 
     final landscapeCases = <(Size, double)>[
       (const Size(568, 320), 1),
+      // Galaxy S20-class landscape height: just above the old 340px compact
+      // cutoff, but still too short for the roomy seat-card sizing.
+      (const Size(800, 360), 1),
       (const Size(844, 390), 1.3),
       (const Size(915, 412), 1.3),
     ];
