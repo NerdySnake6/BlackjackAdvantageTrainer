@@ -4,16 +4,16 @@ A bilingual Flutter training simulation for mastering blackjack basic strategy a
 Hi-Lo running count. It is an offline educational simulation, not a live casino
 assistant and not a real-money game.
 
-## 📲 Beta Releases / Загрузка бета-версии
+## 📲 Beta Releases & Downloads
 
-Готовые сборки актуальной версии **[v1.0.0-beta.1](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/tag/v1.0.0-beta.1)** доступны для тестирования:
+Standalone artifacts for closed beta release **[v1.0.0-beta.1](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/tag/v1.0.0-beta.1)** are available for testing:
 
-- 🤖 **Android (Release APK):** [Скачать BlackjackAdvantageTrainer-android-release.apk (50 МБ)](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/download/v1.0.0-beta.1/BlackjackAdvantageTrainer-android-release.apk)  
-  *Поддерживает любые устройства на Android 7.0+ (API 24–36). Устанавливается напрямую через стандартный установщик.*
-- 🍏 **iOS (IPA):** [Скачать BlackjackAdvantageTrainer-ios-unsigned.ipa (8 МБ)](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/download/v1.0.0-beta.1/BlackjackAdvantageTrainer-ios-unsigned.ipa)  
-  *Упакованный Payload (`Runner.app`) для сайдлоадинга через AltStore, Sideloadly или подписи собственным сертификатом разработчика.*
+- 🤖 **Android (Release APK):** [Download BlackjackAdvantageTrainer-android-release.apk (50 MB)](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/download/v1.0.0-beta.1/BlackjackAdvantageTrainer-android-release.apk)  
+  *Compatible with Android 7.0+ (API 24 to 36). Can be installed directly via the Android package installer.*
+- 🍏 **iOS (Unsigned IPA):** [Download BlackjackAdvantageTrainer-ios-unsigned.ipa (8 MB)](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/download/v1.0.0-beta.1/BlackjackAdvantageTrainer-ios-unsigned.ipa)  
+  *Packaged iOS Payload (`Runner.app`) for sideloading via AltStore, Sideloadly, or re-signing with an Apple Developer certificate.*
 
-Полный журнал изменений релиза доступен на странице [GitHub Releases](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/tag/v1.0.0-beta.1).
+Full release details and feature notes are available on the [GitHub Releases](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/tag/v1.0.0-beta.1) page.
 
 ## Start here
 
