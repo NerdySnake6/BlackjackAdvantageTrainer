@@ -1,16 +1,28 @@
 # Blackjack Advantage Trainer
 
-An English-first Flutter prototype for learning blackjack basic strategy and the
-Hi-Lo running count. It is an offline training simulation, not a live casino
+A bilingual Flutter training simulation for mastering blackjack basic strategy and the
+Hi-Lo running count. It is an offline educational simulation, not a live casino
 assistant and not a real-money game.
+
+## 📲 Beta Releases / Загрузка бета-версии
+
+Готовые сборки актуальной версии **[v1.0.0-beta.1](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/tag/v1.0.0-beta.1)** доступны для тестирования:
+
+- 🤖 **Android (Release APK):** [Скачать BlackjackAdvantageTrainer-android-release.apk (50 МБ)](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/download/v1.0.0-beta.1/BlackjackAdvantageTrainer-android-release.apk)  
+  *Поддерживает любые устройства на Android 7.0+ (API 24–36). Устанавливается напрямую через стандартный установщик.*
+- 🍏 **iOS (IPA):** [Скачать BlackjackAdvantageTrainer-ios-unsigned.ipa (8 МБ)](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/download/v1.0.0-beta.1/BlackjackAdvantageTrainer-ios-unsigned.ipa)  
+  *Упакованный Payload (`Runner.app`) для сайдлоадинга через AltStore, Sideloadly или подписи собственным сертификатом разработчика.*
+
+Полный журнал изменений релиза доступен на странице [GitHub Releases](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases/tag/v1.0.0-beta.1).
 
 ## Start here
 
 These documents are the canonical project context for contributors, reviewers,
-and Codex. Read them before changing the product or code:
+and agents. Read them before changing the product or code:
 
 - [Product context and durable decisions](docs/PROJECT_CONTEXT.md)
 - [Architecture and implementation status](docs/ARCHITECTURE.md)
+- [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 
 ## Implemented vertical slice
@@ -24,14 +36,15 @@ and Codex. Read them before changing the product or code:
 - Standard reference-tested profile: 6D, S17, DAS, late surrender, dealer peek, 3:2,
   and 75% penetration.
 - Pure-Dart hand evaluation, shoe, counting, basic-strategy, and round engines.
-- English ARB UI localization and versioned English lesson/glossary assets.
+- Full bilingual UI and course content localization (English and Russian) with dynamic
+  in-app language switching and 100% progress preservation.
 - Spaced-review state plus a Quick Review session of up to ten due or weak exercises.
 - Firebase Analytics and Crashlytics behind store- and vendor-independent
-  gateways, with separate consent choices and collection disabled by default.
-- Unit and widget tests for the critical mathematical and learning behavior.
+  gateways, with separate consent choices and collection disabled by default (zero advertising IDs).
+- Comprehensive test suite: 116 tests with strict coverage gates (`domain ≥ 95%`).
 
 The rest of the 76-lesson commercial plan, real in-app purchases, additional
-validated rule profiles, Russian content, and store submission are intentionally
+validated rule profiles, and store submission are intentionally
 later stages. See the
 [closed-beta release checklist](docs/BETA_RELEASE.md).
 
@@ -68,10 +81,11 @@ Important locations:
 
 - `lib/domain/blackjack_engine/` — cards, hands, shoe, Hi-Lo, strategy, and round engine.
 - `lib/domain/learning/` — content, progress, mastery, and review policies.
-- `assets/content/en/` — versioned course content and terminology glossary.
-- `lib/l10n/app_en.arb` — localizable interface strings.
+- `assets/content/en/`, `assets/content/ru/` — versioned course content and terminology glossary.
+- `lib/l10n/app_en.arb`, `lib/l10n/app_ru.arb` — localizable interface strings.
 - `lib/presentation/` — learning path, lessons, drill, table, and progress UI.
-- `test/` — mathematical, content, persistence-model, and UI checks.
+- `test/` — mathematical, content, persistence-model, layout, and UI checks.
+- `tool/check_coverage.sh` — automated ratchet coverage gate (strict domain math $\ge 95\%$).
 
 ## Run locally
 
@@ -85,7 +99,8 @@ Requirements:
 ```sh
 flutter pub get
 flutter analyze
-flutter test
+flutter test --coverage
+./tool/check_coverage.sh
 flutter run
 ```
 
@@ -108,7 +123,7 @@ Wait until the Android home screen is fully loaded. Then open a second terminal
 and run the app from the project root (the directory containing `pubspec.yaml`):
 
 ```sh
-cd /Users/nerdysnake6/Documents/BlackjackAdvantageTrainer
+cd /path/to/BlackjackAdvantageTrainer
 flutter devices
 flutter run -d emulator-5554
 ```
@@ -124,13 +139,13 @@ ARM64 image through SDK Manager.
 
 The `Build Android APK` workflow runs automatically for changes to `main` and
 for pull requests, and it can also be started manually from the repository's
-Actions tab. It checks formatting, runs analysis and all tests, then builds a
-debug APK.
+Actions tab. It checks formatting, runs analysis, verifies strict coverage gates,
+and builds the release APK.
 
 After a successful run, open its `Artifacts` section and download the archive
 named `blackjack-advantage-trainer-android-debug-<commit SHA>`. GitHub keeps the
-artifact for 14 days. The APK uses debug signing and is intended only for
-development and testing, not for Google Play distribution.
+artifact for 14 days. Production-signed and beta builds are also published directly under
+[GitHub Releases](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/releases).
 
 ## Adding a language
 
