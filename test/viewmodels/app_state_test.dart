@@ -21,6 +21,8 @@ void main() {
       expect(analytics.events, isEmpty);
       expect(analytics.enabled, isFalse);
       expect(crashes.enabled, isFalse);
+      await appState.recordError(Exception('blocked'), StackTrace.current);
+      expect(crashes.errors, isEmpty);
 
       await appState.setTelemetryConsent(
         analyticsEnabled: true,
@@ -56,6 +58,8 @@ void main() {
         analyticsEnabled: true,
         crashReportsEnabled: true,
       );
+      await appState.recordError(Exception('allowed'), StackTrace.current);
+      expect(crashes.errors, hasLength(1));
       await appState.resetProgress();
       expect(analytics.enabled, isFalse);
       expect(crashes.enabled, isFalse);
@@ -179,6 +183,7 @@ class _RecordingAnalyticsGateway implements AnalyticsGateway {
 
 class _RecordingCrashReporterGateway implements CrashReporterGateway {
   bool enabled = false;
+  final errors = <Object>[];
 
   @override
   Future<void> setCollectionEnabled(bool enabled) async {
@@ -190,5 +195,7 @@ class _RecordingCrashReporterGateway implements CrashReporterGateway {
     Object error,
     StackTrace stackTrace, {
     bool fatal = false,
-  }) async {}
+  }) async {
+    errors.add(error);
+  }
 }

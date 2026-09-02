@@ -26,21 +26,21 @@ and Codex. Read them before changing the product or code:
 - Pure-Dart hand evaluation, shoe, counting, basic-strategy, and round engines.
 - English ARB UI localization and versioned English lesson/glossary assets.
 - Spaced-review state plus a Quick Review session of up to ten due or weak exercises.
-- Separate analytics and crash-report consent, both disabled by default, behind
-  store- and vendor-independent gateways.
+- Firebase Analytics and Crashlytics behind store- and vendor-independent
+  gateways, with separate consent choices and collection disabled by default.
 - Unit and widget tests for the critical mathematical and learning behavior.
 
-The rest of the 76-lesson commercial plan, real in-app purchases, Firebase
-project configuration, additional validated rule profiles, Russian content,
-and store submission are intentionally later stages. See the
+The rest of the 76-lesson commercial plan, real in-app purchases, additional
+validated rule profiles, Russian content, and store submission are intentionally
+later stages. See the
 [closed-beta release checklist](docs/BETA_RELEASE.md).
 
 ## Privacy
 
 The app stores learning progress in local app storage and has no accounts, ads,
-server gameplay history, or sensitive device permissions. Firebase-enabled beta
-builds may offer separate optional usage-analytics and crash-report choices;
-both are off by default and never include answer text or card sequences. See the
+server gameplay history, or sensitive device permissions. Android and iOS builds
+offer separate optional usage-analytics and crash-report choices; both are off
+by default and never include answer text or card sequences. See the
 full [Privacy Policy](PRIVACY_POLICY.md).
 
 Before an external beta or store release, publish the current policy at a

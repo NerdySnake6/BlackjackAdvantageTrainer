@@ -95,7 +95,7 @@ View отвечает за отображение и пользовательс�
 
 - `ContentRepository` загружает текущий English catalog из bundle assets.
 - `ProgressRepository` задаёт контракт, а `LocalProgressRepository` сохраняет `ProgressSnapshot` в `shared_preferences`.
-- `AnalyticsGateway` и `CrashReporterGateway` отделяют приложение от telemetry SDK; consent-aware decorators блокируют передачу до opt-in, а NoOp implementations ничего не отправляют.
+- `AnalyticsGateway` и `CrashReporterGateway` отделяют приложение от telemetry SDK; consent-aware decorators блокируют передачу до opt-in, Firebase adapters обслуживают Android/iOS, а NoOp implementations сохраняют работу неподключённых платформ.
 - `PurchaseGateway` задаёт entitlement, purchase и restore operations.
 - `FakePurchaseGateway` возвращает Free/unavailable и позволяет разрабатывать без магазина.
 - `FeatureAccessPolicy` централизует проверку Pro entitlement.
@@ -104,7 +104,6 @@ View отвечает за отображение и пользовательс�
 
 - locale-aware content и glossary repositories вместо жёсткого `loadEnglishCatalog()`;
 - store adapters для App Store и Google Play, transaction verification и idempotent restore;
-- Firebase Analytics/Crashlytics adapters и platform configuration после создания внешнего Firebase-проекта;
 - versioned repository migrations и резервное восстановление повреждённого progress;
 - отдельные services для profile catalog, session history, statistics и certification.
 

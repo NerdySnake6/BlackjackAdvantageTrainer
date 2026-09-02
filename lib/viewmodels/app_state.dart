@@ -185,6 +185,14 @@ class AppState extends ChangeNotifier {
     return _analytics.track(eventName, parameters);
   }
 
+  Future<void> recordError(
+    Object error,
+    StackTrace stackTrace, {
+    bool fatal = false,
+  }) {
+    return _crashReporter.recordError(error, stackTrace, fatal: fatal);
+  }
+
   Future<void> saveSession({
     required String lessonId,
     required int nextExerciseIndex,

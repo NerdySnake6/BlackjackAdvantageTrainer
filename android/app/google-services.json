@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1042358979086",
+    "project_id": "blackjack-advantage-trainer",
+    "storage_bucket": "blackjack-advantage-trainer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042358979086:android:6dee3301b51a7c0844ca5f",
+        "android_client_info": {
+          "package_name": "com.blackjackadvantage.trainer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3IF1lTgbFr9oSxLS_bTqZ4THGau_5c00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

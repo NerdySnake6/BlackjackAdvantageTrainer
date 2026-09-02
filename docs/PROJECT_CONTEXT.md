@@ -249,10 +249,10 @@ v1 публикуется на английском. Следующий язык
 - pure-Dart engines для карт, hands, shoe, Hi-Lo, basic strategy и раунда;
 - локальный progress, review state и восстановление незавершённого урока;
 - английская UI-локализация и versioned English content/glossary;
-- fake purchase boundary, отдельные consent-aware analytics/crash boundaries и opt-in UI;
+- fake purchase boundary, Firebase Analytics/Crashlytics adapters для Android/iOS, отдельные consent-aware boundaries и opt-in UI;
 - scripted shoes, полный standard strategy fixture и сценарные domain/layout/widget tests.
 
-Не реализованы полный 76-урочный курс, реальные IAP, внешняя конфигурация Firebase/Crashlytics, дополнительные rule profiles, русская локализация, store signing, реальные device gates и публикация beta.
+Не реализованы полный 76-урочный курс, реальные IAP, дополнительные rule profiles, русская локализация, store signing, реальные device gates и публикация beta. Firebase-проект и SDK настроены, но отправку событий после opt-in ещё нужно подтвердить на реальных устройствах и в Firebase Console.
 
 ## Источники и provenance
 

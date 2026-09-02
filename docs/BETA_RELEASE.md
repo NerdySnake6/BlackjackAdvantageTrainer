@@ -29,16 +29,11 @@ git diff --check
 
 Дополнительно пройти приложение на одном реальном Android и одном реальном iPhone. Проверить onboarding и отказ от обоих consent, первый урок, resume, Drill, Quick Review, пять раундов Guided и Practice, изменение experience level и consent в Progress.
 
-## Firebase: обязательная внешняя настройка
+## Firebase: конфигурация и оставшаяся проверка
 
-В репозитории реализованы consent-aware gateways, события с безопасными параметрами и native defaults `false`. До создания Firebase-проекта production использует no-op gateways. Для подключения нужны владелец Google/Firebase-проекта и интерактивная авторизация:
+Проект `blackjack-advantage-trainer`, Android/iOS приложения с ID `com.blackjackadvantage.trainer`, FlutterFire platform configuration и Firebase Analytics/Crashlytics adapters настроены. Native defaults остаются `false`; включение выполняется только после сохранённого opt-in. Сгенерированные platform IDs не являются секретами и хранятся в репозитории, но service-account keys, CLI tokens и другие credentials коммитить нельзя.
 
-1. Установить Firebase CLI и выполнить `firebase login`.
-2. Установить FlutterFire CLI: `dart pub global activate flutterfire_cli`.
-3. Создать или выбрать отдельный Firebase-проект beta и зарегистрировать Android/iOS приложения с ID `com.blackjackadvantage.trainer`.
-4. Добавить `firebase_core`, `firebase_analytics`, `firebase_crashlytics`, затем выполнить `flutterfire configure` для Android и iOS. Сгенерированные не секретные platform IDs можно коммитить; service-account keys и токены нельзя.
-5. Подключить Firebase-адаптеры к существующим `AnalyticsGateway` и `CrashReporterGateway`. Не снимать native defaults `false`: включение выполняется только после сохранённого opt-in.
-6. Проверить на реальных устройствах, что до согласия нет analytics/crash upload, а после согласия отправляются только разрешённые события.
+Перед beta остаётся проверить в Firebase Console связь с Google Analytics и на реальных устройствах подтвердить, что до согласия нет analytics/crash upload, а после согласия отправляются только разрешённые события. Для Crashlytics нужен контролируемый тестовый сбой в отдельной debug/beta сборке; оставлять кнопку или автоматический сбой в production нельзя.
 
 Разрешённые custom-параметры: stable IDs, experience level, session type, correctness и агрегированные итоги. Запрещены тексты ответов, card sequences, email, имя, произвольный user ID и другие персональные данные.
 
