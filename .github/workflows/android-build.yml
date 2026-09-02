@@ -10,6 +10,7 @@ on:
       - "assets/**"
       - "pubspec.yaml"
       - "pubspec.lock"
+      - "tool/**"
       - ".github/workflows/android-build.yml"
   pull_request:
     branches: [main]
@@ -55,8 +56,10 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
-      - name: Test
-        run: flutter test
+      - name: Test and check coverage
+        run: |
+          flutter test --coverage
+          ./tool/check_coverage.sh
 
       - name: Build debug APK
         run: flutter build apk --debug

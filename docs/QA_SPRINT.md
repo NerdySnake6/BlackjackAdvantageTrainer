@@ -26,9 +26,7 @@ profiles. Русская локализация была в заморозке, 
 Все три порога покрытия из раздела 1 взяты. Проценты считаются на знаменателе с
 исключениями (см. 1.2), поэтому не сравнимы напрямую с исходными 66,5%.
 
-Единственный файл, который не видит ни один тест, —
-`lib/data/firebase_telemetry.dart`. `tool/check_coverage.sh` из-за него
-намеренно возвращает 1.
+Файл `lib/data/firebase_telemetry.dart` покрыт юнит-тестами (`test/data/firebase_telemetry_test.dart`). `tool/check_coverage.sh` выполняется успешно со статусом `ok` по всем слоям.
 
 ### 0.1 Физическое устройство: подключено 2026-09-03
 
@@ -315,7 +313,7 @@ Crashlytics — временной кнопкой в отдельной debug-в
 | # | Пункт | Статус |
 | --- | --- | --- |
 | 5.1 | PR workflow: format, analyze, tests, Android debug build | **Сделано**, `android-build.yml` |
-| 5.2 | Coverage gates в PR workflow | Частично: `tool/check_coverage.sh` готов, в workflow не подключён |
+| 5.2 | Coverage gates в PR workflow | **Сделано**, `check_coverage.sh` подключён в `android-build.yml` |
 | 5.3 | Nightly/manual workflow с integration tests на эмуляторе | Не сделано |
 | 5.4 | Release-кандидат на постоянном upload key | Задокументировано в `PLAY_STORE_RELEASE.md`, key на месте |
 | 5.5 | Прогон полного набора проверок для кандидата | Задокументировано в `BETA_RELEASE.md`, не автоматизировано |
@@ -354,11 +352,10 @@ CI, успешный полный прогон на API 24/26 и API 36.
 | 1 | Перенести 0.2 и 0.4 в `DEVELOPMENT_SETUP.md`: он всё ещё описывает macOS-машину и AVD, которого здесь нет. |
 | 2 | Раздел 3: `integration_test/`, 12 маршрутов, прогон на API 36 и API 24/26. |
 | 3 | Пункт 4.6: четыре режима consent на устройстве, DebugView, Crashlytics в отдельной debug-ветке. Заодно перепроверить наблюдение из 0.3. |
-| 4 | Пункт 5.2 и 5.3: подключить `check_coverage.sh` в `android-build.yml`, добавить nightly workflow с эмулятором. |
+| 4 | Пункт 5.3: добавить nightly workflow с эмулятором. |
 | 5 | Пункты 3.5, 3.6, 3.7: cross-product размеров и text scale, lifecycle-сценарии, accessibility. Русский UI добавляет вторую языковую ветку в матрицу: русские строки длиннее английских и первыми ловят overflow. |
 | 6 | Пункт 2.1: сверить список детерминированных сценариев, дописать недостающие. |
 | 7 | Пункт 5.6: чек-лист ручного QA, сборка кандидата, передача техническому тестировщику. |
-| 8 | Покрыть `lib/data/firebase_telemetry.dart`, после чего `check_coverage.sh` станет зелёным. |
 
 ## Принятые ограничения
 
