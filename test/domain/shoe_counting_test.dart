@@ -52,8 +52,49 @@ void main() {
 
         expect(policy.convert(runningCount: 7, decksRemaining: 4), 2);
         expect(policy.convert(runningCount: -7, decksRemaining: 4), -2);
+        expect(policy.convert(runningCount: 5, decksRemaining: 0), 5);
+        expect(policy.convert(runningCount: -3, decksRemaining: -1), -3);
       },
     );
+
+    test('reset clears running count and cards seen', () {
+      final shoe = Shoe(rules: _rules(deckCount: 1), random: Random(1));
+      final counting = CountingEngine();
+
+      for (var index = 0; index < 10; index++) {
+        counting.reveal(shoe.draw());
+      }
+      expect(counting.cardsSeen, 10);
+
+      counting.reset();
+      expect(counting.runningCount, 0);
+      expect(counting.cardsSeen, 0);
+    });
+
+    test('estimateDecksRemaining handles edge cases and clamps to 0.5', () {
+      final counting = CountingEngine();
+
+      expect(counting.estimateDecksRemaining(0), 0.0);
+      expect(counting.estimateDecksRemaining(-10), 0.0);
+      expect(counting.estimateDecksRemaining(5), 0.5);
+      expect(counting.estimateDecksRemaining(26), 0.5);
+      expect(counting.estimateDecksRemaining(52), 1.0);
+      expect(counting.estimateDecksRemaining(78), 1.5);
+      expect(counting.estimateDecksRemaining(130), 2.5);
+      expect(counting.estimateDecksRemaining(312), 6.0);
+    });
+
+    test('trueCount computes correct value via policy and deck estimation', () {
+      final shoe = Shoe(rules: _rules(deckCount: 1), random: Random(2));
+      final counting = CountingEngine();
+
+      for (var index = 0; index < 20; index++) {
+        counting.reveal(shoe.draw());
+      }
+      // Running count evaluated with 104 cards remaining (2.0 decks)
+      final expected = (counting.runningCount / 2.0).round();
+      expect(counting.trueCount(104), expected);
+    });
   });
 }
 

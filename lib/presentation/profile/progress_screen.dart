@@ -101,6 +101,7 @@ class ProgressScreen extends StatelessWidget {
                     const SizedBox(height: 14),
                     DropdownButtonFormField<ExperienceLevel>(
                       initialValue: progress.experienceLevel,
+                      isExpanded: true,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
@@ -132,11 +133,13 @@ class ProgressScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.insights, color: AppColors.mint),
                         const SizedBox(width: 10),
-                        Text(
-                          strings.masteryLabel,
-                          style: Theme.of(context).textTheme.titleMedium,
+                        Expanded(
+                          child: Text(
+                            strings.masteryLabel,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
                         ),
-                        const Spacer(),
+                        const SizedBox(width: 8),
                         Text(
                           '${(progress.averageMastery * 100).round()}%',
                           style: const TextStyle(

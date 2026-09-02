@@ -262,29 +262,34 @@ class SessionSummaryBar extends StatelessWidget {
     final strings = AppLocalizations.of(context);
     return SizedBox(
       height: 58,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.verified_outlined, color: AppColors.mint),
-          const SizedBox(width: 8),
-          Text(
-            strings.tableSessionComplete,
-            style: const TextStyle(fontWeight: FontWeight.w900),
-          ),
-          const SizedBox(width: 16),
-          Text(
-            strings.strategyAccuracy((summary.strategyAccuracy * 100).round()),
-          ),
-          if (summary.countAccuracy case final accuracy?) ...[
-            const SizedBox(width: 12),
-            Text(strings.countAccuracy((accuracy * 100).round())),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.verified_outlined, color: AppColors.mint),
+            const SizedBox(width: 8),
+            Text(
+              strings.tableSessionComplete,
+              style: const TextStyle(fontWeight: FontWeight.w900),
+            ),
+            const SizedBox(width: 16),
+            Text(
+              strings.strategyAccuracy(
+                (summary.strategyAccuracy * 100).round(),
+              ),
+            ),
+            if (summary.countAccuracy case final accuracy?) ...[
+              const SizedBox(width: 12),
+              Text(strings.countAccuracy((accuracy * 100).round())),
+            ],
+            const SizedBox(width: 16),
+            FilledButton(
+              onPressed: viewModel.startNewSession,
+              child: Text(strings.startAnotherSession),
+            ),
           ],
-          const SizedBox(width: 16),
-          FilledButton(
-            onPressed: viewModel.startNewSession,
-            child: Text(strings.startAnotherSession),
-          ),
-        ],
+        ),
       ),
     );
   }
