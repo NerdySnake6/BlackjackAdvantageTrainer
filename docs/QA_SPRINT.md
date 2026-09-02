@@ -104,8 +104,35 @@ profiles. Русская локализация была в заморозке, 
 recovery-ключом, исходный ключ удалён. То есть исправление не только не падает,
 но и не теряет данные.
 
-Проверка QA-3 на артефакте: `aapt2 dump permissions app-debug.apk` до
-исправления показывал все три разрешения, после — ни одного.
+Проверка QA-3 на артефактах. `tools:node="remove"` применяется мержером
+отдельно для каждого build type, поэтому debug недостаточно, проверены оба:
+
+| Артефакт | До | После |
+| --- | --- | --- |
+| `app-debug.apk` | все три разрешения | ни одного |
+| `app-release.apk` | все три в merged manifest | ни одного |
+
+В release APK остаются только `INTERNET`, `ACCESS_NETWORK_STATE`, `WAKE_LOCK`,
+`BIND_GET_INSTALL_REFERRER_SERVICE` и собственное
+`DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`.
+
+### 0.4 Тулчейн текущей Linux-машины
+
+`DEVELOPMENT_SETUP.md` описывает macOS-пути (`/opt/homebrew`, `/Applications`)
+и на этой машине неверен. Фактически:
+
+| Что | Где |
+| --- | --- |
+| Flutter SDK | `~/android-dev/flutter` |
+| Android SDK | `~/android-dev/sdk` |
+| build-tools | 34.0.0, 35.0.0, 36.0.0 |
+| platforms | android-34, android-35, android-36 |
+| upload key | `~/android-dev/keystores/blackjack-advantage-trainer-upload.jks` |
+
+`ANDROID_HOME` не выставлен в окружении. Без `export ANDROID_HOME=~/android-dev/sdk`
+(или без `platform-tools` в `PATH`) `flutter build apk` падает с
+«No Android SDK found». Перенести это в `DEVELOPMENT_SETUP.md` вместе с
+шагами беспроводного adb из 0.1.
 
 Неподтверждённое наблюдение: в самом первом прогоне на устройстве в хранилище
 оказалось `isGranted: true` для обоих каналов, хотя переключатели были
