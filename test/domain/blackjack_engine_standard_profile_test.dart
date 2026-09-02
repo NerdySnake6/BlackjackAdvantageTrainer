@@ -352,6 +352,137 @@ void main() {
       expect(engine.dealtCards, lessThan(32));
       expect(engine.dealtCards + engine.remainingCards, 312);
     });
+
+    test('bot automatically executes basic strategy double on 11 vs 6', () {
+      final engine = _engine(
+        [
+          CardRank.five, // Bot pass 0
+          CardRank.ten, // Human pass 0
+          CardRank.six, // Dealer upcard
+          CardRank.six, // Bot pass 1 (total 11)
+          CardRank.ten, // Human pass 1 (total 20)
+          CardRank.ten, // Dealer hole (total 16)
+          CardRank.ten, // Bot double card (total 21)
+          CardRank.eight, // Dealer hit card (busts with 24)
+        ],
+        SeatConfiguration([
+          SeatRole.bot,
+          SeatRole.human,
+          SeatRole.empty,
+          SeatRole.empty,
+          SeatRole.empty,
+        ]),
+      );
+
+      engine.startRound();
+
+      // Bot automatically doubled; active seat moved to human (seat 1)
+      expect(engine.activeSeatIndex, 1);
+      final botHand = engine.seats[0].hands.single;
+      expect(botHand.hand.cards, hasLength(3));
+      expect(botHand.wagerUnits, 2);
+      expect(botHand.isStanding, isTrue);
+
+      // Human stands
+      engine.applyAction(PlayerAction.stand);
+
+      expect(engine.phase, RoundPhase.complete);
+      expect(botHand.outcome, HandOutcome.win);
+      expect(botHand.resultUnits, 2.0);
+
+      final humanHand = engine.seats[1].hands.single;
+      expect(humanHand.outcome, HandOutcome.win);
+      expect(humanHand.resultUnits, 1.0);
+    });
+
+    test('bot automatically surrenders hard 16 vs dealer 10', () {
+      final engine = _engine(
+        [
+          CardRank.nine, // Bot pass 0
+          CardRank.ten, // Human pass 0
+          CardRank.ten, // Dealer upcard
+          CardRank.seven, // Bot pass 1 (total 16)
+          CardRank.ten, // Human pass 1 (total 20)
+          CardRank.seven, // Dealer hole (total 17 -> dealer stands)
+        ],
+        SeatConfiguration([
+          SeatRole.bot,
+          SeatRole.human,
+          SeatRole.empty,
+          SeatRole.empty,
+          SeatRole.empty,
+        ]),
+      );
+
+      engine.startRound();
+
+      // Bot automatically surrendered; human is next
+      expect(engine.activeSeatIndex, 1);
+      final botHand = engine.seats[0].hands.single;
+      expect(botHand.isSurrendered, isTrue);
+
+      engine.applyAction(PlayerAction.stand);
+      expect(engine.phase, RoundPhase.complete);
+      expect(botHand.outcome, HandOutcome.surrender);
+      expect(botHand.resultUnits, -0.5);
+    });
+
+    test('bot automatically splits eights vs dealer 6', () {
+      final engine = _engine(
+        [
+          CardRank.eight, // Bot pass 0
+          CardRank.ten, // Human pass 0
+          CardRank.six, // Dealer upcard
+          CardRank.eight, // Bot pass 1 (pair of 8s)
+          CardRank.ten, // Human pass 1
+          CardRank
+              .ace, // Dealer hole (6 + Ace = soft 17 -> dealer stands under S17)
+          CardRank.ten, // Bot hand 0 draw card (total 18 -> stands)
+          CardRank.nine, // Bot hand 1 draw card (total 17 -> stands)
+        ],
+        SeatConfiguration([
+          SeatRole.bot,
+          SeatRole.human,
+          SeatRole.empty,
+          SeatRole.empty,
+          SeatRole.empty,
+        ]),
+      );
+
+      engine.startRound();
+
+      // Bot automatically split and played both hands
+      expect(engine.activeSeatIndex, 1);
+      final botHands = engine.seats[0].hands;
+      expect(botHands, hasLength(2));
+      expect(botHands.every((h) => h.fromSplit), isTrue);
+
+      engine.applyAction(PlayerAction.stand);
+      expect(engine.phase, RoundPhase.complete);
+      expect(botHands[0].outcome, HandOutcome.win);
+      expect(botHands[0].resultUnits, 1.0);
+      expect(botHands[1].outcome, HandOutcome.push);
+      expect(botHands[1].resultUnits, 0.0);
+    });
+
+    test('double down loss settles at minus two units', () {
+      final engine = _engine([
+        CardRank.five, // Player pass 0
+        CardRank.ten, // Dealer upcard
+        CardRank.six, // Player pass 1 (total 11)
+        CardRank.seven, // Dealer hole (total 17 -> dealer stands)
+        CardRank.two, // Player double card (total 13)
+      ]);
+
+      engine.startRound();
+      engine.applyAction(PlayerAction.doubleDown);
+
+      expect(engine.phase, RoundPhase.complete);
+      final hand = engine.seats.first.hands.single;
+      expect(hand.wagerUnits, 2);
+      expect(hand.outcome, HandOutcome.loss);
+      expect(hand.resultUnits, -2.0);
+    });
   });
 }
 
@@ -363,7 +494,10 @@ final _singleHuman = SeatConfiguration([
   SeatRole.empty,
 ]);
 
-BlackjackEngine _engine(List<CardRank> ranks) {
+BlackjackEngine _engine(
+  List<CardRank> ranks, [
+  SeatConfiguration? seatConfiguration,
+]) {
   return BlackjackEngine(
     shoe: Shoe.scripted(
       rules: GameRulesProfile.standard,
@@ -376,7 +510,7 @@ BlackjackEngine _engine(List<CardRank> ranks) {
           ),
       ],
     ),
-    seatConfiguration: _singleHuman,
+    seatConfiguration: seatConfiguration ?? _singleHuman,
   );
 }
 

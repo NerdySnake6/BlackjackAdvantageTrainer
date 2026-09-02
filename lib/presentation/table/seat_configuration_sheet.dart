@@ -17,21 +17,28 @@ class SeatConfigurationSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final viewModel = context.watch<TableViewModel>();
+    final isCompact = MediaQuery.sizeOf(context).height < 360;
+
     return SafeArea(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        padding: EdgeInsets.fromLTRB(20, 0, 20, isCompact ? 10 : 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               strings.configureSeats,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: isCompact
+                  ? Theme.of(context).textTheme.titleMedium
+                  : Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 4),
             Text(
               strings.configureSeatsHint,
-              style: const TextStyle(color: Colors.white60),
+              style: TextStyle(
+                color: Colors.white60,
+                fontSize: isCompact ? 11 : 13,
+              ),
             ),
             if (viewModel.hasPendingSeatConfiguration) ...[
               const SizedBox(height: 4),
@@ -43,7 +50,7 @@ class SeatConfigurationSheet extends StatelessWidget {
                 ),
               ),
             ],
-            const SizedBox(height: 16),
+            SizedBox(height: isCompact ? 8 : 16),
             Row(
               children: [
                 for (final (seatIndex, role)
@@ -73,7 +80,9 @@ class SeatConfigurationSheet extends StatelessWidget {
                             ),
                         ],
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(
+                            vertical: isCompact ? 6 : 14,
+                          ),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Theme.of(context).colorScheme.outline,
@@ -82,8 +91,8 @@ class SeatConfigurationSheet extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              Icon(roleIcon(role)),
-                              const SizedBox(height: 5),
+                              Icon(roleIcon(role), size: isCompact ? 18 : 24),
+                              SizedBox(height: isCompact ? 2 : 5),
                               Text(
                                 strings.seat(seatIndex + 1),
                                 style: const TextStyle(fontSize: 11),
@@ -112,7 +121,7 @@ class SeatConfigurationSheet extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 18),
+            SizedBox(height: isCompact ? 8 : 18),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text(strings.done),
