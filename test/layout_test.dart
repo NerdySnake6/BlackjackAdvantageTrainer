@@ -46,6 +46,29 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
     expect(find.text('Deal the first round'), findsOneWidget);
+    await tester.tap(find.byTooltip('Configure seats'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(
+        'Choose Human, Bot, or Empty for each seat. Changes during a round '
+        'apply to the next round. Keep at least one Human.',
+      ),
+      findsOneWidget,
+    );
+    expect(find.text('Seat 5'), findsWidgets);
+    expect(tester.takeException(), isNull);
+
+    expect(find.text('Human'), findsOneWidget);
+    await tester.tap(find.text('Bot').first);
+    await tester.pumpAndSettle();
+    expect(find.text('Empty'), findsOneWidget);
+    await tester.tap(find.text('Human').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Human'), findsNWidgets(2));
+
+    await tester.tap(find.text('Done'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Deal the first round'));
     await tester.pump(const Duration(seconds: 5));
 

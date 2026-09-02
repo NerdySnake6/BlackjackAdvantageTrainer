@@ -113,6 +113,71 @@ void main() {
     expect(viewModel.sessionSummary!.strategyAccuracy, 1);
     expect(viewModel.sessionSummary!.countAccuracy, isNull);
   });
+
+  test('multiple seats can be assigned to the human player', () {
+    final viewModel = TableViewModel();
+    addTearDown(viewModel.dispose);
+
+    expect(viewModel.setSeatRole(1, SeatRole.human), isTrue);
+    expect(viewModel.setSeatRole(4, SeatRole.human), isTrue);
+    expect(viewModel.engine.seats.map((seat) => seat.role), [
+      SeatRole.human,
+      SeatRole.human,
+      SeatRole.bot,
+      SeatRole.bot,
+      SeatRole.human,
+    ]);
+  });
+
+  test('the last human seat cannot be changed to bot or empty', () {
+    final viewModel = TableViewModel();
+    addTearDown(viewModel.dispose);
+
+    expect(viewModel.setSeatRole(0, SeatRole.bot), isFalse);
+    expect(viewModel.setSeatRole(0, SeatRole.empty), isFalse);
+    expect(viewModel.engine.seats.first.role, SeatRole.human);
+
+    expect(viewModel.setSeatRole(1, SeatRole.human), isTrue);
+    expect(viewModel.setSeatRole(0, SeatRole.bot), isTrue);
+    expect(viewModel.engine.seats.first.role, SeatRole.bot);
+  });
+
+  testWidgets('seat changes during a hand apply to the next round', (
+    tester,
+  ) async {
+    final viewModel = TableViewModel(
+      engine: _scriptedEngine([
+        CardRank.ten,
+        CardRank.ten,
+        CardRank.seven,
+        CardRank.seven,
+        CardRank.ten,
+        CardRank.ten,
+        CardRank.ten,
+        CardRank.seven,
+        CardRank.seven,
+        CardRank.seven,
+      ]),
+    );
+    addTearDown(viewModel.dispose);
+
+    viewModel.startRound();
+    await tester.pump(const Duration(seconds: 2));
+    expect(viewModel.engine.phase, RoundPhase.playerTurn);
+
+    expect(viewModel.setSeatRole(1, SeatRole.human), isTrue);
+    expect(viewModel.hasPendingSeatConfiguration, isTrue);
+    expect(viewModel.configuredSeatRoles[1], SeatRole.human);
+    expect(viewModel.engine.seats[1].role, SeatRole.empty);
+
+    viewModel.applyAction(PlayerAction.stand);
+    expect(viewModel.engine.phase, RoundPhase.complete);
+    viewModel.startRound();
+
+    expect(viewModel.hasPendingSeatConfiguration, isFalse);
+    expect(viewModel.engine.seats[1].role, SeatRole.human);
+    await tester.pump(const Duration(seconds: 4));
+  });
 }
 
 BlackjackEngine _scriptedEngine(List<CardRank> ranks) {

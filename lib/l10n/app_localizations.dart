@@ -625,8 +625,14 @@ abstract class AppLocalizations {
   /// No description provided for @configureSeatsHint.
   ///
   /// In en, this message translates to:
-  /// **'Tap a seat to cycle Human → Bot → Empty. Keep at least one Human.'**
+  /// **'Choose Human, Bot, or Empty for each seat. Changes during a round apply to the next round. Keep at least one Human.'**
   String get configureSeatsHint;
+
+  /// No description provided for @seatChangesPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Seat changes will apply to the next round.'**
+  String get seatChangesPending;
 
   /// No description provided for @done.
   ///

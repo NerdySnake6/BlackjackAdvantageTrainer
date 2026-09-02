@@ -121,7 +121,8 @@
   "bot": "Bot",
   "empty": "Empty",
   "configureSeats": "Configure seats",
-  "configureSeatsHint": "Tap a seat to cycle Human → Bot → Empty. Keep at least one Human.",
+  "configureSeatsHint": "Choose Human, Bot, or Empty for each seat. Changes during a round apply to the next round. Keep at least one Human.",
+  "seatChangesPending": "Seat changes will apply to the next round.",
   "done": "Done",
   "currentCount": "Running count: {count}",
   "@currentCount": {

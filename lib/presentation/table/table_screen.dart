@@ -96,10 +96,6 @@ class _TableHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final engine = viewModel.engine;
-    final canConfigure =
-        !viewModel.isDealing &&
-        engine.phase != RoundPhase.playerTurn &&
-        engine.phase != RoundPhase.dealerTurn;
     final width = MediaQuery.sizeOf(context).width;
     final isCompact = width < 1000;
     final isPortraitTransition = width < 480;
@@ -190,9 +186,7 @@ class _TableHeader extends StatelessWidget {
         ],
         const SizedBox(width: 4),
         IconButton(
-          onPressed: canConfigure
-              ? () => _showSeatConfiguration(context)
-              : null,
+          onPressed: () => _showSeatConfiguration(context),
           tooltip: strings.configureSeats,
           icon: const Icon(Icons.tune_rounded),
         ),
@@ -204,6 +198,7 @@ class _TableHeader extends StatelessWidget {
     final viewModel = context.read<TableViewModel>();
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       showDragHandle: true,
       builder: (context) => ChangeNotifierProvider.value(
         value: viewModel,
@@ -996,7 +991,7 @@ class _SeatConfigurationSheet extends StatelessWidget {
     final strings = AppLocalizations.of(context);
     final viewModel = context.watch<TableViewModel>();
     return SafeArea(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1011,34 +1006,79 @@ class _SeatConfigurationSheet extends StatelessWidget {
               strings.configureSeatsHint,
               style: const TextStyle(color: Colors.white60),
             ),
+            if (viewModel.hasPendingSeatConfiguration) ...[
+              const SizedBox(height: 4),
+              Text(
+                strings.seatChangesPending,
+                style: const TextStyle(
+                  color: AppColors.gold,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
             const SizedBox(height: 16),
             Row(
               children: [
-                for (final seat in viewModel.engine.seats)
+                for (final (seatIndex, role)
+                    in viewModel.configuredSeatRoles.indexed)
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: OutlinedButton(
-                        onPressed: () => viewModel.cycleSeat(seat.index),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                        ),
-                        child: Column(
-                          children: [
-                            Icon(_roleIcon(seat.role)),
-                            const SizedBox(height: 5),
-                            Text(
-                              strings.seat(seat.index + 1),
-                              style: const TextStyle(fontSize: 11),
-                            ),
-                            Text(
-                              _roleLabel(strings, seat.role),
-                              style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w800,
+                      child: PopupMenuButton<SeatRole>(
+                        initialValue: role,
+                        onSelected: (role) =>
+                            viewModel.setSeatRole(seatIndex, role),
+                        itemBuilder: (context) => [
+                          for (final role in SeatRole.values)
+                            PopupMenuItem(
+                              value: role,
+                              enabled: viewModel.canSetSeatRole(
+                                seatIndex,
+                                role,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(_roleIcon(role), size: 20),
+                                  const SizedBox(width: 10),
+                                  Text(_roleLabel(strings, role)),
+                                ],
                               ),
                             ),
-                          ],
+                        ],
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(_roleIcon(role)),
+                              const SizedBox(height: 5),
+                              Text(
+                                strings.seat(seatIndex + 1),
+                                style: const TextStyle(fontSize: 11),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      _roleLabel(strings, role),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
+                                  const Icon(Icons.arrow_drop_down, size: 16),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

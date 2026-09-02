@@ -35,6 +35,7 @@ class TableViewModel extends ChangeNotifier {
   var _submittedCount = 0;
   int? _revealedCount;
   bool? _countWasCorrect;
+  List<SeatRole>? _pendingSeatRoles;
 
   bool get isDealing => _isDealing;
   TableDecisionAttempt? get decisionFeedback => _decisionFeedback;
@@ -52,6 +53,11 @@ class TableViewModel extends ChangeNotifier {
       _decisionFeedback == null &&
       engine.phase != RoundPhase.playerTurn &&
       engine.phase != RoundPhase.dealerTurn;
+
+  List<SeatRole> get configuredSeatRoles => List.unmodifiable(
+    _pendingSeatRoles ?? engine.seats.map((seat) => seat.role),
+  );
+  bool get hasPendingSeatConfiguration => _pendingSeatRoles != null;
 
   double get dealProgress {
     if (_dealTargets.isEmpty) {
@@ -83,6 +89,7 @@ class TableViewModel extends ChangeNotifier {
       return;
     }
     _dealTimer?.cancel();
+    _applyPendingSeatConfiguration();
     engine.startRound();
     onEvent?.call('table_round_started', {
       'session_type': mode.name,
@@ -212,14 +219,34 @@ class TableViewModel extends ChangeNotifier {
   }
 
   bool cycleSeat(int seatIndex) {
-    final roles = engine.seats.map((seat) => seat.role).toList();
-    final current = roles[seatIndex];
+    final current = configuredSeatRoles[seatIndex];
     final nextIndex = (current.index + 1) % SeatRole.values.length;
-    roles[seatIndex] = SeatRole.values[nextIndex];
-    if (!roles.contains(SeatRole.human)) {
+    return setSeatRole(seatIndex, SeatRole.values[nextIndex]);
+  }
+
+  bool canSetSeatRole(int seatIndex, SeatRole role) {
+    final roles = configuredSeatRoles;
+    final current = roles[seatIndex];
+    if (current != SeatRole.human || role == SeatRole.human) {
+      return true;
+    }
+    return roles.indexed.any(
+      (entry) => entry.$1 != seatIndex && entry.$2 == SeatRole.human,
+    );
+  }
+
+  bool setSeatRole(int seatIndex, SeatRole role) {
+    if (!canSetSeatRole(seatIndex, role)) {
       return false;
     }
-    engine.configureSeats(SeatConfiguration(roles));
+    final roles = configuredSeatRoles.toList();
+    roles[seatIndex] = role;
+    if (_roundIsActive) {
+      _pendingSeatRoles = roles;
+    } else {
+      engine.configureSeats(SeatConfiguration(roles));
+      _pendingSeatRoles = null;
+    }
     notifyListeners();
     return true;
   }
@@ -236,6 +263,20 @@ class TableViewModel extends ChangeNotifier {
         .map((seat) => seat.index)
         .toList();
     return [...occupiedSeats, -1, ...occupiedSeats, -1];
+  }
+
+  bool get _roundIsActive =>
+      _isDealing ||
+      engine.phase == RoundPhase.playerTurn ||
+      engine.phase == RoundPhase.dealerTurn;
+
+  void _applyPendingSeatConfiguration() {
+    final roles = _pendingSeatRoles;
+    if (roles == null) {
+      return;
+    }
+    engine.configureSeats(SeatConfiguration(roles));
+    _pendingSeatRoles = null;
   }
 
   int _visibleTargetCount(int target) {

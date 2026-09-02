@@ -311,7 +311,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get configureSeatsHint =>
-      'Tap a seat to cycle Human → Bot → Empty. Keep at least one Human.';
+      'Choose Human, Bot, or Empty for each seat. Changes during a round apply to the next round. Keep at least one Human.';
+
+  @override
+  String get seatChangesPending => 'Seat changes will apply to the next round.';
 
   @override
   String get done => 'Done';

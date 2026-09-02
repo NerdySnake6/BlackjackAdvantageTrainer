@@ -76,6 +76,24 @@ void main() {
       expect(hand.resultUnits, -0.5);
     });
 
+    test('late surrender is unavailable after taking a third card', () {
+      final engine = _engine([
+        CardRank.nine,
+        CardRank.ten,
+        CardRank.six,
+        CardRank.five,
+        CardRank.ace,
+      ]);
+
+      engine.startRound();
+      expect(engine.availableActions, contains(PlayerAction.surrender));
+
+      engine.applyAction(PlayerAction.hit);
+
+      expect(engine.activeHand!.hand.cards, hasLength(3));
+      expect(engine.availableActions, isNot(contains(PlayerAction.surrender)));
+    });
+
     test('resplitting is capped at four hands', () {
       final engine = _engine([
         CardRank.eight,
