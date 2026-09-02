@@ -65,6 +65,8 @@ void main() {
     expect(find.text(firstExercise.explanation), findsOneWidget);
 
     // Proceed to completion
+    await tester.drag(find.byType(ListView), const Offset(0, -300));
+    await tester.pump();
     await tester.tap(find.text('Next'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
@@ -88,7 +90,6 @@ Future<void> _pumpScreen(WidgetTester tester, AppState appState) async {
     ChangeNotifierProvider.value(
       value: appState,
       child: MaterialApp(
-        key: UniqueKey(),
         theme: buildAppTheme(),
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -97,7 +98,7 @@ Future<void> _pumpScreen(WidgetTester tester, AppState appState) async {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const QuickReviewScreen(),
+        home: QuickReviewScreen(key: UniqueKey()),
       ),
     ),
   );

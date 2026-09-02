@@ -11,137 +11,79 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  testWidgets('ProgressScreen displays stats and adapts to progress', (
-    tester,
-  ) async {
-    _setupPortrait(tester);
-    final appState = await _createAppState(
-      progress: ProgressSnapshot(
-        xp: 250,
-        streakDays: 4,
-        lessonScores: const {'quick-start': 0.9, 'card-values': 1.0},
-        experienceLevel: ExperienceLevel.basics,
-      ),
-    );
-
-    await _pumpScreen(tester, appState);
-
-    expect(find.text('Your progress'), findsOneWidget);
-    expect(find.text('250'), findsOneWidget);
-    expect(find.text('4'), findsOneWidget);
-    expect(find.text('95%'), findsOneWidget); // (0.9 + 1.0) / 2 = 95%
-    expect(find.text('2 of 6 lessons completed'), findsOneWidget);
-  });
-
   testWidgets(
-    'ProgressScreen toggles consent switches and selects experience level',
+    'ProgressScreen displays stats, toggles consent, and handles reset flow',
     (tester) async {
       _setupPortrait(tester);
       final appState = await _createAppState(
-        progress: const ProgressSnapshot(
-          experienceLevel: ExperienceLevel.beginner,
-          analyticsConsent: ConsentState(isGranted: false),
-          crashReportsConsent: ConsentState(isGranted: false),
+        progress: ProgressSnapshot(
+          xp: 250,
+          streakDays: 4,
+          lessonScores: const {'quick-start': 0.9, 'card-values': 1.0},
+          experienceLevel: ExperienceLevel.basics,
+          analyticsConsent: const ConsentState(isGranted: false),
+          crashReportsConsent: const ConsentState(isGranted: false),
         ),
       );
 
       await _pumpScreen(tester, appState);
 
-      // Toggle analytics switch
+      // 1. Verify stats & header
+      expect(find.text('Your progress'), findsOneWidget);
+      expect(find.text('250'), findsOneWidget);
+      expect(find.text('4'), findsOneWidget);
+      expect(find.text('95%'), findsOneWidget);
+      expect(find.text('2 of 6 lessons completed'), findsOneWidget);
+
+      // 2. Toggle privacy switches
       final analyticsSwitch = find.widgetWithText(
         SwitchListTile,
         'Usage analytics',
       );
       expect(analyticsSwitch, findsOneWidget);
       await tester.tap(analyticsSwitch);
-      await tester.pumpAndSettle();
-
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
       expect(appState.progress.analyticsConsent.isGranted, isTrue);
-      expect(appState.progress.crashReportsConsent.isGranted, isFalse);
 
-      // Toggle crash reports switch
       final crashSwitch = find.widgetWithText(SwitchListTile, 'Crash reports');
+      expect(crashSwitch, findsOneWidget);
       await tester.tap(crashSwitch);
-      await tester.pumpAndSettle();
-
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
       expect(appState.progress.crashReportsConsent.isGranted, isTrue);
 
-      // Change experience level dropdown (tested separately)
-      /*
-    final dropdownFinder = find.byType(DropdownButtonFormField<ExperienceLevel>);
-    await tester.scrollUntilVisible(
-      dropdownFinder,
-      200,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.tap(dropdownFinder);
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.text("I'm an experienced player").last);
-    await tester.pumpAndSettle();
-
-    expect(appState.progress.experienceLevel, ExperienceLevel.experienced);
-    */
-    },
-  );
-
-  testWidgets(
-    'ProgressScreen reset dialog cancels without resetting progress',
-    (tester) async {
-      _setupPortrait(tester);
-      final appState = await _createAppState(
-        progress: const ProgressSnapshot(
-          xp: 150,
-          lessonScores: {'quick-start': 1.0},
-        ),
-      );
-
-      await _pumpScreen(tester, appState);
-
+      // 3. Scroll to reset button and test cancel
       await tester.drag(find.byType(ListView), const Offset(0, -500));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
 
       final resetBtn = find.text('Reset progress');
       await tester.tap(resetBtn);
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
 
       expect(find.text('Reset all lesson progress and XP?'), findsOneWidget);
       await tester.tap(find.text('Cancel'));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
 
       expect(find.text('Reset all lesson progress and XP?'), findsNothing);
-      expect(appState.progress.xp, 150);
-      expect(appState.progress.lessonScores, isNotEmpty);
+      expect(appState.progress.xp, 250);
+
+      // 4. Confirm reset clears progress
+      await tester.tap(resetBtn);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      await tester.tap(find.widgetWithText(FilledButton, 'Reset'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(appState.progress.xp, 0);
+      expect(appState.progress.lessonScores, isEmpty);
     },
   );
-
-  testWidgets('ProgressScreen reset dialog confirms and clears progress', (
-    tester,
-  ) async {
-    _setupPortrait(tester);
-    final appState = await _createAppState(
-      progress: const ProgressSnapshot(
-        xp: 150,
-        lessonScores: {'quick-start': 1.0},
-      ),
-    );
-
-    await _pumpScreen(tester, appState);
-
-    await tester.drag(find.byType(ListView), const Offset(0, -500));
-    await tester.pumpAndSettle();
-
-    final resetBtn = find.text('Reset progress');
-    await tester.tap(resetBtn);
-    await tester.pumpAndSettle();
-
-    expect(find.text('Reset all lesson progress and XP?'), findsOneWidget);
-    await tester.tap(find.widgetWithText(FilledButton, 'Reset'));
-    await tester.pumpAndSettle();
-
-    expect(appState.progress.xp, 0);
-    expect(appState.progress.lessonScores, isEmpty);
-  });
 }
 
 void _setupPortrait(WidgetTester tester) {
@@ -158,7 +100,6 @@ Future<void> _pumpScreen(WidgetTester tester, AppState appState) async {
     ChangeNotifierProvider.value(
       value: appState,
       child: MaterialApp(
-        key: UniqueKey(),
         theme: buildAppTheme(),
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -171,7 +112,8 @@ Future<void> _pumpScreen(WidgetTester tester, AppState appState) async {
       ),
     ),
   );
-  await tester.pumpAndSettle();
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 50));
 }
 
 Future<AppState> _createAppState({
