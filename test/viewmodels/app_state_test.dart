@@ -183,6 +183,35 @@ void main() {
       expect(analytics.events.last.$2['session_type'], 'drill');
     },
   );
+
+  test(
+    'setLanguageCode updates locale, persists selection, and reloads catalog',
+    () async {
+      final repository = _MemoryProgressRepository();
+      final appState = AppState(
+        catalog: await ContentRepository().loadCatalog(),
+        progress: const ProgressSnapshot(),
+        progressRepository: repository,
+      );
+
+      expect(appState.locale, isNull);
+      expect(appState.catalog.locale, 'en');
+
+      await appState.setLanguageCode('ru');
+      expect(appState.locale?.languageCode, 'ru');
+      expect(appState.progress.languageCode, 'ru');
+      expect(repository.snapshot.languageCode, 'ru');
+      expect(appState.catalog.locale, 'ru');
+
+      await appState.setLanguageCode('en');
+      expect(appState.locale?.languageCode, 'en');
+      expect(appState.catalog.locale, 'en');
+
+      await appState.setLanguageCode(null);
+      expect(appState.locale, isNull);
+      expect(appState.progress.languageCode, isNull);
+    },
+  );
 }
 
 Future<AppState> _appState({

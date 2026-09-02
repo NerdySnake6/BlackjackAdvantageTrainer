@@ -1,11 +1,14 @@
 /// Application-level learning progress and feature-access state.
 library;
 
+import 'dart:ui' show Locale;
+
 import 'package:flutter/foundation.dart';
 
 import '../core/analytics/analytics_gateway.dart';
 import '../core/analytics/crash_reporter_gateway.dart';
 import '../core/persistence/progress_repository.dart';
+import '../data/content_repository.dart';
 import '../domain/learning/mastery.dart';
 import '../domain/learning/models.dart';
 import '../domain/purchase/purchase_gateway.dart';
@@ -15,6 +18,7 @@ class AppState extends ChangeNotifier {
     required CourseCatalog catalog,
     required ProgressSnapshot progress,
     required ProgressRepository progressRepository,
+    ContentRepository? contentRepository,
     AnalyticsGateway analytics = const NoOpAnalyticsGateway(),
     CrashReporterGateway crashReporter = const NoOpCrashReporterGateway(),
     PurchaseGateway purchaseGateway = const FakePurchaseGateway(),
@@ -24,6 +28,7 @@ class AppState extends ChangeNotifier {
   }) {
     return AppState._(
       catalog,
+      contentRepository ?? ContentRepository(),
       progress,
       progressRepository,
       ConsentAwareAnalyticsGateway(analytics),
@@ -36,7 +41,8 @@ class AppState extends ChangeNotifier {
   }
 
   AppState._(
-    this.catalog,
+    this._catalog,
+    this._contentRepository,
     this._progress,
     this._progressRepository,
     this._analytics,
@@ -47,7 +53,8 @@ class AppState extends ChangeNotifier {
     this._clock,
   );
 
-  final CourseCatalog catalog;
+  CourseCatalog _catalog;
+  final ContentRepository _contentRepository;
   final ProgressRepository _progressRepository;
   final AnalyticsGateway _analytics;
   final CrashReporterGateway _crashReporter;
@@ -57,7 +64,28 @@ class AppState extends ChangeNotifier {
   final DateTime Function() _clock;
   ProgressSnapshot _progress;
 
+  CourseCatalog get catalog => _catalog;
   ProgressSnapshot get progress => _progress;
+
+  Locale? get locale =>
+      _progress.languageCode == null ? null : Locale(_progress.languageCode!);
+
+  Future<void> setLanguageCode(String? languageCode) async {
+    if (_progress.languageCode == languageCode) return;
+    _progress = languageCode == null
+        ? _progress.copyWith(clearLanguageCode: true)
+        : _progress.copyWith(languageCode: languageCode);
+    await _progressRepository.save(_progress);
+
+    final targetLocale = languageCode ?? ContentRepository.fallbackLocale;
+    try {
+      _catalog = await _contentRepository.loadCatalog(localeCode: targetLocale);
+    } catch (_) {
+      // Keep current catalog if loading fails
+    }
+    notifyListeners();
+  }
+
   EntitlementState entitlement = EntitlementState.free;
 
   bool get hasExperienceLevel => _progress.experienceLevel != null;
@@ -320,7 +348,7 @@ class AppState extends ChangeNotifier {
     await _analytics.setCollectionEnabled(false);
     await _crashReporter.setCollectionEnabled(false);
     await _progressRepository.clear();
-    _progress = const ProgressSnapshot();
+    _progress = ProgressSnapshot(languageCode: _progress.languageCode);
     notifyListeners();
   }
 

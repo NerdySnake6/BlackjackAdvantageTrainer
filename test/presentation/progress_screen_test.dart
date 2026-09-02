@@ -53,8 +53,14 @@ void main() {
       await tester.pump(const Duration(milliseconds: 50));
       expect(appState.progress.crashReportsConsent.isGranted, isTrue);
 
-      // 3. Scroll to reset button and test cancel
-      await tester.drag(find.byType(ListView), const Offset(0, -500));
+      // 3. Verify language section and scroll to reset button
+      await tester.drag(find.byType(ListView), const Offset(0, -300));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
+
+      expect(find.text('Language'), findsOneWidget);
+
+      await tester.drag(find.byType(ListView), const Offset(0, -400));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 50));
 

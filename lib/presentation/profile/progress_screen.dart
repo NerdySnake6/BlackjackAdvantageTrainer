@@ -52,6 +52,53 @@ class ProgressScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.insights, color: AppColors.mint),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            strings.masteryLabel,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '${(progress.averageMastery * 100).round()}%',
+                          style: const TextStyle(
+                            color: AppColors.mint,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+                    LinearProgressIndicator(
+                      value: progress.averageMastery,
+                      minHeight: 10,
+                      borderRadius: BorderRadius.circular(10),
+                      backgroundColor: Colors.white10,
+                      color: AppColors.mint,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      strings.lessonsCompleted(
+                        appState.completedLessonCount,
+                        appState.catalog.lessons.length,
+                      ),
+                      style: const TextStyle(color: Colors.white60),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Card(
               child: Column(
                 children: [
                   ListTile(
@@ -129,41 +176,34 @@ class ProgressScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.insights, color: AppColors.mint),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            strings.masteryLabel,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          '${(progress.averageMastery * 100).round()}%',
-                          style: const TextStyle(
-                            color: AppColors.mint,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      strings.languageLabel,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 14),
-                    LinearProgressIndicator(
-                      value: progress.averageMastery,
-                      minHeight: 10,
-                      borderRadius: BorderRadius.circular(10),
-                      backgroundColor: Colors.white10,
-                      color: AppColors.mint,
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      strings.lessonsCompleted(
-                        appState.completedLessonCount,
-                        appState.catalog.lessons.length,
+                    DropdownButtonFormField<String?>(
+                      initialValue: progress.languageCode,
+                      isExpanded: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
                       ),
-                      style: const TextStyle(color: Colors.white60),
+                      items: [
+                        DropdownMenuItem<String?>(
+                          value: null,
+                          child: Text(strings.systemDefault),
+                        ),
+                        DropdownMenuItem<String?>(
+                          value: 'en',
+                          child: Text(strings.englishLanguage),
+                        ),
+                        DropdownMenuItem<String?>(
+                          value: 'ru',
+                          child: Text(strings.russianLanguage),
+                        ),
+                      ],
+                      onChanged: (code) {
+                        appState.setLanguageCode(code);
+                      },
                     ),
                   ],
                 ),

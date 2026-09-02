@@ -224,5 +224,9 @@
   "cancel": "Cancel",
   "reset": "Reset",
   "loadFailureTitle": "The training content could not be loaded",
-  "loadFailureBody": "Restart the app. If the problem continues, reinstall the app."
+  "loadFailureBody": "Restart the app. If the problem continues, reinstall the app.",
+  "languageLabel": "Language",
+  "systemDefault": "System default",
+  "englishLanguage": "English",
+  "russianLanguage": "Русский"
 }

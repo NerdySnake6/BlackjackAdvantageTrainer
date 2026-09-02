@@ -4,660 +4,659 @@
   "sections": [
     {
       "id": "prototype-foundations",
-      "title": "Blackjack Foundations",
-      "summary": "Learn the game, make your first correct decisions, and begin Hi-Lo.",
+      "title": "Основы блэкджека",
+      "summary": "Изучите правила, принимайте первые верные решения и начните счёт по Hi-Lo.",
       "isPro": false,
       "lessons": [
         {
           "id": "quick-start",
           "skillId": "foundation.quick_start",
-          "title": "Your first hand",
-          "subtitle": "Reach 21 without going over",
+          "title": "Первая раздача",
+          "subtitle": "Наберите до 21 очка без перебора",
           "estimatedMinutes": 6,
           "exercises": [
             {
               "id": "quick-goal",
-              "prompt": "What is the main goal of a blackjack hand?",
+              "prompt": "Какова главная цель в раздаче блэкджека?",
               "options": [
-                "Get closer to 21 than the dealer without going over",
-                "Collect five cards",
-                "Always reach exactly 21"
+                "Набрать больше очков, чем дилер, не превысив 21",
+                "Собрать комбинацию из пяти карт",
+                "Всегда набирать ровно 21 очко"
               ],
               "correctIndex": 0,
-              "explanation": "You win by beating the dealer's total without busting. Exactly 21 is not required."
+              "explanation": "Вы побеждаете, если набираете больше очков, чем дилер, без перебора. Набирать именно 21 не обязательно."
             },
             {
               "id": "quick-face-card",
-              "prompt": "What is a king worth?",
+              "prompt": "Сколько очков даёт король?",
               "options": [
                 "10",
                 "11",
-                "Its printed rank"
+                "По своему номеру в колоде"
               ],
               "correctIndex": 0,
-              "explanation": "Tens, jacks, queens, and kings are all worth 10."
+              "explanation": "Десятки, валеты, дамы и короли дают по 10 очков."
             },
             {
               "id": "quick-ace",
-              "prompt": "How can an ace be counted?",
+              "prompt": "Как считается туз?",
               "options": [
-                "As 1 or 11",
-                "Only as 1",
-                "Only as 11"
+                "Как 1 или как 11",
+                "Только как 1",
+                "Только как 11"
               ],
               "correctIndex": 0,
-              "explanation": "The ace takes the value that gives the strongest total without busting."
+              "explanation": "Туз принимает то значение (1 или 11), которое даёт наилучшую сумму без перебора."
             },
             {
               "id": "quick-hit",
-              "prompt": "You have hard 16 against a dealer 10. Surrender is unavailable. What is the basic-strategy action?",
+              "prompt": "У вас жёсткие 16 против 10 у дилера. Сдаться нельзя. Каково действие по базовой стратегии?",
               "options": [
-                "Hit",
-                "Stand",
-                "Split"
+                "Взять карту (Hit)",
+                "Остановиться (Stand)",
+                "Разделить (Split)"
               ],
               "correctIndex": 0,
-              "explanation": "Standing on 16 against a 10 loses more often than taking another card."
+              "explanation": "Остановка на 16 против десятки дилера математически проигрывает чаще, чем добор ещё одной карты."
             },
             {
               "id": "quick-stand",
-              "prompt": "You have 20. What should you do?",
+              "prompt": "У вас 20 очков. Что следует сделать?",
               "options": [
-                "Stand",
-                "Hit",
-                "Surrender"
+                "Остановиться (Stand)",
+                "Взять карту (Hit)",
+                "Сдаться (Surrender)"
               ],
               "correctIndex": 0,
-              "explanation": "Twenty is already an excellent total. Taking another card would usually bust."
+              "explanation": "20 — отличная сумма очков. Взятие дополнительной карты почти наверняка приведёт к перебору."
             },
             {
               "id": "quick-blackjack",
-              "prompt": "Which hand is a natural blackjack?",
+              "prompt": "Какая комбинация является натуральным блэкджеком?",
               "options": [
-                "Ace + king as the first two cards",
+                "Туз + король первыми двумя картами",
                 "7 + 7 + 7",
                 "10 + 5 + 6"
               ],
               "correctIndex": 0,
-              "explanation": "A blackjack is specifically an ace plus a ten-value card on the initial two cards."
+              "explanation": "Блэкджек — это именно туз плюс десятиочковая карта в начальной раздаче из двух карт."
             },
             {
               "id": "quick-stand-meaning",
-              "prompt": "What does Stand mean?",
+              "prompt": "Что означает действие «Хватит» (Stand)?",
               "options": [
-                "Take no more cards",
-                "Take exactly one card",
-                "End the entire table"
+                "Больше не брать карт в текущую руку",
+                "Взять ровно одну карту",
+                "Завершить игру за всем столом"
               ],
               "correctIndex": 0,
-              "explanation": "Standing ends play only for the current hand."
+              "explanation": "Остановка (Stand) завершает набор карт только для текущей руки."
             },
             {
               "id": "quick-outcome",
-              "prompt": "Can a mathematically correct decision still lose the hand?",
+              "prompt": "Может ли математически верное решение проиграть раздачу?",
               "options": [
-                "Yes, short-term outcomes are random",
-                "No, correct strategy always wins",
-                "Only when counting cards"
+                "Да, результат отдельной раздачи случаен",
+                "Нет, правильная стратегия выигрывает всегда",
+                "Только если ведётся подсчёт карт"
               ],
               "correctIndex": 0,
-              "explanation": "Training measures decision quality, not whether one random hand wins."
+              "explanation": "Обучение оценивает качество ваших решений, а не случайный исход отдельной руки из-за дисперсии."
             }
           ]
         },
         {
           "id": "card-values",
           "skillId": "foundation.card_values",
-          "title": "Cards and totals",
-          "subtitle": "Read every hand correctly",
+          "title": "Значения карт и подсчёт очков",
+          "subtitle": "Правильно оценивайте любую руку",
           "estimatedMinutes": 10,
           "exercises": [
             {
               "id": "values-queen",
-              "prompt": "What is a queen worth?",
+              "prompt": "Сколько очков даёт дама?",
               "options": [
                 "10",
                 "12",
-                "1 or 11"
+                "1 или 11"
               ],
               "correctIndex": 0,
-              "explanation": "Every face card is worth 10."
+              "explanation": "Любая фигурная карта (валет, дама, король) даёт 10 очков."
             },
             {
               "id": "values-ten-ranks",
-              "prompt": "Which ranks are all worth 10?",
+              "prompt": "Какие карты приносят ровно 10 очков?",
               "options": [
-                "10, J, Q, K",
-                "A, J, Q, K",
-                "9, 10, J, Q"
+                "10, В, Д, К",
+                "Т, В, Д, К",
+                "9, 10, В, Д"
               ],
               "correctIndex": 0,
-              "explanation": "Tens and all three face-card ranks are worth 10."
+              "explanation": "Десятка и все три картинки стоят по 10 очков."
             },
             {
               "id": "values-soft-17",
-              "prompt": "What is the best total for ace + 6?",
+              "prompt": "Какова лучшая сумма для комбинации туз + 6?",
               "options": [
-                "Soft 17",
-                "Hard 7",
-                "Hard 17"
+                "Мягкие 17",
+                "Жёсткие 7",
+                "Жёсткие 17"
               ],
               "correctIndex": 0,
-              "explanation": "The ace counts as 11, so the total is 17 and remains soft."
+              "explanation": "Туз считается за 11, поэтому сумма равна 17 и остаётся мягкой."
             },
             {
               "id": "values-ace-adjust",
-              "prompt": "What is ace + 9 + 5 worth?",
+              "prompt": "Чему равна сумма руки: туз + 9 + 5?",
               "options": [
                 "15",
                 "25",
-                "Blackjack"
+                "Блэкджек"
               ],
               "correctIndex": 0,
-              "explanation": "The ace changes from 11 to 1 to prevent a bust: 1 + 9 + 5 = 15."
+              "explanation": "Туз меняет значение с 11 на 1, чтобы предотвратить перебор: 1 + 9 + 5 = 15."
             },
             {
               "id": "values-hard-15",
-              "prompt": "What kind of hand is 7 + 8?",
+              "prompt": "Какой рукой является комбинация 7 + 8?",
               "options": [
-                "Hard 15",
-                "Soft 15",
-                "Blackjack"
+                "Жёсткие 15",
+                "Мягкие 15",
+                "Блэкджек"
               ],
               "correctIndex": 0,
-              "explanation": "A hand without an ace counted as 11 is hard."
+              "explanation": "Рука без туза, считающегося за 11 очков, называется жёсткой."
             },
             {
               "id": "values-two-aces",
-              "prompt": "What is ace + ace worth?",
+              "prompt": "Чему равна сумма руки из двух тузов: туз + туз?",
               "options": [
-                "Soft 12",
-                "22 and bust",
-                "Hard 2 only"
+                "Мягкие 12",
+                "22 (перебор)",
+                "Только жёсткие 2"
               ],
               "correctIndex": 0,
-              "explanation": "One ace counts as 11 and the other as 1."
+              "explanation": "Один туз считается за 11, а второй за 1: 11 + 1 = 12 очков."
             },
             {
               "id": "values-bust",
-              "prompt": "When does a hand bust?",
+              "prompt": "Когда рука считается сгоревшей (перебор)?",
               "options": [
-                "When its best total exceeds 21",
-                "At exactly 21",
-                "After five cards"
+                "Когда сумма очков превышает 21",
+                "При достижении ровно 21",
+                "После получения пяти карт"
               ],
               "correctIndex": 0,
-              "explanation": "There is no automatic five-card win in standard blackjack."
+              "explanation": "В классическом блэкджеке перебор наступает при превышении суммы 21 очка."
             },
             {
               "id": "values-payout",
-              "prompt": "In the standard profile, what does blackjack pay?",
+              "prompt": "Как оплачивается натуральный блэкджек по стандартным правилам?",
               "options": [
                 "3:2",
                 "1:1",
                 "6:5"
               ],
               "correctIndex": 0,
-              "explanation": "The trainer defaults to the player-friendlier 3:2 payout."
+              "explanation": "Стандартный дружелюбный к игроку профиль использует выплату 3:2."
             },
             {
               "id": "values-s17",
-              "prompt": "What does S17 mean?",
+              "prompt": "Что означает правило S17?",
               "options": [
-                "Dealer stands on soft 17",
-                "Player must stand on 17",
-                "Seventeen decks are used"
+                "Дилер останавливается на мягких 17",
+                "Игрок обязан остановиться на 17",
+                "В игре используется семнадцать колод"
               ],
               "correctIndex": 0,
-              "explanation": "S17 describes the dealer rule for a soft total of 17."
+              "explanation": "S17 фиксирует правило для дилера: при мягких 17 он обязан остановиться (Stand)."
             }
           ]
         },
         {
           "id": "hard-and-soft",
           "skillId": "foundation.hand_types",
-          "title": "Hard and soft hands",
-          "subtitle": "Use the ace without confusion",
+          "title": "Жёсткие и мягкие руки",
+          "subtitle": "Уверенно используйте гибкость туза",
           "estimatedMinutes": 10,
           "exercises": [
             {
               "id": "types-definition-soft",
-              "prompt": "What makes a hand soft?",
+              "prompt": "Что делает руку «мягкой»?",
               "options": [
-                "An ace is currently counted as 11",
-                "It contains any ace",
-                "It cannot win"
+                "Туз в ней считается за 11 очков",
+                "Наличие любого туза в руке",
+                "Такая рука не может выиграть"
               ],
               "correctIndex": 0,
-              "explanation": "A hand stops being soft when every ace must count as 1."
+              "explanation": "Рука перестаёт быть мягкой, когда туз вынужден считаться за 1 очко во избежание перебора."
             },
             {
               "id": "types-a7",
-              "prompt": "What is ace + 7?",
+              "prompt": "Чему равна комбинация туз + 7?",
               "options": [
-                "Soft 18",
-                "Hard 8",
-                "Blackjack"
+                "Мягкие 18",
+                "Жёсткие 8",
+                "Блэкджек"
               ],
               "correctIndex": 0,
-              "explanation": "The ace can safely count as 11."
+              "explanation": "Туз безопасно считается за 11, давая мягкие 18."
             },
             {
               "id": "types-a6t",
-              "prompt": "What is ace + 6 + 10?",
+              "prompt": "Чему равна рука: туз + 6 + 10?",
               "options": [
-                "Hard 17",
-                "Soft 27",
-                "Bust"
+                "Жёсткие 17",
+                "Мягкие 27",
+                "Перебор"
               ],
               "correctIndex": 0,
-              "explanation": "The ace must count as 1, leaving a hard total of 17."
+              "explanation": "Туз обязан считаться за 1, в результате образуются жёсткие 17 очков."
             },
             {
               "id": "types-soft-safety",
-              "prompt": "Why can a soft hand take a card more safely?",
+              "prompt": "Почему при мягкой руке брать карту безопаснее?",
               "options": [
-                "The ace can fall from 11 to 1",
-                "Soft hands cannot bust",
-                "The dealer ignores the ace"
+                "Туз может уменьшиться с 11 до 1",
+                "Мягкая рука никогда не сгорает",
+                "Дилер не учитывает карты игрока"
               ],
               "correctIndex": 0,
-              "explanation": "A soft hand can still become hard and later bust; it is not permanently safe."
+              "explanation": "При мягкой руке туз спасает от мгновенного перебора, превращая руку в жёсткую."
             },
             {
               "id": "types-aa9",
-              "prompt": "What is ace + ace + 9?",
+              "prompt": "Чему равна комбинация: туз + туз + 9?",
               "options": [
-                "Soft 21",
-                "Bust",
-                "Hard 11"
+                "Мягкие 21",
+                "Перебор",
+                "Жёсткие 11"
               ],
               "correctIndex": 0,
-              "explanation": "The aces count as 11 and 1, producing 21. It is not a blackjack because it uses three cards."
+              "explanation": "Тузы считаются как 11 и 1: 11 + 1 + 9 = 21 очко. Это не блэкджек, так как карт три."
             },
             {
               "id": "types-hard17",
-              "prompt": "What is 10 + 7?",
+              "prompt": "Какой комбинацией является 10 + 7?",
               "options": [
-                "Hard 17",
-                "Soft 17",
-                "Blackjack"
+                "Жёсткие 17",
+                "Мягкие 17",
+                "Блэкджек"
               ],
               "correctIndex": 0,
-              "explanation": "There is no ace, so the hand is hard."
+              "explanation": "Здесь нет туза, поэтому комбинация является жёсткой."
             },
             {
               "id": "types-natural",
-              "prompt": "Is ace + 5 + 5 a blackjack?",
+              "prompt": "Является ли комбинация туз + 5 + 5 блэкджеком?",
               "options": [
-                "No, it is a three-card 21",
-                "Yes, every 21 is blackjack",
-                "Only against a dealer 10"
+                "Нет, это рука из трёх карт с суммой 21",
+                "Да, любая сумма 21 — это блэкджек",
+                "Только против десятки дилера"
               ],
               "correctIndex": 0,
-              "explanation": "Only a two-card ace plus ten-value card is a natural blackjack."
+              "explanation": "Только начальные две карты (туз + карта достоинством 10) образуют натуральный блэкджек."
             },
             {
               "id": "types-conversion",
-              "prompt": "Soft 18 receives a 5. What is the new total?",
+              "prompt": "К мягким 18 пришла 5. Какова новая сумма очков?",
               "options": [
-                "Hard 13",
-                "23 and bust",
-                "Soft 13"
+                "Жёсткие 13",
+                "23 (перебор)",
+                "Мягкие 13"
               ],
               "correctIndex": 0,
-              "explanation": "The ace changes to 1: 1 + 7 + 5 = 13."
+              "explanation": "Туз меняет значение на 1: 1 + 7 + 5 = 13 очков."
             }
           ]
         },
         {
           "id": "player-actions",
           "skillId": "foundation.actions",
-          "title": "Player actions",
-          "subtitle": "Know every legal choice",
+          "title": "Действия игрока",
+          "subtitle": "Все возможные ходы за столом",
           "estimatedMinutes": 11,
           "exercises": [
             {
               "id": "actions-hit",
-              "prompt": "What does Hit do?",
+              "prompt": "Что делает действие «Ещё» (Hit)?",
               "options": [
-                "Adds one card to the hand",
-                "Ends the hand",
-                "Splits a pair"
+                "Добавляет одну карту в руку",
+                "Завершает игру руки",
+                "Разделяет пару"
               ],
               "correctIndex": 0,
-              "explanation": "You may hit repeatedly until standing, reaching 21, or busting."
+              "explanation": "Вы можете брать карты последовательно до остановки, достижения 21 или перебора."
             },
             {
               "id": "actions-double",
-              "prompt": "What happens after Double?",
+              "prompt": "Что происходит при удвоении ставки (Double)?",
               "options": [
-                "The wager doubles, one card is dealt, then the hand stands",
-                "Two cards are dealt",
-                "The hand is surrendered"
+                "Ставка удваивается, сдаётся ровно одна карта, затем рука останавливается",
+                "Сдаются две карты",
+                "Рука сдаётся казино"
               ],
               "correctIndex": 0,
-              "explanation": "Doubling exchanges flexibility for a larger wager in favorable situations."
+              "explanation": "При удвоении вы жертвуете возможностью брать ещё карты в обмен на двойную ставку в выгодной ситуации."
             },
             {
               "id": "actions-split",
-              "prompt": "What does Split do?",
+              "prompt": "Что делает разделение карт (Split)?",
               "options": [
-                "Turns a pair into two hands",
-                "Cuts the shoe",
-                "Shares a hand with another seat"
+                "Превращает пару в две независимые руки",
+                "Срезает башмак",
+                "Объединяет ставку с соседом"
               ],
               "correctIndex": 0,
-              "explanation": "Each split hand receives another card and is played independently."
+              "explanation": "Каждая рука после сплита получает дополнительную карту и разыгрывается отдельно."
             },
             {
               "id": "actions-surrender",
-              "prompt": "What does late surrender normally cost?",
+              "prompt": "Сколько стоит поздняя сдача (Late Surrender)?",
               "options": [
-                "Half of the wager",
-                "The entire wager",
-                "Nothing"
+                "Половину первоначальной ставки",
+                "Всю ставку",
+                "Ничего"
               ],
               "correctIndex": 0,
-              "explanation": "Late surrender is available only in specific situations and rule sets."
+              "explanation": "При сдаче игрок отказывается от руки и возвращает себе половину ставки."
             },
             {
               "id": "actions-das",
-              "prompt": "What does DAS mean?",
+              "prompt": "Что означает правило DAS?",
               "options": [
-                "Double after split is allowed",
-                "Dealer always stands",
-                "Decks are shuffled separately"
+                "Разрешено удваивать после сплита (Double After Split)",
+                "Дилер всегда останавливается",
+                "Колоды перемешиваются отдельно"
               ],
               "correctIndex": 0,
-              "explanation": "DAS makes several pair splits more valuable."
+              "explanation": "DAS делает сплит многих пар существенно более выгодным."
             },
             {
               "id": "actions-late",
-              "prompt": "Why is it called late surrender?",
+              "prompt": "Почему сдача называется «поздней» (Late Surrender)?",
               "options": [
-                "It occurs after the dealer checks for blackjack",
-                "It is allowed only late at night",
-                "It happens after the player hits"
+                "Она доступна после проверки дилером блэкджека",
+                "Она разрешена только в конце смены",
+                "Она делается после того, как игрок добрал карту"
               ],
               "correctIndex": 0,
-              "explanation": "If the dealer already has blackjack, late surrender is not available."
+              "explanation": "Если у дилера уже выпал блэкджек, сдаться нельзя — ставка проигрывает."
             },
             {
               "id": "actions-peek",
-              "prompt": "What is a dealer peek?",
+              "prompt": "Что такое проверка дилера (Dealer Peek)?",
               "options": [
-                "A check for blackjack with an ace or ten showing",
-                "A player looking at the hole card",
-                "A shuffle inspection"
+                "Проверка закрытой карты на блэкджек при открытом тузе или десятке",
+                "Взгляд игрока в закрытую карту дилера",
+                "Проверка колоды перед тасовкой"
               ],
               "correctIndex": 0,
-              "explanation": "The hole card remains hidden unless blackjack is found."
+              "explanation": "Дилер проверяет скрытую карту на блэкджек до ходов игроков, не раскрывая её, если блэкджека нет."
             },
             {
               "id": "actions-eligibility",
-              "prompt": "Which actions are normally limited to the first two cards?",
+              "prompt": "Какие действия обычно доступны только на первых двух картах?",
               "options": [
-                "Double and surrender",
-                "Hit and stand",
-                "Only stand"
+                "Дабл и саррендер",
+                "Хит и стэнд",
+                "Только стэнд"
               ],
               "correctIndex": 0,
-              "explanation": "Exact availability depends on the table rules."
+              "explanation": "Удвоение и сдача, как правило, возможны только на стартовой руке из двух карт."
             }
           ]
         },
         {
           "id": "first-strategy",
           "skillId": "strategy.first_decisions",
-          "title": "First strategy decisions",
-          "subtitle": "Choose actions for common hands",
+          "title": "Первые решения базовой стратегии",
+          "subtitle": "Оптимальные ходы для частых комбинаций",
           "estimatedMinutes": 12,
           "exercises": [
             {
               "id": "strategy-12v4",
-              "prompt": "Hard 12 vs dealer 4?",
+              "prompt": "Жёсткие 12 против 4 у дилера?",
               "options": [
-                "Stand",
-                "Hit",
-                "Double"
+                "Остановиться (Stand)",
+                "Взять карту (Hit)",
+                "Удвоить (Double)"
               ],
               "correctIndex": 0,
-              "explanation": "The dealer's 4 is weak enough that standing is better."
+              "explanation": "Четвёрка дилера достаточно слаба, поэтому остановка математически выгоднее риска перебора."
             },
             {
               "id": "strategy-11v6",
-              "prompt": "Hard 11 vs dealer 6?",
+              "prompt": "Жёсткие 11 против 6 у дилера?",
               "options": [
-                "Double",
-                "Stand",
-                "Surrender"
+                "Удвоить (Double)",
+                "Остановиться (Stand)",
+                "Сдаться (Surrender)"
               ],
               "correctIndex": 0,
-              "explanation": "Eleven is a strong doubling hand against a weak dealer card."
+              "explanation": "11 — идеальная рука для удвоения против слабой открытой карты дилера."
             },
             {
               "id": "strategy-a7v9",
-              "prompt": "Soft 18 vs dealer 9?",
+              "prompt": "Мягкие 18 против 9 у дилера?",
               "options": [
-                "Hit",
-                "Stand",
-                "Split"
+                "Взять карту (Hit)",
+                "Остановиться (Stand)",
+                "Разделить (Split)"
               ],
               "correctIndex": 0,
-              "explanation": "Soft 18 is not strong enough to stand against a 9."
+              "explanation": "Мягких 18 недостаточно против сильной девятки дилера, необходимо добирать карту."
             },
             {
               "id": "strategy-88v10",
-              "prompt": "Pair of 8s vs dealer 10?",
+              "prompt": "Пара восьмёрок (8-8) против 10 у дилера?",
               "options": [
-                "Split",
-                "Stand",
-                "Double"
+                "Разделить (Split)",
+                "Остановиться (Stand)",
+                "Удвоить (Double)"
               ],
               "correctIndex": 0,
-              "explanation": "Two starting hands of 8 are preferable to playing hard 16."
+              "explanation": "Разыграть две руки с начальной 8 выгоднее, чем играть слабейшие жёсткие 16."
             },
             {
               "id": "strategy-ttv6",
-              "prompt": "Pair of 10s vs dealer 6?",
+              "prompt": "Пара десяток (10-10) против 6 у дилера?",
               "options": [
-                "Stand",
-                "Split",
-                "Double"
+                "Остановиться (Stand)",
+                "Разделить (Split)",
+                "Удвоить (Double)"
               ],
               "correctIndex": 0,
-              "explanation": "Do not break up an excellent total of 20."
+              "explanation": "Не разбивайте великолепную готовую сумму 20 очков."
             },
             {
               "id": "strategy-55v6",
-              "prompt": "Pair of 5s vs dealer 6?",
+              "prompt": "Пара пятёрок (5-5) против 6 у дилера?",
               "options": [
-                "Double",
-                "Split",
-                "Stand"
+                "Удвоить (Double)",
+                "Разделить (Split)",
+                "Остановиться (Stand)"
               ],
               "correctIndex": 0,
-              "explanation": "Treat the hand as a total of 10 and double; splitting creates two weak hands."
+              "explanation": "Играйте пару как сумму 10 и удваивайте; сплит создал бы две слабые руки с пятёрки."
             },
             {
               "id": "strategy-13v2",
-              "prompt": "Hard 13 vs dealer 2?",
+              "prompt": "Жёсткие 13 против 2 у дилера?",
               "options": [
-                "Stand",
-                "Hit",
-                "Surrender"
+                "Остановиться (Stand)",
+                "Взять карту (Hit)",
+                "Сдаться (Surrender)"
               ],
               "correctIndex": 0,
-              "explanation": "Stand and let the weak dealer card carry the bust risk."
+              "explanation": "Остановитесь и предоставьте дилеру рисковать перебором на его слабой двойке."
             },
             {
               "id": "strategy-15v10",
-              "prompt": "Hard 15 vs dealer 10 with late surrender available?",
+              "prompt": "Жёсткие 15 против 10 дилера при доступной сдаче?",
               "options": [
-                "Surrender",
-                "Stand",
-                "Double"
+                "Сдаться (Surrender)",
+                "Остановиться (Stand)",
+                "Удвоить (Double)"
               ],
               "correctIndex": 0,
-              "explanation": "This is one of the standard late-surrender decisions in the default profile."
+              "explanation": "Это классическая ситуация для поздней сдачи в стандартном профиле правил."
             },
             {
               "id": "strategy-insurance",
-              "prompt": "Without count information, should a basic-strategy player take insurance?",
+              "prompt": "Стоит ли брать страховку без информации о счёте карт?",
               "options": [
-                "No",
-                "Always",
-                "Only with a blackjack"
+                "Нет",
+                "Всегда",
+                "Только при наличии блэкджека"
               ],
               "correctIndex": 0,
-              "explanation": "Insurance is generally unfavorable without count-dependent information."
+              "explanation": "Страховка имеет отрицательное математическое ожидание, если у вас нет преимущества по счёту карт."
             },
             {
               "id": "strategy-process",
-              "prompt": "What should training score?",
+              "prompt": "Что должно оценивать эффективное обучение?",
               "options": [
-                "Whether the decision was correct",
-                "Whether the hand won",
-                "How large the wager was"
+                "Правильность принятого решения",
+                "Выиграла ли конкретная рука",
+                "Размер сделанной ставки"
               ],
               "correctIndex": 0,
-              "explanation": "A strong process can still produce a losing short-term result."
+              "explanation": "Математически безупречное решение в отдельной раздаче может проиграть из-за дисперсии."
             }
           ]
         },
         {
           "id": "hi-lo-intro",
           "skillId": "counting.hi_lo_tags",
-          "title": "Hi-Lo card values",
-          "subtitle": "Start the running count",
+          "title": "Значения карт по Hi-Lo",
+          "subtitle": "Начало ведения счёта",
           "estimatedMinutes": 12,
           "exercises": [
             {
               "id": "hilo-low",
-              "prompt": "What Hi-Lo tag do cards 2 through 6 receive?",
+              "prompt": "Какое значение по Hi-Lo получают карты от 2 до 6?",
               "options": [
                 "+1",
                 "0",
                 "-1"
               ],
               "correctIndex": 0,
-              "explanation": "Low cards increase the running count when they leave the shoe."
+              "explanation": "Младшие карты увеличивают текущий счёт, когда выходят из башмака."
             },
             {
               "id": "hilo-neutral",
-              "prompt": "What Hi-Lo tag do 7, 8, and 9 receive?",
+              "prompt": "Какое значение по Hi-Lo получают 7, 8 и 9?",
               "options": [
                 "0",
                 "+1",
                 "-1"
               ],
               "correctIndex": 0,
-              "explanation": "These neutral cards do not change the running count."
+              "explanation": "Нейтральные карты не меняют текущий счёт."
             },
             {
               "id": "hilo-high",
-              "prompt": "What tag do 10, jack, queen, king, and ace receive?",
+              "prompt": "Какое значение получают 10, валет, дама, король и туз?",
               "options": [
                 "-1",
                 "0",
                 "+1"
               ],
               "correctIndex": 0,
-              "explanation": "High cards reduce the running count as they are exposed."
+              "explanation": "Старшие карты уменьшают счёт при своём выходе на стол."
             },
             {
               "id": "hilo-cancel",
-              "prompt": "What is the combined tag of 3 and king?",
+              "prompt": "Каков суммарный счёт для пары из тройки и короля (3 + К)?",
               "options": [
                 "0",
                 "+2",
                 "-2"
               ],
               "correctIndex": 0,
-              "explanation": "+1 and -1 cancel. Grouping cards this way improves speed."
+              "explanation": "+1 и -1 взаимно уничтожаются. Объединение карт в пары ускоряет счёт."
             },
             {
               "id": "hilo-four",
-              "prompt": "Starting at zero, what is the count after 5, 6, queen, ace?",
+              "prompt": "Счёт с нуля: вышли 5, 6, дама, туз. Чему равен счёт?",
               "options": [
                 "0",
                 "+2",
                 "-2"
               ],
               "correctIndex": 0,
-              "explanation": "+1 +1 -1 -1 = 0."
+              "explanation": "+1 + 1 - 1 - 1 = 0."
             },
             {
               "id": "hilo-reset",
-              "prompt": "When does the running count reset to zero?",
+              "prompt": "Когда текущий счёт сбрасывается в ноль?",
               "options": [
-                "When the shoe is shuffled",
-                "After every hand",
-                "Whenever the count becomes negative"
+                "При перемешивании башмака",
+                "После каждой раздачи",
+                "Когда счёт становится отрицательным"
               ],
               "correctIndex": 0,
-              "explanation": "The count continues across hands until a shuffle begins a new shoe."
+              "explanation": "Счёт ведётся непрерывно из раздачи в раздачу, пока башмак не будет перетасован."
             },
             {
               "id": "hilo-balanced",
-              "prompt": "What should the final running count of one complete deck be?",
+              "prompt": "Каков итоговый счёт полной стандартной колоды из 52 карт?",
               "options": [
                 "0",
                 "+4",
                 "-4"
               ],
               "correctIndex": 0,
-              "explanation": "Hi-Lo is balanced: all tags in a full deck sum to zero."
+              "explanation": "Система Hi-Lo сбалансирована: сумма значений всех 52 карт колоды равна нулю."
             },
             {
               "id": "hilo-multideck-carry",
-              "prompt": "A six-deck shoe has dealt 52 cards and the running count is +6. What happens next?",
+              "prompt": "В 6-колодном башмаке вышло 52 карты, счёт равен +6. Что делать дальше?",
               "options": [
-                "Continue from +6 until the shoe is shuffled",
-                "Reset to zero because 52 cards have passed",
-                "Start a separate count for the next 52 cards"
+                "Продолжать вести счёт от +6 до перетасовки башмака",
+                "Сбросить в ноль, так как вышла целая колода",
+                "Начать отдельный счёт для следующих 52 карт"
               ],
               "correctIndex": 0,
-              "explanation": "Those 52 cards are only a mixed part of the six-deck shoe. The running count continues until the shoe is shuffled."
+              "explanation": "Эти 52 карты — лишь часть 6-колодного башмака. Счёт продолжается до полного перемешивания башмака."
             },
             {
               "id": "hilo-visible",
-              "prompt": "When should the dealer's hole card enter the count?",
+              "prompt": "Когда закрытая карта дилера учитывается в счёте?",
               "options": [
-                "When it is revealed",
-                "As soon as it is dealt face down",
-                "Never"
+                "Только когда она будет открыта",
+                "Сразу при раздаче рубашкой вверх",
+                "Никогда"
               ],
               "correctIndex": 0,
-              "explanation": "Count only cards that have actually been exposed."
+              "explanation": "Считаются только те карты, достоинство которых фактически открыто на столе."
             },
             {
               "id": "hilo-positive",
-              "prompt": "What does a positive running count suggest?",
+              "prompt": "О чём говорит положительный текущий счёт?",
               "options": [
-                "Relatively more high cards remain",
-                "Only low cards remain",
-                "The next hand must win"
+                "В башмаке осталось относительно больше старших карт",
+                "В башмаке остались только младшие карты",
+                "Следующая раздача обязательно выиграет"
               ],
               "correctIndex": 0,
-              "explanation": "It changes probabilities; it never predicts a guaranteed next card or win."
+              "explanation": "Положительный счёт повышает вероятность выпадения блэкджеков и десяток, смещая матожидание в пользу игрока."
             },
             {
               "id": "hilo-sequence",
-              "prompt": "Starting at zero: 2, 8, 10, 4, ace. What is the count?",
+              "prompt": "Счёт с нуля: вышли 2, 8, 10, 4, туз. Каков счёт?",
               "options": [
                 "0",
                 "+1",
                 "-1"
               ],
               "correctIndex": 0,
-              "explanation": "+1 +0 -1 +1 -1 = 0."
+              "explanation": "+1 + 0 - 1 + 1 - 1 = 0."
             }
           ]
         }
       ]
     }
-  ],
-  "translationStatus": "untranslated"
+  ]
 }

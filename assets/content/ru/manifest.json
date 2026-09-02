@@ -10,7 +10,7 @@
   "supportedRuleProfiles": [
     "standard_6d_s17_das_ls_peek_3to2"
   ],
-  "lessonFile": "assets/content/en/lessons.json",
-  "glossaryFile": "assets/content/en/glossary.json",
-  "translationStatus": "untranslated"
+  "lessonFile": "assets/content/ru/lessons.json",
+  "glossaryFile": "assets/content/ru/glossary.json",
+  "translationStatus": "complete"
 }

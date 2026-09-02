@@ -253,6 +253,7 @@ class ProgressSnapshot {
     this.xp = 0,
     this.streakDays = 0,
     this.lastActivityDate,
+    this.languageCode,
   });
 
   factory ProgressSnapshot.fromJson(Map<String, Object?> json) {
@@ -297,6 +298,7 @@ class ProgressSnapshot {
       lastActivityDate: json['lastActivityDate'] == null
           ? null
           : DateTime.parse(json['lastActivityDate']! as String),
+      languageCode: json['languageCode'] as String?,
     );
   }
 
@@ -311,6 +313,7 @@ class ProgressSnapshot {
   final int xp;
   final int streakDays;
   final DateTime? lastActivityDate;
+  final String? languageCode;
 
   double get averageMastery {
     if (lessonScores.isEmpty) {
@@ -335,6 +338,7 @@ class ProgressSnapshot {
     'xp': xp,
     'streakDays': streakDays,
     'lastActivityDate': lastActivityDate?.toIso8601String(),
+    'languageCode': languageCode,
   };
 
   ProgressSnapshot copyWith({
@@ -350,6 +354,8 @@ class ProgressSnapshot {
     int? streakDays,
     DateTime? lastActivityDate,
     bool clearLastActivityDate = false,
+    String? languageCode,
+    bool clearLanguageCode = false,
   }) {
     return ProgressSnapshot(
       lessonScores: lessonScores ?? this.lessonScores,
@@ -367,6 +373,9 @@ class ProgressSnapshot {
       lastActivityDate: clearLastActivityDate
           ? null
           : lastActivityDate ?? this.lastActivityDate,
+      languageCode: clearLanguageCode
+          ? null
+          : languageCode ?? this.languageCode,
     );
   }
 }

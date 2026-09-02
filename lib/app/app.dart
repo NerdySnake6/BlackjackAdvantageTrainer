@@ -32,18 +32,23 @@ class _BlackjackTrainerAppState extends State<BlackjackTrainerApp> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: widget.appState,
-      child: MaterialApp.router(
-        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-        debugShowCheckedModeBanner: false,
-        theme: buildAppTheme(),
-        routerConfig: _router,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
+      child: Consumer<AppState>(
+        builder: (context, appState, _) {
+          return MaterialApp.router(
+            locale: appState.locale,
+            onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+            debugShowCheckedModeBanner: false,
+            theme: buildAppTheme(),
+            routerConfig: _router,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+          );
+        },
       ),
     );
   }

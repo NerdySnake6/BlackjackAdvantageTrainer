@@ -1,13 +1,12 @@
 {
-  "hit": "Take one more card.",
-  "stand": "End play on the current hand without taking another card.",
-  "double": "Double the wager, take exactly one card, then stand.",
-  "split": "Separate a matching pair into two independently played hands.",
-  "surrender": "Give up the hand and lose half of its wager when the rules allow it.",
-  "hardHand": "A hand with no ace currently counted as 11.",
-  "softHand": "A hand containing an ace currently counted as 11.",
-  "runningCount": "The cumulative total of the Hi-Lo tags of every exposed card.",
-  "trueCount": "Running count divided by the estimated decks remaining.",
-  "penetration": "The percentage of a shoe dealt before the shuffle card is reached.",
-  "translationStatus": "untranslated"
+  "hit": "Взять ещё одну карту.",
+  "stand": "Завершить игру текущей руки, не беря больше карт.",
+  "double": "Удвоить начальную ставку, получить ровно одну карту и завершить ход.",
+  "split": "Разделить парные карты на две независимые руки.",
+  "surrender": "Отказаться от продолжения руки с потерей половины ставки (если разрешено правилами).",
+  "hardHand": "Рука без туза или комбинация, где туз считается только за 1 очко.",
+  "softHand": "Рука, содержащая туз, который считается за 11 очков без перебора.",
+  "runningCount": "Текущая сумма значений Hi-Lo всех вышедших открытых карт.",
+  "trueCount": "Текущий счёт, разделённый на расчётное число оставшихся в башмаке колод.",
+  "penetration": "Процент карт башмака, сданных до появления разрезной карты перемешивания."
 }

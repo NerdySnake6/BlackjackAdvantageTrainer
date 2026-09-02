@@ -541,4 +541,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get loadFailureBody =>
       'Restart the app. If the problem continues, reinstall the app.';
+
+  @override
+  String get languageLabel => 'Language';
+
+  @override
+  String get systemDefault => 'System default';
+
+  @override
+  String get englishLanguage => 'English';
+
+  @override
+  String get russianLanguage => 'Русский';
 }
