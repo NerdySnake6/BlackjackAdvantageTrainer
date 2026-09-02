@@ -51,6 +51,7 @@ View отвечает за отображение и пользовательс�
 - `Shoe` создаёт и перемешивает карты для `GameRulesProfile`, контролирует остаток и penetration; `Shoe.scripted` задаёт точную последовательность для сценарных тестов.
 - `HandEvaluator` вычисляет total, soft/hard, bust и natural blackjack; состояние руки представляет `BlackjackHand`.
 - `StrategyEngine` рекомендует действие для единственного проверенного standard profile, возвращает `StrategyRecommendation` с локализуемым `StrategyReason` и сохраняет совместимую обёртку `recommend()`.
+- Полная таблица standard profile сверена с Wizard of Odds и независимо подтверждена публичной S17-таблицей Blackjack Apprenticeship 2026-09-02. Fixture хранит обе ссылки, дату и результат проверки; wording и графика источников не копировались.
 - `CountingEngine` ведёт running count, оценивает оставшиеся колоды и делегирует true-count conversion политике.
 - `TrueCountPolicy` — интерфейс политики округления; текущая `NearestWholeTrueCountPolicy` использует ближайшее целое. Поведение отрицательных значений должно оставаться явно протестированным.
 
@@ -60,7 +61,7 @@ View отвечает за отображение и пользовательс�
 
 ### Запланировано
 
-- второй независимый solver export или экспертная проверка текущего reference fixture перед внешней beta;
+- независимая экспертная проверка blackjack-специалистом перед платными математическими заявлениями;
 - расширенные профили 1/2/6/8 decks, H17/S17, DAS, surrender и 3:2/6:5;
 - profile-specific restrictions для будущих проверенных профилей;
 - deviations, включая I18/Fab4, только после математической валидации;

@@ -33,6 +33,13 @@ void main() {
                 as Map<String, Object?>;
         expect(fixture['profileId'], GameRulesProfile.standard.id);
         expect(fixture['source'], startsWith('https://wizardofodds.com/'));
+        expect(
+          fixture['independentlyConfirmedBy'],
+          'https://www.blackjackapprenticeship.com/wp-content/uploads/'
+          '2024/09/S17-Basic-Strategy.pdf',
+        );
+        expect(fixture['independentCheckDate'], '2026-09-02');
+        expect(fixture['independentCheckResult'], isNotEmpty);
 
         final dealerOrder = (fixture['dealerOrder']! as List<Object?>)
             .cast<String>();

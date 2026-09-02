@@ -11,6 +11,13 @@
 
 ## Локальный release gate
 
+Полная basic-strategy fixture для standard profile сверена с Wizard of Odds и
+независимо подтверждена публичной S17-таблицей Blackjack Apprenticeship
+2026-09-02. Обе ссылки и результат проверки хранятся в
+`test/fixtures/standard_strategy_s17_das_ls.json`. Перед внешней beta остаётся
+ручной smoke-test на реальном Android; перед платными математическими
+заявлениями также нужна независимая проверка blackjack-специалистом.
+
 ```sh
 dart format <changed Dart files>
 flutter analyze

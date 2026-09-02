@@ -2,6 +2,9 @@
   "profileId": "standard_6d_s17_das_ls_peek_3to2",
   "source": "https://wizardofodds.com/games/blackjack/strategy/4-decks/",
   "sourceCheckedAt": "2026-08-02",
+  "independentlyConfirmedBy": "https://www.blackjackapprenticeship.com/wp-content/uploads/2024/09/S17-Basic-Strategy.pdf",
+  "independentCheckDate": "2026-09-02",
+  "independentCheckResult": "All hard, soft, pair-splitting, and late-surrender decisions match for the supported S17 and DAS rules.",
   "license": "Independently transcribed mathematical decisions; no commercial wording or artwork copied.",
   "dealerOrder": ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"],
   "codes": {
