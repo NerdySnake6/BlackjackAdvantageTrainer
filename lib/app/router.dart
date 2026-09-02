@@ -74,6 +74,12 @@ GoRouter createRouter({required AppState appState}) {
       ),
       GoRoute(
         path: '/lesson/:lessonId',
+        redirect: (context, state) {
+          final lessonId = state.pathParameters['lessonId'];
+          return appState.catalog.lessons.any((lesson) => lesson.id == lessonId)
+              ? null
+              : '/learn';
+        },
         builder: (context, state) =>
             LessonScreen(lessonId: state.pathParameters['lessonId']!),
       ),

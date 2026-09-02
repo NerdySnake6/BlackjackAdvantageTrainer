@@ -37,6 +37,10 @@ void main() {
         analytics.events.single.$2['experience_level'],
         ExperienceLevel.basics.name,
       );
+      expect(
+        analytics.userProperties['experience_level'],
+        ExperienceLevel.basics.name,
+      );
 
       await appState.trackTrainingEvent('exercise_answered', {
         'exercise_id': 'values-ten-ranks',
@@ -63,6 +67,7 @@ void main() {
       await appState.resetProgress();
       expect(analytics.enabled, isFalse);
       expect(crashes.enabled, isFalse);
+      expect(analytics.userProperties['experience_level'], isNull);
       expect(appState.progress.hasSeenTelemetryConsent, isFalse);
     },
   );
@@ -129,6 +134,55 @@ void main() {
     expect(review, hasLength(10));
     expect(review.map((exercise) => exercise.id).toSet(), hasLength(10));
   });
+
+  test('all four independent telemetry consent modes are respected', () async {
+    for (final analyticsEnabled in [false, true]) {
+      for (final crashesEnabled in [false, true]) {
+        final analytics = _RecordingAnalyticsGateway();
+        final crashes = _RecordingCrashReporterGateway();
+        final appState = await _appState(
+          analytics: analytics,
+          crashes: crashes,
+        );
+
+        await appState.chooseExperienceLevel(ExperienceLevel.beginner);
+        await appState.setTelemetryConsent(
+          analyticsEnabled: analyticsEnabled,
+          crashReportsEnabled: crashesEnabled,
+        );
+        await appState.trackTrainingEvent('drill_started', {
+          'session_type': 'one_deck',
+        });
+        await appState.recordError(StateError('test'), StackTrace.current);
+
+        expect(analytics.events.isNotEmpty, analyticsEnabled);
+        expect(crashes.errors.isNotEmpty, crashesEnabled);
+      }
+    }
+  });
+
+  test(
+    'completion keeps detailed event and adds canonical session event',
+    () async {
+      final analytics = _RecordingAnalyticsGateway();
+      final appState = await _appState(analytics: analytics);
+      await appState.setTelemetryConsent(
+        analyticsEnabled: true,
+        crashReportsEnabled: false,
+      );
+
+      await appState.trackTrainingEvent('drill_completed', {
+        'session_type': 'one_deck',
+        'cards_seen': 52,
+      });
+
+      expect(analytics.events.map((event) => event.$1), [
+        'drill_completed',
+        'training_session_completed',
+      ]);
+      expect(analytics.events.last.$2['session_type'], 'drill');
+    },
+  );
 }
 
 Future<AppState> _appState({
@@ -166,10 +220,16 @@ class _MemoryProgressRepository implements ProgressRepository {
 class _RecordingAnalyticsGateway implements AnalyticsGateway {
   bool enabled = false;
   final events = <(String, Map<String, Object?>)>[];
+  final userProperties = <String, String?>{};
 
   @override
   Future<void> setCollectionEnabled(bool enabled) async {
     this.enabled = enabled;
+  }
+
+  @override
+  Future<void> setUserProperty(String name, String? value) async {
+    userProperties[name] = value;
   }
 
   @override

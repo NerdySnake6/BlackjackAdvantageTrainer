@@ -4,6 +4,8 @@ library;
 abstract interface class AnalyticsGateway {
   Future<void> setCollectionEnabled(bool enabled);
 
+  Future<void> setUserProperty(String name, String? value);
+
   Future<void> track(
     String eventName, [
     Map<String, Object?> parameters = const {},
@@ -15,6 +17,9 @@ class NoOpAnalyticsGateway implements AnalyticsGateway {
 
   @override
   Future<void> setCollectionEnabled(bool enabled) async {}
+
+  @override
+  Future<void> setUserProperty(String name, String? value) async {}
 
   @override
   Future<void> track(
@@ -43,7 +48,10 @@ class ConsentAwareAnalyticsGateway implements AnalyticsGateway {
     'quick_review_started',
     'quick_review_answered',
     'quick_review_completed',
+    'training_session_completed',
   };
+
+  static const _allowedUserProperties = {'experience_level'};
 
   static const _allowedParameterKeys = {
     'lesson_id',
@@ -67,6 +75,14 @@ class ConsentAwareAnalyticsGateway implements AnalyticsGateway {
   Future<void> setCollectionEnabled(bool enabled) async {
     _enabled = enabled;
     await _delegate.setCollectionEnabled(enabled);
+  }
+
+  @override
+  Future<void> setUserProperty(String name, String? value) async {
+    if (!_enabled || !_allowedUserProperties.contains(name)) {
+      return;
+    }
+    await _delegate.setUserProperty(name, value);
   }
 
   @override

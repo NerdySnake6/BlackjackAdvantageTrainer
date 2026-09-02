@@ -16,6 +16,11 @@ class FirebaseAnalyticsGateway implements AnalyticsGateway {
   }
 
   @override
+  Future<void> setUserProperty(String name, String? value) {
+    return _analytics.setUserProperty(name: name, value: value);
+  }
+
+  @override
   Future<void> track(
     String eventName, [
     Map<String, Object?> parameters = const {},

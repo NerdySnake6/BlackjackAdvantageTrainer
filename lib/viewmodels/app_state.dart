@@ -127,6 +127,7 @@ class AppState extends ChangeNotifier {
     _progress = _progress.copyWith(experienceLevel: level);
     notifyListeners();
     await _progressRepository.save(_progress);
+    await _analytics.setUserProperty('experience_level', level.name);
     await _analytics.track('experience_level_selected', {
       'experience_level': level.name,
     });
@@ -151,7 +152,16 @@ class AppState extends ChangeNotifier {
         updatedAt: now,
       ),
     );
+    if (!analyticsEnabled) {
+      await _analytics.setUserProperty('experience_level', null);
+    }
     await _analytics.setCollectionEnabled(analyticsEnabled);
+    if (analyticsEnabled && _progress.experienceLevel != null) {
+      await _analytics.setUserProperty(
+        'experience_level',
+        _progress.experienceLevel!.name,
+      );
+    }
     await _crashReporter.setCollectionEnabled(crashReportsEnabled);
     notifyListeners();
     await _progressRepository.save(_progress);
@@ -173,6 +183,13 @@ class AppState extends ChangeNotifier {
 
   Future<void> initializeTelemetry() async {
     await _analytics.setCollectionEnabled(_progress.analyticsConsent.isGranted);
+    if (_progress.analyticsConsent.isGranted &&
+        _progress.experienceLevel != null) {
+      await _analytics.setUserProperty(
+        'experience_level',
+        _progress.experienceLevel!.name,
+      );
+    }
     await _crashReporter.setCollectionEnabled(
       _progress.crashReportsConsent.isGranted,
     );
@@ -181,8 +198,20 @@ class AppState extends ChangeNotifier {
   Future<void> trackTrainingEvent(
     String eventName, [
     Map<String, Object?> parameters = const {},
-  ]) {
-    return _analytics.track(eventName, parameters);
+  ]) async {
+    await _analytics.track(eventName, parameters);
+    final sessionType = switch (eventName) {
+      'drill_completed' => 'drill',
+      'table_session_completed' => 'table',
+      'quick_review_completed' => 'quick_review',
+      _ => null,
+    };
+    if (sessionType != null) {
+      await _analytics.track('training_session_completed', {
+        ...parameters,
+        'session_type': sessionType,
+      });
+    }
   }
 
   Future<void> recordError(
@@ -278,10 +307,16 @@ class AppState extends ChangeNotifier {
       'lesson_id': lesson.id,
       'score_percent': (score * 100).round(),
     });
+    await _analytics.track('training_session_completed', {
+      'session_type': 'lesson',
+      'lesson_id': lesson.id,
+      'score_percent': (score * 100).round(),
+    });
     return score;
   }
 
   Future<void> resetProgress() async {
+    await _analytics.setUserProperty('experience_level', null);
     await _analytics.setCollectionEnabled(false);
     await _crashReporter.setCollectionEnabled(false);
     await _progressRepository.clear();

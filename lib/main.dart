@@ -5,11 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'app/app.dart';
-import 'core/analytics/analytics_gateway.dart';
-import 'core/analytics/crash_reporter_gateway.dart';
 import 'data/content_repository.dart';
 import 'data/firebase_telemetry.dart';
 import 'data/local_progress_repository.dart';
+import 'data/telemetry_bootstrap.dart';
 import 'firebase_options.dart';
 import 'viewmodels/app_state.dart';
 
@@ -18,7 +17,17 @@ Future<void> main() async {
 
   final contentRepository = ContentRepository();
   final progressRepository = LocalProgressRepository();
-  final telemetry = await _initializeTelemetry();
+  final supportsFirebase =
+      !kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS);
+  final telemetry = await initializeTelemetryGateways(
+    supportsFirebase: supportsFirebase,
+    initializeFirebase: () =>
+        Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+    createAnalytics: FirebaseAnalyticsGateway.new,
+    createCrashReporter: FirebaseCrashReporterGateway.new,
+  );
   final catalog = await contentRepository.loadCatalog(
     localeCode: PlatformDispatcher.instance.locale.languageCode,
   );
@@ -49,24 +58,4 @@ Future<void> main() async {
   };
 
   runApp(BlackjackTrainerApp(appState: appState));
-}
-
-Future<({AnalyticsGateway analytics, CrashReporterGateway crashReporter})>
-_initializeTelemetry() async {
-  final supportsFirebase =
-      !kIsWeb &&
-      (defaultTargetPlatform == TargetPlatform.android ||
-          defaultTargetPlatform == TargetPlatform.iOS);
-  if (!supportsFirebase) {
-    return (
-      analytics: const NoOpAnalyticsGateway(),
-      crashReporter: const NoOpCrashReporterGateway(),
-    );
-  }
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  return (
-    analytics: FirebaseAnalyticsGateway(),
-    crashReporter: FirebaseCrashReporterGateway(),
-  );
 }

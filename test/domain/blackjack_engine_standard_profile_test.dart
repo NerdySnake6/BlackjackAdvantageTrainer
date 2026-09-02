@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/blackjack_engine.dart';
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/card.dart';
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/game_rules.dart';
@@ -180,6 +182,105 @@ void main() {
       final hand = engine.seats.first.hands.single;
       expect(hand.outcome, HandOutcome.blackjack);
       expect(hand.resultUnits, 1.5);
+    });
+
+    test('blackjack against blackjack pushes', () {
+      final engine = _engine([
+        CardRank.ace,
+        CardRank.ace,
+        CardRank.king,
+        CardRank.queen,
+      ]);
+
+      engine.startRound();
+
+      final hand = engine.seats.first.hands.single;
+      expect(hand.outcome, HandOutcome.push);
+      expect(hand.resultUnits, 0);
+    });
+
+    test('natural blackjack beats an ordinary three-card 21', () {
+      final engine = _engine([
+        CardRank.ace,
+        CardRank.six,
+        CardRank.king,
+        CardRank.five,
+        CardRank.ten,
+      ]);
+
+      engine.startRound();
+
+      final hand = engine.seats.first.hands.single;
+      expect(engine.evaluate(engine.dealerHand).total, 21);
+      expect(engine.dealerHand.cards, hasLength(3));
+      expect(hand.outcome, HandOutcome.blackjack);
+      expect(hand.resultUnits, 1.5);
+    });
+
+    test('dealer peeks under both ace and ten upcards', () {
+      final aceUp = _engine([
+        CardRank.nine,
+        CardRank.ace,
+        CardRank.seven,
+        CardRank.king,
+      ])..startRound();
+      final tenUp = _engine([
+        CardRank.nine,
+        CardRank.ten,
+        CardRank.seven,
+        CardRank.ace,
+      ])..startRound();
+
+      expect(aceUp.phase, RoundPhase.complete);
+      expect(aceUp.dealerHoleRevealed, isTrue);
+      expect(tenUp.phase, RoundPhase.complete);
+      expect(tenUp.dealerHoleRevealed, isTrue);
+    });
+
+    test('multiple human seats play strictly from left to right', () {
+      final engine = BlackjackEngine(
+        random: Random(44),
+        seatConfiguration: SeatConfiguration([
+          SeatRole.human,
+          SeatRole.bot,
+          SeatRole.human,
+          SeatRole.empty,
+          SeatRole.human,
+        ]),
+      );
+
+      engine.startRound();
+      final visited = <int>[];
+      while (engine.phase == RoundPhase.playerTurn) {
+        visited.add(engine.activeSeatIndex);
+        engine.applyAction(PlayerAction.stand);
+      }
+
+      expect(visited, orderedEquals([0, 2, 4]));
+      expect(engine.phase, RoundPhase.complete);
+    });
+
+    test('seat changes are rejected mid-round and apply next round', () {
+      final engine = BlackjackEngine(random: Random(91));
+      engine.startRound();
+      final next = SeatConfiguration([
+        SeatRole.empty,
+        SeatRole.human,
+        SeatRole.bot,
+        SeatRole.empty,
+        SeatRole.empty,
+      ]);
+
+      expect(() => engine.configureSeats(next), throwsStateError);
+      while (engine.phase == RoundPhase.playerTurn) {
+        engine.applyAction(PlayerAction.stand);
+      }
+      engine.configureSeats(next);
+      engine.startRound();
+
+      expect(engine.seats[0].hands, isEmpty);
+      expect(engine.seats[1].role, SeatRole.human);
+      expect(engine.seats[1].hands, hasLength(1));
     });
 
     test('bust loses and equal totals push', () {
