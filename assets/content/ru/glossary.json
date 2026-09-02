@@ -1,0 +1,13 @@
+{
+  "hit": "Take one more card.",
+  "stand": "End play on the current hand without taking another card.",
+  "double": "Double the wager, take exactly one card, then stand.",
+  "split": "Separate a matching pair into two independently played hands.",
+  "surrender": "Give up the hand and lose half of its wager when the rules allow it.",
+  "hardHand": "A hand with no ace currently counted as 11.",
+  "softHand": "A hand containing an ace currently counted as 11.",
+  "runningCount": "The cumulative total of the Hi-Lo tags of every exposed card.",
+  "trueCount": "Running count divided by the estimated decks remaining.",
+  "penetration": "The percentage of a shoe dealt before the shuffle card is reached.",
+  "translationStatus": "untranslated"
+}

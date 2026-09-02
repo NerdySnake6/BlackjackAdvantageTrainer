@@ -1,0 +1,663 @@
+{
+  "contentVersion": 3,
+  "locale": "ru",
+  "sections": [
+    {
+      "id": "prototype-foundations",
+      "title": "Blackjack Foundations",
+      "summary": "Learn the game, make your first correct decisions, and begin Hi-Lo.",
+      "isPro": false,
+      "lessons": [
+        {
+          "id": "quick-start",
+          "skillId": "foundation.quick_start",
+          "title": "Your first hand",
+          "subtitle": "Reach 21 without going over",
+          "estimatedMinutes": 6,
+          "exercises": [
+            {
+              "id": "quick-goal",
+              "prompt": "What is the main goal of a blackjack hand?",
+              "options": [
+                "Get closer to 21 than the dealer without going over",
+                "Collect five cards",
+                "Always reach exactly 21"
+              ],
+              "correctIndex": 0,
+              "explanation": "You win by beating the dealer's total without busting. Exactly 21 is not required."
+            },
+            {
+              "id": "quick-face-card",
+              "prompt": "What is a king worth?",
+              "options": [
+                "10",
+                "11",
+                "Its printed rank"
+              ],
+              "correctIndex": 0,
+              "explanation": "Tens, jacks, queens, and kings are all worth 10."
+            },
+            {
+              "id": "quick-ace",
+              "prompt": "How can an ace be counted?",
+              "options": [
+                "As 1 or 11",
+                "Only as 1",
+                "Only as 11"
+              ],
+              "correctIndex": 0,
+              "explanation": "The ace takes the value that gives the strongest total without busting."
+            },
+            {
+              "id": "quick-hit",
+              "prompt": "You have hard 16 against a dealer 10. Surrender is unavailable. What is the basic-strategy action?",
+              "options": [
+                "Hit",
+                "Stand",
+                "Split"
+              ],
+              "correctIndex": 0,
+              "explanation": "Standing on 16 against a 10 loses more often than taking another card."
+            },
+            {
+              "id": "quick-stand",
+              "prompt": "You have 20. What should you do?",
+              "options": [
+                "Stand",
+                "Hit",
+                "Surrender"
+              ],
+              "correctIndex": 0,
+              "explanation": "Twenty is already an excellent total. Taking another card would usually bust."
+            },
+            {
+              "id": "quick-blackjack",
+              "prompt": "Which hand is a natural blackjack?",
+              "options": [
+                "Ace + king as the first two cards",
+                "7 + 7 + 7",
+                "10 + 5 + 6"
+              ],
+              "correctIndex": 0,
+              "explanation": "A blackjack is specifically an ace plus a ten-value card on the initial two cards."
+            },
+            {
+              "id": "quick-stand-meaning",
+              "prompt": "What does Stand mean?",
+              "options": [
+                "Take no more cards",
+                "Take exactly one card",
+                "End the entire table"
+              ],
+              "correctIndex": 0,
+              "explanation": "Standing ends play only for the current hand."
+            },
+            {
+              "id": "quick-outcome",
+              "prompt": "Can a mathematically correct decision still lose the hand?",
+              "options": [
+                "Yes, short-term outcomes are random",
+                "No, correct strategy always wins",
+                "Only when counting cards"
+              ],
+              "correctIndex": 0,
+              "explanation": "Training measures decision quality, not whether one random hand wins."
+            }
+          ]
+        },
+        {
+          "id": "card-values",
+          "skillId": "foundation.card_values",
+          "title": "Cards and totals",
+          "subtitle": "Read every hand correctly",
+          "estimatedMinutes": 10,
+          "exercises": [
+            {
+              "id": "values-queen",
+              "prompt": "What is a queen worth?",
+              "options": [
+                "10",
+                "12",
+                "1 or 11"
+              ],
+              "correctIndex": 0,
+              "explanation": "Every face card is worth 10."
+            },
+            {
+              "id": "values-ten-ranks",
+              "prompt": "Which ranks are all worth 10?",
+              "options": [
+                "10, J, Q, K",
+                "A, J, Q, K",
+                "9, 10, J, Q"
+              ],
+              "correctIndex": 0,
+              "explanation": "Tens and all three face-card ranks are worth 10."
+            },
+            {
+              "id": "values-soft-17",
+              "prompt": "What is the best total for ace + 6?",
+              "options": [
+                "Soft 17",
+                "Hard 7",
+                "Hard 17"
+              ],
+              "correctIndex": 0,
+              "explanation": "The ace counts as 11, so the total is 17 and remains soft."
+            },
+            {
+              "id": "values-ace-adjust",
+              "prompt": "What is ace + 9 + 5 worth?",
+              "options": [
+                "15",
+                "25",
+                "Blackjack"
+              ],
+              "correctIndex": 0,
+              "explanation": "The ace changes from 11 to 1 to prevent a bust: 1 + 9 + 5 = 15."
+            },
+            {
+              "id": "values-hard-15",
+              "prompt": "What kind of hand is 7 + 8?",
+              "options": [
+                "Hard 15",
+                "Soft 15",
+                "Blackjack"
+              ],
+              "correctIndex": 0,
+              "explanation": "A hand without an ace counted as 11 is hard."
+            },
+            {
+              "id": "values-two-aces",
+              "prompt": "What is ace + ace worth?",
+              "options": [
+                "Soft 12",
+                "22 and bust",
+                "Hard 2 only"
+              ],
+              "correctIndex": 0,
+              "explanation": "One ace counts as 11 and the other as 1."
+            },
+            {
+              "id": "values-bust",
+              "prompt": "When does a hand bust?",
+              "options": [
+                "When its best total exceeds 21",
+                "At exactly 21",
+                "After five cards"
+              ],
+              "correctIndex": 0,
+              "explanation": "There is no automatic five-card win in standard blackjack."
+            },
+            {
+              "id": "values-payout",
+              "prompt": "In the standard profile, what does blackjack pay?",
+              "options": [
+                "3:2",
+                "1:1",
+                "6:5"
+              ],
+              "correctIndex": 0,
+              "explanation": "The trainer defaults to the player-friendlier 3:2 payout."
+            },
+            {
+              "id": "values-s17",
+              "prompt": "What does S17 mean?",
+              "options": [
+                "Dealer stands on soft 17",
+                "Player must stand on 17",
+                "Seventeen decks are used"
+              ],
+              "correctIndex": 0,
+              "explanation": "S17 describes the dealer rule for a soft total of 17."
+            }
+          ]
+        },
+        {
+          "id": "hard-and-soft",
+          "skillId": "foundation.hand_types",
+          "title": "Hard and soft hands",
+          "subtitle": "Use the ace without confusion",
+          "estimatedMinutes": 10,
+          "exercises": [
+            {
+              "id": "types-definition-soft",
+              "prompt": "What makes a hand soft?",
+              "options": [
+                "An ace is currently counted as 11",
+                "It contains any ace",
+                "It cannot win"
+              ],
+              "correctIndex": 0,
+              "explanation": "A hand stops being soft when every ace must count as 1."
+            },
+            {
+              "id": "types-a7",
+              "prompt": "What is ace + 7?",
+              "options": [
+                "Soft 18",
+                "Hard 8",
+                "Blackjack"
+              ],
+              "correctIndex": 0,
+              "explanation": "The ace can safely count as 11."
+            },
+            {
+              "id": "types-a6t",
+              "prompt": "What is ace + 6 + 10?",
+              "options": [
+                "Hard 17",
+                "Soft 27",
+                "Bust"
+              ],
+              "correctIndex": 0,
+              "explanation": "The ace must count as 1, leaving a hard total of 17."
+            },
+            {
+              "id": "types-soft-safety",
+              "prompt": "Why can a soft hand take a card more safely?",
+              "options": [
+                "The ace can fall from 11 to 1",
+                "Soft hands cannot bust",
+                "The dealer ignores the ace"
+              ],
+              "correctIndex": 0,
+              "explanation": "A soft hand can still become hard and later bust; it is not permanently safe."
+            },
+            {
+              "id": "types-aa9",
+              "prompt": "What is ace + ace + 9?",
+              "options": [
+                "Soft 21",
+                "Bust",
+                "Hard 11"
+              ],
+              "correctIndex": 0,
+              "explanation": "The aces count as 11 and 1, producing 21. It is not a blackjack because it uses three cards."
+            },
+            {
+              "id": "types-hard17",
+              "prompt": "What is 10 + 7?",
+              "options": [
+                "Hard 17",
+                "Soft 17",
+                "Blackjack"
+              ],
+              "correctIndex": 0,
+              "explanation": "There is no ace, so the hand is hard."
+            },
+            {
+              "id": "types-natural",
+              "prompt": "Is ace + 5 + 5 a blackjack?",
+              "options": [
+                "No, it is a three-card 21",
+                "Yes, every 21 is blackjack",
+                "Only against a dealer 10"
+              ],
+              "correctIndex": 0,
+              "explanation": "Only a two-card ace plus ten-value card is a natural blackjack."
+            },
+            {
+              "id": "types-conversion",
+              "prompt": "Soft 18 receives a 5. What is the new total?",
+              "options": [
+                "Hard 13",
+                "23 and bust",
+                "Soft 13"
+              ],
+              "correctIndex": 0,
+              "explanation": "The ace changes to 1: 1 + 7 + 5 = 13."
+            }
+          ]
+        },
+        {
+          "id": "player-actions",
+          "skillId": "foundation.actions",
+          "title": "Player actions",
+          "subtitle": "Know every legal choice",
+          "estimatedMinutes": 11,
+          "exercises": [
+            {
+              "id": "actions-hit",
+              "prompt": "What does Hit do?",
+              "options": [
+                "Adds one card to the hand",
+                "Ends the hand",
+                "Splits a pair"
+              ],
+              "correctIndex": 0,
+              "explanation": "You may hit repeatedly until standing, reaching 21, or busting."
+            },
+            {
+              "id": "actions-double",
+              "prompt": "What happens after Double?",
+              "options": [
+                "The wager doubles, one card is dealt, then the hand stands",
+                "Two cards are dealt",
+                "The hand is surrendered"
+              ],
+              "correctIndex": 0,
+              "explanation": "Doubling exchanges flexibility for a larger wager in favorable situations."
+            },
+            {
+              "id": "actions-split",
+              "prompt": "What does Split do?",
+              "options": [
+                "Turns a pair into two hands",
+                "Cuts the shoe",
+                "Shares a hand with another seat"
+              ],
+              "correctIndex": 0,
+              "explanation": "Each split hand receives another card and is played independently."
+            },
+            {
+              "id": "actions-surrender",
+              "prompt": "What does late surrender normally cost?",
+              "options": [
+                "Half of the wager",
+                "The entire wager",
+                "Nothing"
+              ],
+              "correctIndex": 0,
+              "explanation": "Late surrender is available only in specific situations and rule sets."
+            },
+            {
+              "id": "actions-das",
+              "prompt": "What does DAS mean?",
+              "options": [
+                "Double after split is allowed",
+                "Dealer always stands",
+                "Decks are shuffled separately"
+              ],
+              "correctIndex": 0,
+              "explanation": "DAS makes several pair splits more valuable."
+            },
+            {
+              "id": "actions-late",
+              "prompt": "Why is it called late surrender?",
+              "options": [
+                "It occurs after the dealer checks for blackjack",
+                "It is allowed only late at night",
+                "It happens after the player hits"
+              ],
+              "correctIndex": 0,
+              "explanation": "If the dealer already has blackjack, late surrender is not available."
+            },
+            {
+              "id": "actions-peek",
+              "prompt": "What is a dealer peek?",
+              "options": [
+                "A check for blackjack with an ace or ten showing",
+                "A player looking at the hole card",
+                "A shuffle inspection"
+              ],
+              "correctIndex": 0,
+              "explanation": "The hole card remains hidden unless blackjack is found."
+            },
+            {
+              "id": "actions-eligibility",
+              "prompt": "Which actions are normally limited to the first two cards?",
+              "options": [
+                "Double and surrender",
+                "Hit and stand",
+                "Only stand"
+              ],
+              "correctIndex": 0,
+              "explanation": "Exact availability depends on the table rules."
+            }
+          ]
+        },
+        {
+          "id": "first-strategy",
+          "skillId": "strategy.first_decisions",
+          "title": "First strategy decisions",
+          "subtitle": "Choose actions for common hands",
+          "estimatedMinutes": 12,
+          "exercises": [
+            {
+              "id": "strategy-12v4",
+              "prompt": "Hard 12 vs dealer 4?",
+              "options": [
+                "Stand",
+                "Hit",
+                "Double"
+              ],
+              "correctIndex": 0,
+              "explanation": "The dealer's 4 is weak enough that standing is better."
+            },
+            {
+              "id": "strategy-11v6",
+              "prompt": "Hard 11 vs dealer 6?",
+              "options": [
+                "Double",
+                "Stand",
+                "Surrender"
+              ],
+              "correctIndex": 0,
+              "explanation": "Eleven is a strong doubling hand against a weak dealer card."
+            },
+            {
+              "id": "strategy-a7v9",
+              "prompt": "Soft 18 vs dealer 9?",
+              "options": [
+                "Hit",
+                "Stand",
+                "Split"
+              ],
+              "correctIndex": 0,
+              "explanation": "Soft 18 is not strong enough to stand against a 9."
+            },
+            {
+              "id": "strategy-88v10",
+              "prompt": "Pair of 8s vs dealer 10?",
+              "options": [
+                "Split",
+                "Stand",
+                "Double"
+              ],
+              "correctIndex": 0,
+              "explanation": "Two starting hands of 8 are preferable to playing hard 16."
+            },
+            {
+              "id": "strategy-ttv6",
+              "prompt": "Pair of 10s vs dealer 6?",
+              "options": [
+                "Stand",
+                "Split",
+                "Double"
+              ],
+              "correctIndex": 0,
+              "explanation": "Do not break up an excellent total of 20."
+            },
+            {
+              "id": "strategy-55v6",
+              "prompt": "Pair of 5s vs dealer 6?",
+              "options": [
+                "Double",
+                "Split",
+                "Stand"
+              ],
+              "correctIndex": 0,
+              "explanation": "Treat the hand as a total of 10 and double; splitting creates two weak hands."
+            },
+            {
+              "id": "strategy-13v2",
+              "prompt": "Hard 13 vs dealer 2?",
+              "options": [
+                "Stand",
+                "Hit",
+                "Surrender"
+              ],
+              "correctIndex": 0,
+              "explanation": "Stand and let the weak dealer card carry the bust risk."
+            },
+            {
+              "id": "strategy-15v10",
+              "prompt": "Hard 15 vs dealer 10 with late surrender available?",
+              "options": [
+                "Surrender",
+                "Stand",
+                "Double"
+              ],
+              "correctIndex": 0,
+              "explanation": "This is one of the standard late-surrender decisions in the default profile."
+            },
+            {
+              "id": "strategy-insurance",
+              "prompt": "Without count information, should a basic-strategy player take insurance?",
+              "options": [
+                "No",
+                "Always",
+                "Only with a blackjack"
+              ],
+              "correctIndex": 0,
+              "explanation": "Insurance is generally unfavorable without count-dependent information."
+            },
+            {
+              "id": "strategy-process",
+              "prompt": "What should training score?",
+              "options": [
+                "Whether the decision was correct",
+                "Whether the hand won",
+                "How large the wager was"
+              ],
+              "correctIndex": 0,
+              "explanation": "A strong process can still produce a losing short-term result."
+            }
+          ]
+        },
+        {
+          "id": "hi-lo-intro",
+          "skillId": "counting.hi_lo_tags",
+          "title": "Hi-Lo card values",
+          "subtitle": "Start the running count",
+          "estimatedMinutes": 12,
+          "exercises": [
+            {
+              "id": "hilo-low",
+              "prompt": "What Hi-Lo tag do cards 2 through 6 receive?",
+              "options": [
+                "+1",
+                "0",
+                "-1"
+              ],
+              "correctIndex": 0,
+              "explanation": "Low cards increase the running count when they leave the shoe."
+            },
+            {
+              "id": "hilo-neutral",
+              "prompt": "What Hi-Lo tag do 7, 8, and 9 receive?",
+              "options": [
+                "0",
+                "+1",
+                "-1"
+              ],
+              "correctIndex": 0,
+              "explanation": "These neutral cards do not change the running count."
+            },
+            {
+              "id": "hilo-high",
+              "prompt": "What tag do 10, jack, queen, king, and ace receive?",
+              "options": [
+                "-1",
+                "0",
+                "+1"
+              ],
+              "correctIndex": 0,
+              "explanation": "High cards reduce the running count as they are exposed."
+            },
+            {
+              "id": "hilo-cancel",
+              "prompt": "What is the combined tag of 3 and king?",
+              "options": [
+                "0",
+                "+2",
+                "-2"
+              ],
+              "correctIndex": 0,
+              "explanation": "+1 and -1 cancel. Grouping cards this way improves speed."
+            },
+            {
+              "id": "hilo-four",
+              "prompt": "Starting at zero, what is the count after 5, 6, queen, ace?",
+              "options": [
+                "0",
+                "+2",
+                "-2"
+              ],
+              "correctIndex": 0,
+              "explanation": "+1 +1 -1 -1 = 0."
+            },
+            {
+              "id": "hilo-reset",
+              "prompt": "When does the running count reset to zero?",
+              "options": [
+                "When the shoe is shuffled",
+                "After every hand",
+                "Whenever the count becomes negative"
+              ],
+              "correctIndex": 0,
+              "explanation": "The count continues across hands until a shuffle begins a new shoe."
+            },
+            {
+              "id": "hilo-balanced",
+              "prompt": "What should the final running count of one complete deck be?",
+              "options": [
+                "0",
+                "+4",
+                "-4"
+              ],
+              "correctIndex": 0,
+              "explanation": "Hi-Lo is balanced: all tags in a full deck sum to zero."
+            },
+            {
+              "id": "hilo-multideck-carry",
+              "prompt": "A six-deck shoe has dealt 52 cards and the running count is +6. What happens next?",
+              "options": [
+                "Continue from +6 until the shoe is shuffled",
+                "Reset to zero because 52 cards have passed",
+                "Start a separate count for the next 52 cards"
+              ],
+              "correctIndex": 0,
+              "explanation": "Those 52 cards are only a mixed part of the six-deck shoe. The running count continues until the shoe is shuffled."
+            },
+            {
+              "id": "hilo-visible",
+              "prompt": "When should the dealer's hole card enter the count?",
+              "options": [
+                "When it is revealed",
+                "As soon as it is dealt face down",
+                "Never"
+              ],
+              "correctIndex": 0,
+              "explanation": "Count only cards that have actually been exposed."
+            },
+            {
+              "id": "hilo-positive",
+              "prompt": "What does a positive running count suggest?",
+              "options": [
+                "Relatively more high cards remain",
+                "Only low cards remain",
+                "The next hand must win"
+              ],
+              "correctIndex": 0,
+              "explanation": "It changes probabilities; it never predicts a guaranteed next card or win."
+            },
+            {
+              "id": "hilo-sequence",
+              "prompt": "Starting at zero: 2, 8, 10, 4, ace. What is the count?",
+              "options": [
+                "0",
+                "+1",
+                "-1"
+              ],
+              "correctIndex": 0,
+              "explanation": "+1 +0 -1 +1 -1 = 0."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "translationStatus": "untranslated"
+}

@@ -1,0 +1,296 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Blackjack Advantage",
+  "learnTab": "Learn",
+  "drillTab": "Drill",
+  "tableTab": "Table",
+  "profileTab": "Progress",
+  "learningPath": "Learning path",
+  "learningPathSubtitle": "Build perfect decisions before adding speed.",
+  "prototypeBuild": "6-lesson foundation course",
+  "experienceLevelTitle": "Where should we start?",
+  "experienceLevelSubtitle": "Choose the starting point that fits your blackjack experience. You can review every earlier lesson later.",
+  "beginnerLevelTitle": "I'm new to blackjack",
+  "beginnerLevelDescription": "Start with the rules, the first hand, and the decisions you need at the table.",
+  "basicsLevelTitle": "I know the basics",
+  "basicsLevelDescription": "Skip the introduction and begin with hard and soft hands.",
+  "experiencedLevelTitle": "I'm an experienced player",
+  "experiencedLevelDescription": "Jump into common basic-strategy decisions and use earlier lessons as optional review.",
+  "experienceLevelNote": "This changes your recommended starting point, not your saved progress.",
+  "telemetryConsentTitle": "Help improve the training",
+  "telemetryConsentBody": "Choose separately whether to share anonymous usage events and technical crash reports.",
+  "usageAnalyticsTitle": "Usage analytics",
+  "usageAnalyticsDescription": "Share stable lesson IDs, session types, and aggregate correctness. Answer text and card sequences are never sent.",
+  "crashReportsTitle": "Crash reports",
+  "crashReportsDescription": "Share fatal technical diagnostics so crashes can be fixed. No gameplay content or personal profile is attached.",
+  "telemetryOptionalNote": "Both choices are optional. Saying no does not limit the app, and you can change them in Progress.",
+  "saveAndContinue": "Save and continue",
+  "recommendedStart": "Start here",
+  "minutesShort": "{minutes} min",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "mastered": "Mastered",
+  "inProgress": "In progress",
+  "freeLabel": "FREE",
+  "proLabel": "PRO",
+  "startLesson": "Start lesson",
+  "continueLesson": "Continue lesson",
+  "lockedLesson": "Complete the previous lesson to unlock",
+  "lessonComplete": "Lesson complete",
+  "lessonCompleteSubtitle": "Accuracy unlocked the next node. Keep reviewing to retain the skill.",
+  "lessonNeedsReview": "Lesson finished — review required",
+  "lessonNeedsReviewSubtitle": "Reach at least 80% accuracy to unlock the next lesson.",
+  "retryLesson": "Review and try again",
+  "lessonResult": "{correct} of {total} correct",
+  "@lessonResult": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "correctAnswer": "Correct",
+  "incorrectAnswer": "Not quite",
+  "next": "Next",
+  "finish": "Finish",
+  "backToPath": "Back to path",
+  "quickReviewTitle": "Quick Review",
+  "quickReviewReadyLater": "Weak and due exercises will appear here.",
+  "quickReviewDue": "{count} exercises ready · about 3–5 min",
+  "@quickReviewDue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quickReviewProgress": "Review {current} of {total}",
+  "@quickReviewProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quickReviewEmptyTitle": "Nothing to review yet",
+  "quickReviewEmptyBody": "Complete a few lesson exercises, then return for a focused review.",
+  "quickReviewComplete": "Review complete",
+  "quickReviewResult": "{correct} of {total} correct. Your next review dates were updated.",
+  "@quickReviewResult": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "countdownTitle": "Running count",
+  "countdownSubtitle": "Keep a Hi-Lo count as each card is revealed.",
+  "countDrillIntroTitle": "Before your first count",
+  "countDrillIntroBody": "Hi-Lo tracks exposed cards in the current shoe. Start at 0 and keep one running total.",
+  "countDrillIntroLowCards": "2–6  →  +1",
+  "countDrillIntroNeutralCards": "7–9  →  0",
+  "countDrillIntroHighCards": "10, J, Q, K, A  →  −1",
+  "countDrillIntroDeckNote": "All 52 cards of one complete deck sum to 0 in Hi-Lo. In a multi-deck shoe, any 52 cards are only a mixed segment: keep the running count until the shoe is shuffled.",
+  "countDrillIntroKnown": "I know these rules — don't show this again",
+  "countDrillIntroContinue": "Got it",
+  "startDrill": "Start one-deck drill",
+  "nextCard": "Reveal next card",
+  "submitCount": "Check count",
+  "yourCount": "Your count",
+  "cardsSeen": "{count} cards seen",
+  "@cardsSeen": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checkpoint": "Checkpoint",
+  "countCorrect": "Count is correct. Keep going.",
+  "countIncorrect": "The exact count was {count}.",
+  "@countIncorrect": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "drillComplete": "Deck complete",
+  "drillCompleteSubtitle": "A complete Hi-Lo deck always returns to zero.",
+  "restartDrill": "Run another deck",
+  "revealInstruction": "Memorize the count, then reveal the next card.",
+  "adjustCountInstruction": "Set the running count you have in mind.",
+  "newRound": "New round",
+  "hit": "Hit",
+  "stand": "Stand",
+  "doubleAction": "Double",
+  "split": "Split",
+  "surrender": "Surrender",
+  "dealer": "Dealer",
+  "seat": "Seat {number}",
+  "@seat": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "human": "Human",
+  "bot": "Bot",
+  "empty": "Empty",
+  "configureSeats": "Configure seats",
+  "configureSeatsHint": "Choose Human, Bot, or Empty for each seat. Changes during a round apply to the next round. Keep at least one Human.",
+  "seatChangesPending": "Seat changes will apply to the next round.",
+  "done": "Done",
+  "currentCount": "Running count: {count}",
+  "@currentCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shoeStatus": "{dealt} / {total} cards dealt",
+  "@shoeStatus": {
+    "placeholders": {
+      "dealt": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "turnPrompt": "Choose the best action",
+  "roundComplete": "Round complete",
+  "startFirstRound": "Deal the first round",
+  "guidedMode": "GUIDED TABLE",
+  "practiceMode": "PRACTICE TABLE",
+  "guidedModeName": "Guided",
+  "practiceModeName": "Practice",
+  "tableRoundProgress": "Round {completed} / {total}",
+  "@tableRoundProgress": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "recommendedAction": "Recommended: {action}",
+  "@recommendedAction": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "continueAction": "Continue",
+  "tableCountPrompt": "What is the running count?",
+  "tableSessionComplete": "Five-round session complete",
+  "strategyAccuracy": "Strategy {percent}%",
+  "@strategyAccuracy": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "countAccuracy": "Count {percent}%",
+  "@countAccuracy": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "startAnotherSession": "Another session",
+  "strategyReasonSplitPair": "Splitting this pair creates the stronger long-run play.",
+  "strategyReasonStandPair": "This pair should stay together against this dealer card.",
+  "strategyReasonDoublePair": "Play these cards as a hard ten and double against this dealer card.",
+  "strategyReasonHitPair": "This pair is stronger when played as a regular hand.",
+  "strategyReasonSurrenderHard": "Late surrender loses less than playing this weak hard total.",
+  "strategyReasonDoubleSoft": "The soft total has enough upside to double against this dealer card.",
+  "strategyReasonStandSoft": "This soft total is already strong enough to stand.",
+  "strategyReasonHitSoft": "The ace protects the hand while another card can improve it.",
+  "strategyReasonDoubleHard": "This hard total has an advantage against the dealer's up-card.",
+  "strategyReasonStandHard": "The dealer is more likely to break; avoid taking another card.",
+  "strategyReasonHitHard": "Standing is too weak here; take another card.",
+  "strategyReasonFallback": "The preferred move is unavailable, so use the safest legal fallback.",
+  "standardRulesName": "Standard six-deck · S17 · DAS · late surrender · 3:2",
+  "practiceUnits": "Practice unit",
+  "dealingCards": "Dealing cards...",
+  "dealerTurn": "Dealer is resolving the round.",
+  "hiddenCard": "Hidden card",
+  "handTotal": "Total {total}",
+  "@handTotal": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "resultUnits": "{outcome} · {units} units",
+  "@resultUnits": {
+    "placeholders": {
+      "outcome": {
+        "type": "String"
+      },
+      "units": {
+        "type": "String"
+      }
+    }
+  },
+  "outcomeBlackjack": "Blackjack",
+  "outcomeWin": "Win",
+  "outcomePush": "Push",
+  "outcomeLoss": "Loss",
+  "outcomeSurrender": "Surrender",
+  "reshuffled": "The shoe was reshuffled at 75% penetration.",
+  "progressTitle": "Your progress",
+  "progressSubtitle": "Motivation and mastery are measured separately.",
+  "xpLabel": "XP",
+  "streakLabel": "day streak",
+  "masteryLabel": "Lesson accuracy",
+  "experienceSettingTitle": "Experience level",
+  "experienceSettingSubtitle": "Change your recommended starting point without deleting progress.",
+  "lessonsCompleted": "{completed} of {total} lessons completed",
+  "@lessonsCompleted": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "privacyChoicesTitle": "Privacy choices",
+  "privacyChoicesSubtitle": "Optional collection stays off unless you enable it.",
+  "privacyNote": "Telemetry follows your separate opt-in choices. Answer text, card sequences, and personal data are not collected.",
+  "educationDisclaimer": "Training simulation only. Skill does not guarantee gambling profit.",
+  "proComingSoon": "Pro course coming later",
+  "settings": "Settings",
+  "resetProgress": "Reset progress",
+  "resetConfirmation": "Reset all lesson progress and XP?",
+  "cancel": "Cancel",
+  "reset": "Reset",
+  "loadFailureTitle": "The training content could not be loaded",
+  "loadFailureBody": "Restart the app. If the problem continues, reinstall the app."
+}

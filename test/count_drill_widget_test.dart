@@ -16,7 +16,7 @@ void main() {
       await tester.pumpWidget(const SizedBox());
       tester.view.reset();
     });
-    final catalog = await ContentRepository().loadEnglishCatalog();
+    final catalog = await ContentRepository().loadCatalog();
     final appState = AppState(
       catalog: catalog,
       progress: const ProgressSnapshot(

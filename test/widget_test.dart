@@ -65,7 +65,7 @@ void main() {
 }
 
 Future<AppState> _createAppState() async {
-  final catalog = await ContentRepository().loadEnglishCatalog();
+  final catalog = await ContentRepository().loadCatalog();
   return AppState(
     catalog: catalog,
     progress: const ProgressSnapshot(),

@@ -103,7 +103,7 @@ void main() {
 
   test('quick review selects no more than ten due or weak exercises', () async {
     final now = DateTime.utc(2026, 8, 2);
-    final catalog = await ContentRepository().loadEnglishCatalog();
+    final catalog = await ContentRepository().loadCatalog();
     final exerciseIds = [
       for (final lesson in catalog.lessons)
         for (final exercise in lesson.exercises) exercise.id,
@@ -137,7 +137,7 @@ Future<AppState> _appState({
   DateTime Function()? clock,
 }) async {
   return AppState(
-    catalog: await ContentRepository().loadEnglishCatalog(),
+    catalog: await ContentRepository().loadCatalog(),
     progress: const ProgressSnapshot(),
     progressRepository: _MemoryProgressRepository(),
     analytics: analytics ?? const NoOpAnalyticsGateway(),

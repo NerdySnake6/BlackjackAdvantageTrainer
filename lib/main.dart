@@ -19,7 +19,9 @@ Future<void> main() async {
   final contentRepository = ContentRepository();
   final progressRepository = LocalProgressRepository();
   final telemetry = await _initializeTelemetry();
-  final catalog = await contentRepository.loadEnglishCatalog();
+  final catalog = await contentRepository.loadCatalog(
+    localeCode: PlatformDispatcher.instance.locale.languageCode,
+  );
   final progress = await progressRepository.load();
   final appState = AppState(
     catalog: catalog,

@@ -89,7 +89,7 @@ void main() {
 
 Future<AppState> _createAppState() async {
   return AppState(
-    catalog: await ContentRepository().loadEnglishCatalog(),
+    catalog: await ContentRepository().loadCatalog(),
     progress: const ProgressSnapshot(
       experienceLevel: ExperienceLevel.beginner,
       hasSeenTelemetryConsent: true,
