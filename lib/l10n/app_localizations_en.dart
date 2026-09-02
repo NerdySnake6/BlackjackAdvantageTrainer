@@ -31,7 +31,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Build perfect decisions before adding speed.';
 
   @override
-  String get prototypeBuild => '6-lesson validation build';
+  String get prototypeBuild => '6-lesson foundation course';
 
   @override
   String get experienceLevelTitle => 'Where should we start?';
@@ -499,7 +499,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String lessonsCompleted(int completed, int total) {
-    return '$completed of $total prototype lessons completed';
+    return '$completed of $total lessons completed';
   }
 
   @override
@@ -524,7 +524,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
-  String get resetProgress => 'Reset prototype progress';
+  String get resetProgress => 'Reset progress';
 
   @override
   String get resetConfirmation => 'Reset all lesson progress and XP?';
@@ -540,5 +540,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadFailureBody =>
-      'Restart the app. If the problem continues, reinstall this prototype.';
+      'Restart the app. If the problem continues, reinstall the app.';
 }

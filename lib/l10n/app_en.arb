@@ -7,7 +7,7 @@
   "profileTab": "Progress",
   "learningPath": "Learning path",
   "learningPathSubtitle": "Build perfect decisions before adding speed.",
-  "prototypeBuild": "6-lesson validation build",
+  "prototypeBuild": "6-lesson foundation course",
   "experienceLevelTitle": "Where should we start?",
   "experienceLevelSubtitle": "Choose the starting point that fits your blackjack experience. You can review every earlier lesson later.",
   "beginnerLevelTitle": "I'm new to blackjack",
@@ -206,7 +206,7 @@
   "masteryLabel": "Lesson accuracy",
   "experienceSettingTitle": "Experience level",
   "experienceSettingSubtitle": "Change your recommended starting point without deleting progress.",
-  "lessonsCompleted": "{completed} of {total} prototype lessons completed",
+  "lessonsCompleted": "{completed} of {total} lessons completed",
   "@lessonsCompleted": {
     "placeholders": {
       "completed": {"type": "int"},
@@ -219,10 +219,10 @@
   "educationDisclaimer": "Training simulation only. Skill does not guarantee gambling profit.",
   "proComingSoon": "Pro course coming later",
   "settings": "Settings",
-  "resetProgress": "Reset prototype progress",
+  "resetProgress": "Reset progress",
   "resetConfirmation": "Reset all lesson progress and XP?",
   "cancel": "Cancel",
   "reset": "Reset",
   "loadFailureTitle": "The training content could not be loaded",
-  "loadFailureBody": "Restart the app. If the problem continues, reinstall this prototype."
+  "loadFailureBody": "Restart the app. If the problem continues, reinstall the app."
 }

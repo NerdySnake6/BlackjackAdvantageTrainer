@@ -139,7 +139,7 @@ abstract class AppLocalizations {
   /// No description provided for @prototypeBuild.
   ///
   /// In en, this message translates to:
-  /// **'6-lesson validation build'**
+  /// **'6-lesson foundation course'**
   String get prototypeBuild;
 
   /// No description provided for @experienceLevelTitle.
@@ -937,7 +937,7 @@ abstract class AppLocalizations {
   /// No description provided for @lessonsCompleted.
   ///
   /// In en, this message translates to:
-  /// **'{completed} of {total} prototype lessons completed'**
+  /// **'{completed} of {total} lessons completed'**
   String lessonsCompleted(int completed, int total);
 
   /// No description provided for @privacyChoicesTitle.
@@ -979,7 +979,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetProgress.
   ///
   /// In en, this message translates to:
-  /// **'Reset prototype progress'**
+  /// **'Reset progress'**
   String get resetProgress;
 
   /// No description provided for @resetConfirmation.
@@ -1009,7 +1009,7 @@ abstract class AppLocalizations {
   /// No description provided for @loadFailureBody.
   ///
   /// In en, this message translates to:
-  /// **'Restart the app. If the problem continues, reinstall this prototype.'**
+  /// **'Restart the app. If the problem continues, reinstall the app.'**
   String get loadFailureBody;
 }
 
