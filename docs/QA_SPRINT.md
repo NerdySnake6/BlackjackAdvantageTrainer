@@ -60,33 +60,78 @@ profiles. Русская локализация была в заморозке, 
 - Локаль ru-RU: на момент прогона ru-пакет контента грузился, но текст в нём
   был английский (scaffold). Полный русский перевод и переключение языка
   пришли позже тем же днём (`6ece657`), поэтому прогон на устройстве надо
-  повторить: русский UI на реальном экране ещё не видели ни разу. Дрейф ID и
-  полнота перевода покрыты `test/data/content_locale_test.dart`.
+  повторить: на физическом Android русский UI ещё не видели (на эмуляторе
+  API 36 он проверен, см. 0.2). Дрейф ID и полнота перевода покрыты
+  `test/data/content_locale_test.dart`.
 
 Что это меняет: устройство закрывает внешний gate раздела 5 (smoke-тест на
 физическом Android) и делает возможными lifecycle-проверки пункта 3.6. Оно
 **не** заменяет эмуляторы API 24 и API 36: API 33 лежит между ними и не
 проверяет ни минимальную, ни целевую версию.
 
-### 0.2 Android-эмуляторы: по-прежнему отсутствуют
+### 0.2 Android-эмуляторы: матрица создана 2026-09-03
 
-`DEVELOPMENT_SETUP.md` описывает macOS-машину и AVD
-`blackjack_pixel_7_api_36`. Текущая машина — Linux, и на ней:
+| AVD | API | Образ | Устройство |
+| --- | --- | --- | --- |
+| `blackjack_pixel_7_api_36` | 36 | `system-images;android-36;google_apis;x86_64` | pixel_7, 1080×2400 |
+| `blackjack_nexus_5x_api_24` | 24 (Android 7.0) | `system-images;android-24;google_apis;x86_64` | Nexus 5X, 1080×1920 |
 
-- `~/android-dev/sdk/system-images` содержит только `android-34/android-wear/x86_64`;
-- единственный AVD — `wear_test`, телефонных AVD нет;
-- platforms 34/35/36 и build-tools 34/35/36 установлены, upload key на месте
-  (`~/android-dev/keystores/blackjack-advantage-trainer-upload.jks`).
+Взят `google_apis`, а не `default`: в нём есть Play services, без которых
+Firebase не инициализируется. x86_64 под эту машину; `/dev/kvm` доступен,
+оба AVD грузятся за 40–50 с.
 
-Создание матрицы эмуляторов остаётся самостоятельной задачей. Физическое
-устройство из 0.1 её не снимает.
+API 24 — это `flutter.minSdkVersion`, то есть нижняя граница. Nexus 5X даёт
+заодно 16:9 вместо 20:9, поэтому между двумя AVD меняется не только API.
 
-Поправка к исходному тексту: на x86_64 Linux ARM64-образ API 24 запускается
-через полную эмуляцию инструкций и практически непригоден. Берём
-`system-images;android-24;google_apis;x86_64` (или API 26 x86_64, если образ 24
-не поднимается), а не ARM64.
+Создание с нуля:
 
-`minSdk` подтверждён: `flutter.minSdkVersion` = 24.
+```sh
+export ANDROID_HOME=~/android-dev/sdk
+export JAVA_HOME=~/android-dev/jdk/jdk-17.0.19+10
+SM=$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager
+AM=$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager
+
+yes | $SM --licenses
+$SM "system-images;android-36;google_apis;x86_64" \
+    "system-images;android-24;google_apis;x86_64" "platforms;android-24"
+$AM create avd -n blackjack_pixel_7_api_36 \
+    -k "system-images;android-36;google_apis;x86_64" -d pixel_7
+$AM create avd -n blackjack_nexus_5x_api_24 \
+    -k "system-images;android-24;google_apis;x86_64" -d "Nexus 5X"
+
+$ANDROID_HOME/emulator/emulator -avd blackjack_pixel_7_api_36 \
+    -no-snapshot-save -no-boot-anim -gpu swiftshader_indirect
+```
+
+Три грабли, на которые ушло время:
+
+- `JAVA_HOME` должен указывать на `~/android-dev/jdk/jdk-17.0.19+10`, а не на
+  `~/android-dev/jdk`. Иначе `sdkmanager` молча выдаёт пустой список пакетов.
+- Fat debug APK весит 163 МБ, и его установка на API 24 не укладывается в три
+  минуты. Для эмулятора собирайте
+  `flutter build apk --debug --target-platform android-x64` (116 МБ), тогда
+  установка проходит штатно.
+- Смена локали через `setprop persist.sys.locale` применяется только после
+  `adb reboot`. Без перезагрузки приложение продолжает показывать английский.
+
+Проверено на обоих AVD 2026-09-03 (build 1.0.0+4, debug, x86_64):
+
+| Проверка | API 24 | API 36 |
+| --- | --- | --- |
+| Установка и запуск | да | да |
+| `FATAL` / `AndroidRuntime` / `E/flutter` | нет | нет |
+| `MissingPlugin` / `UnsatisfiedLink` | нет | нет |
+| Onboarding отрисован корректно | да | да |
+| `RenderFlex overflowed` | нет | нет |
+
+API 24 подтверждает, что заявленный `minSdk` работает на реальном рантайме
+Android 7.0, а не только формально в манифесте.
+
+Русский UI впервые увиден на экране (API 36, `persist.sys.locale=ru-RU`):
+onboarding и экран согласия, то есть самая плотная по тексту страница,
+отрисованы полностью, без обрезки и без `RenderFlex overflowed`. На физическом
+устройстве русский всё ещё не проверялся: там стоит сборка, предшествующая
+локализации.
 
 ### 0.3 Журнал дефектов
 
@@ -198,8 +243,8 @@ dealer peek с тузом и с десяткой, resplit до четырёх р
 | # | Пункт | Статус |
 | --- | --- | --- |
 | 3.1 | Android integration suite (12 маршрутов) | Не сделано, каталога `integration_test/` нет |
-| 3.2 | Матрица API 36 | Не сделано, AVD отсутствует (0.2) |
-| 3.3 | Матрица API 24 (или 26) x86_64 | Не сделано, образ не установлен |
+| 3.2 | Матрица API 36 | AVD создан, smoke пройден. Осталось прогнать integration suite |
+| 3.3 | Матрица API 24 x86_64 | AVD создан, smoke пройден. Осталось прогнать integration suite |
 | 3.4 | Семь размеров экрана | Покрыто в `layout_test.dart` |
 | 3.5 | Text scale 1.0 и 1.3 | Частично: каждый размер на одном scale, не на обоих |
 | 3.6 | Airplane mode, сворачивание, kill процесса, обновление сборки | Частично: обновление проверено на устройстве (0.1), остальное нет |
@@ -306,7 +351,7 @@ CI, успешный полный прогон на API 24/26 и API 36.
 
 | Приоритет | Работа |
 | --- | --- |
-| 1 | Матрица эмуляторов: скачать `android-36;google_apis;x86_64` и `android-24;google_apis;x86_64`, создать AVD, проверить `flutter run`. Обновить `DEVELOPMENT_SETUP.md` под Linux-машину. |
+| 1 | Перенести 0.2 и 0.4 в `DEVELOPMENT_SETUP.md`: он всё ещё описывает macOS-машину и AVD, которого здесь нет. |
 | 2 | Раздел 3: `integration_test/`, 12 маршрутов, прогон на API 36 и API 24/26. |
 | 3 | Пункт 4.6: четыре режима consent на устройстве, DebugView, Crashlytics в отдельной debug-ветке. Заодно перепроверить наблюдение из 0.3. |
 | 4 | Пункт 5.2 и 5.3: подключить `check_coverage.sh` в `android-build.yml`, добавить nightly workflow с эмулятором. |
