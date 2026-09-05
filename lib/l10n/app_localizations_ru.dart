@@ -9,6 +9,76 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get pilotTitle => 'Три игровых урока · пилот';
+
+  @override
+  String get pilotWarmup => 'Знакомство · без оценки';
+
+  @override
+  String get pilotPractice => 'Тренировка · оценивается первый ответ';
+
+  @override
+  String get pilotIndependent => 'Самостоятельная практика · без подсказок';
+
+  @override
+  String get pilotHint => 'Показать подсказку';
+
+  @override
+  String get pilotCorrectTask =>
+      'Выбери правильный ответ на этих же картах, чтобы продолжить. Первый ответ останется в результате.';
+
+  @override
+  String get pilotDoubleAvailable =>
+      'Дабл (Double) доступен на этой двухкарточной руке.';
+
+  @override
+  String get pilotDoubleUnavailable =>
+      'Дабл (Double) недоступен для этой руки.';
+
+  @override
+  String get pilotResultNote =>
+      'Порог прохождения — 80% первых ответов. Подсказки учитываются отдельно; эта фиксированная практика не подтверждает освоение навыка.';
+
+  @override
+  String get pilotSaveFailed =>
+      'Не удалось сохранить. Последнее действие не применено. Повтори его перед выходом.';
+
+  @override
+  String get pilotIncompatible =>
+      'Это сохранение несовместимо с текущим уроком. Начни только этот урок заново; XP и остальной прогресс сохранятся.';
+
+  @override
+  String get pilotDecrease => 'Уменьшить счёт';
+
+  @override
+  String get pilotIncrease => 'Увеличить счёт';
+
+  @override
+  String pilotStartingCount(int count) {
+    return 'Начальный RC: $count';
+  }
+
+  @override
+  String pilotUnassisted(int count) {
+    return 'Без подсказок: $count/10';
+  }
+
+  @override
+  String pilotStars(int count) {
+    return 'Звёзды: $count/3';
+  }
+
+  @override
+  String pilotReward(int count) {
+    return 'Начислено: $count XP';
+  }
+
+  @override
+  String pilotSelected(String answer) {
+    return 'Твой первый ответ: $answer';
+  }
+
+  @override
   String get appTitle => 'Blackjack Advantage';
 
   @override

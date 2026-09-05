@@ -8,6 +8,7 @@ import '../presentation/drill/count_drill_screen.dart';
 import '../presentation/home/app_shell.dart';
 import '../presentation/learn/learning_path_screen.dart';
 import '../presentation/learn/lesson_screen.dart';
+import '../presentation/learn/pilot_lesson_screen.dart';
 import '../presentation/onboarding/experience_level_screen.dart';
 import '../presentation/onboarding/telemetry_consent_screen.dart';
 import '../presentation/profile/progress_screen.dart';
@@ -86,6 +87,17 @@ GoRouter createRouter({required AppState appState}) {
       GoRoute(
         path: '/review',
         builder: (context, state) => const QuickReviewScreen(),
+      ),
+      GoRoute(
+        path: '/pilot/:lessonId',
+        redirect: (context, state) =>
+            appState.catalog.pilotLessons.any(
+              (lesson) => lesson.id == state.pathParameters['lessonId'],
+            )
+            ? null
+            : '/learn',
+        builder: (context, state) =>
+            PilotLessonScreen(lessonId: state.pathParameters['lessonId']!),
       ),
     ],
     errorBuilder: (context, state) =>

@@ -8,7 +8,7 @@ import '../../domain/blackjack_engine/card.dart';
 import '../../domain/blackjack_engine/game_rules.dart';
 import '../../domain/blackjack_engine/hand.dart';
 import '../../l10n/app_localizations.dart';
-import '../table/compact_hand_view.dart';
+import '../widgets/playing_card_view.dart';
 import '../table/table_formatters.dart';
 
 /// Presents the player hand, dealer up-card, and every possible action.
@@ -23,12 +23,14 @@ class DecisionScene extends StatelessWidget {
     required this.dealerUpCard,
     required this.availableActions,
     required this.onAction,
+    this.enabled = true,
   });
 
   final BlackjackHand playerHand;
   final PlayingCard dealerUpCard;
   final Set<PlayerAction> availableActions;
   final ValueChanged<PlayerAction> onAction;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,12 @@ class DecisionScene extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 14),
+            Text(
+              availableActions.contains(PlayerAction.doubleDown)
+                  ? strings.pilotDoubleAvailable
+                  : strings.pilotDoubleUnavailable,
+            ),
+            const SizedBox(height: 10),
             Wrap(
               alignment: WrapAlignment.center,
               spacing: 8,
@@ -85,9 +93,8 @@ class DecisionScene extends StatelessWidget {
               children: [
                 for (final action in actions)
                   _ActionButton(
-                    action: action,
                     label: actionLabel(strings, action),
-                    enabled: availableActions.contains(action),
+                    enabled: enabled && availableActions.contains(action),
                     onPressed: () => onAction(action),
                   ),
               ],
@@ -128,7 +135,15 @@ class _HandPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        CompactHandView(hand: hand, cardWidth: 52),
+        Wrap(
+          spacing: 4,
+          runSpacing: 4,
+          alignment: WrapAlignment.center,
+          children: [
+            for (final card in hand.cards)
+              PlayingCardView(card: card, width: 52),
+          ],
+        ),
         if (total != null) ...[
           const SizedBox(height: 4),
           Text(
@@ -147,13 +162,11 @@ class _HandPanel extends StatelessWidget {
 
 class _ActionButton extends StatelessWidget {
   const _ActionButton({
-    required this.action,
     required this.label,
     required this.enabled,
     required this.onPressed,
   });
 
-  final PlayerAction action;
   final String label;
   final bool enabled;
   final VoidCallback onPressed;

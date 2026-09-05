@@ -1,6 +1,8 @@
 /// Versioned learning-content and progress models.
 library;
 
+import 'pilot_lesson.dart';
+
 enum ExperienceLevel {
   beginner('quick-start'),
   basics('hard-and-soft'),
@@ -25,12 +27,16 @@ class CourseCatalog {
     required this.contentVersion,
     required this.locale,
     required this.sections,
+    this.pilotLessons = const [],
   });
 
   factory CourseCatalog.fromJson(Map<String, Object?> json) {
     return CourseCatalog(
       contentVersion: json['contentVersion']! as int,
       locale: json['locale']! as String,
+      pilotLessons: (json['pilotLessons'] as List<Object?>? ?? [])
+          .map((item) => PilotLesson.fromJson(item! as Map<String, Object?>))
+          .toList(growable: false),
       sections: (json['sections']! as List<Object?>)
           .map((item) => CourseSection.fromJson(item! as Map<String, Object?>))
           .toList(growable: false),
@@ -40,6 +46,7 @@ class CourseCatalog {
   final int contentVersion;
   final String locale;
   final List<CourseSection> sections;
+  final List<PilotLesson> pilotLessons;
 
   List<LessonDefinition> get lessons => [
     for (final section in sections) ...section.lessons,
@@ -244,6 +251,7 @@ class ProgressSnapshot {
   const ProgressSnapshot({
     this.lessonScores = const {},
     this.activeSessions = const {},
+    this.pilotSessions = const {},
     this.exerciseReviewStates = const {},
     this.experienceLevel,
     this.hasSeenCountDrillIntro = false,
@@ -271,6 +279,7 @@ class ProgressSnapshot {
           LessonSessionProgress.fromJson(value! as Map<String, Object?>),
         ),
       ),
+      pilotSessions: _readPilotSessions(json['pilotSessions']),
       exerciseReviewStates: rawReviewStates.map(
         (key, value) => MapEntry(
           key,
@@ -304,6 +313,7 @@ class ProgressSnapshot {
 
   final Map<String, double> lessonScores;
   final Map<String, LessonSessionProgress> activeSessions;
+  final Map<String, Map<String, Object?>> pilotSessions;
   final Map<String, ExerciseReviewState> exerciseReviewStates;
   final ExperienceLevel? experienceLevel;
   final bool hasSeenCountDrillIntro;
@@ -315,6 +325,18 @@ class ProgressSnapshot {
   final DateTime? lastActivityDate;
   final String? languageCode;
 
+  static Map<String, Map<String, Object?>> _readPilotSessions(Object? raw) {
+    if (raw is! Map<String, Object?>) return {};
+    return raw.map(
+      (key, value) => MapEntry(
+        key,
+        value is Map<String, Object?>
+            ? Map<String, Object?>.of(value)
+            : {'schema': 0},
+      ),
+    );
+  }
+
   double get averageMastery {
     if (lessonScores.isEmpty) {
       return 0;
@@ -324,6 +346,7 @@ class ProgressSnapshot {
 
   Map<String, Object?> toJson() => {
     'lessonScores': lessonScores,
+    'pilotSessions': pilotSessions,
     'activeSessions': activeSessions.map(
       (key, value) => MapEntry(key, value.toJson()),
     ),
@@ -344,6 +367,7 @@ class ProgressSnapshot {
   ProgressSnapshot copyWith({
     Map<String, double>? lessonScores,
     Map<String, LessonSessionProgress>? activeSessions,
+    Map<String, Map<String, Object?>>? pilotSessions,
     Map<String, ExerciseReviewState>? exerciseReviewStates,
     ExperienceLevel? experienceLevel,
     bool? hasSeenCountDrillIntro,
@@ -360,6 +384,7 @@ class ProgressSnapshot {
     return ProgressSnapshot(
       lessonScores: lessonScores ?? this.lessonScores,
       activeSessions: activeSessions ?? this.activeSessions,
+      pilotSessions: pilotSessions ?? this.pilotSessions,
       exerciseReviewStates: exerciseReviewStates ?? this.exerciseReviewStates,
       experienceLevel: experienceLevel ?? this.experienceLevel,
       hasSeenCountDrillIntro:

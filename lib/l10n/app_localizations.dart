@@ -98,6 +98,114 @@ abstract class AppLocalizations {
     Locale('ru'),
   ];
 
+  /// No description provided for @pilotTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Three game lessons · pilot'**
+  String get pilotTitle;
+
+  /// No description provided for @pilotWarmup.
+  ///
+  /// In en, this message translates to:
+  /// **'Introduction · unscored'**
+  String get pilotWarmup;
+
+  /// No description provided for @pilotPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice · first answers count'**
+  String get pilotPractice;
+
+  /// No description provided for @pilotIndependent.
+  ///
+  /// In en, this message translates to:
+  /// **'Independent practice · no hints'**
+  String get pilotIndependent;
+
+  /// No description provided for @pilotHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Show hint'**
+  String get pilotHint;
+
+  /// No description provided for @pilotCorrectTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Try the correct answer on these same cards to continue. Your first answer stays recorded.'**
+  String get pilotCorrectTask;
+
+  /// No description provided for @pilotDoubleAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Double is available on this two-card hand.'**
+  String get pilotDoubleAvailable;
+
+  /// No description provided for @pilotDoubleUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Double is unavailable for this hand.'**
+  String get pilotDoubleUnavailable;
+
+  /// No description provided for @pilotResultNote.
+  ///
+  /// In en, this message translates to:
+  /// **'80% first answers passes this lesson. Hints are tracked separately; this fixed practice is not a mastery certificate.'**
+  String get pilotResultNote;
+
+  /// No description provided for @pilotSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save. Your last change was not applied. Try the action again before leaving.'**
+  String get pilotSaveFailed;
+
+  /// No description provided for @pilotIncompatible.
+  ///
+  /// In en, this message translates to:
+  /// **'This saved lesson cannot be resumed with this content. Restart only this lesson; your XP and other progress will remain.'**
+  String get pilotIncompatible;
+
+  /// No description provided for @pilotDecrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease count'**
+  String get pilotDecrease;
+
+  /// No description provided for @pilotIncrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase count'**
+  String get pilotIncrease;
+
+  /// No description provided for @pilotStartingCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting RC: {count}'**
+  String pilotStartingCount(int count);
+
+  /// No description provided for @pilotUnassisted.
+  ///
+  /// In en, this message translates to:
+  /// **'Without hints: {count}/10'**
+  String pilotUnassisted(int count);
+
+  /// No description provided for @pilotStars.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars: {count}/3'**
+  String pilotStars(int count);
+
+  /// No description provided for @pilotReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Earned: {count} XP'**
+  String pilotReward(int count);
+
+  /// No description provided for @pilotSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Your first answer: {answer}'**
+  String pilotSelected(String answer);
+
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:

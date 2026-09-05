@@ -43,6 +43,36 @@ class LearningPathScreen extends StatelessWidget {
                     children: [
                       _QuickReviewCard(appState: appState),
                       const SizedBox(height: 12),
+                      if (appState.catalog.pilotLessons.isNotEmpty) ...[
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            strings.pilotTitle,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                        for (final lesson in appState.catalog.pilotLessons)
+                          Card(
+                            child: ListTile(
+                              key: ValueKey('pilot-${lesson.id}'),
+                              title: Text(lesson.title),
+                              subtitle: Text(
+                                appState.progress.pilotSessions.containsKey(
+                                      lesson.id,
+                                    )
+                                    ? strings.continueLesson
+                                    : lesson.subtitle,
+                              ),
+                              trailing: Icon(
+                                appState.isLessonCompleted(lesson.id)
+                                    ? Icons.check_circle_outline
+                                    : Icons.chevron_right,
+                              ),
+                              onTap: () => context.push('/pilot/${lesson.id}'),
+                            ),
+                          ),
+                        const SizedBox(height: 12),
+                      ],
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(

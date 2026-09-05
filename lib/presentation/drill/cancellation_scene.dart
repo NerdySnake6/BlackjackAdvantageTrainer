@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 import '../../domain/blackjack_engine/card.dart';
+import '../../domain/learning/cancellation.dart';
 import '../../l10n/app_localizations.dart';
 import '../widgets/playing_card_view.dart';
 
@@ -16,12 +17,14 @@ class CancellationScene extends StatelessWidget {
     required this.revealedCount,
     required this.runningCount,
     required this.onRevealNext,
+    this.showExplanation = true,
   });
 
   final List<PlayingCard> sequence;
   final int revealedCount;
   final int runningCount;
   final VoidCallback onRevealNext;
+  final bool showExplanation;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class CancellationScene extends StatelessWidget {
     final visibleCount = revealedCount.clamp(0, sequence.length);
     final visibleCards = sequence.take(visibleCount).toList(growable: false);
     final isComplete = visibleCount == sequence.length;
+    final cancelled = cancellationEnds(visibleCards);
 
     return Card(
       child: Padding(
@@ -37,14 +41,15 @@ class CancellationScene extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 Text(
                   strings.cardsSeen(visibleCount),
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
-                _CountBadge(runningCount: runningCount),
+                if (showExplanation) _CountBadge(runningCount: runningCount),
               ],
             ),
             const SizedBox(height: 16),
@@ -55,21 +60,20 @@ class CancellationScene extends StatelessWidget {
                 style: const TextStyle(color: Colors.white60),
               )
             else
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (var index = 0; index < visibleCards.length; index++)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: _RevealedCard(
-                          card: visibleCards[index],
-                          isCancelled: _isCancelledPair(visibleCards, index),
-                        ),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (var index = 0; index < visibleCards.length; index++)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: _RevealedCard(
+                        card: visibleCards[index],
+                        isCancelled: cancelled.contains(index),
+                        showTag: showExplanation,
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
             const SizedBox(height: 16),
             FilledButton(
@@ -81,22 +85,18 @@ class CancellationScene extends StatelessWidget {
       ),
     );
   }
-
-  bool _isCancelledPair(List<PlayingCard> cards, int index) {
-    if (index == 0) {
-      return false;
-    }
-    final previousTag = cards[index - 1].hiLoTag;
-    final currentTag = cards[index].hiLoTag;
-    return previousTag != 0 && previousTag + currentTag == 0;
-  }
 }
 
 class _RevealedCard extends StatelessWidget {
-  const _RevealedCard({required this.card, required this.isCancelled});
+  const _RevealedCard({
+    required this.card,
+    required this.isCancelled,
+    required this.showTag,
+  });
 
   final PlayingCard card;
   final bool isCancelled;
+  final bool showTag;
 
   @override
   Widget build(BuildContext context) {
@@ -111,25 +111,26 @@ class _RevealedCard extends StatelessWidget {
       children: [
         PlayingCardView(card: card, width: 58),
         const SizedBox(height: 5),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: tagColor.withValues(alpha: 0.14),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: tagColor.withValues(alpha: 0.45)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            child: Text(
-              tag > 0
-                  ? '+1'
-                  : tag < 0
-                  ? '−1'
-                  : '0',
-              style: TextStyle(color: tagColor, fontWeight: FontWeight.w900),
+        if (showTag)
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: tagColor.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: tagColor.withValues(alpha: 0.45)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              child: Text(
+                tag > 0
+                    ? '+1'
+                    : tag < 0
+                    ? '−1'
+                    : '0',
+                style: TextStyle(color: tagColor, fontWeight: FontWeight.w900),
+              ),
             ),
           ),
-        ),
-        if (isCancelled)
+        if (showTag && isCancelled)
           const Padding(
             padding: EdgeInsets.only(top: 3),
             child: Icon(

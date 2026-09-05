@@ -10,6 +10,7 @@ import '../core/analytics/crash_reporter_gateway.dart';
 import '../core/persistence/progress_repository.dart';
 import '../data/content_repository.dart';
 import '../domain/learning/mastery.dart';
+import '../domain/learning/decision_lesson.dart';
 import '../domain/learning/models.dart';
 import '../domain/purchase/purchase_gateway.dart';
 
@@ -349,6 +350,55 @@ class AppState extends ChangeNotifier {
     await _crashReporter.setCollectionEnabled(false);
     await _progressRepository.clear();
     _progress = ProgressSnapshot(languageCode: _progress.languageCode);
+    notifyListeners();
+  }
+
+  /// Saves phase and reward together. Replaying a completed attempt is a no-op.
+  Future<void> savePilotSession(DecisionLessonSession session) async {
+    final id = session.lesson.id;
+    final existing = _progress.pilotSessions[id];
+    final previousAttempt = existing?['attempt'];
+    if (previousAttempt is int && previousAttempt > session.attempt) {
+      throw StateError('A newer pilot attempt has already been saved');
+    }
+    if (existing != null &&
+        previousAttempt == session.attempt &&
+        existing['awardedXp'] != null) {
+      return;
+    }
+    final previous = _progress;
+    var next = previous;
+    if (session.phase == DecisionLessonPhase.result) {
+      final previousScore = previous.lessonScores[id] ?? 0;
+      final score = _scorer.score(
+        correctAnswers: session.correctAnswers,
+        totalAnswers: session.evaluatedAnswers,
+      );
+      final bonus = previousScore < 0.8 && score >= 0.8 ? 50 : 0;
+      final xp = session.correctAnswers * 10 + bonus;
+      session.recordReward(xp);
+      final now = _clock();
+      final date = DateTime(now.year, now.month, now.day);
+      next = next.copyWith(
+        lessonScores: {
+          ...previous.lessonScores,
+          id: score > previousScore ? score : previousScore,
+        },
+        xp: previous.xp + xp,
+        streakDays: _updatedStreak(date),
+        lastActivityDate: date,
+      );
+    }
+    next = next.copyWith(
+      pilotSessions: {...previous.pilotSessions, id: session.toJson()},
+    );
+    _progress = next;
+    try {
+      await _progressRepository.save(next);
+    } catch (_) {
+      if (identical(_progress, next)) _progress = previous;
+      rethrow;
+    }
     notifyListeners();
   }
 

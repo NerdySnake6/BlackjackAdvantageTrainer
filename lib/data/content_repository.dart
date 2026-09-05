@@ -27,7 +27,13 @@ class ContentRepository {
     if (rawJson == null) {
       throw StateError('No course content bundled for "$localeCode".');
     }
-    return CourseCatalog.fromJson(jsonDecode(rawJson)! as Map<String, Object?>);
+    final json = jsonDecode(rawJson)! as Map<String, Object?>;
+    final locale = json['locale']! as String;
+    final pilotJson = await _bundle.loadString(
+      'assets/content/$locale/pilot_lessons.json',
+    );
+    json['pilotLessons'] = jsonDecode(pilotJson);
+    return CourseCatalog.fromJson(json);
   }
 
   Future<String?> _loadRaw(String localeCode) async {

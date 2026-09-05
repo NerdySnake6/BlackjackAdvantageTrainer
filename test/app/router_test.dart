@@ -80,6 +80,23 @@ void main() {
     );
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('pilot routes validate ids separately from legacy MCQ lessons', (
+    tester,
+  ) async {
+    final router = await _pumpRouter(tester, _onboarded);
+    router.go('/pilot/no-such-lesson');
+    await tester.pumpAndSettle();
+    expect(router.state.matchedLocation, '/learn');
+    router.go('/pilot/hard-12');
+    await tester.pumpAndSettle();
+    expect(router.state.matchedLocation, '/pilot/hard-12');
+    expect(find.text(catalog.pilotLessons.first.theory), findsOneWidget);
+    router.go('/lesson/hard-12');
+    await tester.pumpAndSettle();
+    expect(router.state.matchedLocation, '/learn');
+    expect(tester.takeException(), isNull);
+  });
 }
 
 const _onboarded = ProgressSnapshot(

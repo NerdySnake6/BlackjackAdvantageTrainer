@@ -26,6 +26,8 @@ and agents. Read them before changing the product or code:
 - [Course skill and material map](docs/COURSE_SKILL_MAP.md)
 - [Iteration 6 lesson packs](docs/ITERATION_6_LESSON_PACKS.md)
 - [Iteration 8 cancellation scene](lib/presentation/drill/cancellation_scene.dart)
+- [Decision lesson flow](lib/domain/learning/decision_lesson.dart)
+- [Playable pilot lessons and checks](docs/ITERATION_9_PILOT_LESSONS.md)
 - [Pilot recruitment and feedback protocol](docs/PILOT_RECRUITMENT.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
@@ -33,6 +35,9 @@ and agents. Read them before changing the product or code:
 ## Implemented vertical slice
 
 - A six-node learning path with 54 original exercises.
+- Three additional playable pilot lessons in Learn: hard 12, soft 18, and
+  Hi-Lo cancellation. Each has theory, two unscored introductions, five practice
+  tasks, five independent tasks, correction, resume, and an idempotent XP result.
 - Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
@@ -46,7 +51,8 @@ and agents. Read them before changing the product or code:
 - Spaced-review state plus a Quick Review session of up to ten due or weak exercises.
 - Firebase Analytics and Crashlytics behind store- and vendor-independent
   gateways, with separate consent choices and collection disabled by default (zero advertising IDs).
-- Comprehensive test suite: 116 tests with strict coverage gates (`domain ≥ 95%`).
+- Domain, persistence, layout, and UI tests with strict coverage gates
+  (`domain ≥ 95%`), plus device integration routes.
 
 The approved course redesign targets 26 Free and 32 Pro lessons, delivered in
 70 individually verified, committed, and pushed iterations. The first milestone

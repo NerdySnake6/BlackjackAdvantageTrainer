@@ -9,6 +9,75 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get pilotTitle => 'Three game lessons · pilot';
+
+  @override
+  String get pilotWarmup => 'Introduction · unscored';
+
+  @override
+  String get pilotPractice => 'Practice · first answers count';
+
+  @override
+  String get pilotIndependent => 'Independent practice · no hints';
+
+  @override
+  String get pilotHint => 'Show hint';
+
+  @override
+  String get pilotCorrectTask =>
+      'Try the correct answer on these same cards to continue. Your first answer stays recorded.';
+
+  @override
+  String get pilotDoubleAvailable =>
+      'Double is available on this two-card hand.';
+
+  @override
+  String get pilotDoubleUnavailable => 'Double is unavailable for this hand.';
+
+  @override
+  String get pilotResultNote =>
+      '80% first answers passes this lesson. Hints are tracked separately; this fixed practice is not a mastery certificate.';
+
+  @override
+  String get pilotSaveFailed =>
+      'Could not save. Your last change was not applied. Try the action again before leaving.';
+
+  @override
+  String get pilotIncompatible =>
+      'This saved lesson cannot be resumed with this content. Restart only this lesson; your XP and other progress will remain.';
+
+  @override
+  String get pilotDecrease => 'Decrease count';
+
+  @override
+  String get pilotIncrease => 'Increase count';
+
+  @override
+  String pilotStartingCount(int count) {
+    return 'Starting RC: $count';
+  }
+
+  @override
+  String pilotUnassisted(int count) {
+    return 'Without hints: $count/10';
+  }
+
+  @override
+  String pilotStars(int count) {
+    return 'Stars: $count/3';
+  }
+
+  @override
+  String pilotReward(int count) {
+    return 'Earned: $count XP';
+  }
+
+  @override
+  String pilotSelected(String answer) {
+    return 'Your first answer: $answer';
+  }
+
+  @override
   String get appTitle => 'Blackjack Advantage';
 
   @override

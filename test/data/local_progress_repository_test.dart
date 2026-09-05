@@ -46,6 +46,19 @@ void main() {
     expect(await storage.getString('learning_progress_v1'), isNull);
     expect(await storage.getString('learning_progress_corrupt_v1'), corrupt);
   });
+
+  test('a damaged pilot entry does not reset legacy progress or XP', () async {
+    for (final pilotData in ['{"hard-12":null}', 'false']) {
+      final storage = _MemoryProgressStorage({
+        'learning_progress_v1':
+            '{"xp":999,"languageCode":"ru","pilotSessions":$pilotData}',
+      });
+      final saved = await LocalProgressRepository.withStorage(storage).load();
+      expect(saved.xp, 999);
+      expect(saved.languageCode, 'ru');
+      expect(await storage.getString('learning_progress_corrupt_v1'), isNull);
+    }
+  });
 }
 
 class _MemoryProgressStorage implements ProgressStorage {
