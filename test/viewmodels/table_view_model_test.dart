@@ -61,6 +61,44 @@ void main() {
     expect(viewModel.decisionFeedback!.isCorrect, isFalse);
   });
 
+  testWidgets('soft 18 after a hit accepts stand as correct strategy', (
+    tester,
+  ) async {
+    final decisionResults = <bool>[];
+    final viewModel = TableViewModel(
+      engine: _scriptedEngine([
+        CardRank.ace,
+        CardRank.six,
+        CardRank.two,
+        CardRank.ten,
+        CardRank.five,
+        CardRank.ten,
+      ]),
+      onEvent: (name, parameters) {
+        if (name == 'strategy_decision') {
+          decisionResults.add(parameters['is_correct']! as bool);
+        }
+      },
+    );
+    addTearDown(viewModel.dispose);
+
+    viewModel.startRound();
+    await tester.pump(const Duration(seconds: 2));
+    viewModel.applyAction(PlayerAction.hit);
+
+    expect(viewModel.engine.activeHand!.hand.cards, hasLength(3));
+    expect(
+      viewModel.engine.availableActions,
+      isNot(contains(PlayerAction.doubleDown)),
+    );
+    viewModel.dismissDecisionFeedback();
+    viewModel.applyAction(PlayerAction.stand);
+
+    expect(viewModel.decisionFeedback, isNull);
+    expect(decisionResults, [false, true]);
+    expect(viewModel.engine.phase, RoundPhase.complete);
+  });
+
   testWidgets('practice mode checks count after every completed round', (
     tester,
   ) async {

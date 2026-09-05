@@ -134,3 +134,9 @@ Pro: сначала проверка интереса у минимум деся
 Результат: синхронизированы README, PROJECT_CONTEXT, ARCHITECTURE и DEVELOPMENT_SETUP; сохранены все 70 итераций, ограничения и gates. Актуализированы EN/RU, Android-first, статус beta и границы Learn. Новый курс ещё не реализован; следующая итерация — soft 18 fallback.
 
 Проверка: документационные изменения сверены с текущим кодом и утверждённым планом; `git diff --check` и проверка относительных ссылок выполняются перед commit. Flutter/runtime в этой итерации не изменяются, поэтому повторная сборка не требуется. Commit/push подтверждаются Git-историей, а не этим текстом.
+
+### Итерация 2 — soft 18 без Double
+
+Результат: soft 18 против 3–6 при недоступном Double рекомендует Stand, сохраняя существующий reason и public API. Добавлены 16 независимых reference-сценариев и один сценарий через TableViewModel. Подробное основание и границы проверки — [STRATEGY_VALIDATION.md](STRATEGY_VALIDATION.md).
+
+Проверка 2026-09-05: до исправления 12 новых regression-сценариев упали с Hit вместо Stand; после — `dart format` без изменений, `flutter analyze` без замечаний, все 133 теста прошли. `flutter build apk --debug` и `flutter build ios --debug --no-codesign` успешны. Android выдаёт предупреждения о KGP/native access/SDK XML, но build завершён; SDK и плагины не обновлялись. Публикация iOS и device signing не выполнялись. Следующая итерация — полная матрица ограничений действий.

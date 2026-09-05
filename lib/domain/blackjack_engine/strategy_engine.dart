@@ -103,6 +103,16 @@ class StrategyEngine {
             PlayerAction.stand => StrategyReason.standHardTotal,
             _ => StrategyReason.hitHardTotal,
           };
+    // Soft 18 uses double-or-stand, unlike the other double-or-hit totals.
+    if (evaluation.isSoft &&
+        evaluation.total == 18 &&
+        preferred == PlayerAction.doubleDown &&
+        !availableActions.contains(PlayerAction.doubleDown)) {
+      return const StrategyRecommendation(
+        action: PlayerAction.stand,
+        reason: StrategyReason.unavailableActionFallback,
+      );
+    }
     return _recommendAvailable(preferred, availableActions, reason);
   }
 

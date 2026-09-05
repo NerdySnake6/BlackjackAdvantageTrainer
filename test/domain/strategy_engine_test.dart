@@ -102,6 +102,51 @@ void main() {
       );
     });
 
+    // Independent S17 reference: Wizard of Odds, 4–8 deck text strategy,
+    // Double then Hit/Stand sections, checked 2026-09-05:
+    // https://wizardofodds.com/games/blackjack/strategy/4-decks/
+    group('soft 18 double-or-stand', () {
+      for (final dealer in [
+        CardRank.three,
+        CardRank.four,
+        CardRank.five,
+        CardRank.six,
+      ]) {
+        test('doubles against ${dealer.name} when available', () {
+          final recommendation = strategy.recommendWithReason(
+            hand: BlackjackHand([_card(CardRank.ace), _card(CardRank.seven)]),
+            dealerUpCard: _card(dealer),
+            rules: GameRulesProfile.standard,
+            availableActions: allActions,
+          );
+
+          expect(recommendation.action, PlayerAction.doubleDown);
+          expect(recommendation.reason, StrategyReason.doubleSoftTotal);
+        });
+
+        for (final ranks in [
+          [CardRank.ace, CardRank.seven],
+          [CardRank.ace, CardRank.two, CardRank.five],
+          [CardRank.ace, CardRank.ace, CardRank.six],
+        ]) {
+          test('stands $ranks against ${dealer.name} without double', () {
+            final recommendation = strategy.recommendWithReason(
+              hand: BlackjackHand(ranks.map(_card)),
+              dealerUpCard: _card(dealer),
+              rules: GameRulesProfile.standard,
+              availableActions: {PlayerAction.hit, PlayerAction.stand},
+            );
+
+            expect(recommendation.action, PlayerAction.stand);
+            expect(
+              recommendation.reason,
+              StrategyReason.unavailableActionFallback,
+            );
+          });
+        }
+      }
+    });
+
     test('splits eights and stands on paired tens', () {
       expect(
         action([CardRank.eight, CardRank.eight], CardRank.ten),
