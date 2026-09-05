@@ -23,6 +23,7 @@ and agents. Read them before changing the product or code:
 - [Product context and durable decisions](docs/PROJECT_CONTEXT.md)
 - [Architecture and implementation status](docs/ARCHITECTURE.md)
 - [Approved course roadmap and iteration gates](docs/COURSE_ROADMAP.md)
+- [Course skill and material map](docs/COURSE_SKILL_MAP.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 

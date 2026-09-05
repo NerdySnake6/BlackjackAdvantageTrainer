@@ -1,0 +1,755 @@
+{
+  "schemaVersion": 1,
+  "status": "approved-plan-not-production-content",
+  "ruleProfileId": "standard_6d_s17_das_ls_peek_3to2",
+  "sourceRegistry": {
+    "product-contract": {
+      "location": "docs/PROJECT_CONTEXT.md",
+      "status": "canonical"
+    },
+    "course-roadmap": {
+      "location": "docs/COURSE_ROADMAP.md",
+      "status": "canonical"
+    },
+    "strategy-validation": {
+      "location": "docs/STRATEGY_VALIDATION.md",
+      "status": "verified-reference"
+    },
+    "rules-reference": {
+      "location": "https://wizardofodds.com/games/blackjack/basics/",
+      "status": "reference-checked-2026-09-05"
+    },
+    "strategy-reference": {
+      "location": "https://wizardofodds.com/games/blackjack/strategy/4-decks/",
+      "status": "reference-checked-2026-09-05"
+    },
+    "hi-lo-reference": {
+      "location": "https://wizardofodds.com/games/blackjack/card-counting/high-low/",
+      "status": "reference-identified"
+    },
+    "probability-reference": {
+      "location": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/",
+      "status": "reference-identified"
+    },
+    "risk-reference": {
+      "location": "https://wizardofodds.com/games/blackjack/risk-of-ruin/",
+      "status": "reference-checked-2026-09-05-model-match-required"
+    },
+    "rule-impact-reference": {
+      "location": "https://wizardofodds.com/games/blackjack/rule-variations/",
+      "status": "reference-checked-2026-09-05"
+    },
+    "solver-review-gate": {
+      "location": "docs/COURSE_ROADMAP.md#итерации-pro",
+      "status": "required-before-production"
+    },
+    "expert-review-gate": {
+      "location": "docs/PROJECT_CONTEXT.md#математические-и-qa-инварианты",
+      "status": "required-before-production"
+    },
+    "pilot-evidence-gate": {
+      "location": "docs/COURSE_ROADMAP.md#ближайший-выпуск-и-пользовательские-gates",
+      "status": "required-before-scale-up"
+    }
+  },
+  "sections": [
+    {
+      "id": "free-foundations",
+      "access": "free",
+      "lessons": [
+        {
+          "id": "quick-start",
+          "skillId": "foundation.quick_start",
+          "prerequisiteLessonIds": [],
+          "placementMayBypass": true,
+          "outcome": "Собрать законченную руку и объяснить цель без предположения, что 21 гарантирует победу.",
+          "misconceptions": ["Нужно всегда добирать до 21", "Любые 21 очко считаются blackjack"],
+          "anchorExample": "10+6 против 10: игрок выбирает между ещё одной картой и остановкой, не оценивая исход как гарантию.",
+          "sourceRefs": ["product-contract", "rules-reference"],
+          "transferCheck": "На пяти новых раздачах определить цель, bust и отличие natural blackjack от многокарточных 21."
+        },
+        {
+          "id": "card-values",
+          "skillId": "foundation.card_values",
+          "prerequisiteLessonIds": [],
+          "placementMayBypass": true,
+          "outcome": "Без подсказки вычислять сумму руки с числовыми картами, картинками и тузами.",
+          "misconceptions": ["Картинки имеют разные значения", "Туз всегда равен 11"],
+          "anchorExample": "A+7+9 считается как 17, потому что туз меняет значение с 11 на 1.",
+          "sourceRefs": ["rules-reference"],
+          "transferCheck": "Вычислить десять ранее не показанных рук, включая несколько тузов и переход через 21."
+        },
+        {
+          "id": "hard-and-soft",
+          "skillId": "foundation.hand_types",
+          "prerequisiteLessonIds": ["card-values"],
+          "placementMayBypass": true,
+          "outcome": "Различать hard и soft total и пересчитывать тип руки после каждой новой карты.",
+          "misconceptions": ["Любая рука с тузом мягкая", "Тип руки не меняется после Hit"],
+          "anchorExample": "A+6 — soft 17; после 10 та же рука становится hard 17.",
+          "sourceRefs": ["rules-reference"],
+          "transferCheck": "Классифицировать восемь новых последовательностей до и после добора карты."
+        },
+        {
+          "id": "player-actions",
+          "skillId": "foundation.actions",
+          "prerequisiteLessonIds": ["quick-start"],
+          "placementMayBypass": true,
+          "outcome": "Связывать Hit, Stand, Double, Split и Surrender с их legal-action ограничениями.",
+          "misconceptions": ["Double доступен после любого числа карт", "Surrender доступен после Split"],
+          "anchorExample": "После Hit на 9+2 Double и Surrender исчезают; остаются Hit и Stand.",
+          "sourceRefs": ["rules-reference", "strategy-validation"],
+          "transferCheck": "Для шести новых состояний назвать полный набор доступных действий и причину каждого ограничения."
+        }
+      ]
+    },
+    {
+      "id": "free-basic-strategy",
+      "access": "free",
+      "lessons": [
+        {
+          "id": "first-strategy",
+          "skillId": "strategy.first_decisions",
+          "prerequisiteLessonIds": ["hard-and-soft", "player-actions"],
+          "placementMayBypass": true,
+          "outcome": "Принимать первые базовые решения по своей сумме и открытой карте дилера, не ориентируясь на прошлый исход.",
+          "misconceptions": ["Прошлая победа доказывает правильность действия", "Нужно учитывать только свою руку"],
+          "anchorExample": "Hard 17 остаётся против 6 и против 10, хотя ожидаемые исходы различаются.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить десять новых hard/soft ситуаций с перемешанными картами дилера и объяснить используемый признак."
+        },
+        {
+          "id": "dealer-upcard",
+          "skillId": "strategy.dealer_upcard",
+          "prerequisiteLessonIds": ["first-strategy"],
+          "placementMayBypass": false,
+          "outcome": "Группировать открытые карты дилера по давлению на решение, не превращая группы в абсолютное правило.",
+          "misconceptions": ["У дилера всегда слабые 2–6", "Против сильной карты всегда нужно Hit"],
+          "anchorExample": "Hard 12: Stand против 4, но Hit против 2 — соседние низкие карты дают разные решения.",
+          "sourceRefs": ["strategy-reference"],
+          "transferCheck": "На новых руках определить, где смена dealer up-card меняет действие, и назвать исключение."
+        },
+        {
+          "id": "hard-doubles",
+          "skillId": "strategy.hard_doubles",
+          "prerequisiteLessonIds": ["dealer-upcard"],
+          "placementMayBypass": false,
+          "outcome": "Выбирать Double для hard 9–11 по карте дилера и Hit, когда Double недоступен.",
+          "misconceptions": ["Любые 9–11 нужно удваивать", "После недоступного Double следует Stand"],
+          "anchorExample": "5+6 против 6 — Double на первых двух картах; 2+3+6 против 6 — Hit.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить новые двух- и многокарточные hard 9–11 с одинаковыми totals."
+        },
+        {
+          "id": "hard-12",
+          "skillId": "strategy.hard_12",
+          "prerequisiteLessonIds": ["dealer-upcard"],
+          "placementMayBypass": false,
+          "outcome": "Без подсказки применять границу hard 12: Stand против 4–6, иначе Hit.",
+          "misconceptions": ["Hard 12 всегда слабая рука для Hit", "Любая низкая карта дилера означает Stand"],
+          "anchorExample": "10+2 против 3 — Hit, а против 4 — Stand.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Дать 10 последовательных правильных ответов на новых представлениях hard 12 со всеми dealer ranks."
+        },
+        {
+          "id": "hard-13-16",
+          "skillId": "strategy.hard_13_16",
+          "prerequisiteLessonIds": ["hard-12"],
+          "placementMayBypass": false,
+          "outcome": "Решать hard 13–16 против 2–A и отличать обычное действие от Surrender.",
+          "misconceptions": ["На 16 всегда нужно Stand", "Surrender означает признание неправильной стратегии"],
+          "anchorExample": "Hard 16 против 6 — Stand; против 10 на исходных двух картах — Surrender.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить смешанный набор новых hard 13–16, включая многокарточные 15/16 без Surrender."
+        },
+        {
+          "id": "soft-13-17",
+          "skillId": "strategy.soft_13_17",
+          "prerequisiteLessonIds": ["hard-doubles", "hard-and-soft"],
+          "placementMayBypass": false,
+          "outcome": "Применять Double-or-Hit для soft 13–17 с учётом доступности Double.",
+          "misconceptions": ["Soft hand нельзя перебрать", "Soft 17 достаточно силён для Stand"],
+          "anchorExample": "A+6 против 4 — Double; A+2+4 против 4 — Hit.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить новые soft 13–17 в двух- и многокарточном виде без подсказки по действию."
+        },
+        {
+          "id": "soft-18",
+          "skillId": "strategy.soft_18",
+          "prerequisiteLessonIds": ["soft-13-17"],
+          "placementMayBypass": false,
+          "outcome": "Выбирать между Double, Stand и Hit для soft 18 и правильно делать fallback без Double.",
+          "misconceptions": ["Soft 18 всегда Stand", "Любой недоступный Double превращается в Hit"],
+          "anchorExample": "A+7 против 6 — Double; A+2+5 против 6 — Stand; против 9 — Hit.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить новые soft 18 против всех dealer ranks в представлениях с двумя и тремя картами."
+        },
+        {
+          "id": "pairs-core",
+          "skillId": "strategy.pairs_core",
+          "prerequisiteLessonIds": ["hard-13-16", "soft-18"],
+          "placementMayBypass": false,
+          "outcome": "Применять базовые решения для A+A, 8+8, 9+9, 10-value pairs и не путать Split с целью получить две сильные суммы сразу.",
+          "misconceptions": ["Любую пару нужно Split", "10 и картинка не образуют pair-state"],
+          "anchorExample": "8+8 против 10 — Split, тогда как 10+K против 6 — Stand.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить новые пары с разными мастями и ten-value ranks, затем разыграть одну руку после Split."
+        },
+        {
+          "id": "pairs-das",
+          "skillId": "strategy.pairs_das",
+          "prerequisiteLessonIds": ["pairs-core", "hard-doubles"],
+          "placementMayBypass": false,
+          "outcome": "Решать DAS-зависимые пары и использовать Double на полученной после Split руке.",
+          "misconceptions": ["DAS меняет только размер ставки", "4+4 никогда не Split"],
+          "anchorExample": "4+4 против 5 — Split при DAS; полученные 4+5 против 6 — Double.",
+          "sourceRefs": ["strategy-reference", "strategy-validation"],
+          "transferCheck": "Решить новые 2+2, 3+3, 4+4 и 6+6, затем выбрать действие после раздачи второй карты."
+        },
+        {
+          "id": "unavailable-actions-surrender",
+          "skillId": "strategy.unavailable_actions",
+          "prerequisiteLessonIds": ["pairs-das", "hard-13-16"],
+          "placementMayBypass": false,
+          "outcome": "Переходить к проверенному fallback при недоступных Split, Double или late Surrender.",
+          "misconceptions": ["Таблица применима без учёта legal actions", "8+8 нельзя сдать ни при каких условиях"],
+          "anchorExample": "8+8 против 10: Split при доступности, Surrender при запрете Split, иначе Hit.",
+          "sourceRefs": ["strategy-validation", "rules-reference"],
+          "transferCheck": "Для десяти новых состояний сначала назвать недоступное предпочтительное действие, затем legal fallback."
+        },
+        {
+          "id": "mixed-basic-strategy",
+          "skillId": "strategy.mixed",
+          "prerequisiteLessonIds": ["unavailable-actions-surrender"],
+          "placementMayBypass": false,
+          "outcome": "Выбирать действие без подсказки о семействе руки и объяснять ключевой признак решения.",
+          "misconceptions": ["Название урока подскажет правило", "Успешный денежный исход подтверждает решение"],
+          "anchorExample": "В одной серии чередуются hard 12, soft 18, пара 8 и многокарточные hard 11.",
+          "sourceRefs": ["strategy-reference", "strategy-validation", "product-contract"],
+          "transferCheck": "Решить 20 новых перемешанных задач без метки типа руки и без повторения тренировочных seed."
+        },
+        {
+          "id": "basic-strategy-checkpoint",
+          "skillId": "strategy.checkpoint",
+          "prerequisiteLessonIds": ["mixed-basic-strategy"],
+          "placementMayBypass": false,
+          "outcome": "Подтвердить воспроизводимую basic strategy на всех семействах standard profile.",
+          "misconceptions": ["Лучший исторический процент равен mastery", "Исправленный после подсказки ответ считается первым"],
+          "anchorExample": "Серия продолжается только по первым самостоятельным ответам и сбрасывается при ошибке.",
+          "sourceRefs": ["product-contract", "strategy-validation", "pilot-evidence-gate"],
+          "transferCheck": "Дать 100 последовательных правильных первых ответов на новых задачах с полным покрытием семейств."
+        }
+      ]
+    },
+    {
+      "id": "free-math-reality",
+      "access": "free",
+      "lessons": [
+        {
+          "id": "house-edge-reality",
+          "skillId": "math.house_edge",
+          "prerequisiteLessonIds": ["first-strategy"],
+          "placementMayBypass": false,
+          "outcome": "Объяснять house edge как среднее ожидание при заданных правилах, а не прогноз отдельной сессии.",
+          "misconceptions": ["Низкий house edge гарантирует выигрыш", "House edge одинаков для любых правил и решений"],
+          "anchorExample": "Две короткие серии с одинаковыми правилами дают разные результаты при одном математическом ожидании.",
+          "sourceRefs": ["rules-reference", "probability-reference", "solver-review-gate"],
+          "transferCheck": "Выбрать корректное толкование house edge в пяти новых сценариях без расчёта денежного выигрыша."
+        },
+        {
+          "id": "expected-value",
+          "skillId": "math.expected_value",
+          "prerequisiteLessonIds": ["house-edge-reality"],
+          "placementMayBypass": false,
+          "outcome": "Сравнивать действия по expected value, отделяя качество решения от фактического исхода.",
+          "misconceptions": ["Победившее действие имело лучший EV", "Положительный EV означает выигрыш в каждом повторе"],
+          "anchorExample": "Правильный Stand проигрывает конкретную раздачу, но остаётся лучшим решением по среднему результату.",
+          "sourceRefs": ["probability-reference", "strategy-validation", "solver-review-gate"],
+          "transferCheck": "На новых распределениях выбрать действие с лучшим EV и объяснить, почему один исход его не опровергает."
+        },
+        {
+          "id": "variance",
+          "skillId": "math.variance",
+          "prerequisiteLessonIds": ["expected-value"],
+          "placementMayBypass": false,
+          "outcome": "Различать средний результат и разброс результатов на коротком и длинном горизонте.",
+          "misconceptions": ["Дисперсия исчезает при правильной игре", "Длинная проигрышная серия доказывает отрицательный EV"],
+          "anchorExample": "Три выборки одной модели имеют одинаковый EV, но заметно разные диапазоны исходов.",
+          "sourceRefs": ["probability-reference", "solver-review-gate"],
+          "transferCheck": "Сравнить новые распределения по EV и разбросу, не смешивая эти две характеристики."
+        },
+        {
+          "id": "advantage-play-conditions",
+          "skillId": "math.ap_conditions",
+          "prerequisiteLessonIds": ["variance"],
+          "placementMayBypass": false,
+          "outcome": "Объяснять, что математическое преимущество зависит от правил, точности, информации и риска, а не от обещания прибыли.",
+          "misconceptions": ["Счёт карт сам по себе гарантирует преимущество", "Любой положительный count означает безопасную ставку"],
+          "anchorExample": "Одинаковый running count при разном остатке колод не даёт одинаковой информации.",
+          "sourceRefs": ["product-contract", "hi-lo-reference", "probability-reference", "expert-review-gate"],
+          "transferCheck": "В новых описаниях отделить необходимые условия AP от ложных гарантий и недостающих данных."
+        }
+      ]
+    },
+    {
+      "id": "free-running-count",
+      "access": "free",
+      "lessons": [
+        {
+          "id": "hi-lo-intro",
+          "skillId": "counting.hi_lo_tags",
+          "prerequisiteLessonIds": [],
+          "placementMayBypass": true,
+          "outcome": "Без подсказки назначать каждой карте Hi-Lo tag −1, 0 или +1.",
+          "misconceptions": ["Туз имеет нулевой tag", "Tag показывает очковую стоимость карты"],
+          "anchorExample": "5 даёт +1, 9 даёт 0, K даёт −1 независимо от позиции в раздаче.",
+          "sourceRefs": ["hi-lo-reference"],
+          "transferCheck": "Правильно классифицировать 30 новых случайных карт без группировки по рангу."
+        },
+        {
+          "id": "hi-lo-cancellation",
+          "skillId": "counting.cancellation",
+          "prerequisiteLessonIds": ["hi-lo-intro"],
+          "placementMayBypass": false,
+          "outcome": "Мгновенно замечать взаимно компенсирующиеся low/high карты и сохранять running count.",
+          "misconceptions": ["Каждую карту обязательно считать отдельно", "Нейтральная пара всегда состоит из одинаковых ranks"],
+          "anchorExample": "5 и K дают 0; добавление 8 не меняет итог.",
+          "sourceRefs": ["hi-lo-reference", "pilot-evidence-gate"],
+          "transferCheck": "Сосчитать десять новых коротких последовательностей с другими порядками и отвлекающими нулевыми картами."
+        },
+        {
+          "id": "hi-lo-chunks",
+          "skillId": "counting.chunks",
+          "prerequisiteLessonIds": ["hi-lo-cancellation"],
+          "placementMayBypass": false,
+          "outcome": "Объединять 3–5 карт в chunks и обновлять count одним изменением без потери знака.",
+          "misconceptions": ["Chunk всегда должен давать ноль", "Порядок карт меняет сумму tags"],
+          "anchorExample": "2, 4, Q, A дают 0 как один chunk; добавленная 7 сохраняет 0.",
+          "sourceRefs": ["hi-lo-reference", "pilot-evidence-gate"],
+          "transferCheck": "Сосчитать новые chunks разного размера и объяснить сумму tags до объединения."
+        },
+        {
+          "id": "running-count-continuity",
+          "skillId": "counting.continuity",
+          "prerequisiteLessonIds": ["hi-lo-chunks"],
+          "placementMayBypass": false,
+          "outcome": "Продолжать running count между руками и восстанавливать его из известной контрольной точки.",
+          "misconceptions": ["Count сбрасывается после каждой раздачи", "Достаточно помнить только итог полной колоды"],
+          "anchorExample": "После первой руки RC +2; следующая начинается с +2, а не с нуля.",
+          "sourceRefs": ["hi-lo-reference", "product-contract"],
+          "transferCheck": "Продолжить три новые последовательности после скрытой паузы и одной явной контрольной точки."
+        },
+        {
+          "id": "running-count-checkpoints",
+          "skillId": "counting.checkpoints",
+          "prerequisiteLessonIds": ["running-count-continuity"],
+          "placementMayBypass": false,
+          "outcome": "Обнаруживать первую потерю count на промежуточных checkpoints и корректно начинать remediation.",
+          "misconceptions": ["Нулевой итог колоды доказывает отсутствие промежуточных ошибок", "Можно исправить финальный ответ угадыванием"],
+          "anchorExample": "RC неверен после 16-й карты, хотя случайная последующая ошибка возвращает финал к нулю.",
+          "sourceRefs": ["product-contract", "hi-lo-reference"],
+          "transferCheck": "Пройти новую колоду с checkpoints каждые восемь карт без единого неверного промежуточного значения."
+        },
+        {
+          "id": "running-count-speed",
+          "skillId": "counting.speed",
+          "prerequisiteLessonIds": ["running-count-checkpoints"],
+          "placementMayBypass": false,
+          "outcome": "Сохранять точный running count при постепенном сокращении времени, не жертвуя точностью ради рекорда.",
+          "misconceptions": ["Быстрый неточный count лучше медленного точного", "Одна удачная быстрая колода подтверждает навык"],
+          "anchorExample": "Переход к 45 секундам разрешается только после точной полной колоды на 60 секундах.",
+          "sourceRefs": ["product-contract", "pilot-evidence-gate", "expert-review-gate"],
+          "transferCheck": "Последовательно пройти три новые полные колоды без ошибок на 60, 45 и 30 секундах."
+        }
+      ]
+    },
+    {
+      "id": "pro-deck-estimation",
+      "access": "pro",
+      "lessons": [
+        {
+          "id": "deck-estimation-concept",
+          "skillId": "deck_estimation.concept",
+          "prerequisiteLessonIds": ["running-count-continuity"],
+          "placementMayBypass": false,
+          "outcome": "Различать сыгранные карты, визуальную стопку и фактический остаток колод.",
+          "misconceptions": ["Высота discard tray равна числу оставшихся колод", "Остаток можно вывести только из running count"],
+          "anchorExample": "Из 6 колод сыграно 2,5: остаток 3,5 независимо от текущего RC.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Для новых сцен назвать played и remaining decks отдельно до ввода оценки."
+        },
+        {
+          "id": "deck-estimation-whole",
+          "skillId": "deck_estimation.whole",
+          "prerequisiteLessonIds": ["deck-estimation-concept"],
+          "placementMayBypass": false,
+          "outcome": "Оценивать остаток с точностью до целой колоды по нескольким визуальным представлениям.",
+          "misconceptions": ["Положение ползунка можно запомнить", "Все колоды выглядят одинаково при любой перспективе"],
+          "anchorExample": "Сцена с 4 из 6 оставшимися колодами показывается с разной шириной и углом стопки.",
+          "sourceRefs": ["course-roadmap", "pilot-evidence-gate", "expert-review-gate"],
+          "transferCheck": "Оценить 20 новых сцен с изменёнными масштабом, перспективой и оформлением."
+        },
+        {
+          "id": "deck-estimation-half",
+          "skillId": "deck_estimation.half",
+          "prerequisiteLessonIds": ["deck-estimation-whole"],
+          "placementMayBypass": false,
+          "outcome": "Оценивать остаток с шагом половины колоды и видеть направление ошибки.",
+          "misconceptions": ["3,5 округляется всегда вверх", "Ошибка +0,5 и −0,5 одинаково влияет на TC"],
+          "anchorExample": "Истина 2,5 колоды, ответ 3: переоценка остатка на 0,5.",
+          "sourceRefs": ["course-roadmap", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "На 20 новых сценах удержать ошибку не больше 0,5 и классифицировать её знак."
+        },
+        {
+          "id": "deck-estimation-quarter",
+          "skillId": "deck_estimation.quarter",
+          "prerequisiteLessonIds": ["deck-estimation-half"],
+          "placementMayBypass": false,
+          "outcome": "Оценивать статичный и движущийся остаток с шагом четверти колоды.",
+          "misconceptions": ["Четверти можно угадывать по фиксированным пикселям", "Более точная цифра всегда более точная оценка"],
+          "anchorExample": "Истина 1,75 колоды показывается в двух визуально разных tray-сценах.",
+          "sourceRefs": ["course-roadmap", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Оценить новые движущиеся сцены без повторения калибровочных изображений."
+        },
+        {
+          "id": "deck-estimation-checkpoint",
+          "skillId": "deck_estimation.checkpoint",
+          "prerequisiteLessonIds": ["deck-estimation-quarter"],
+          "placementMayBypass": false,
+          "outcome": "Подтвердить несмещённую оценку остатка на разнообразных сценах.",
+          "misconceptions": ["Средняя ошибка скрывает постоянное завышение", "Лучший результат одной попытки равен mastery"],
+          "anchorExample": "Отчёт отдельно показывает долю попаданий и систематическое смещение оценки.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "На 30 новых сценах получить не менее 90% ответов в пределах ±0,25 колоды без систематического смещения."
+        }
+      ]
+    },
+    {
+      "id": "pro-true-count",
+      "access": "pro",
+      "lessons": [
+        {
+          "id": "true-count-concept",
+          "skillId": "true_count.concept",
+          "prerequisiteLessonIds": ["deck-estimation-half", "running-count-continuity"],
+          "placementMayBypass": false,
+          "outcome": "Объяснять TC как нормализацию RC на оценённый остаток колод и разделять источники ошибки.",
+          "misconceptions": ["RC и TC взаимозаменяемы", "Ошибка TC всегда является ошибкой деления"],
+          "anchorExample": "RC +6 при 3 колодах даёт исходное отношение +2 до применения утверждённой политики округления.",
+          "sourceRefs": ["hi-lo-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Для новых примеров отдельно назвать estimation, division и rounding step."
+        },
+        {
+          "id": "true-count-positive",
+          "skillId": "true_count.positive",
+          "prerequisiteLessonIds": ["true-count-concept"],
+          "placementMayBypass": false,
+          "outcome": "Точно вычислять положительный TC при разных RC и остатках.",
+          "misconceptions": ["Одинаковый RC означает одинаковый TC", "Положительный RC всегда даёт большой TC"],
+          "anchorExample": "RC +6 при 3 колодах и при 1,5 колоды даёт разные TC.",
+          "sourceRefs": ["hi-lo-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить 20 новых положительных примеров с целыми, половинами и четвертями остатка."
+        },
+        {
+          "id": "true-count-negative",
+          "skillId": "true_count.negative",
+          "prerequisiteLessonIds": ["true-count-positive"],
+          "placementMayBypass": false,
+          "outcome": "Применять утверждённую floor policy к отрицательным дробным TC без округления к нулю.",
+          "misconceptions": ["Floor отрицательного числа обрезает модуль", "−1,2 становится −1 при floor"],
+          "anchorExample": "После фиксации policy значение −1,2 обрабатывается как −2, а не как −1.",
+          "sourceRefs": ["course-roadmap", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить не менее 15 новых отрицательных пограничных примеров и объяснить направление округления."
+        },
+        {
+          "id": "true-count-speed",
+          "skillId": "true_count.speed",
+          "prerequisiteLessonIds": ["true-count-negative"],
+          "placementMayBypass": false,
+          "outcome": "Сохранять точность цепочки RC → decks remaining → TC при ограниченном времени.",
+          "misconceptions": ["Скорость компенсирует систематическое округление", "Coaching должен входить в время ответа"],
+          "anchorExample": "Таймер останавливается на разборе, а ускоряется только самостоятельное вычисление.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "pilot-evidence-gate"],
+          "transferCheck": "Решить новый смешанный набор положительных и отрицательных TC с точностью не ниже 95%."
+        },
+        {
+          "id": "true-count-checkpoint",
+          "skillId": "true_count.checkpoint",
+          "prerequisiteLessonIds": ["true-count-speed", "deck-estimation-checkpoint"],
+          "placementMayBypass": false,
+          "outcome": "Подтвердить воспроизводимый TC и диагностировать тип каждой ошибки.",
+          "misconceptions": ["Верный TC доказывает верную оценку остатка", "Можно исключить отрицательные RC из проверки"],
+          "anchorExample": "Отчёт разделяет ошибку остатка, деления и floor rounding.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить 100 новых вычислений, включая минимум 30 отрицательных RC, с точностью не ниже 95%."
+        }
+      ]
+    },
+    {
+      "id": "pro-playing-deviations",
+      "access": "pro",
+      "lessons": [
+        {
+          "id": "deviations-baseline",
+          "skillId": "deviations.baseline",
+          "prerequisiteLessonIds": ["basic-strategy-checkpoint", "true-count-checkpoint"],
+          "placementMayBypass": false,
+          "outcome": "Различать baseline basic strategy, индекс, направление порога и применимость к profile.",
+          "misconceptions": ["Deviation заменяет всю basic strategy", "Любой индекс применим к любому rules profile"],
+          "anchorExample": "Одна рука сохраняет baseline ниже порога и меняет действие только на проверенной границе.",
+          "sourceRefs": ["strategy-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "На новых below/equal/above примерах назвать baseline, условие изменения и profile."
+        },
+        {
+          "id": "deviations-stand-hit-1",
+          "skillId": "deviations.stand_hit_1",
+          "prerequisiteLessonIds": ["deviations-baseline"],
+          "placementMayBypass": false,
+          "outcome": "Применять первую проверенную группу Stand/Hit indices без угадывания по имени руки.",
+          "misconceptions": ["Более высокий TC всегда означает Stand", "Равенство индексу всегда трактуется одинаково"],
+          "anchorExample": "Для каждого утверждённого индекса сравниваются TC ниже, ровно и выше порога.",
+          "sourceRefs": ["solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить новые пограничные задачи для каждого индекса первой группы с объяснением направления."
+        },
+        {
+          "id": "deviations-stand-hit-2",
+          "skillId": "deviations.stand_hit_2",
+          "prerequisiteLessonIds": ["deviations-stand-hit-1"],
+          "placementMayBypass": false,
+          "outcome": "Различать несколько Stand/Hit indices и выбирать применимый без подсказки группы.",
+          "misconceptions": ["Все пороги имеют одно направление", "Можно запомнить только изменённое действие"],
+          "anchorExample": "В одной серии перемешаны сохранение baseline и смена действия по разным индексам.",
+          "sourceRefs": ["solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить смешанный новый набор обеих групп без названий индексов на экране."
+        },
+        {
+          "id": "deviations-double",
+          "skillId": "deviations.double",
+          "prerequisiteLessonIds": ["deviations-stand-hit-2"],
+          "placementMayBypass": false,
+          "outcome": "Применять проверенные Double deviations только при legal Double и правильном fallback.",
+          "misconceptions": ["Deviation делает Double доступным после Hit", "Недоступный Double означает Stand"],
+          "anchorExample": "Одинаковый total и TC: двухкарточная рука допускает Double, многокарточная использует fallback.",
+          "sourceRefs": ["strategy-validation", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить новые пограничные задачи попарно с доступным и недоступным Double."
+        },
+        {
+          "id": "deviations-split",
+          "skillId": "deviations.split",
+          "prerequisiteLessonIds": ["deviations-double", "pairs-das"],
+          "placementMayBypass": false,
+          "outcome": "Применять проверенные Split deviations с учётом DAS, лимита рук и fallback hard total.",
+          "misconceptions": ["Индекс отменяет лимит resplit", "Пара остаётся pair-strategy при недоступном Split"],
+          "anchorExample": "При достигнутом лимите рук пара разыгрывается как hard total, даже если TC пересёк Split index.",
+          "sourceRefs": ["strategy-validation", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить новые задачи с доступным Split и теми же состояниями при достигнутом лимите."
+        },
+        {
+          "id": "deviations-insurance",
+          "skillId": "deviations.insurance",
+          "prerequisiteLessonIds": ["deviations-baseline"],
+          "placementMayBypass": false,
+          "outcome": "Рассматривать Insurance как отдельное проверенное EV-решение, а не защиту хорошей руки.",
+          "misconceptions": ["Insurance зависит от силы руки игрока", "Even money всегда безопасен"],
+          "anchorExample": "Две разные руки против A получают одинаковое insurance-решение при одном проверенном TC.",
+          "sourceRefs": ["solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить 20 новых below/equal/above задач у проверенного insurance threshold."
+        },
+        {
+          "id": "deviations-surrender",
+          "skillId": "deviations.surrender",
+          "prerequisiteLessonIds": ["deviations-double", "unavailable-actions-surrender"],
+          "placementMayBypass": false,
+          "outcome": "Применять проверенные Surrender deviations только после peek и на исходных двух картах.",
+          "misconceptions": ["Index разрешает Surrender после Hit", "Early и late surrender используют одинаковую границу"],
+          "anchorExample": "Одинаковые total/TC дают Surrender на двух картах и legal fallback после Hit.",
+          "sourceRefs": ["strategy-validation", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить новые пограничные задачи с изменённой доступностью Surrender и неизменным TC."
+        },
+        {
+          "id": "deviations-checkpoint",
+          "skillId": "deviations.checkpoint",
+          "prerequisiteLessonIds": ["deviations-split", "deviations-insurance", "deviations-surrender"],
+          "placementMayBypass": false,
+          "outcome": "Подтвердить ключевые deviations на новых задачах с baseline, index, boundary и legal actions.",
+          "misconceptions": ["Знание названия I18/Fab4 подтверждает навык", "Исправление после подсказки считается самостоятельным"],
+          "anchorExample": "Checkpoint перемешивает типы действий и не показывает название deviation до ответа.",
+          "sourceRefs": ["solver-review-gate", "expert-review-gate", "product-contract"],
+          "transferCheck": "Дать 100% первых ответов по утверждённым ключевым deviations на новом независимом наборе."
+        }
+      ]
+    },
+    {
+      "id": "pro-betting-risk",
+      "access": "pro",
+      "lessons": [
+        {
+          "id": "edge-and-units",
+          "skillId": "risk.edge_units",
+          "prerequisiteLessonIds": ["true-count-concept", "expected-value"],
+          "placementMayBypass": false,
+          "outcome": "Связывать условную оценку edge с абстрактными betting units без представления units как денег приложения.",
+          "misconceptions": ["Unit имеет фиксированную денежную стоимость", "Положительный edge устраняет риск"],
+          "anchorExample": "Один и тот же план выражается в units без покупки, вывода или сохранения баланса.",
+          "sourceRefs": ["product-contract", "probability-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Для новых планов перевести относительные размеры в units и назвать недостающие предпосылки edge."
+        },
+        {
+          "id": "betting-spreads",
+          "skillId": "risk.betting_spreads",
+          "prerequisiteLessonIds": ["edge-and-units"],
+          "placementMayBypass": false,
+          "outcome": "Сравнивать конкретные spreads одновременно по EV, разбросу и предпосылкам без универсального победителя.",
+          "misconceptions": ["Больший spread всегда лучше", "Spread можно оценить без distribution и правил"],
+          "anchorExample": "Два плана имеют разный EV и variance; выбор зависит от заданного риска и горизонта.",
+          "sourceRefs": ["probability-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Сравнить новые пары spreads, изменяя по одному параметру и не выдавая рекомендацию без условий."
+        },
+        {
+          "id": "variance-downswings",
+          "skillId": "risk.variance_downswings",
+          "prerequisiteLessonIds": ["betting-spreads", "variance"],
+          "placementMayBypass": false,
+          "outcome": "Интерпретировать downswings как возможный результат положительного EV на конечном горизонте.",
+          "misconceptions": ["Просадка доказывает, что edge исчез", "Положительный EV ограничивает максимальную потерю"],
+          "anchorExample": "Симуляции одного плана показывают прибыльные и убыточные траектории при одинаковых предпосылках.",
+          "sourceRefs": ["probability-reference", "risk-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Интерпретировать новые распределения и найти утверждения, которые путают EV с гарантией."
+        },
+        {
+          "id": "bankroll-planning",
+          "skillId": "risk.bankroll_planning",
+          "prerequisiteLessonIds": ["variance-downswings"],
+          "placementMayBypass": false,
+          "outcome": "Строить учебный план из units, горизонта, stop rules и пополнения, отделяя его от постоянного денежного баланса.",
+          "misconceptions": ["Размер bankroll имеет смысл без unit и горизонта", "Пополнение не влияет на определение риска"],
+          "anchorExample": "100 units на 500 рук и 100 units без горизонта — разные задачи риска.",
+          "sourceRefs": ["risk-reference", "product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Для новых сценариев перечислить все параметры до сравнения риска и отметить отсутствующие."
+        },
+        {
+          "id": "risk-of-ruin",
+          "skillId": "risk.ruin",
+          "prerequisiteLessonIds": ["bankroll-planning"],
+          "placementMayBypass": false,
+          "outcome": "Различать session risk, finite-horizon ruin и долгосрочный ruin при явно заданной модели.",
+          "misconceptions": ["Ноль ruin в конечной симуляции доказывает нулевой риск", "Любая таблица RoR применима к любым rules"],
+          "anchorExample": "Reference-таблица с иными правилами служит методом сравнения, но её числа нельзя переносить в текущий profile.",
+          "sourceRefs": ["risk-reference", "probability-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "На новых моделях выбрать корректное определение риска и отклонить выводы с несовпадающими предпосылками."
+        }
+      ]
+    },
+    {
+      "id": "pro-game-selection",
+      "access": "pro",
+      "lessons": [
+        {
+          "id": "rule-impact",
+          "skillId": "game_selection.rule_impact",
+          "prerequisiteLessonIds": ["house-edge-reality", "risk-of-ruin"],
+          "placementMayBypass": false,
+          "outcome": "Сравнивать влияние конкретных rules без переноса strategy между непроверенными profiles.",
+          "misconceptions": ["Число колод полностью определяет качество правил", "S17/H17 меняет только действия дилера, но не strategy"],
+          "anchorExample": "Два вымышленных стола отличаются одним правилом; вывод ограничен этим сравнением.",
+          "sourceRefs": ["rule-impact-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "В новых парах условий изменить одно правило и назвать, какие данные нужно перепроверить."
+        },
+        {
+          "id": "penetration",
+          "skillId": "game_selection.penetration",
+          "prerequisiteLessonIds": ["rule-impact", "deck-estimation-concept"],
+          "placementMayBypass": false,
+          "outcome": "Объяснять penetration как долю сыгранного shoe и связывать её с доступной информацией без гарантии edge.",
+          "misconceptions": ["75% penetration означает 75% оставшихся карт", "Более глубокая penetration гарантирует прибыль"],
+          "anchorExample": "75% шестиколодного shoe означает примерно 234 сыгранные карты и около 78 оставшихся.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "На новых deck counts переводить penetration в played/remaining cards и формулировать ограниченный вывод."
+        },
+        {
+          "id": "conditions-combined",
+          "skillId": "game_selection.conditions",
+          "prerequisiteLessonIds": ["penetration"],
+          "placementMayBypass": false,
+          "outcome": "Сравнивать совокупность rules, penetration и model assumptions внутри вымышленных сценариев.",
+          "misconceptions": ["Один хороший параметр компенсирует все остальные", "Можно ранжировать условия без общей модели"],
+          "anchorExample": "S17 с меньшей penetration сравнивается с H17 и большей penetration только через проверенную модель.",
+          "sourceRefs": ["rule-impact-reference", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Обосновать выбор в новых вымышленных условиях и явно назвать неопределённости."
+        },
+        {
+          "id": "game-selection-checkpoint",
+          "skillId": "game_selection.checkpoint",
+          "prerequisiteLessonIds": ["conditions-combined"],
+          "placementMayBypass": false,
+          "outcome": "Подтвердить сравнение условий через параметры без поиска реального казино или внешнего live-table ввода.",
+          "misconceptions": ["Checkpoint должен рекомендовать конкретное казино", "Любое итоговое число точно при неполных данных"],
+          "anchorExample": "Задача использует только вымышленные профили и просит объяснить выбор, а не найти место игры.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Решить новые вымышленные кейсы, отклоняя варианты с недостающими или непроверенными условиями."
+        }
+      ]
+    },
+    {
+      "id": "pro-full-shoe-certification",
+      "access": "pro",
+      "lessons": [
+        {
+          "id": "full-shoe-guided",
+          "skillId": "certification.guided",
+          "prerequisiteLessonIds": ["deviations-checkpoint", "game-selection-checkpoint"],
+          "placementMayBypass": false,
+          "outcome": "Совмещать strategy, RC, deck estimation, TC и deviations в одной shoe-сессии с немедленным coaching.",
+          "misconceptions": ["Каждый навык можно сбрасывать между руками", "Денежный итог определяет качество решений"],
+          "anchorExample": "После каждой ошибки Тренер сохраняет состояние shoe и объясняет только нарушенный навык.",
+          "sourceRefs": ["product-contract", "strategy-validation", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Завершить новую guided shoe без потери состояния между типами решений и восстановиться после coaching."
+        },
+        {
+          "id": "full-shoe-practice",
+          "skillId": "certification.practice",
+          "prerequisiteLessonIds": ["full-shoe-guided"],
+          "placementMayBypass": false,
+          "outcome": "Выполнять общую shoe-сессию с редкими checkpoints и разбором причин после блока.",
+          "misconceptions": ["Отсутствие мгновенной подсказки означает отсутствие ошибки", "Можно исправить RC задним числом без отметки"],
+          "anchorExample": "Ошибки сохраняются до checkpoint, затем отчёт разделяет strategy, RC, estimation и TC.",
+          "sourceRefs": ["product-contract", "pilot-evidence-gate", "expert-review-gate"],
+          "transferCheck": "Пройти новую practice shoe и по итоговому отчёту правильно назвать первичную причину каждой ошибки."
+        },
+        {
+          "id": "full-shoe-pressure",
+          "skillId": "certification.pressure",
+          "prerequisiteLessonIds": ["full-shoe-practice"],
+          "placementMayBypass": false,
+          "outcome": "Сохранять точность общей последовательности при контролируемом темпе и паузах вне измерения.",
+          "misconceptions": ["Pressure должен скрывать ошибки управления", "Coaching и background входят в время решения"],
+          "anchorExample": "Таймер идёт только во время самостоятельного решения и останавливается на explanation/background.",
+          "sourceRefs": ["product-contract", "pilot-evidence-gate"],
+          "transferCheck": "Пройти новую pressure shoe в заданном темпе без ухудшения обязательных accuracy thresholds."
+        },
+        {
+          "id": "full-shoe-exam",
+          "skillId": "certification.exam",
+          "prerequisiteLessonIds": ["full-shoe-pressure"],
+          "placementMayBypass": false,
+          "outcome": "Завершать самостоятельный Exam без раскрытия подробного разбора до конца сессии.",
+          "misconceptions": ["Exam можно проходить по немедленной обратной связи", "Случайная прибыль компенсирует ошибку навыка"],
+          "anchorExample": "Во время shoe фиксируются первые ответы, но причины и рекомендации раскрываются после завершения.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate"],
+          "transferCheck": "Завершить новую exam shoe без подсказок и воспроизвести решения на эквивалентном контрольном наборе."
+        },
+        {
+          "id": "full-shoe-certification",
+          "skillId": "certification.final",
+          "prerequisiteLessonIds": ["full-shoe-exam"],
+          "placementMayBypass": false,
+          "outcome": "Подтвердить внутренний стандарт mastery без заявления о гарантированном финансовом результате.",
+          "misconceptions": ["Сертификат обещает прибыль", "Лучший исторический score заменяет итоговую самостоятельную проверку"],
+          "anchorExample": "Итог требует 100% strategy и ключевых deviations, точный RC и не менее 95% TC независимо от units outcome.",
+          "sourceRefs": ["product-contract", "solver-review-gate", "expert-review-gate", "pilot-evidence-gate"],
+          "transferCheck": "Пройти новый независимый certification set по всем порогам; случайный денежный исход не участвует в оценке."
+        }
+      ]
+    }
+  ]
+}
