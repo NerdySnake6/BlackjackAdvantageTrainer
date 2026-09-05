@@ -25,6 +25,7 @@ and agents. Read them before changing the product or code:
 - [Approved course roadmap and iteration gates](docs/COURSE_ROADMAP.md)
 - [Course skill and material map](docs/COURSE_SKILL_MAP.md)
 - [Iteration 6 lesson packs](docs/ITERATION_6_LESSON_PACKS.md)
+- [Iteration 8 cancellation scene](lib/presentation/drill/cancellation_scene.dart)
 - [Pilot recruitment and feedback protocol](docs/PILOT_RECRUITMENT.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
