@@ -22,6 +22,7 @@ and agents. Read them before changing the product or code:
 
 - [Product context and durable decisions](docs/PROJECT_CONTEXT.md)
 - [Architecture and implementation status](docs/ARCHITECTURE.md)
+- [Approved course roadmap and iteration gates](docs/COURSE_ROADMAP.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 
@@ -43,9 +44,13 @@ and agents. Read them before changing the product or code:
   gateways, with separate consent choices and collection disabled by default (zero advertising IDs).
 - Comprehensive test suite: 116 tests with strict coverage gates (`domain ≥ 95%`).
 
-The rest of the 76-lesson commercial plan, real in-app purchases, additional
-validated rule profiles, and store submission are intentionally
-later stages. See the
+The approved course redesign targets 26 Free and 32 Pro lessons, delivered in
+70 individually verified, committed, and pushed iterations. The first milestone
+is three playable lessons and a target-audience pilot, not the entire catalog.
+Only Learn is redesigned; shared correctness fixes and compatibility adapters
+must preserve the other sections. Android is the release priority; iOS publication
+and real purchases are deferred. Additional profiles require independent validation.
+See the [course roadmap](docs/COURSE_ROADMAP.md) and the
 [closed-beta release checklist](docs/BETA_RELEASE.md).
 
 ## Privacy

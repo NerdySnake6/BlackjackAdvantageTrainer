@@ -1,6 +1,6 @@
 # Архитектура Blackjack Advantage Trainer
 
-Статус документа: каноническое описание структуры и roadmap на 2026-08-02. Продуктовые решения находятся в [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md), локальная среда — в [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md).
+Статус документа: каноническое описание текущей структуры и утверждённых границ изменений на 2026-09-05. Продуктовые решения находятся в [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md), последовательность работ — в [COURSE_ROADMAP.md](COURSE_ROADMAP.md), локальная среда — в [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md).
 
 ## Принципы и направление зависимостей
 
@@ -34,13 +34,13 @@ View отвечает за отображение и пользовательс�
 | --- | --- |
 | `lib/presentation/` | **Реализовано.** Views для onboarding/consent, learning path, lesson, Quick Review, count drill, Guided/Practice table и progress. |
 | `lib/viewmodels/` | **Реализовано.** `AppState`, `LessonViewModel`, `QuickReviewViewModel`, `CountDrillViewModel`, `TableViewModel`. |
-| `lib/data/` | **Реализовано.** Загрузка English content и локальное хранение прогресса. |
+| `lib/data/` | **Реализовано.** Загрузка locale-specific English/Russian content и локальное хранение прогресса. |
 | `lib/core/` | **Реализовано.** Контракты persistence, consent-aware analytics и crash-reporting boundaries. |
 | `lib/domain/blackjack_engine/` | **Реализовано.** Pure-Dart cards, hands, shoe, counting, strategy и round engine. |
 | `lib/domain/learning/` | **Частично реализовано.** Content/progress models, session scoring и базовый review schedule. |
 | `lib/domain/purchase/` | **Граница реализована.** Store API пока заменён `FakePurchaseGateway`. |
-| `assets/content/en/` | **Реализовано для прототипа.** Versioned English lessons, glossary и manifest. |
-| `lib/l10n/` | **Реализовано только для English.** ARB и generated localizations. |
+| `assets/content/en/`, `assets/content/ru/` | **Реализовано для прототипа.** Versioned lessons, glossary и manifest. |
+| `lib/l10n/` | **Реализовано для English/Russian.** ARB и generated localizations. |
 | `test/` | **Реализовано для vertical slice.** Domain, content и widget tests. |
 
 ## Blackjack domain
@@ -52,6 +52,7 @@ View отвечает за отображение и пользовательс�
 - `HandEvaluator` вычисляет total, soft/hard, bust и natural blackjack; состояние руки представляет `BlackjackHand`.
 - `StrategyEngine` рекомендует действие для единственного проверенного standard profile, возвращает `StrategyRecommendation` с локализуемым `StrategyReason` и сохраняет совместимую обёртку `recommend()`.
 - Полная таблица standard profile сверена с Wizard of Odds и независимо подтверждена публичной S17-таблицей Blackjack Apprenticeship 2026-09-02. Fixture хранит обе ссылки, дату и результат проверки; wording и графика источников не копировались.
+- Эта fixture проверяет предпочтительные действия при полном наборе доступных действий. Ограничения действий требуют отдельной матрицы. При аудите 2026-09-05 найден неверный fallback soft 18 против 3–6 без Double; исправление и расширение проверок — итерации 2–3.
 - `CountingEngine` ведёт running count, оценивает оставшиеся колоды и делегирует true-count conversion политике.
 - `TrueCountPolicy` — интерфейс политики округления; текущая `NearestWholeTrueCountPolicy` использует ближайшее целое. Поведение отрицательных значений должно оставаться явно протестированным.
 
@@ -62,7 +63,7 @@ View отвечает за отображение и пользовательс�
 ### Запланировано
 
 - независимая экспертная проверка blackjack-специалистом перед платными математическими заявлениями;
-- расширенные профили 1/2/6/8 decks, H17/S17, DAS, surrender и 3:2/6:5;
+- первым дополнительным пакетом курса будет независимо проверенный 6D H17/DAS/LS/peek/3:2; другие комбинации правил не активируются автоматически;
 - profile-specific restrictions для будущих проверенных профилей;
 - deviations, включая I18/Fab4, только после математической валидации;
 - отдельные session/report types для certification, deck estimation и full-shoe exams.
@@ -87,13 +88,27 @@ View отвечает за отображение и пользовательс�
 - `SessionScorer` для speed, accuracy, streaks ошибок и exam constraints, а не только доли правильных ответов;
 - Placement Test и формальные migration policies для будущих `contentVersion`.
 
+### Утверждённая граница игрового курса
+
+Сначала три законченных урока на двух игровых сценах с явным состоянием сессии; универсальные runtime и генераторы расширяются после пользовательского gate. Learn получает теорию Тренера, игровые миссии, объяснения выбранных ошибок, первые/подсказанные ответы и отдельное освоение навыка. Публичные интерфейсы остальных разделов сохраняются.
+
+Оценка игровой миссии использует фактическое число оцениваемых попыток, а не `LessonDefinition.exercises.length`. Адаптер сохраняет совместимые результаты для существующего Progress и экономику XP. Повторная обработка одной сессии не выдаёт награду повторно. Исторический лучший процент не подменяет самостоятельное освоение.
+
+При миграции допускается однократный сброс несовместимых учебных scores/sessions/review states с объяснением пользователю; XP, streak, language, experience и consent сохраняются. Stable IDs не переименовываются. Сессия хранит версию контента, порядок/seed, текущую фазу и первые ответы, включая подсказки.
+
+Quick Review сохраняет старый совместимый банк и существующий сценарий. Игровые и Pro-задания не добавляются туда автоматически. Повторение новых навыков и диагностика живут в Learn. Карта Learn должна поддержать несколько разделов вместо текущего `sections.first`.
+
+Pro использует отдельную политику floor TC только с совместимым проверенным набором индексов. Текущая `NearestWholeTrueCountPolicy` других разделов не меняется. Пакет profile связывает правила, стратегию, индексы, provenance и тесты; непроверенный пакет нельзя активировать.
+
+Комплексная учебная сессия переиспользует чистый blackjack engine, но не TableViewModel. Новый второй движок раздачи не создаётся. Объяснения авторские, заранее проверенные; runtime LLM и новые внешние сервисы для курса не нужны.
+
 Стабильные `lessonId`, `skillId` и exercise IDs — ключи прогресса, а не переводимый текст. Их нельзя переименовывать после публикации.
 
 ## Repositories, services и внешние границы
 
 ### Реализовано
 
-- `ContentRepository` загружает текущий English catalog из bundle assets.
+- `ContentRepository.loadCatalog(localeCode:)` загружает English/Russian catalog из bundle assets с English fallback для отсутствующего locale package.
 - `ProgressRepository` задаёт контракт, а `LocalProgressRepository` сохраняет `ProgressSnapshot` в `shared_preferences`.
 - `AnalyticsGateway` и `CrashReporterGateway` отделяют приложение от telemetry SDK; consent-aware decorators блокируют передачу до opt-in, Firebase adapters обслуживают Android/iOS, а NoOp implementations сохраняют работу неподключённых платформ.
 - `PurchaseGateway` задаёт entitlement, purchase и restore operations.
@@ -102,8 +117,8 @@ View отвечает за отображение и пользовательс�
 
 ### Запланировано
 
-- locale-aware content и glossary repositories вместо жёсткого `loadEnglishCatalog()`;
-- store adapters для App Store и Google Play, transaction verification и idempotent restore;
+- typed validation для игровых locale packages и glossary;
+- store adapters, transaction verification и idempotent restore — отдельный этап после учебного Pro, не реализация текущих 70 итераций;
 - versioned repository migrations и резервное восстановление повреждённого progress;
 - отдельные services для profile catalog, session history, statistics и certification.
 
