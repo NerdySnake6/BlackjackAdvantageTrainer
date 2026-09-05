@@ -28,6 +28,13 @@ class AppLocalizationsRu extends AppLocalizations {
       'Выбери правильный ответ на этих же картах, чтобы продолжить. Первый ответ останется в результате.';
 
   @override
+  String get pilotCorrected => 'Исправлено';
+
+  @override
+  String get pilotRevealBeforeCount =>
+      'Открой все карты, затем укажи конечный текущий счёт.';
+
+  @override
   String get pilotDoubleAvailable =>
       'Дабл (Double) доступен на этой двухкарточной руке.';
 

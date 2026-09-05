@@ -54,6 +54,25 @@ class _PilotBody extends StatelessWidget {
       canPop: !vm.busy,
       child: Scaffold(
         appBar: AppBar(title: Text(vm.lesson.title)),
+        bottomNavigationBar: vm.saveFailed
+            ? SafeArea(
+                top: false,
+                child: Semantics(
+                  liveRegion: true,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    color: Theme.of(context).colorScheme.errorContainer,
+                    child: Text(
+                      strings.pilotSaveFailed,
+                      key: const ValueKey('pilot-save-error'),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onErrorContainer,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : null,
         body: SafeArea(
           child: ListView(
             key: ValueKey('${session.phase.name}-${session.index}'),
@@ -61,12 +80,6 @@ class _PilotBody extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             children: [
               if (vm.busy) const LinearProgressIndicator(),
-              if (vm.saveFailed)
-                Text(
-                  strings.pilotSaveFailed,
-                  key: const ValueKey('pilot-save-error'),
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
               if (vm.incompatibleSave) ...[
                 Text(strings.pilotIncompatible),
                 FilledButton(
@@ -139,20 +152,35 @@ class _PilotBody extends StatelessWidget {
                       onRevealNext: vm.reveal,
                     ),
                   ),
-                  Text(strings.adjustCountInstruction),
+                  if (!feedback || !session.corrected)
+                    Text(
+                      session.revealed < task.cards.length
+                          ? strings.pilotRevealBeforeCount
+                          : strings.adjustCountInstruction,
+                    ),
                   Wrap(
                     spacing: 12,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       IconButton(
                         tooltip: strings.pilotDecrease,
-                        onPressed: canAnswer ? () => vm.adjustCount(-1) : null,
+                        onPressed:
+                            canAnswer &&
+                                session.countInput >
+                                    task.initialCount - task.cards.length
+                            ? () => vm.adjustCount(-1)
+                            : null,
                         icon: const Icon(Icons.remove),
                       ),
                       Text('${strings.yourCount}: ${session.countInput}'),
                       IconButton(
                         tooltip: strings.pilotIncrease,
-                        onPressed: canAnswer ? () => vm.adjustCount(1) : null,
+                        onPressed:
+                            canAnswer &&
+                                session.countInput <
+                                    task.initialCount + task.cards.length
+                            ? () => vm.adjustCount(1)
+                            : null,
                         icon: const Icon(Icons.add),
                       ),
                     ],
@@ -192,6 +220,8 @@ class _PilotBody extends StatelessWidget {
                   Text(
                     session.firstAnswer == task.expected
                         ? strings.correctAnswer
+                        : session.corrected
+                        ? strings.pilotCorrected
                         : strings.incorrectAnswer,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),

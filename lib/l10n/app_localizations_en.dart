@@ -28,6 +28,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Try the correct answer on these same cards to continue. Your first answer stays recorded.';
 
   @override
+  String get pilotCorrected => 'Corrected';
+
+  @override
+  String get pilotRevealBeforeCount =>
+      'Reveal all the cards, then enter the final running count.';
+
+  @override
   String get pilotDoubleAvailable =>
       'Double is available on this two-card hand.';
 

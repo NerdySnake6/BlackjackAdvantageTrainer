@@ -134,6 +134,18 @@ abstract class AppLocalizations {
   /// **'Try the correct answer on these same cards to continue. Your first answer stays recorded.'**
   String get pilotCorrectTask;
 
+  /// No description provided for @pilotCorrected.
+  ///
+  /// In en, this message translates to:
+  /// **'Corrected'**
+  String get pilotCorrected;
+
+  /// No description provided for @pilotRevealBeforeCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal all the cards, then enter the final running count.'**
+  String get pilotRevealBeforeCount;
+
   /// No description provided for @pilotDoubleAvailable.
   ///
   /// In en, this message translates to:

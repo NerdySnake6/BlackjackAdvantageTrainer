@@ -33,6 +33,10 @@ and agents. Read them before changing the product or code:
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 
+Iteration 10's observed pilot is temporarily deferred by the owner (2026-09-05).
+Iteration 11 includes technical lesson-UI fixes; validation with real users is
+still pending. See the roadmap for the status and unchanged study criteria.
+
 ## Implemented vertical slice
 
 - A six-node learning path with 54 original exercises.
