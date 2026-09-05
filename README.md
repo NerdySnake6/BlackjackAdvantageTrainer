@@ -29,6 +29,7 @@ and agents. Read them before changing the product or code:
 - [Decision lesson flow](lib/domain/learning/decision_lesson.dart)
 - [Playable pilot lessons and checks](docs/ITERATION_9_PILOT_LESSONS.md)
 - [Pilot recruitment and feedback protocol](docs/PILOT_RECRUITMENT.md)
+- [Iteration 10 pilot runbook](docs/ITERATION_10_PILOT_RUNBOOK.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 
@@ -155,7 +156,7 @@ ARM64 image through SDK Manager.
 The `Build Android APK` workflow runs automatically for changes to `main` and
 for pull requests, and it can also be started manually from the repository's
 Actions tab. It checks formatting, runs analysis, verifies strict coverage gates,
-and builds the release APK.
+and builds the debug APK.
 
 After a successful run, open its `Artifacts` section and download the archive
 named `blackjack-advantage-trainer-android-debug-<commit SHA>`. GitHub keeps the

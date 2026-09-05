@@ -64,10 +64,21 @@ flutter build ios --debug --no-codesign
 набор из 160 тестов — успешно; domain coverage — 98,2% (784/798), при пороге
 95%; `git diff --check` — чисто. Android API 36: `flutter test
 integration_test/pilot_lessons_test.dart -d emulator-5554` — успешно для EN и
-RU; debug APK собран и установлен эмулятором. На экране Hi-Lo визуально
-проверены 320 px-эквивалент, крупный текст и переходы после раскрытия карт.
-Повторный `flutter build apk --debug` в конце этой сессии не запускался из-за
-исчерпанного лимита среды, но тот же APK был собран интеграционным запуском.
+RU; тестовый APK собран и установлен на эмулятор. Экран Hi-Lo также проверен
+визуально на Android API 36; ширина 320×568 и масштаб 1,6 проверены отдельно
+widget-тестами. Интеграционная сборка использует тестовую точку входа и сама
+по себе не подтверждает готовность обычного APK для участников.
+
+Дополнительная проверка 2026-09-05 перед подготовкой пилота: на коммите
+`85cfda3` анализ проходит, все 161 тест успешны, domain coverage — 98,2%
+(785/799). Обычный `flutter build apk --debug` успешно собирает
+`build/app/outputs/flutter-apk/app-debug.apk` с `lib/main.dart`.
+[GitHub Actions для того же коммита](https://github.com/NerdySnake6/BlackjackAdvantageTrainer/actions/runs/33967564860)
+также завершился успешно. Предупреждения KGP/native access/SDK XML не
+остановили сборку; SDK и зависимости не обновлялись.
+Проверка общего runtime завершена: `flutter build ios --debug --no-codesign`
+успешно собрал `build/ios/iphoneos/Runner.app`. Подпись и установка iOS
+на физическое устройство этой проверкой не выполнялись.
 
 ## Следующий gate
 
