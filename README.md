@@ -24,6 +24,8 @@ and agents. Read them before changing the product or code:
 - [Architecture and implementation status](docs/ARCHITECTURE.md)
 - [Approved course roadmap and iteration gates](docs/COURSE_ROADMAP.md)
 - [Course skill and material map](docs/COURSE_SKILL_MAP.md)
+- [Iteration 6 lesson packs](docs/ITERATION_6_LESSON_PACKS.md)
+- [Pilot recruitment and feedback protocol](docs/PILOT_RECRUITMENT.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 

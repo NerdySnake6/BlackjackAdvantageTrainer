@@ -1,0 +1,1 @@
+participant_code,cohort,session_type,session_number,started_at_utc,app_build,locale,device_model,android_version,research_consent,analytics_opt_in,crash_opt_in,completed,help_requests,first_answer_accuracy,hints_used,median_response_seconds,delayed_follow_up_due,format_preference,top_friction,bug_severity,issue_id,redacted_note,follow_up_status

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "profileId": "standard_6d_s17_das_ls_peek_3to2",
+  "source": "https://wizardofodds.com/games/blackjack/strategy/4-decks/",
+  "sourceCheckedAt": "2026-09-05",
+  "independentReference": "test/fixtures/standard_strategy_s17_das_ls.json",
+  "packages": [
+    {
+      "lessonId": "hard-12",
+      "skillId": "strategy.hard_12",
+      "theory": "Stand against dealer 4-6; hit otherwise.",
+      "misconceptions": [
+        "Hard 12 always means hit.",
+        "Every low dealer card is weak."
+      ],
+      "guidedPractice": ["10+2 vs 3", "9+3 vs 4", "8+4 vs 6", "10+2 vs 7"],
+      "independentTest": {
+        "cards": ["10", "2"],
+        "cases": [
+          {"dealer": "2", "expectedAction": "hit"},
+          {"dealer": "3", "expectedAction": "hit"},
+          {"dealer": "4", "expectedAction": "stand"},
+          {"dealer": "5", "expectedAction": "stand"},
+          {"dealer": "6", "expectedAction": "stand"},
+          {"dealer": "7", "expectedAction": "hit"},
+          {"dealer": "8", "expectedAction": "hit"},
+          {"dealer": "9", "expectedAction": "hit"},
+          {"dealer": "10", "expectedAction": "hit"},
+          {"dealer": "A", "expectedAction": "hit"}
+        ]
+      }
+    },
+    {
+      "lessonId": "soft-18",
+      "skillId": "strategy.soft_18",
+      "theory": "Double 3-6, stand 2/7/8, hit 9/10/A; unavailable double falls back to stand.",
+      "misconceptions": [
+        "Soft 18 is always stand.",
+        "An unavailable double always becomes hit.",
+        "A three-card hand cannot be soft."
+      ],
+      "guidedPractice": ["A+7 vs 6", "A+2+5 vs 6", "A+7 vs 8", "A+7 vs 9"],
+      "independentTest": {
+        "twoCardCases": [
+          {"dealer": "2", "expectedAction": "stand"},
+          {"dealer": "3", "expectedAction": "doubleDown"},
+          {"dealer": "4", "expectedAction": "doubleDown"},
+          {"dealer": "5", "expectedAction": "doubleDown"},
+          {"dealer": "6", "expectedAction": "doubleDown"},
+          {"dealer": "7", "expectedAction": "stand"},
+          {"dealer": "8", "expectedAction": "stand"},
+          {"dealer": "9", "expectedAction": "hit"},
+          {"dealer": "10", "expectedAction": "hit"},
+          {"dealer": "A", "expectedAction": "hit"}
+        ],
+        "fallbackCases": [
+          {"cards": ["A", "2", "5"], "dealer": "3", "expectedAction": "stand"},
+          {"cards": ["A", "2", "5"], "dealer": "6", "expectedAction": "stand"},
+          {"cards": ["A", "7"], "dealer": "4", "expectedAction": "stand"},
+          {"cards": ["A", "7"], "dealer": "6", "expectedAction": "stand"}
+        ]
+      }
+    },
+    {
+      "lessonId": "hi-lo-cancellation",
+      "skillId": "counting.cancellation",
+      "theory": "Low 2-6 is +1, neutral 7-9 is 0, high 10-A is -1.",
+      "misconceptions": [
+        "Every card must be counted separately.",
+        "A neutral pair must use the same rank.",
+        "Ace has tag zero because its blackjack value changes."
+      ],
+      "guidedPractice": ["3+K", "5+K+8", "2+4+Q+A"],
+      "independentTest": {
+        "cases": [
+          {"cards": ["3", "K"], "expectedTags": [1, -1], "expectedRunningCount": 0},
+          {"cards": ["5", "K", "8"], "expectedTags": [1, -1, 0], "expectedRunningCount": 0},
+          {"cards": ["2", "4", "Q", "A"], "expectedTags": [1, 1, -1, -1], "expectedRunningCount": 0},
+          {"cards": ["7", "6", "J", "2", "9"], "expectedTags": [0, 1, -1, 1, 0], "expectedRunningCount": 1},
+          {"cards": ["A", "4", "10", "6", "8", "3"], "expectedTags": [-1, 1, -1, 1, 0, 1], "expectedRunningCount": 1}
+        ]
+      }
+    }
+  ]
+}
