@@ -12,6 +12,7 @@ void main() {
     var revealedCount = 2;
     await tester.pumpWidget(
       MaterialApp(
+        locale: const Locale('en'),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -40,9 +41,13 @@ void main() {
     expect(find.text('−1'), findsOneWidget);
     expect(find.byIcon(Icons.sync_alt_rounded), findsOneWidget);
     expect(find.text('Running count: 0'), findsOneWidget);
-    expect(find.text('Next card'), findsOneWidget);
+    final strings = AppLocalizations.of(
+      tester.element(find.byType(CancellationScene)),
+    );
+    final nextCardButton = find.widgetWithText(FilledButton, strings.nextCard);
+    expect(nextCardButton, findsOneWidget);
 
-    await tester.tap(find.text('Next card'));
+    await tester.tap(nextCardButton);
     expect(revealedCount, 3);
   });
 }
