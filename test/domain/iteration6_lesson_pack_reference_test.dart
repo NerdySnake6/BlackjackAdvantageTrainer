@@ -55,7 +55,7 @@ void main() {
 
     for (final scenario in cases) {
       final recommendation = strategy.recommend(
-        hand: BlackjackHand(cards.map(_card)),
+        hand: BlackjackHand(cards.map(_cardFromLabel)),
         dealerUpCard: _card(_rank(scenario['dealer']! as String)),
         rules: GameRulesProfile.standard,
         availableActions: allActions,
@@ -95,7 +95,9 @@ void main() {
     for (final scenario in fallbackCases) {
       final recommendation = strategy.recommendWithReason(
         hand: BlackjackHand(
-          (scenario['cards']! as List<Object?>).cast<String>().map(_card),
+          (scenario['cards']! as List<Object?>).cast<String>().map(
+            _cardFromLabel,
+          ),
         ),
         dealerUpCard: _card(_rank(scenario['dealer']! as String)),
         rules: GameRulesProfile.standard,
@@ -143,6 +145,8 @@ Map<String, Object?> _package(String lessonId) {
 
 PlayingCard _card(CardRank rank) =>
     PlayingCard(deckIndex: 0, suit: CardSuit.spades, rank: rank);
+
+PlayingCard _cardFromLabel(String label) => _card(_rank(label));
 
 CardRank _rank(String label) =>
     CardRank.values.firstWhere((rank) => rank.label == label);
