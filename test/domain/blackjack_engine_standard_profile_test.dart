@@ -4,6 +4,7 @@ import 'package:blackjack_advantage_trainer/domain/blackjack_engine/blackjack_en
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/card.dart';
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/game_rules.dart';
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/shoe.dart';
+import 'package:blackjack_advantage_trainer/domain/blackjack_engine/strategy_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -96,6 +97,46 @@ void main() {
       expect(engine.availableActions, isNot(contains(PlayerAction.surrender)));
     });
 
+    test(
+      'action availability follows initial, multi-card, and pair states',
+      () {
+        final initial = _engine([
+          CardRank.five,
+          CardRank.six,
+          CardRank.four,
+          CardRank.ten,
+          CardRank.two,
+        ]);
+        initial.startRound();
+
+        expect(
+          initial.availableActions,
+          equals({
+            PlayerAction.hit,
+            PlayerAction.stand,
+            PlayerAction.doubleDown,
+            PlayerAction.surrender,
+          }),
+        );
+        initial.applyAction(PlayerAction.hit);
+        expect(
+          initial.availableActions,
+          equals({PlayerAction.hit, PlayerAction.stand}),
+        );
+
+        final pair = _engine([
+          CardRank.eight,
+          CardRank.six,
+          CardRank.eight,
+          CardRank.ten,
+          CardRank.two,
+          CardRank.three,
+        ]);
+        pair.startRound();
+        expect(pair.availableActions, contains(PlayerAction.split));
+      },
+    );
+
     test('resplitting is capped at four hands', () {
       final engine = _engine([
         CardRank.eight,
@@ -130,7 +171,7 @@ void main() {
         CardRank.six,
         CardRank.four,
         CardRank.ten,
-        CardRank.two,
+        CardRank.five,
         CardRank.three,
         CardRank.ten,
       ]);
@@ -138,7 +179,18 @@ void main() {
       engine.startRound();
       engine.applyAction(PlayerAction.split);
       expect(engine.activeHand!.fromSplit, isTrue);
-      expect(engine.availableActions, contains(PlayerAction.doubleDown));
+      expect(
+        engine.availableActions,
+        equals({PlayerAction.hit, PlayerAction.stand, PlayerAction.doubleDown}),
+      );
+      final recommendation = engine.strategyEngine.recommendWithReason(
+        hand: engine.activeHand!.hand,
+        dealerUpCard: engine.dealerUpCard!,
+        rules: engine.rules,
+        availableActions: engine.availableActions,
+      );
+      expect(recommendation.action, PlayerAction.doubleDown);
+      expect(recommendation.reason, StrategyReason.doubleHardTotal);
 
       engine.applyAction(PlayerAction.doubleDown);
 

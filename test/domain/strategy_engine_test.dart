@@ -81,6 +81,56 @@ void main() {
       },
     );
 
+    test('matches the independently transcribed action constraints', () async {
+      final fixture =
+          jsonDecode(
+                await File(
+                  'test/fixtures/standard_strategy_action_constraints.json',
+                ).readAsString(),
+              )!
+              as Map<String, Object?>;
+      expect(fixture['profileId'], GameRulesProfile.standard.id);
+      expect(fixture['source'], startsWith('https://wizardofodds.com/'));
+      expect(fixture['rulesSource'], startsWith('https://wizardofodds.com/'));
+      expect(
+        fixture['surrenderSource'],
+        startsWith('https://wizardofodds.com/'),
+      );
+      expect(fixture['sourceCheckedAt'], '2026-09-05');
+      expect(fixture['excludedState'], isNotEmpty);
+
+      final cases = (fixture['cases']! as List<Object?>)
+          .cast<Map<String, Object?>>();
+      expect(cases, hasLength(25));
+      for (final scenario in cases) {
+        final recommendation = strategy.recommendWithReason(
+          hand: BlackjackHand(
+            (scenario['cards']! as List<Object?>)
+                .cast<String>()
+                .map(_rank)
+                .map(_card),
+          ),
+          dealerUpCard: _card(_rank(scenario['dealer']! as String)),
+          rules: GameRulesProfile.standard,
+          availableActions: (scenario['availableActions']! as List<Object?>)
+              .cast<String>()
+              .map(_action)
+              .toSet(),
+        );
+
+        expect(
+          recommendation.action.name,
+          scenario['expectedAction'],
+          reason: scenario['id']! as String,
+        );
+        expect(
+          recommendation.reason.name,
+          scenario['expectedReason'],
+          reason: scenario['id']! as String,
+        );
+      }
+    });
+
     test('stands hard 12 against dealer 4', () {
       expect(
         action([CardRank.ten, CardRank.two], CardRank.four),
@@ -216,4 +266,8 @@ CardRank _rank(String label) {
 
 PlayingCard _card(CardRank rank) {
   return PlayingCard(deckIndex: 0, suit: CardSuit.spades, rank: rank);
+}
+
+PlayerAction _action(String name) {
+  return PlayerAction.values.singleWhere((action) => action.name == name);
 }

@@ -1,0 +1,212 @@
+{
+  "profileId": "standard_6d_s17_das_ls_peek_3to2",
+  "source": "https://wizardofodds.com/games/blackjack/strategy/4-decks/",
+  "rulesSource": "https://wizardofodds.com/games/blackjack/basics/",
+  "surrenderSource": "https://wizardofodds.com/games/blackjack/surrender/",
+  "sourceCheckedAt": "2026-09-05",
+  "scope": "Total-dependent S17 strategy with DAS, late surrender after peek, and double on any initial two cards or after split.",
+  "excludedState": "A decision after receiving one card on split aces is excluded because the supported engine stands both split-ace hands automatically.",
+  "license": "Independently transcribed mathematical decisions; no source wording or artwork copied.",
+  "cases": [
+    {
+      "id": "hard-11-double-available",
+      "cards": ["5", "6"],
+      "dealer": "6",
+      "availableActions": ["hit", "stand", "doubleDown", "surrender"],
+      "expectedAction": "doubleDown",
+      "expectedReason": "doubleHardTotal"
+    },
+    {
+      "id": "hard-11-multi-card",
+      "cards": ["2", "3", "6"],
+      "dealer": "6",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "hard-10-multi-card",
+      "cards": ["2", "3", "5"],
+      "dealer": "9",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "hard-9-multi-card",
+      "cards": ["2", "3", "4"],
+      "dealer": "3",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "soft-13-multi-card",
+      "cards": ["A", "A", "A"],
+      "dealer": "5",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "soft-15-multi-card",
+      "cards": ["A", "2", "2"],
+      "dealer": "4",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "soft-17-multi-card",
+      "cards": ["A", "2", "4"],
+      "dealer": "3",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "soft-18-multi-card",
+      "cards": ["A", "2", "5"],
+      "dealer": "6",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "stand",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "hard-15-late-surrender",
+      "cards": ["9", "6"],
+      "dealer": "10",
+      "availableActions": ["hit", "stand", "doubleDown", "surrender"],
+      "expectedAction": "surrender",
+      "expectedReason": "surrenderHardTotal"
+    },
+    {
+      "id": "hard-15-multi-card-no-surrender",
+      "cards": ["4", "5", "6"],
+      "dealer": "10",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "hard-16-late-surrender-vs-9",
+      "cards": ["10", "6"],
+      "dealer": "9",
+      "availableActions": ["hit", "stand", "doubleDown", "surrender"],
+      "expectedAction": "surrender",
+      "expectedReason": "surrenderHardTotal"
+    },
+    {
+      "id": "hard-16-late-surrender-vs-10",
+      "cards": ["10", "6"],
+      "dealer": "10",
+      "availableActions": ["hit", "stand", "doubleDown", "surrender"],
+      "expectedAction": "surrender",
+      "expectedReason": "surrenderHardTotal"
+    },
+    {
+      "id": "hard-16-late-surrender-vs-ace",
+      "cards": ["10", "6"],
+      "dealer": "A",
+      "availableActions": ["hit", "stand", "doubleDown", "surrender"],
+      "expectedAction": "surrender",
+      "expectedReason": "surrenderHardTotal"
+    },
+    {
+      "id": "hard-16-multi-card-no-surrender",
+      "cards": ["7", "4", "5"],
+      "dealer": "A",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "pair-8-prioritizes-split-over-surrender",
+      "cards": ["8", "8"],
+      "dealer": "10",
+      "availableActions": ["hit", "stand", "doubleDown", "split", "surrender"],
+      "expectedAction": "split",
+      "expectedReason": "splitPair"
+    },
+    {
+      "id": "pair-8-surrenders-when-split-unavailable",
+      "cards": ["8", "8"],
+      "dealer": "10",
+      "availableActions": ["hit", "stand", "doubleDown", "surrender"],
+      "expectedAction": "surrender",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "pair-8-hits-when-split-and-surrender-unavailable",
+      "cards": ["8", "8"],
+      "dealer": "10",
+      "availableActions": ["hit", "stand"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "das-pair-2-vs-2",
+      "cards": ["2", "2"],
+      "dealer": "2",
+      "availableActions": ["hit", "stand", "doubleDown", "split"],
+      "expectedAction": "split",
+      "expectedReason": "splitPair"
+    },
+    {
+      "id": "das-pair-4-vs-5",
+      "cards": ["4", "4"],
+      "dealer": "5",
+      "availableActions": ["hit", "stand", "doubleDown", "split"],
+      "expectedAction": "split",
+      "expectedReason": "splitPair"
+    },
+    {
+      "id": "das-pair-6-vs-2",
+      "cards": ["6", "6"],
+      "dealer": "2",
+      "availableActions": ["hit", "stand", "doubleDown", "split"],
+      "expectedAction": "split",
+      "expectedReason": "splitPair"
+    },
+    {
+      "id": "pair-2-no-split",
+      "cards": ["2", "2"],
+      "dealer": "2",
+      "availableActions": ["hit", "stand", "doubleDown"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "pair-4-no-split",
+      "cards": ["4", "4"],
+      "dealer": "5",
+      "availableActions": ["hit", "stand", "doubleDown"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "pair-6-no-split",
+      "cards": ["6", "6"],
+      "dealer": "2",
+      "availableActions": ["hit", "stand", "doubleDown"],
+      "expectedAction": "hit",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "pair-8-no-split-vs-6",
+      "cards": ["8", "8"],
+      "dealer": "6",
+      "availableActions": ["hit", "stand", "doubleDown"],
+      "expectedAction": "stand",
+      "expectedReason": "unavailableActionFallback"
+    },
+    {
+      "id": "pair-9-no-split-vs-9",
+      "cards": ["9", "9"],
+      "dealer": "9",
+      "availableActions": ["hit", "stand", "doubleDown"],
+      "expectedAction": "stand",
+      "expectedReason": "unavailableActionFallback"
+    }
+  ]
+}

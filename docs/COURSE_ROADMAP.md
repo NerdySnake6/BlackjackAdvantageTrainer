@@ -140,3 +140,9 @@ Pro: сначала проверка интереса у минимум деся
 Результат: soft 18 против 3–6 при недоступном Double рекомендует Stand, сохраняя существующий reason и public API. Добавлены 16 независимых reference-сценариев и один сценарий через TableViewModel. Подробное основание и границы проверки — [STRATEGY_VALIDATION.md](STRATEGY_VALIDATION.md).
 
 Проверка 2026-09-05: до исправления 12 новых regression-сценариев упали с Hit вместо Stand; после — `dart format` без изменений, `flutter analyze` без замечаний, все 133 теста прошли. `flutter build apk --debug` и `flutter build ios --debug --no-codesign` успешны. Android выдаёт предупреждения о KGP/native access/SDK XML, но build завершён; SDK и плагины не обновлялись. Публикация iOS и device signing не выполнялись. Следующая итерация — полная матрица ограничений действий.
+
+### Итерация 3 — ограничения действий
+
+Результат: добавлена независимо транскрибированная матрица из 25 состояний для многокарточных рук, недоступных Double/Split/Surrender, приоритета Split и DAS. Движок сохраняет правильное действие и теперь возвращает `unavailableActionFallback` также при недоступных Surrender и Split. Сценарные тесты фиксируют legal actions до/после Hit и после Split; неподдерживаемое решение после split aces и непроверенные профили явно исключены. Подробное основание — [STRATEGY_VALIDATION.md](STRATEGY_VALIDATION.md).
+
+Проверка 2026-09-05: новые тесты сначала выявили неверную причину `hitHardTotal` вместо `unavailableActionFallback` для недоступного Surrender; после исправления `dart format` выполнен, `flutter analyze` прошёл без замечаний, все 135 тестов прошли. `flutter build apk --debug` и `flutter build ios --debug --no-codesign` успешны. Android сохранил известные предупреждения KGP/native access; SDK и зависимости не обновлялись. Следующая итерация — карта навыков и материалов всех уроков.

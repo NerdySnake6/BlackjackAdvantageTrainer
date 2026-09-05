@@ -50,6 +50,7 @@ class StrategyEngine {
     required GameRulesProfile rules,
     required Set<PlayerAction> availableActions,
   }) {
+    var preferredActionUnavailable = false;
     if (hand.cards.length == 2 && _isPair(hand)) {
       final pairAction = _pairAction(
         hand.cards.first.rank.blackjackValue,
@@ -62,6 +63,9 @@ class StrategyEngine {
           action: PlayerAction.split,
           reason: StrategyReason.splitPair,
         );
+      }
+      if (pairAction == PlayerAction.split) {
+        preferredActionUnavailable = true;
       }
       if (pairAction != PlayerAction.split) {
         return _recommendAvailable(
@@ -79,14 +83,20 @@ class StrategyEngine {
     final evaluation = evaluator.evaluate(hand.cards);
     final dealerValue = dealerUpCard.rank.blackjackValue;
 
-    if (!evaluation.isSoft &&
-        availableActions.contains(PlayerAction.surrender) &&
+    final shouldSurrender =
+        !evaluation.isSoft &&
         ((evaluation.total == 16 && (dealerValue == 1 || dealerValue >= 9)) ||
-            (evaluation.total == 15 && dealerValue == 10))) {
-      return const StrategyRecommendation(
+            (evaluation.total == 15 && dealerValue == 10));
+    if (shouldSurrender && availableActions.contains(PlayerAction.surrender)) {
+      return StrategyRecommendation(
         action: PlayerAction.surrender,
-        reason: StrategyReason.surrenderHardTotal,
+        reason: preferredActionUnavailable
+            ? StrategyReason.unavailableActionFallback
+            : StrategyReason.surrenderHardTotal,
       );
+    }
+    if (shouldSurrender) {
+      preferredActionUnavailable = true;
     }
 
     final preferred = evaluation.isSoft
@@ -113,7 +123,19 @@ class StrategyEngine {
         reason: StrategyReason.unavailableActionFallback,
       );
     }
-    return _recommendAvailable(preferred, availableActions, reason);
+    final recommendation = _recommendAvailable(
+      preferred,
+      availableActions,
+      reason,
+    );
+    if (preferredActionUnavailable &&
+        recommendation.reason != StrategyReason.unavailableActionFallback) {
+      return StrategyRecommendation(
+        action: recommendation.action,
+        reason: StrategyReason.unavailableActionFallback,
+      );
+    }
+    return recommendation;
   }
 
   bool _isPair(BlackjackHand hand) {
