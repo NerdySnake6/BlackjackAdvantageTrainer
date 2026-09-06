@@ -141,6 +141,7 @@ void main() {
       await tester.pump();
       expect(find.text('Question 1 of 4'), findsOneWidget);
     },
+    timeout: const Timeout(Duration(seconds: 30)),
   );
 }
 

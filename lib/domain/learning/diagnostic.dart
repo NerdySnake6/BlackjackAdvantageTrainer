@@ -23,7 +23,7 @@ class DiagnosticSession {
         DiagnosticQuestion(
           id: 'strategy-boundary',
           skill: DiagnosticSkill.strategy,
-          correctOption: 1,
+          correctOption: 0,
         ),
         DiagnosticQuestion(
           id: 'strategy-double',
