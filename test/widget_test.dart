@@ -62,6 +62,58 @@ void main() {
     expect(appState.isLessonUnlocked('first-strategy'), isTrue);
     expect(appState.isLessonCompleted('quick-start'), isFalse);
   });
+
+  testWidgets(
+    'Learn diagnostic is untimed, recommends a focus, and does not certify',
+    (tester) async {
+      addTearDown(() async {
+        await tester.pumpWidget(const SizedBox());
+        tester.view.reset();
+      });
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(320, 568);
+      final catalog = await ContentRepository().loadCatalog();
+      final appState = AppState(
+        catalog: catalog,
+        progress: const ProgressSnapshot(
+          experienceLevel: ExperienceLevel.basics,
+          hasSeenTelemetryConsent: true,
+        ),
+        progressRepository: _MemoryProgressRepository(),
+      );
+      await tester.pumpWidget(BlackjackTrainerApp(appState: appState));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Quick skill check'), findsOneWidget);
+      expect(
+        find.text(
+          'Four untimed questions suggest where to practise next. This is not a certificate.',
+        ),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Start check'));
+      await tester.pumpAndSettle();
+      expect(find.text('Question 1 of 4'), findsOneWidget);
+      await tester.tap(find.text('The dealer up-card and your hand'));
+      await tester.tap(find.text('On a two-card hand when the rules allow it'));
+      await tester.tap(find.text('+1'));
+      await tester.tap(find.text('When the shoe is shuffled'));
+      await tester.pumpAndSettle();
+      expect(find.text('Suggested next focus'), findsOneWidget);
+      expect(
+        find.text('Alternate basic strategy with running-count practice.'),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          'This check only suggests a starting point. It does not unlock lessons or certify mastery.',
+        ),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Run again'));
+      expect(find.text('Question 1 of 4'), findsOneWidget);
+    },
+  );
 }
 
 Future<AppState> _createAppState() async {

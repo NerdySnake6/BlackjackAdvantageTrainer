@@ -218,6 +218,33 @@ abstract class AppLocalizations {
   /// **'Your first answer: {answer}'**
   String pilotSelected(String answer);
 
+  String get diagnosticTitle;
+  String get diagnosticIntro;
+  String get diagnosticStart;
+  String diagnosticQuestionProgress(int current, int total);
+  String get diagnosticQ1;
+  String get diagnosticQ1A;
+  String get diagnosticQ1B;
+  String get diagnosticQ1C;
+  String get diagnosticQ2;
+  String get diagnosticQ2A;
+  String get diagnosticQ2B;
+  String get diagnosticQ2C;
+  String get diagnosticQ3;
+  String get diagnosticQ3A;
+  String get diagnosticQ3B;
+  String get diagnosticQ3C;
+  String get diagnosticQ4;
+  String get diagnosticQ4A;
+  String get diagnosticQ4B;
+  String get diagnosticQ4C;
+  String get diagnosticResultTitle;
+  String get diagnosticRecommendationStrategy;
+  String get diagnosticRecommendationCount;
+  String get diagnosticRecommendationCombined;
+  String get diagnosticResultNote;
+  String get diagnosticRestart;
+
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../app/theme.dart';
 import '../../domain/learning/models.dart';
+import '../../domain/learning/diagnostic.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
 
@@ -42,6 +43,8 @@ class LearningPathScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       _QuickReviewCard(appState: appState),
+                      const SizedBox(height: 12),
+                      const _DiagnosticCard(),
                       const SizedBox(height: 12),
                       if (appState.catalog.pilotLessons.isNotEmpty) ...[
                         Align(
@@ -180,6 +183,172 @@ class LearningPathScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class _DiagnosticCard extends StatefulWidget {
+  const _DiagnosticCard();
+
+  @override
+  State<_DiagnosticCard> createState() => _DiagnosticCardState();
+}
+
+class _DiagnosticCardState extends State<_DiagnosticCard> {
+  final _session = DiagnosticSession();
+  bool _started = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+    if (!_started) {
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const CircleAvatar(child: Icon(Icons.tune)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      strings.diagnosticTitle,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(strings.diagnosticIntro),
+              const SizedBox(height: 10),
+              Align(
+                alignment: Alignment.centerRight,
+                child: FilledButton(
+                  onPressed: () => setState(() => _started = true),
+                  child: Text(strings.diagnosticStart),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    if (_session.isComplete) {
+      final recommendation = switch (_session.recommendation) {
+        DiagnosticRecommendation.strategy =>
+          strings.diagnosticRecommendationStrategy,
+        DiagnosticRecommendation.runningCount =>
+          strings.diagnosticRecommendationCount,
+        DiagnosticRecommendation.combined =>
+          strings.diagnosticRecommendationCombined,
+      };
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                strings.diagnosticResultTitle,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Text(recommendation),
+              const SizedBox(height: 6),
+              Text(strings.diagnosticResultNote),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () => setState(() {
+                    _session.restart();
+                  }),
+                  child: Text(strings.diagnosticRestart),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final index = _session.currentIndex;
+    final question = _diagnosticQuestion(strings, index);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              strings.diagnosticTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              strings.diagnosticQuestionProgress(
+                index + 1,
+                _session.questions.length,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(question.prompt),
+            const SizedBox(height: 8),
+            for (var option = 0; option < question.options.length; option++)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: OutlinedButton(
+                  onPressed: () => setState(() => _session.answer(option)),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(question.options[option]),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+({String prompt, List<String> options}) _diagnosticQuestion(
+  AppLocalizations strings,
+  int index,
+) {
+  return switch (index) {
+    0 => (
+      prompt: strings.diagnosticQ1,
+      options: [
+        strings.diagnosticQ1A,
+        strings.diagnosticQ1B,
+        strings.diagnosticQ1C,
+      ],
+    ),
+    1 => (
+      prompt: strings.diagnosticQ2,
+      options: [
+        strings.diagnosticQ2A,
+        strings.diagnosticQ2B,
+        strings.diagnosticQ2C,
+      ],
+    ),
+    2 => (
+      prompt: strings.diagnosticQ3,
+      options: [
+        strings.diagnosticQ3A,
+        strings.diagnosticQ3B,
+        strings.diagnosticQ3C,
+      ],
+    ),
+    _ => (
+      prompt: strings.diagnosticQ4,
+      options: [
+        strings.diagnosticQ4A,
+        strings.diagnosticQ4B,
+        strings.diagnosticQ4C,
+      ],
+    ),
+  };
 }
 
 class _QuickReviewCard extends StatelessWidget {

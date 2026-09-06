@@ -85,6 +85,67 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get diagnosticTitle => 'Quick skill check';
+  @override
+  String get diagnosticIntro =>
+      'Four untimed questions suggest where to practise next. This is not a certificate.';
+  @override
+  String get diagnosticStart => 'Start check';
+  @override
+  String diagnosticQuestionProgress(int current, int total) =>
+      'Question $current of $total';
+  @override
+  String get diagnosticQ1 =>
+      'What mainly changes the best basic-strategy action?';
+  @override
+  String get diagnosticQ1A => 'The dealer up-card and your hand';
+  @override
+  String get diagnosticQ1B => "The last round's result";
+  @override
+  String get diagnosticQ1C => 'The size of the table';
+  @override
+  String get diagnosticQ2 =>
+      'When is Double normally available in this trainer?';
+  @override
+  String get diagnosticQ2A => 'On a two-card hand when the rules allow it';
+  @override
+  String get diagnosticQ2B => 'After any hit';
+  @override
+  String get diagnosticQ2C => 'Only after winning a round';
+  @override
+  String get diagnosticQ3 => 'In Hi-Lo, what tag does a 5 receive?';
+  @override
+  String get diagnosticQ3A => '+1';
+  @override
+  String get diagnosticQ3B => '0';
+  @override
+  String get diagnosticQ3C => '−1';
+  @override
+  String get diagnosticQ4 => 'When should you reset a running count?';
+  @override
+  String get diagnosticQ4A => 'After every hand';
+  @override
+  String get diagnosticQ4B => 'When the dealer shows an ace';
+  @override
+  String get diagnosticQ4C => 'When the shoe is shuffled';
+  @override
+  String get diagnosticResultTitle => 'Suggested next focus';
+  @override
+  String get diagnosticRecommendationStrategy =>
+      'Practise basic-strategy decisions first.';
+  @override
+  String get diagnosticRecommendationCount =>
+      'Practise Hi-Lo and running count first.';
+  @override
+  String get diagnosticRecommendationCombined =>
+      'Alternate basic strategy with running-count practice.';
+  @override
+  String get diagnosticResultNote =>
+      'This check only suggests a starting point. It does not unlock lessons or certify mastery.';
+  @override
+  String get diagnosticRestart => 'Run again';
+
+  @override
   String get appTitle => 'Blackjack Advantage';
 
   @override

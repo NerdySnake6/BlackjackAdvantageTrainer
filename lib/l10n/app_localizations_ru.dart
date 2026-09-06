@@ -86,6 +86,66 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get diagnosticTitle => 'Быстрая проверка навыков';
+  @override
+  String get diagnosticIntro =>
+      'Четыре вопроса без таймера подскажут, что потренировать дальше. Это не сертификат.';
+  @override
+  String get diagnosticStart => 'Начать проверку';
+  @override
+  String diagnosticQuestionProgress(int current, int total) =>
+      'Вопрос $current из $total';
+  @override
+  String get diagnosticQ1 =>
+      'Что в основном меняет лучшее действие по базовой стратегии?';
+  @override
+  String get diagnosticQ1A => 'Открытая карта дилера и твоя рука';
+  @override
+  String get diagnosticQ1B => 'Результат предыдущей раздачи';
+  @override
+  String get diagnosticQ1C => 'Размер стола';
+  @override
+  String get diagnosticQ2 => 'Когда в этом тренажёре обычно доступен дабл?';
+  @override
+  String get diagnosticQ2A => 'На двухкарточной руке, если правила разрешают';
+  @override
+  String get diagnosticQ2B => 'После любой дополнительной карты';
+  @override
+  String get diagnosticQ2C => 'Только после выигранной раздачи';
+  @override
+  String get diagnosticQ3 => 'Какой тег получает пятёрка в Hi-Lo?';
+  @override
+  String get diagnosticQ3A => '+1';
+  @override
+  String get diagnosticQ3B => '0';
+  @override
+  String get diagnosticQ3C => '−1';
+  @override
+  String get diagnosticQ4 => 'Когда нужно сбросить running count?';
+  @override
+  String get diagnosticQ4A => 'После каждой руки';
+  @override
+  String get diagnosticQ4B => 'Когда у дилера туз';
+  @override
+  String get diagnosticQ4C => 'Когда перетасована колода';
+  @override
+  String get diagnosticResultTitle => 'Что потренировать дальше';
+  @override
+  String get diagnosticRecommendationStrategy =>
+      'Сначала потренируй решения по базовой стратегии.';
+  @override
+  String get diagnosticRecommendationCount =>
+      'Сначала потренируй Hi-Lo и running count.';
+  @override
+  String get diagnosticRecommendationCombined =>
+      'Чередуй базовую стратегию и running count.';
+  @override
+  String get diagnosticResultNote =>
+      'Проверка только предлагает точку старта. Она не открывает уроки и не подтверждает мастерство.';
+  @override
+  String get diagnosticRestart => 'Пройти ещё раз';
+
+  @override
   String get appTitle => 'Blackjack Advantage';
 
   @override
