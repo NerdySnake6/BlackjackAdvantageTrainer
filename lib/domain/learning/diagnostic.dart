@@ -78,8 +78,9 @@ class DiagnosticSession {
     var count = 0;
     for (var i = 0; i < questions.length; i++) {
       if (questions[i].skill == skill &&
-          _answers[i] == questions[i].correctOption)
+          _answers[i] == questions[i].correctOption) {
         count++;
+      }
     }
     return count;
   }
