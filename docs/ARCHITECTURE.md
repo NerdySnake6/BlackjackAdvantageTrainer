@@ -138,6 +138,10 @@ Pro использует отдельную политику floor TC тольк
 ### Реализовано
 
 - `ContentRepository.loadCatalog(localeCode:)` загружает English/Russian catalog из bundle assets с English fallback для отсутствующего locale package.
+- `ContentValidator` проверяет загруженные игровые пакеты, manifest, glossary,
+  ID, разрешённый profile и полноту coaching до открытия уроков. Существующий
+  повреждённый пакет не вызывает fallback. `tool/validate_content.dart` повторяет
+  проверку в CI и сверяет EN/RU семантику и ссылки на утверждённую карту навыков.
 - `ProgressRepository` задаёт контракт, а `LocalProgressRepository` сохраняет `ProgressSnapshot` в `shared_preferences`.
 - `AnalyticsGateway` и `CrashReporterGateway` отделяют приложение от telemetry SDK; consent-aware decorators блокируют передачу до opt-in, Firebase adapters обслуживают Android/iOS, а NoOp implementations сохраняют работу неподключённых платформ.
 - `PurchaseGateway` задаёт entitlement, purchase и restore operations.
@@ -146,7 +150,6 @@ Pro использует отдельную политику floor TC тольк
 
 ### Запланировано
 
-- typed validation для игровых locale packages и glossary;
 - store adapters, transaction verification и idempotent restore — отдельный этап после учебного Pro, не реализация текущих 70 итераций;
 - versioned repository migrations и резервное восстановление повреждённого progress;
 - отдельные services для profile catalog, session history, statistics и certification.

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:blackjack_advantage_trainer/data/content_repository.dart';
 import 'package:blackjack_advantage_trainer/l10n/app_localizations_ru.dart';
@@ -114,6 +115,38 @@ void main() {
 
     expect(repository.loadCatalog(), throwsStateError);
   });
+
+  test(
+    'invalid Russian lesson is rejected instead of falling back to English',
+    () async {
+      const path = 'assets/content/ru/pilot_lessons.json';
+      final lessons = jsonDecode(await rootBundle.loadString(path)) as List;
+      lessons.first['scenarios'][0]['coaching']['mistakes'].remove('hit');
+      final repository = ContentRepository(
+        bundle: _OverrideBundle(path, jsonEncode(lessons)),
+      );
+      await expectLater(
+        repository.loadCatalog(localeCode: 'ru'),
+        throwsFormatException,
+      );
+    },
+  );
+
+  test(
+    'all English UI messages have matching Russian localization keys',
+    () async {
+      final en =
+          jsonDecode(await File('lib/l10n/app_en.arb').readAsString()) as Map;
+      final ru =
+          jsonDecode(await File('lib/l10n/app_ru.arb').readAsString()) as Map;
+      Set<String> keys(Map arb) =>
+          arb.keys.cast<String>().where((key) => !key.startsWith('@')).toSet();
+      expect(keys(ru), keys(en));
+      for (final key in keys(en)) {
+        expect((ru[key] as String).trim(), isNotEmpty, reason: key);
+      }
+    },
+  );
 }
 
 List<String> _ids(Object catalog) {
@@ -130,4 +163,16 @@ List<String> _ids(Object catalog) {
 class _EmptyBundle extends CachingAssetBundle {
   @override
   Future<ByteData> load(String key) async => throw FlutterError('missing $key');
+}
+
+class _OverrideBundle extends CachingAssetBundle {
+  _OverrideBundle(this.path, this.content);
+
+  final String path;
+  final String content;
+
+  @override
+  Future<ByteData> load(String key) async => key == path
+      ? ByteData.sublistView(Uint8List.fromList(utf8.encode(content)))
+      : rootBundle.load(key);
 }

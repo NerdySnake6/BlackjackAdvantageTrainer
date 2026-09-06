@@ -94,6 +94,7 @@ App Store signing и provisioning не считаются настроенным
 
 ```sh
 flutter pub get
+dart run tool/validate_content.dart
 dart format lib test
 flutter analyze
 flutter test

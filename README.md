@@ -119,6 +119,7 @@ Requirements:
 
 ```sh
 flutter pub get
+dart run tool/validate_content.dart
 flutter analyze
 flutter test --coverage
 ./tool/check_coverage.sh

@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+import '../domain/learning/content_validator.dart';
 import '../domain/learning/models.dart';
 
 class ContentRepository {
@@ -32,8 +33,22 @@ class ContentRepository {
     final pilotJson = await _bundle.loadString(
       'assets/content/$locale/pilot_lessons.json',
     );
-    json['pilotLessons'] = jsonDecode(pilotJson);
-    return CourseCatalog.fromJson(json);
+    final manifest =
+        jsonDecode(
+              await _bundle.loadString('assets/content/$locale/manifest.json'),
+            )!
+            as Map<String, Object?>;
+    final glossary =
+        jsonDecode(
+              await _bundle.loadString('assets/content/$locale/glossary.json'),
+            )!
+            as Map<String, Object?>;
+    return const ContentValidator().parse(
+      catalog: json,
+      pilotLessons: jsonDecode(pilotJson),
+      manifest: manifest,
+      glossary: glossary,
+    );
   }
 
   Future<String?> _loadRaw(String localeCode) async {
