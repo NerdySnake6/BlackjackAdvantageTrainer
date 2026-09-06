@@ -1,12 +1,15 @@
-/// Fixed, authored scenarios for the three pilot lessons, not a course generator.
+/// Content-driven lessons on the two supported scenes, not a course generator.
 library;
 
 import '../blackjack_engine/card.dart';
 import '../blackjack_engine/game_rules.dart';
+import 'lesson_format.dart';
 
 class PilotScenario {
   PilotScenario.fromJson(Map<String, Object?> json)
     : id = json['id']! as String,
+      kind = LessonMissionKind.values.byName(json['kind']! as String),
+      stage = LessonMissionStage.values.byName(json['stage']! as String),
       cards = List.unmodifiable(
         (json['cards']! as List<Object?>).indexed.map(
           (entry) => cardFromLabel(entry.$2! as String, entry.$1),
@@ -25,27 +28,34 @@ class PilotScenario {
       ),
       initialCount = json['initialCount'] as int? ?? 0,
       expected = json['expected']! as String,
-      explanation = json['explanation']! as String,
-      contrast = json['contrast']! as String,
-      mistakes = Map<String, String>.unmodifiable(
-        Map<String, String>.from(json['mistakes']! as Map),
+      coaching = LessonCoaching.fromJson(
+        json['coaching']! as Map<String, Object?>,
       ) {
-    if (cards.isEmpty || !accepts(expected)) {
+    if (cards.isEmpty ||
+        isCounting != (dealer == null) ||
+        (isCounting && availableActions.isNotEmpty) ||
+        !accepts(expected)) {
       throw FormatException('Invalid pilot scenario: $id');
     }
   }
 
   final String id;
+  final LessonMissionKind kind;
+  final LessonMissionStage stage;
   final List<PlayingCard> cards;
   final PlayingCard? dealer;
   final Set<PlayerAction> availableActions;
   final int initialCount;
   final String expected;
-  final String explanation;
-  final String contrast;
-  final Map<String, String> mistakes;
+  final LessonCoaching coaching;
 
-  bool get isCounting => dealer == null;
+  String get explanation => coaching.explanation;
+  String get contrast => coaching.contrast;
+  Map<String, String> get mistakes => coaching.mistakes;
+
+  bool get isCounting => kind == LessonMissionKind.runningCount;
+  bool get isEvaluated => stage != LessonMissionStage.introduction;
+  bool get allowsHint => stage != LessonMissionStage.independent;
 
   bool accepts(String answer) => isCounting
       ? int.tryParse(answer) != null
@@ -68,30 +78,55 @@ class PilotScenario {
 
 class PilotLesson {
   PilotLesson.fromJson(Map<String, Object?> json)
-    : id = json['id']! as String,
+    : schemaVersion = json['schemaVersion']! as int,
+      id = json['id']! as String,
       skillId = json['skillId']! as String,
       version = json['version']! as int,
+      profileId = json['profileId']! as String,
       title = json['title']! as String,
       subtitle = json['subtitle']! as String,
-      theory = json['theory']! as String,
+      theoryBlock = LessonTheory.fromJson(
+        json['theory']! as Map<String, Object?>,
+      ),
+      scoring = LessonScoring.fromJson(
+        json['scoring']! as Map<String, Object?>,
+      ),
       scenarios = List.unmodifiable(
         (json['scenarios']! as List<Object?>).map(
           (item) => PilotScenario.fromJson(item! as Map<String, Object?>),
         ),
       ) {
-    // Two unscored introductions, five practice tasks, five transfer tasks.
-    if (version < 1 ||
-        scenarios.length != 12 ||
-        scenarios.map((item) => item.id).toSet().length != 12) {
+    if (schemaVersion != 1 ||
+        version < 1 ||
+        introductionCount < 2 ||
+        introductionCount > 4 ||
+        scenarios.where((s) => s.stage == LessonMissionStage.practice).length !=
+            5 ||
+        scenarios
+                .where((s) => s.stage == LessonMissionStage.independent)
+                .length !=
+            5 ||
+        scenarios.map((item) => item.id).toSet().length != scenarios.length ||
+        !List.generate(
+          scenarios.length - 1,
+          (i) => scenarios[i].stage.index <= scenarios[i + 1].stage.index,
+        ).every((v) => v)) {
       throw FormatException('Invalid pilot lesson: $id');
     }
   }
 
   final String id;
+  final int schemaVersion;
   final String skillId;
   final int version;
+  final String profileId;
   final String title;
   final String subtitle;
-  final String theory;
+  final LessonTheory theoryBlock;
+  final LessonScoring scoring;
   final List<PilotScenario> scenarios;
+
+  String get theory => theoryBlock.text;
+  int get introductionCount => scenarios.where((s) => !s.isEvaluated).length;
+  int get evaluatedCount => scenarios.where((s) => s.isEvaluated).length;
 }

@@ -1,4 +1,4 @@
-/// Resumable fixed pilot flow with first-answer scoring and explicit correction.
+/// Resumable authored lesson flow with first-answer scoring and correction.
 library;
 
 import 'pilot_lesson.dart';
@@ -58,31 +58,40 @@ class DecisionLessonSession {
   bool get corrected => _corrected;
   int? get awardedXp => _awardedXp;
   PilotScenario get current => lesson.scenarios[_index];
-  bool get isWarmup => _index < 2;
-  bool get isIndependent => _index >= 7;
+  bool get isWarmup => !current.isEvaluated;
+  bool get isIndependent => !current.allowsHint;
+  bool get isLastTask => _index == lesson.scenarios.length - 1;
+  int get taskNumber =>
+      isWarmup ? _index + 1 : _index + 1 - lesson.introductionCount;
+  int get taskCount =>
+      isWarmup ? lesson.introductionCount : lesson.evaluatedCount;
   String? get firstAnswer => _answers.length > _index ? _answers[_index] : null;
   bool get canAnswer =>
       (_phase == DecisionLessonPhase.decision ||
           (_phase == DecisionLessonPhase.coaching && !_corrected)) &&
       (!current.isCounting || _revealed == current.cards.length);
   int get correctAnswers => [
-    for (var i = 2; i < _answers.length; i++)
-      if (_answers[i] == lesson.scenarios[i].expected) i,
+    for (var i = 0; i < _answers.length; i++)
+      if (lesson.scenarios[i].isEvaluated &&
+          _answers[i] == lesson.scenarios[i].expected)
+        i,
   ].length;
   int get unassistedAnswers => [
-    for (var i = 2; i < _answers.length; i++)
-      if (_answers[i] == lesson.scenarios[i].expected && !_hints[i]) i,
+    for (var i = 0; i < _answers.length; i++)
+      if (lesson.scenarios[i].isEvaluated &&
+          _answers[i] == lesson.scenarios[i].expected &&
+          !_hints[i])
+        i,
   ].length;
-  int get evaluatedAnswers => (_answers.length - 2).clamp(0, 10);
+  int get evaluatedAnswers =>
+      lesson.scenarios.take(_answers.length).where((s) => s.isEvaluated).length;
   double get score =>
       evaluatedAnswers == 0 ? 0 : correctAnswers / evaluatedAnswers;
-  int get stars => correctAnswers < 8
-      ? 0
-      : correctAnswers == 8
-      ? 1
-      : correctAnswers == 10 && unassistedAnswers == 10
-      ? 3
-      : 2;
+  bool get passed => lesson.scoring.passes(correctAnswers);
+  int get stars => lesson.scoring.stars(
+    correct: correctAnswers,
+    unassisted: unassistedAnswers,
+  );
 
   void begin() {
     if (_phase != DecisionLessonPhase.theory) {
@@ -133,7 +142,7 @@ class DecisionLessonSession {
     if (_phase != DecisionLessonPhase.coaching || !_corrected) {
       throw StateError('Correct this task before continuing');
     }
-    if (_index == lesson.scenarios.length - 1) {
+    if (isLastTask) {
       _phase = DecisionLessonPhase.result;
     } else {
       _index++;
@@ -191,14 +200,15 @@ class DecisionLessonSession {
             (_index != 0 || _revealed != 0 || _hint)) ||
         (!answered && _corrected) ||
         (_phase == DecisionLessonPhase.result &&
-            (_index != 11 || !_corrected)) ||
+            (!isLastTask || !_corrected)) ||
         (_awardedXp != null &&
             (_phase != DecisionLessonPhase.result || _awardedXp! < 0)) ||
         (isIndependent && _hint)) {
       throw const FormatException('Invalid pilot session state');
     }
     for (var i = 0; i < _answers.length; i++) {
-      if (!lesson.scenarios[i].accepts(_answers[i]) || (i >= 7 && _hints[i])) {
+      if (!lesson.scenarios[i].accepts(_answers[i]) ||
+          (!lesson.scenarios[i].allowsHint && _hints[i])) {
         throw const FormatException('Invalid pilot answer');
       }
     }

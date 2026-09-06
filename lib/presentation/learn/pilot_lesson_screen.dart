@@ -99,7 +99,7 @@ class _PilotBody extends StatelessWidget {
                 ),
               ] else if (session.phase == DecisionLessonPhase.result) ...[
                 Text(
-                  session.score >= 0.8
+                  session.passed
                       ? strings.lessonComplete
                       : strings.lessonNeedsReview,
                   style: Theme.of(context).textTheme.headlineSmall,
@@ -134,11 +134,7 @@ class _PilotBody extends StatelessWidget {
                       : strings.pilotPractice,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Text(
-                  session.isWarmup
-                      ? '${session.index + 1}/2'
-                      : '${session.index - 1}/10',
-                ),
+                Text('${session.taskNumber}/${session.taskCount}'),
                 const SizedBox(height: 12),
                 if (task.isCounting) ...[
                   Text(strings.pilotStartingCount(task.initialCount)),
@@ -246,7 +242,7 @@ class _PilotBody extends StatelessWidget {
                     key: const ValueKey('pilot-next'),
                     onPressed: !vm.busy && session.corrected ? vm.next : null,
                     child: Text(
-                      session.index == 11
+                      session.isLastTask
                           ? strings.finish
                           : strings.continueAction,
                     ),

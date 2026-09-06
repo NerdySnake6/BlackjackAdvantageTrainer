@@ -27,6 +27,7 @@ and agents. Read them before changing the product or code:
 - [Iteration 6 lesson packs](docs/ITERATION_6_LESSON_PACKS.md)
 - [Iteration 8 cancellation scene](lib/presentation/drill/cancellation_scene.dart)
 - [Decision lesson flow](lib/domain/learning/decision_lesson.dart)
+- [Versioned playable lesson format](docs/LESSON_FORMAT.md)
 - [Playable pilot lessons and checks](docs/ITERATION_9_PILOT_LESSONS.md)
 - [Pilot recruitment and feedback protocol](docs/PILOT_RECRUITMENT.md)
 - [Iteration 10 pilot runbook](docs/ITERATION_10_PILOT_RUNBOOK.md)
