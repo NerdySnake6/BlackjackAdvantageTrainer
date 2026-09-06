@@ -7,6 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late CourseCatalog catalog;
+  // Load assets outside the separate fake-async zone of each widget test.
+  setUpAll(() async => catalog = await ContentRepository().loadCatalog());
+
   testWidgets('first launch selects an experience level and adapts the path', (
     tester,
   ) async {
@@ -16,7 +21,8 @@ void main() {
     });
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(320, 568);
-    final appState = await _createAppState();
+    final appState = _createAppState(catalog);
+    addTearDown(appState.dispose);
 
     await tester.pumpWidget(BlackjackTrainerApp(appState: appState));
     await tester.pumpAndSettle();
@@ -72,7 +78,6 @@ void main() {
       });
       tester.view.devicePixelRatio = 1;
       tester.view.physicalSize = const Size(320, 568);
-      final catalog = await ContentRepository().loadCatalog();
       final appState = AppState(
         catalog: catalog,
         progress: const ProgressSnapshot(
@@ -81,6 +86,7 @@ void main() {
         ),
         progressRepository: _MemoryProgressRepository(),
       );
+      addTearDown(appState.dispose);
       await tester.pumpWidget(BlackjackTrainerApp(appState: appState));
       await tester.pumpAndSettle();
 
@@ -91,14 +97,33 @@ void main() {
         ),
         findsOneWidget,
       );
-      await tester.tap(find.text('Start check'));
-      await tester.pumpAndSettle();
+      Future<void> bringIntoView(Finder finder) async {
+        await Scrollable.ensureVisible(
+          tester.element(finder),
+          alignment: 0.2,
+          duration: Duration.zero,
+        );
+        await tester.pump();
+        expect(finder.hitTestable(), findsOneWidget);
+      }
+
+      final start = find.text('Start check');
+      await bringIntoView(start);
+      await tester.tap(start);
+      await tester.pump();
       expect(find.text('Question 1 of 4'), findsOneWidget);
-      await tester.tap(find.text('The dealer up-card and your hand'));
-      await tester.tap(find.text('On a two-card hand when the rules allow it'));
-      await tester.tap(find.text('+1'));
-      await tester.tap(find.text('When the shoe is shuffled'));
-      await tester.pumpAndSettle();
+      Future<void> answer(String text) async {
+        final option = find.text(text);
+        await bringIntoView(option);
+        await tester.tap(option);
+        await tester.pump();
+      }
+
+      await answer('The dealer up-card and your hand');
+      await answer('On a two-card hand when the rules allow it');
+      await answer('+1');
+      await answer('When the shoe is shuffled');
+      await tester.pump();
       expect(find.text('Suggested next focus'), findsOneWidget);
       expect(
         find.text('Alternate basic strategy with running-count practice.'),
@@ -110,14 +135,16 @@ void main() {
         ),
         findsOneWidget,
       );
-      await tester.tap(find.text('Run again'));
+      final runAgain = find.text('Run again');
+      await bringIntoView(runAgain);
+      await tester.tap(runAgain);
+      await tester.pump();
       expect(find.text('Question 1 of 4'), findsOneWidget);
     },
   );
 }
 
-Future<AppState> _createAppState() async {
-  final catalog = await ContentRepository().loadCatalog();
+AppState _createAppState(CourseCatalog catalog) {
   return AppState(
     catalog: catalog,
     progress: const ProgressSnapshot(),

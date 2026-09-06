@@ -115,8 +115,23 @@ Future<void> runPilotJourney(
     }
     await tapPilot(tester, find.byKey(const ValueKey('pilot-next')));
   }
+  Future<void> bringResultIntoView(Finder finder) async {
+    final scrollable = find.byType(Scrollable).first;
+    for (final delta in [const Offset(0, -180), const Offset(0, 180)]) {
+      for (var attempt = 0; attempt < 8; attempt++) {
+        if (finder.hitTestable().evaluate().isNotEmpty) return;
+        await tester.drag(scrollable, delta);
+        await tester.pump();
+      }
+    }
+    expect(finder.hitTestable(), findsOneWidget);
+  }
+
+  await bringResultIntoView(find.text(strings.lessonResult(9, 10)));
   expect(find.text(strings.lessonResult(9, 10)), findsOneWidget);
+  await bringResultIntoView(find.text(strings.pilotUnassisted(8)));
   expect(find.text(strings.pilotUnassisted(8)), findsOneWidget);
+  await bringResultIntoView(find.text(strings.pilotReward(140)));
   expect(find.text(strings.pilotReward(140)), findsOneWidget);
   final xp = app.progress.xp;
   await tapPilot(tester, find.widgetWithText(FilledButton, strings.backToPath));
