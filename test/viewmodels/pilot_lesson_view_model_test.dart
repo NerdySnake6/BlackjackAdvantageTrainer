@@ -13,6 +13,86 @@ void main() {
   late CourseCatalog catalog;
   setUpAll(() async => catalog = await ContentRepository().loadCatalog());
 
+  for (final completed in [false, true]) {
+    test(
+      'migration persists once and retries failed storage (completed=$completed)',
+      () async {
+        final lesson = catalog.pilotLessons.first;
+        final session = DecisionLessonSession(lesson);
+        if (completed) {
+          session.begin();
+          for (final task in lesson.scenarios) {
+            session.answer(task.expected);
+            session.next();
+          }
+          session.recordReward(150);
+        }
+        final legacy = session.toJson()
+          ..remove('contentSignature')
+          ..['schema'] = 1;
+        final original = ProgressSnapshot(
+          xp: 999,
+          languageCode: 'ru',
+          pilotSessions: {lesson.id: legacy},
+        );
+        final storage = _Storage();
+        final repository = LocalProgressRepository.withStorage(storage);
+        final app = AppState(
+          catalog: catalog,
+          progress: original,
+          progressRepository: repository,
+        );
+        addTearDown(app.dispose);
+        storage.fail = true;
+        expect(await app.migratePilotProgress(), isFalse);
+        expect(identical(app.progress, original), isTrue);
+        expect(storage.writes, 0);
+        storage.fail = false;
+        expect(await app.migratePilotProgress(), isTrue);
+        expect(storage.writes, 1);
+        expect(
+          (await repository.load()).pilotSessions[lesson.id]!['schema'],
+          2,
+        );
+        expect(app.progress.xp, 999);
+        expect(app.progress.languageCode, 'ru');
+        expect(await app.migratePilotProgress(), isTrue);
+        expect(storage.writes, 1);
+        if (completed) {
+          final restored = DecisionLessonSession.restore(
+            lesson,
+            app.progress.pilotSessions[lesson.id]!,
+          );
+          await app.savePilotSession(restored);
+          expect(app.progress.xp, 999);
+          expect(storage.writes, 1);
+        }
+      },
+    );
+  }
+
+  test('isolated restart handles a corrupt attempt counter', () async {
+    final lesson = catalog.pilotLessons.first;
+    final app = AppState(
+      catalog: catalog,
+      progress: ProgressSnapshot(
+        xp: 99,
+        pilotSessions: {
+          lesson.id: {'schema': 0, 'attempt': -10},
+        },
+      ),
+      progressRepository: LocalProgressRepository.withStorage(_Storage()),
+    );
+    final vm = PilotLessonViewModel(appState: app, lesson: lesson);
+    addTearDown(vm.dispose);
+    addTearDown(app.dispose);
+    expect(vm.incompatibleSave, isTrue);
+    await vm.restart();
+    expect(vm.incompatibleSave, isFalse);
+    expect(vm.session.attempt, 1);
+    expect(app.progress.xp, 99);
+  });
+
   test(
     'every saved interaction survives storage reload; rewards apply once',
     () async {
@@ -225,6 +305,7 @@ void main() {
 class _Storage implements ProgressStorage {
   final values = <String, String>{};
   bool fail = false;
+  int writes = 0;
   Completer<void>? pending;
 
   @override
@@ -236,5 +317,6 @@ class _Storage implements ProgressStorage {
     if (fail) throw StateError('test storage unavailable');
     await pending?.future;
     values[key] = value;
+    writes++;
   }
 }

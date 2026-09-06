@@ -3,6 +3,7 @@ import 'package:blackjack_advantage_trainer/app/app.dart';
 import 'package:blackjack_advantage_trainer/data/content_repository.dart';
 import 'package:blackjack_advantage_trainer/data/local_progress_repository.dart';
 import 'package:blackjack_advantage_trainer/domain/learning/models.dart';
+import 'package:blackjack_advantage_trainer/domain/learning/decision_lesson.dart';
 import 'package:blackjack_advantage_trainer/viewmodels/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,6 +29,12 @@ void main() {
             languageCode: locale,
             experienceLevel: ExperienceLevel.basics,
             hasSeenTelemetryConsent: true,
+            pilotSessions: {
+              for (final lesson in catalog.pilotLessons)
+                lesson.id: DecisionLessonSession(lesson).toJson()
+                  ..remove('contentSignature')
+                  ..['schema'] = 1,
+            },
           ),
         );
         AppState? app;
@@ -38,6 +45,13 @@ void main() {
             catalog: catalog,
             progress: await repository.load(),
             progressRepository: repository,
+          );
+          expect(await app!.migratePilotProgress(), isTrue);
+          expect(
+            app!.progress.pilotSessions.values.every(
+              (saved) => saved['schema'] == 2,
+            ),
+            isTrue,
           );
           await tester.pumpWidget(BlackjackTrainerApp(appState: app!));
           await tester.pumpAndSettle();

@@ -1,6 +1,8 @@
 /// Content-driven lessons on the two supported scenes, not a course generator.
 library;
 
+import 'dart:convert';
+
 import '../blackjack_engine/card.dart';
 import '../blackjack_engine/game_rules.dart';
 import 'lesson_format.dart';
@@ -129,4 +131,32 @@ class PilotLesson {
   String get theory => theoryBlock.text;
   int get introductionCount => scenarios.where((s) => !s.isEvaluated).length;
   int get evaluatedCount => scenarios.where((s) => s.isEvaluated).length;
+
+  /// Locale-independent identity for resume and translation parity checks.
+  String get resumeSignature => jsonEncode({
+    'id': id,
+    'skill': skillId,
+    'schema': schemaVersion,
+    'version': version,
+    'profile': profileId,
+    'theory': theoryBlock.id,
+    'policy': scoring.policyId,
+    'pass': scoring.passCorrect,
+    'stars': scoring.starCorrect,
+    'unassisted': scoring.topStarRequiresUnassisted,
+    'tasks': [
+      for (final task in scenarios)
+        {
+          'id': task.id,
+          'kind': task.kind.name,
+          'stage': task.stage.name,
+          'cards': task.cards.map((c) => c.rank.label).toList(),
+          'dealer': task.dealer?.rank.label,
+          'actions': task.availableActions.map((a) => a.name).toList()..sort(),
+          'initialCount': task.initialCount,
+          'expected': task.expected,
+          'mistakes': task.mistakes.keys.toList()..sort(),
+        },
+    ],
+  });
 }

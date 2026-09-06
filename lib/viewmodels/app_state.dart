@@ -12,6 +12,7 @@ import '../data/content_repository.dart';
 import '../domain/learning/mastery.dart';
 import '../domain/learning/decision_lesson.dart';
 import '../domain/learning/models.dart';
+import '../domain/learning/pilot_progress_migration.dart';
 import '../domain/purchase/purchase_gateway.dart';
 
 class AppState extends ChangeNotifier {
@@ -67,6 +68,22 @@ class AppState extends ChangeNotifier {
 
   CourseCatalog get catalog => _catalog;
   ProgressSnapshot get progress => _progress;
+
+  /// Called before startup interactions; failed writes retain the original state.
+  Future<bool> migratePilotProgress() async {
+    final migrated = const PilotProgressMigration().migrate(
+      _progress,
+      _catalog,
+    );
+    if (identical(migrated, _progress)) return true;
+    try {
+      await _progressRepository.save(migrated);
+    } on Object {
+      return false;
+    }
+    _progress = migrated;
+    return true;
+  }
 
   Locale? get locale =>
       _progress.languageCode == null ? null : Locale(_progress.languageCode!);

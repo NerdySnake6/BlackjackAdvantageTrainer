@@ -161,7 +161,11 @@ void main() {
         'awardedXp': null,
       };
       final session = DecisionLessonSession.restore(lesson, saved);
-      expect(session.toJson(), saved);
+      expect(session.toJson(), {
+        ...saved,
+        'schema': 2,
+        'contentSignature': lesson.resumeSignature,
+      });
       expect(session.firstAnswer, 'stand');
       expect(session.corrected, isTrue);
       expect(session.correctAnswers, 0);

@@ -1,11 +1,8 @@
 /// Fail-closed validation of bundled learning packages, without platform APIs.
 library;
 
-import 'dart:convert';
-
 import '../blackjack_engine/game_rules.dart';
 import 'models.dart';
-import 'pilot_lesson.dart';
 
 class ContentValidator {
   const ContentValidator();
@@ -217,39 +214,12 @@ class ContentValidator {
     );
     for (var i = 0; i < source.pilotLessons.length; i++) {
       _require(
-        jsonEncode(_structure(source.pilotLessons[i])) ==
-            jsonEncode(_structure(translation.pilotLessons[i])),
+        source.pilotLessons[i].resumeSignature ==
+            translation.pilotLessons[i].resumeSignature,
         '${translation.locale}/${translation.pilotLessons[i].id}: lesson semantics differ from source',
       );
     }
   }
-
-  Map<String, Object?> _structure(PilotLesson lesson) => {
-    'id': lesson.id,
-    'skill': lesson.skillId,
-    'schema': lesson.schemaVersion,
-    'version': lesson.version,
-    'profile': lesson.profileId,
-    'theory': lesson.theoryBlock.id,
-    'policy': lesson.scoring.policyId,
-    'pass': lesson.scoring.passCorrect,
-    'stars': lesson.scoring.starCorrect,
-    'unassisted': lesson.scoring.topStarRequiresUnassisted,
-    'tasks': [
-      for (final task in lesson.scenarios)
-        {
-          'id': task.id,
-          'kind': task.kind.name,
-          'stage': task.stage.name,
-          'cards': task.cards.map((c) => c.rank.label).toList(),
-          'dealer': task.dealer?.rank.label,
-          'actions': task.availableActions.map((a) => a.name).toList()..sort(),
-          'initialCount': task.initialCount,
-          'expected': task.expected,
-          'mistakes': task.mistakes.keys.toList()..sort(),
-        },
-    ],
-  };
 
   void _text(Object? value, String path) => _require(
     value is String && value.trim().isNotEmpty,

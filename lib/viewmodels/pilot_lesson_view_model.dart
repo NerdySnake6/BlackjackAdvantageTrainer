@@ -43,7 +43,10 @@ class PilotLessonViewModel extends ChangeNotifier {
     final saved = appState.progress.pilotSessions[lesson.id];
     final attempt = saved?['attempt'];
     await _save(
-      DecisionLessonSession(lesson, attempt: attempt is int ? attempt + 1 : 1),
+      DecisionLessonSession(
+        lesson,
+        attempt: attempt is int && attempt > 0 ? attempt + 1 : 1,
+      ),
     );
   }
 

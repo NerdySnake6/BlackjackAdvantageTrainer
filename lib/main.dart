@@ -28,10 +28,12 @@ Future<void> main() async {
     createAnalytics: FirebaseAnalyticsGateway.new,
     createCrashReporter: FirebaseCrashReporterGateway.new,
   );
-  final catalog = await contentRepository.loadCatalog(
-    localeCode: PlatformDispatcher.instance.locale.languageCode,
-  );
   final progress = await progressRepository.load();
+  final catalog = await contentRepository.loadCatalog(
+    localeCode:
+        progress.languageCode ??
+        PlatformDispatcher.instance.locale.languageCode,
+  );
   final appState = AppState(
     catalog: catalog,
     progress: progress,
@@ -39,6 +41,7 @@ Future<void> main() async {
     analytics: telemetry.analytics,
     crashReporter: telemetry.crashReporter,
   );
+  await appState.migratePilotProgress();
   await appState.initializeTelemetry();
   await appState.initializeEntitlement();
 

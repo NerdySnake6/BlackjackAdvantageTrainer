@@ -169,7 +169,7 @@ void main() {
     () {
       final base = DecisionLessonSession(lessons.first).toJson();
       for (final change in <Map<String, Object?>>[
-        {'schema': 2},
+        {'schema': 99},
         {'lessonId': 'other'},
         {'version': 2},
         {'order': []},

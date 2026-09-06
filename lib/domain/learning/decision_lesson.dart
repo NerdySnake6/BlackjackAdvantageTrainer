@@ -6,9 +6,24 @@ import 'pilot_lesson.dart';
 enum DecisionLessonPhase { theory, decision, coaching, result }
 
 class DecisionLessonSession {
-  DecisionLessonSession(this.lesson, {this.attempt = 1});
+  DecisionLessonSession(this.lesson, {this.attempt = 1}) {
+    if (attempt < 1) throw ArgumentError.value(attempt, 'attempt');
+  }
 
   factory DecisionLessonSession.restore(
+    PilotLesson lesson,
+    Map<String, Object?> json,
+  ) {
+    try {
+      return DecisionLessonSession._restore(lesson, json);
+    } on TypeError {
+      throw const FormatException('Invalid pilot session field type');
+    } on ArgumentError {
+      throw const FormatException('Invalid pilot session field value');
+    }
+  }
+
+  static DecisionLessonSession _restore(
     PilotLesson lesson,
     Map<String, Object?> json,
   ) {
@@ -16,11 +31,17 @@ class DecisionLessonSession {
       lesson,
       attempt: json['attempt']! as int,
     );
-    if (json['schema'] != 1 ||
+    final order = json['order']! as List;
+    if (json['schema'] is! int ||
+        (json['schema'] != 1 && json['schema'] != 2) ||
+        (json['schema'] == 2 &&
+            json['contentSignature'] != lesson.resumeSignature) ||
         json['lessonId'] != lesson.id ||
         json['version'] != lesson.version ||
-        (json['order']! as List).join('|') !=
-            lesson.scenarios.map((item) => item.id).join('|')) {
+        order.length != lesson.scenarios.length ||
+        !order.indexed.every(
+          (entry) => entry.$2 == lesson.scenarios[entry.$1].id,
+        )) {
       throw const FormatException('Incompatible pilot session');
     }
     session._phase = DecisionLessonPhase.values.byName(
@@ -162,7 +183,8 @@ class DecisionLessonSession {
   }
 
   Map<String, Object?> toJson() => {
-    'schema': 1,
+    'schema': 2,
+    'contentSignature': lesson.resumeSignature,
     'lessonId': lesson.id,
     'version': lesson.version,
     'order': lesson.scenarios.map((item) => item.id).toList(),
@@ -199,6 +221,9 @@ class DecisionLessonSession {
         (_phase == DecisionLessonPhase.theory &&
             (_index != 0 || _revealed != 0 || _hint)) ||
         (!answered && _corrected) ||
+        (answered &&
+            (_hint != _hints[_index] ||
+                (firstAnswer == current.expected && !_corrected))) ||
         (_phase == DecisionLessonPhase.result &&
             (!isLastTask || !_corrected)) ||
         (_awardedXp != null &&
