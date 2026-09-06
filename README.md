@@ -44,6 +44,9 @@ still pending. See the roadmap for the status and unchanged study criteria.
 - Three additional playable pilot lessons in Learn: hard 12, soft 18, and
   Hi-Lo cancellation. Each has theory, two unscored introductions, five practice
   tasks, five independent tasks, correction, resume, and an idempotent XP result.
+- Separate new-task checks for these three lessons: ten first answers, 90%
+  threshold, two disjoint forms, resume and end-only feedback. No extra XP;
+  these narrow checks are not full-skill certificates.
 - Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,

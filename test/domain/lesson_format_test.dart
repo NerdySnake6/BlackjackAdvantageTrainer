@@ -78,9 +78,31 @@ void main() {
       expect(session.evaluatedAnswers, 10);
       expect(session.correctAnswers, 10);
       expect(session.passed, isTrue);
+      expect(session.independentAnswers, 5);
+      expect(session.independentCorrectAnswers, 5);
       expect(session.stars, 3);
     },
   );
+
+  test('completion keeps independent practice first answers separate', () {
+    final lesson = PilotLesson.fromJson(_rawLesson());
+    var session = DecisionLessonSession(lesson)..begin();
+    for (var i = 0; i < lesson.scenarios.length; i++) {
+      final task = session.current;
+      final answer = i == 9 || i == 10
+          ? task.availableActions
+                .firstWhere((action) => action.name != task.expected)
+                .name
+          : task.expected;
+      session.answer(answer);
+      if (answer != task.expected) session.answer(task.expected);
+      session.next();
+    }
+
+    expect(session.correctAnswers, 8);
+    expect(session.passed, isTrue);
+    expect(session.independentCorrectAnswers, 3);
+  });
 
   test(
     'unknown schemas, policies, stage order and scene mismatches fail closed',

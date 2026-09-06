@@ -173,6 +173,9 @@ void main() {
         expect(app!.progress.xp, expectedXp);
         expect(app!.progress.streakDays, 5);
         expect(app!.progress.lessonScores[lesson.id], 0.9);
+        expect(app!.progress.masteryChecks, isEmpty);
+        expect(app!.isLessonCompleted(lesson.id), isTrue);
+        expect(app!.isLessonMastered(lesson.id), isFalse);
         await app!.savePilotSession(vm!.session);
         await reload(lesson.id);
         expect(app!.progress.xp, expectedXp);

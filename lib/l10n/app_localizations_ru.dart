@@ -44,7 +44,50 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get pilotResultNote =>
-      'Порог прохождения — 80% первых ответов. Подсказки учитываются отдельно; эта фиксированная практика не подтверждает освоение навыка.';
+      '80% первых ответов достаточно для прохождения урока. Повторяемая практика не подтверждает освоение: для этого есть отдельная проверка на новых задачах.';
+
+  @override
+  String pilotMasteryStatus(int percent) {
+    return 'Новые задачи: $percent% первых ответов';
+  }
+
+  @override
+  String get pilotMastered =>
+      'Проверка урока пройдена. Это не сертификат всей стратегии или счёта полной колоды.';
+
+  @override
+  String get pilotMasteryPending =>
+      'Проверка урока пока не пройдена. Разбери объяснения перед новым вариантом.';
+
+  @override
+  String get checkpointTitle => 'Проверка на новых задачах';
+
+  @override
+  String get checkpointIntro =>
+      '10 новых задач, минимум 9 правильных первых ответов. Без таймера, подсказок и разбора до конца проверки. Каждый ответ сохраняется: после выхода продолжишь тот же вариант. Дополнительных XP нет. Эта узкая проверка не подтверждает весь навык.';
+
+  @override
+  String get checkpointSoftScope =>
+      'Этот вариант проверяет soft 18 с дополнительными картами, когда Double недоступен.';
+
+  @override
+  String get checkpointBegin => 'Начать проверку на новых задачах';
+
+  @override
+  String get checkpointNextForm => 'Попробовать новый вариант';
+
+  @override
+  String get checkpointExhausted =>
+      'В этой версии не осталось новых вариантов. Можно тренироваться в уроке, но повтор уже известных ответов не подтверждает освоение.';
+
+  @override
+  String get checkpointIncompatible =>
+      'Сохранённую проверку нельзя проверить с текущим содержимым. Она сохранена, но не подтверждает освоение. Остальной прогресс не изменился.';
+
+  @override
+  String checkpointReview(String actual, String expected) {
+    return 'Твой ответ: $actual. Правильный ответ: $expected.';
+  }
 
   @override
   String get pilotSaveFailed =>
@@ -87,61 +130,87 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get diagnosticTitle => 'Быстрая проверка навыков';
+
   @override
   String get diagnosticIntro =>
       'Четыре вопроса без таймера подскажут, что потренировать дальше. Это не сертификат.';
+
   @override
   String get diagnosticStart => 'Начать проверку';
+
   @override
-  String diagnosticQuestionProgress(int current, int total) =>
-      'Вопрос $current из $total';
+  String diagnosticQuestionProgress(int current, int total) {
+    return 'Вопрос $current из $total';
+  }
+
   @override
   String get diagnosticQ1 =>
       'Что в основном меняет лучшее действие по базовой стратегии?';
+
   @override
   String get diagnosticQ1A => 'Открытая карта дилера и твоя рука';
+
   @override
   String get diagnosticQ1B => 'Результат предыдущей раздачи';
+
   @override
   String get diagnosticQ1C => 'Размер стола';
+
   @override
   String get diagnosticQ2 => 'Когда в этом тренажёре обычно доступен дабл?';
+
   @override
   String get diagnosticQ2A => 'На двухкарточной руке, если правила разрешают';
+
   @override
   String get diagnosticQ2B => 'После любой дополнительной карты';
+
   @override
   String get diagnosticQ2C => 'Только после выигранной раздачи';
+
   @override
   String get diagnosticQ3 => 'Какой тег получает пятёрка в Hi-Lo?';
+
   @override
   String get diagnosticQ3A => '+1';
+
   @override
   String get diagnosticQ3B => '0';
+
   @override
   String get diagnosticQ3C => '−1';
+
   @override
   String get diagnosticQ4 => 'Когда нужно сбросить running count?';
+
   @override
   String get diagnosticQ4A => 'После каждой руки';
+
   @override
   String get diagnosticQ4B => 'Когда у дилера туз';
+
   @override
   String get diagnosticQ4C => 'Когда перетасована колода';
+
   @override
   String get diagnosticResultTitle => 'Что потренировать дальше';
+
   @override
   String get diagnosticRecommendationStrategy =>
       'Сначала потренируй решения по базовой стратегии.';
+
   @override
   String get diagnosticRecommendationCount =>
       'Сначала потренируй Hi-Lo и running count.';
+
   @override
   String get diagnosticRecommendationCombined =>
       'Чередуй базовую стратегию и running count.';
+
   @override
   String get diagnosticResultNote =>
       'Проверка только предлагает точку старта. Она не открывает уроки и не подтверждает мастерство.';
+
   @override
   String get diagnosticRestart => 'Пройти ещё раз';
 

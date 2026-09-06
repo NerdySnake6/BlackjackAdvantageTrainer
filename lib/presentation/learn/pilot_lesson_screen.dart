@@ -115,6 +115,14 @@ class _PilotBody extends StatelessWidget {
                 Text(strings.pilotReward(session.awardedXp ?? 0)),
                 const SizedBox(height: 16),
                 Text(strings.pilotResultNote),
+                if (context.read<AppState>().isLessonCompleted(vm.lesson.id))
+                  FilledButton.tonal(
+                    key: const ValueKey('pilot-checkpoint'),
+                    onPressed: vm.busy
+                        ? null
+                        : () => context.push('/checkpoint/${vm.lesson.id}'),
+                    child: Text(strings.checkpointTitle),
+                  ),
                 const SizedBox(height: 16),
                 FilledButton(
                   onPressed: vm.busy ? null : () => context.go('/learn'),

@@ -1,6 +1,7 @@
 /// Resumable authored lesson flow with first-answer scoring and correction.
 library;
 
+import 'lesson_format.dart';
 import 'pilot_lesson.dart';
 
 enum DecisionLessonPhase { theory, decision, coaching, result }
@@ -106,6 +107,16 @@ class DecisionLessonSession {
   ].length;
   int get evaluatedAnswers =>
       lesson.scenarios.take(_answers.length).where((s) => s.isEvaluated).length;
+  int get independentAnswers => lesson.scenarios
+      .take(_answers.length)
+      .where((s) => s.stage == LessonMissionStage.independent)
+      .length;
+  int get independentCorrectAnswers => [
+    for (var i = 0; i < _answers.length; i++)
+      if (lesson.scenarios[i].stage == LessonMissionStage.independent &&
+          _answers[i] == lesson.scenarios[i].expected)
+        i,
+  ].length;
   double get score =>
       evaluatedAnswers == 0 ? 0 : correctAnswers / evaluatedAnswers;
   bool get passed => lesson.scoring.passes(correctAnswers);

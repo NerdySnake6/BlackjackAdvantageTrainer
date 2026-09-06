@@ -25,6 +25,7 @@ class LearningPathScreen extends StatelessWidget {
         builder: (context, constraints) {
           final horizontalPadding = constraints.maxWidth < 380 ? 12.0 : 20.0;
           return CustomScrollView(
+            key: const ValueKey('learning-path-scroll'),
             slivers: [
               SliverPadding(
                 padding: EdgeInsets.fromLTRB(
@@ -67,9 +68,15 @@ class LearningPathScreen extends StatelessWidget {
                                     : lesson.subtitle,
                               ),
                               trailing: Icon(
-                                appState.isLessonCompleted(lesson.id)
+                                appState.isLessonMastered(lesson.id)
+                                    ? Icons.workspace_premium
+                                    : appState.isLessonCompleted(lesson.id)
                                     ? Icons.check_circle_outline
                                     : Icons.chevron_right,
+                                semanticLabel:
+                                    appState.isLessonMastered(lesson.id)
+                                    ? strings.pilotMastered
+                                    : null,
                               ),
                               onTap: () => context.push('/pilot/${lesson.id}'),
                             ),

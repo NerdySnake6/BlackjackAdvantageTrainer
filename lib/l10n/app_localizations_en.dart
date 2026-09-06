@@ -43,7 +43,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pilotResultNote =>
-      '80% first answers passes this lesson. Hints are tracked separately; this fixed practice is not a mastery certificate.';
+      '80% first answers passes this lesson. This fixed practice does not confirm mastery; take the separate check on new tasks.';
+
+  @override
+  String pilotMasteryStatus(int percent) {
+    return 'New-task check: $percent% first answers';
+  }
+
+  @override
+  String get pilotMastered =>
+      'Lesson check passed. This is not a full strategy or whole-deck certificate.';
+
+  @override
+  String get pilotMasteryPending =>
+      'Lesson check not passed yet. Review the explanations before trying a fresh form.';
+
+  @override
+  String get checkpointTitle => 'Check on new tasks';
+
+  @override
+  String get checkpointIntro =>
+      '10 new tasks, at least 9 correct first answers. No timer, hints or feedback until the end. Each answer is saved; leaving resumes the same form. No additional XP. This narrow check does not certify the whole skill.';
+
+  @override
+  String get checkpointSoftScope =>
+      'This form checks soft 18 with extra cards, when Double is unavailable.';
+
+  @override
+  String get checkpointBegin => 'Start new-task check';
+
+  @override
+  String get checkpointNextForm => 'Try a fresh form';
+
+  @override
+  String get checkpointExhausted =>
+      'No unused forms remain in this version. You can practise the lesson, but repeating these answers cannot confirm mastery.';
+
+  @override
+  String get checkpointIncompatible =>
+      'This saved check cannot be verified with the current content. It has been preserved, but does not confirm mastery. Your other progress is unchanged.';
+
+  @override
+  String checkpointReview(String actual, String expected) {
+    return 'Your answer: $actual. Correct answer: $expected.';
+  }
 
   @override
   String get pilotSaveFailed =>
@@ -86,62 +129,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get diagnosticTitle => 'Quick skill check';
+
   @override
   String get diagnosticIntro =>
       'Four untimed questions suggest where to practise next. This is not a certificate.';
+
   @override
   String get diagnosticStart => 'Start check';
+
   @override
-  String diagnosticQuestionProgress(int current, int total) =>
-      'Question $current of $total';
+  String diagnosticQuestionProgress(int current, int total) {
+    return 'Question $current of $total';
+  }
+
   @override
   String get diagnosticQ1 =>
       'What mainly changes the best basic-strategy action?';
+
   @override
   String get diagnosticQ1A => 'The dealer up-card and your hand';
+
   @override
-  String get diagnosticQ1B => "The last round's result";
+  String get diagnosticQ1B => 'The last round\'s result';
+
   @override
   String get diagnosticQ1C => 'The size of the table';
+
   @override
   String get diagnosticQ2 =>
       'When is Double normally available in this trainer?';
+
   @override
   String get diagnosticQ2A => 'On a two-card hand when the rules allow it';
+
   @override
   String get diagnosticQ2B => 'After any hit';
+
   @override
   String get diagnosticQ2C => 'Only after winning a round';
+
   @override
   String get diagnosticQ3 => 'In Hi-Lo, what tag does a 5 receive?';
+
   @override
   String get diagnosticQ3A => '+1';
+
   @override
   String get diagnosticQ3B => '0';
+
   @override
   String get diagnosticQ3C => '−1';
+
   @override
   String get diagnosticQ4 => 'When should you reset a running count?';
+
   @override
   String get diagnosticQ4A => 'After every hand';
+
   @override
   String get diagnosticQ4B => 'When the dealer shows an ace';
+
   @override
   String get diagnosticQ4C => 'When the shoe is shuffled';
+
   @override
   String get diagnosticResultTitle => 'Suggested next focus';
+
   @override
   String get diagnosticRecommendationStrategy =>
       'Practise basic-strategy decisions first.';
+
   @override
   String get diagnosticRecommendationCount =>
       'Practise Hi-Lo and running count first.';
+
   @override
   String get diagnosticRecommendationCombined =>
       'Alternate basic strategy with running-count practice.';
+
   @override
   String get diagnosticResultNote =>
       'This check only suggests a starting point. It does not unlock lessons or certify mastery.';
+
   @override
   String get diagnosticRestart => 'Run again';
 

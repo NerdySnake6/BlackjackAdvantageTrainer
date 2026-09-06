@@ -10,6 +10,7 @@ import '../core/analytics/crash_reporter_gateway.dart';
 import '../core/persistence/progress_repository.dart';
 import '../data/content_repository.dart';
 import '../domain/learning/mastery.dart';
+import '../domain/learning/mastery_check.dart';
 import '../domain/learning/decision_lesson.dart';
 import '../domain/learning/models.dart';
 import '../domain/learning/pilot_progress_migration.dart';
@@ -116,6 +117,16 @@ class AppState extends ChangeNotifier {
 
   bool isLessonCompleted(String lessonId) {
     return _scorer.isLessonComplete(_progress.lessonScores[lessonId] ?? 0);
+  }
+
+  bool isLessonMastered(String lessonId) {
+    final saved = _progress.masteryChecks[lessonId];
+    if (saved == null || !isLessonCompleted(lessonId)) return false;
+    try {
+      return MasteryCheckSession.restore(lessonId, saved).passed;
+    } on FormatException {
+      return false;
+    }
   }
 
   bool isLessonUnlocked(String lessonId) {
@@ -416,6 +427,52 @@ class AppState extends ChangeNotifier {
       if (identical(_progress, next)) _progress = previous;
       rethrow;
     }
+    notifyListeners();
+  }
+
+  /// A check stores evidence, not XP. Old answers/forms cannot be replayed.
+  Future<void> saveMasteryCheck(MasteryCheckSession session) async {
+    final id = session.lessonId;
+    if (!isLessonCompleted(id)) throw StateError('Complete the lesson first');
+    final existing = _progress.masteryChecks[id];
+    final nextData = session.toJson();
+    MasteryCheckSession.restore(id, nextData);
+    if (existing == null) {
+      if (session.form != 0 ||
+          session.index != 0 ||
+          session.revealed != 0 ||
+          session.count != 0) {
+        throw StateError('Start the first form before answering');
+      }
+    } else {
+      final previous = MasteryCheckSession.restore(id, existing);
+      if (session.form == previous.form) {
+        if (session.index < previous.index ||
+            session.index > previous.index + 1 ||
+            previous.answers.indexed.any(
+              (e) => session.answers[e.$1] != e.$2,
+            ) ||
+            (session.index == previous.index &&
+                session.revealed < previous.revealed)) {
+          throw StateError('Check answers cannot be rewritten');
+        }
+        if (previous.complete) return;
+      } else if (!previous.complete ||
+          previous.passed ||
+          session.form != previous.form + 1 ||
+          session.index != 0 ||
+          session.revealed != 0 ||
+          session.count != 0) {
+        throw StateError('No fresh form available');
+      }
+    }
+    final previous = _progress;
+    final next = previous.copyWith(
+      masteryChecks: {...previous.masteryChecks, id: nextData},
+    );
+    // Publish only a successful write: failed checks cannot award a badge.
+    await _progressRepository.save(next);
+    _progress = next;
     notifyListeners();
   }
 

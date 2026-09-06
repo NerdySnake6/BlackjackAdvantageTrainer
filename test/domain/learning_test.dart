@@ -23,6 +23,23 @@ void main() {
       );
     });
 
+    test('mastery checkpoint is separate from lesson completion', () {
+      const calculator = MasteryCalculator();
+
+      expect(
+        calculator.checkpointPassed(correctAnswers: 9, totalAnswers: 10),
+        isTrue,
+      );
+      expect(
+        calculator.checkpointPassed(correctAnswers: 8, totalAnswers: 10),
+        isFalse,
+      );
+      expect(
+        calculator.checkpointScore(correctAnswers: 8, totalAnswers: 10),
+        0.8,
+      );
+    });
+
     test('review intervals follow 1, 3, 7, 14, and 30 days', () {
       const scheduler = ReviewScheduler();
       final completedAt = DateTime.utc(2026, 8, 2);
@@ -74,6 +91,8 @@ void main() {
       );
 
       expect(decoded.lessonScores['quick-start'], 0.875);
+      expect(decoded.masteryChecks, isEmpty);
+      expect(decoded.averageMastery, 0.875);
       expect(decoded.activeSessions['card-values']!.nextExerciseIndex, 3);
       expect(decoded.experienceLevel, ExperienceLevel.experienced);
       expect(decoded.hasSeenCountDrillIntro, isTrue);

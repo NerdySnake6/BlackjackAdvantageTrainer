@@ -161,8 +161,74 @@ abstract class AppLocalizations {
   /// No description provided for @pilotResultNote.
   ///
   /// In en, this message translates to:
-  /// **'80% first answers passes this lesson. Hints are tracked separately; this fixed practice is not a mastery certificate.'**
+  /// **'80% first answers passes this lesson. This fixed practice does not confirm mastery; take the separate check on new tasks.'**
   String get pilotResultNote;
+
+  /// No description provided for @pilotMasteryStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'New-task check: {percent}% first answers'**
+  String pilotMasteryStatus(int percent);
+
+  /// No description provided for @pilotMastered.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson check passed. This is not a full strategy or whole-deck certificate.'**
+  String get pilotMastered;
+
+  /// No description provided for @pilotMasteryPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson check not passed yet. Review the explanations before trying a fresh form.'**
+  String get pilotMasteryPending;
+
+  /// No description provided for @checkpointTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check on new tasks'**
+  String get checkpointTitle;
+
+  /// No description provided for @checkpointIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'10 new tasks, at least 9 correct first answers. No timer, hints or feedback until the end. Each answer is saved; leaving resumes the same form. No additional XP. This narrow check does not certify the whole skill.'**
+  String get checkpointIntro;
+
+  /// No description provided for @checkpointSoftScope.
+  ///
+  /// In en, this message translates to:
+  /// **'This form checks soft 18 with extra cards, when Double is unavailable.'**
+  String get checkpointSoftScope;
+
+  /// No description provided for @checkpointBegin.
+  ///
+  /// In en, this message translates to:
+  /// **'Start new-task check'**
+  String get checkpointBegin;
+
+  /// No description provided for @checkpointNextForm.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a fresh form'**
+  String get checkpointNextForm;
+
+  /// No description provided for @checkpointExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'No unused forms remain in this version. You can practise the lesson, but repeating these answers cannot confirm mastery.'**
+  String get checkpointExhausted;
+
+  /// No description provided for @checkpointIncompatible.
+  ///
+  /// In en, this message translates to:
+  /// **'This saved check cannot be verified with the current content. It has been preserved, but does not confirm mastery. Your other progress is unchanged.'**
+  String get checkpointIncompatible;
+
+  /// No description provided for @checkpointReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answer: {actual}. Correct answer: {expected}.'**
+  String checkpointReview(String actual, String expected);
 
   /// No description provided for @pilotSaveFailed.
   ///
@@ -218,31 +284,160 @@ abstract class AppLocalizations {
   /// **'Your first answer: {answer}'**
   String pilotSelected(String answer);
 
+  /// No description provided for @diagnosticTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick skill check'**
   String get diagnosticTitle;
+
+  /// No description provided for @diagnosticIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Four untimed questions suggest where to practise next. This is not a certificate.'**
   String get diagnosticIntro;
+
+  /// No description provided for @diagnosticStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start check'**
   String get diagnosticStart;
+
+  /// No description provided for @diagnosticQuestionProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {current} of {total}'**
   String diagnosticQuestionProgress(int current, int total);
+
+  /// No description provided for @diagnosticQ1.
+  ///
+  /// In en, this message translates to:
+  /// **'What mainly changes the best basic-strategy action?'**
   String get diagnosticQ1;
+
+  /// No description provided for @diagnosticQ1A.
+  ///
+  /// In en, this message translates to:
+  /// **'The dealer up-card and your hand'**
   String get diagnosticQ1A;
+
+  /// No description provided for @diagnosticQ1B.
+  ///
+  /// In en, this message translates to:
+  /// **'The last round\'s result'**
   String get diagnosticQ1B;
+
+  /// No description provided for @diagnosticQ1C.
+  ///
+  /// In en, this message translates to:
+  /// **'The size of the table'**
   String get diagnosticQ1C;
+
+  /// No description provided for @diagnosticQ2.
+  ///
+  /// In en, this message translates to:
+  /// **'When is Double normally available in this trainer?'**
   String get diagnosticQ2;
+
+  /// No description provided for @diagnosticQ2A.
+  ///
+  /// In en, this message translates to:
+  /// **'On a two-card hand when the rules allow it'**
   String get diagnosticQ2A;
+
+  /// No description provided for @diagnosticQ2B.
+  ///
+  /// In en, this message translates to:
+  /// **'After any hit'**
   String get diagnosticQ2B;
+
+  /// No description provided for @diagnosticQ2C.
+  ///
+  /// In en, this message translates to:
+  /// **'Only after winning a round'**
   String get diagnosticQ2C;
+
+  /// No description provided for @diagnosticQ3.
+  ///
+  /// In en, this message translates to:
+  /// **'In Hi-Lo, what tag does a 5 receive?'**
   String get diagnosticQ3;
+
+  /// No description provided for @diagnosticQ3A.
+  ///
+  /// In en, this message translates to:
+  /// **'+1'**
   String get diagnosticQ3A;
+
+  /// No description provided for @diagnosticQ3B.
+  ///
+  /// In en, this message translates to:
+  /// **'0'**
   String get diagnosticQ3B;
+
+  /// No description provided for @diagnosticQ3C.
+  ///
+  /// In en, this message translates to:
+  /// **'−1'**
   String get diagnosticQ3C;
+
+  /// No description provided for @diagnosticQ4.
+  ///
+  /// In en, this message translates to:
+  /// **'When should you reset a running count?'**
   String get diagnosticQ4;
+
+  /// No description provided for @diagnosticQ4A.
+  ///
+  /// In en, this message translates to:
+  /// **'After every hand'**
   String get diagnosticQ4A;
+
+  /// No description provided for @diagnosticQ4B.
+  ///
+  /// In en, this message translates to:
+  /// **'When the dealer shows an ace'**
   String get diagnosticQ4B;
+
+  /// No description provided for @diagnosticQ4C.
+  ///
+  /// In en, this message translates to:
+  /// **'When the shoe is shuffled'**
   String get diagnosticQ4C;
+
+  /// No description provided for @diagnosticResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested next focus'**
   String get diagnosticResultTitle;
+
+  /// No description provided for @diagnosticRecommendationStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Practise basic-strategy decisions first.'**
   String get diagnosticRecommendationStrategy;
+
+  /// No description provided for @diagnosticRecommendationCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Practise Hi-Lo and running count first.'**
   String get diagnosticRecommendationCount;
+
+  /// No description provided for @diagnosticRecommendationCombined.
+  ///
+  /// In en, this message translates to:
+  /// **'Alternate basic strategy with running-count practice.'**
   String get diagnosticRecommendationCombined;
+
+  /// No description provided for @diagnosticResultNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This check only suggests a starting point. It does not unlock lessons or certify mastery.'**
   String get diagnosticResultNote;
+
+  /// No description provided for @diagnosticRestart.
+  ///
+  /// In en, this message translates to:
+  /// **'Run again'**
   String get diagnosticRestart;
 
   /// No description provided for @appTitle.
