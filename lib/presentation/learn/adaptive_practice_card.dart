@@ -59,6 +59,7 @@ class AdaptivePracticeCard extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(strings.adaptiveOptional),
+            Text(strings.adaptiveVariant(session.adaptiveSeed + 1)),
             if (!plan.isChallenge || answer != null) Text(explanation),
             if (task.isCounting) ...[
               Text(strings.pilotStartingCount(0)),

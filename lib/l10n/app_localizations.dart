@@ -161,20 +161,26 @@ abstract class AppLocalizations {
   /// No description provided for @adaptiveExtraHard.
   ///
   /// In en, this message translates to:
-  /// **'3+4+5 is still hard 12. An extra card does not change the rule: against 4, choose Stand. There is no timer.'**
+  /// **'An extra card does not change hard 12: Stand against 4–6, Hit against 2–3 and 7–A. There is no timer.'**
   String get adaptiveExtraHard;
 
   /// No description provided for @adaptiveExtraSoft.
   ///
   /// In en, this message translates to:
-  /// **'A+3+4 is soft 18. The extra card makes Double unavailable: against 6, the fallback is Stand. There is no timer.'**
+  /// **'With an extra card, this is still soft 18 but Double is unavailable. Stand against 2–8; Hit against 9, 10 or A. There is no timer.'**
   String get adaptiveExtraSoft;
 
   /// No description provided for @adaptiveExtraCount.
   ///
   /// In en, this message translates to:
-  /// **'One extra card, the same Hi-Lo tags, no timer: +1, 0, −1, +1, −1. Starting from zero, the final RC is zero.'**
+  /// **'One extra card, the same Hi-Lo tags, no timer. Starting from zero, add the tags shown on the cards; neutral cards do not change RC.'**
   String get adaptiveExtraCount;
+
+  /// No description provided for @adaptiveVariant.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice variant {number}'**
+  String adaptiveVariant(int number);
 
   /// No description provided for @pilotPracticeBaseline.
   ///

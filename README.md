@@ -51,6 +51,8 @@ still pending. See the roadmap for the status and unchanged study criteria.
   answers without hints), separately from mastery and the unchanged XP rewards.
 - Between pilot practice and independent tasks, optional unscored examples
   respond to repeated errors or add one extra card after consistent success.
+- These optional examples vary between attempts using a persisted seed; resuming
+  reproduces the same cards and actions without changing the held-out checks.
 - Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,

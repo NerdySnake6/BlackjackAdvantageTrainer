@@ -50,15 +50,20 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get adaptiveExtraHard =>
-      '3+4+5 — всё ещё hard 12. Дополнительная карта не меняет правило: против 4 выбирай Stand. Таймера нет.';
+      'Дополнительная карта не меняет hard 12: против 4–6 — Stand, против 2–3 и 7–A — Hit. Таймера нет.';
 
   @override
   String get adaptiveExtraSoft =>
-      'A+3+4 — soft 18. Дополнительная карта делает Double недоступным: против 6 запасное действие — Stand. Таймера нет.';
+      'С дополнительной картой это по-прежнему soft 18, но Double недоступен. Против 2–8 — Stand; против 9, 10 или A — Hit. Таймера нет.';
 
   @override
   String get adaptiveExtraCount =>
-      'На одну карту больше, прежние теги Hi-Lo, без таймера: +1, 0, −1, +1, −1. При начальном нуле конечный RC — ноль.';
+      'На одну карту больше, прежние теги Hi-Lo, без таймера. Начиная с нуля, сложи показанные теги карт; нейтральные карты не меняют RC.';
+
+  @override
+  String adaptiveVariant(int number) {
+    return 'Вариант практики $number';
+  }
 
   @override
   String pilotPracticeBaseline(int correct, int unassisted) {

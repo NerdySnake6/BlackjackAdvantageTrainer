@@ -8,8 +8,15 @@ import 'pilot_lesson.dart';
 enum DecisionLessonPhase { theory, decision, coaching, result }
 
 class DecisionLessonSession {
-  DecisionLessonSession(this.lesson, {this.attempt = 1}) {
+  DecisionLessonSession(this.lesson, {this.attempt = 1, int? adaptiveSeed})
+    : adaptiveSeed =
+          adaptiveSeed ??
+          (attempt - 1) % (AdaptiveExampleGenerator.maxSeed + 1) {
     if (attempt < 1) throw ArgumentError.value(attempt, 'attempt');
+    if (this.adaptiveSeed < 0 ||
+        this.adaptiveSeed > AdaptiveExampleGenerator.maxSeed) {
+      throw ArgumentError.value(this.adaptiveSeed, 'adaptiveSeed');
+    }
   }
 
   factory DecisionLessonSession.restore(
@@ -32,9 +39,13 @@ class DecisionLessonSession {
     final session = DecisionLessonSession(
       lesson,
       attempt: json['attempt']! as int,
+      adaptiveSeed: json['adaptiveSeed'] as int? ?? 0,
     );
     final order = json['order']! as List;
-    if (json['schema'] is! int ||
+    if ((json['adaptiveGeneratorVersion'] != null &&
+            json['adaptiveGeneratorVersion'] !=
+                AdaptiveExampleGenerator.version) ||
+        json['schema'] is! int ||
         (json['schema'] != 1 && json['schema'] != 2) ||
         (json['schema'] == 2 &&
             json['contentSignature'] != lesson.resumeSignature) ||
@@ -65,6 +76,7 @@ class DecisionLessonSession {
 
   final PilotLesson lesson;
   final int attempt;
+  final int adaptiveSeed;
   DecisionLessonPhase _phase = DecisionLessonPhase.theory;
   int _index = 0;
   int _revealed = 0;
@@ -78,7 +90,7 @@ class DecisionLessonSession {
   int _adaptiveCount = 0;
 
   LessonAdaptation? get adaptation =>
-      LessonAdaptation.select(lesson, _answers, _hints);
+      LessonAdaptation.select(lesson, _answers, _hints, seed: adaptiveSeed);
   String? get adaptiveAnswer => _adaptiveAnswer;
   int get adaptiveCount => _adaptiveCount;
   bool get isAdaptiveBoundary =>
@@ -255,6 +267,8 @@ class DecisionLessonSession {
     'awardedXp': _awardedXp,
     'adaptiveAnswer': _adaptiveAnswer,
     'adaptiveCount': _adaptiveCount,
+    'adaptiveSeed': adaptiveSeed,
+    'adaptiveGeneratorVersion': AdaptiveExampleGenerator.version,
   };
 
   void _validate() {

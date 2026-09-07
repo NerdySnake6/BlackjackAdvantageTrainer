@@ -189,6 +189,8 @@ void main() {
         'contentSignature': lesson.resumeSignature,
         'adaptiveAnswer': null,
         'adaptiveCount': 0,
+        'adaptiveSeed': 0,
+        'adaptiveGeneratorVersion': 1,
       });
       expect(session.firstAnswer, 'stand');
       expect(session.corrected, isTrue);

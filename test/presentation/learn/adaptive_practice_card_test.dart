@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:blackjack_advantage_trainer/core/persistence/progress_repository.dart';
 import 'package:blackjack_advantage_trainer/data/content_repository.dart';
 import 'package:blackjack_advantage_trainer/domain/blackjack_engine/game_rules.dart';
+import 'package:blackjack_advantage_trainer/domain/learning/decision_lesson.dart';
 import 'package:blackjack_advantage_trainer/domain/learning/models.dart';
 import 'package:blackjack_advantage_trainer/l10n/app_localizations.dart';
 import 'package:blackjack_advantage_trainer/presentation/learn/adaptive_practice_card.dart';
@@ -38,7 +39,7 @@ void main() {
             final lesson = catalog.pilotLessons.firstWhere(
               (l) => l.id == lessonId,
             );
-            final session = boundary(
+            final baseSession = boundary(
               lesson,
               errors: help
                   ? lessonId == 'soft-18'
@@ -48,6 +49,10 @@ void main() {
                         : {2, 3}
                   : {},
             );
+            final session = DecisionLessonSession.restore(lesson, {
+              ...baseSession.toJson(),
+              'adaptiveSeed': help ? 0 : 37,
+            });
             final repository = _Repository(
               ProgressSnapshot(
                 xp: 500,
@@ -134,6 +139,7 @@ void main() {
               );
             }
             final saved = app.progress.pilotSessions[lessonId]!;
+            expect(saved['adaptiveSeed'], help ? 0 : 37);
             expect(saved['answers'], session.toJson()['answers']);
             expect(
               saved['adaptiveAnswer'],
