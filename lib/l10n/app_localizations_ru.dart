@@ -9,6 +9,25 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String pilotPracticeBaseline(int correct, int unassisted) {
+    return 'Последняя практика: $correct/10 правильных первых ответов; $unassisted/10 правильно без подсказок.';
+  }
+
+  @override
+  String pilotPracticeComparison(
+    int before,
+    int after,
+    int beforeUnassisted,
+    int afterUnassisted,
+  ) {
+    return 'Предыдущая → последняя практика: $before/10 → $after/10 правильно; без подсказок: $beforeUnassisted/10 → $afterUnassisted/10.';
+  }
+
+  @override
+  String get pilotPracticeComparisonNote =>
+      'Это повторяемые тренировочные задачи, а не результат освоения на новых заданиях.';
+
+  @override
   String get pilotTitle => 'Три игровых урока · пилот';
 
   @override

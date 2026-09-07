@@ -14,6 +14,7 @@ import '../../viewmodels/pilot_lesson_view_model.dart';
 import '../drill/cancellation_scene.dart';
 import '../table/table_formatters.dart';
 import 'decision_scene.dart';
+import 'pilot_performance_summary.dart';
 
 class PilotLessonScreen extends StatelessWidget {
   const PilotLessonScreen({super.key, required this.lessonId});
@@ -113,6 +114,7 @@ class _PilotBody extends StatelessWidget {
                 Text(strings.pilotUnassisted(session.unassistedAnswers)),
                 Text(strings.pilotStars(session.stars)),
                 Text(strings.pilotReward(session.awardedXp ?? 0)),
+                PilotPerformanceSummary(lessonId: vm.lesson.id),
                 const SizedBox(height: 16),
                 Text(strings.pilotResultNote),
                 if (context.read<AppState>().isLessonCompleted(vm.lesson.id))

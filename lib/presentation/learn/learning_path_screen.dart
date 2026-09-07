@@ -10,6 +10,7 @@ import '../../domain/learning/models.dart';
 import '../../domain/learning/diagnostic.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
+import 'pilot_performance_summary.dart';
 
 class LearningPathScreen extends StatelessWidget {
   const LearningPathScreen({super.key});
@@ -57,28 +58,48 @@ class LearningPathScreen extends StatelessWidget {
                         ),
                         for (final lesson in appState.catalog.pilotLessons)
                           Card(
-                            child: ListTile(
-                              key: ValueKey('pilot-${lesson.id}'),
-                              title: Text(lesson.title),
-                              subtitle: Text(
-                                appState.progress.pilotSessions.containsKey(
-                                      lesson.id,
-                                    )
-                                    ? strings.continueLesson
-                                    : lesson.subtitle,
-                              ),
-                              trailing: Icon(
-                                appState.isLessonMastered(lesson.id)
-                                    ? Icons.workspace_premium
-                                    : appState.isLessonCompleted(lesson.id)
-                                    ? Icons.check_circle_outline
-                                    : Icons.chevron_right,
-                                semanticLabel:
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  key: ValueKey('pilot-${lesson.id}'),
+                                  title: Text(lesson.title),
+                                  subtitle: Text(
+                                    appState.progress.pilotSessions.containsKey(
+                                          lesson.id,
+                                        )
+                                        ? strings.continueLesson
+                                        : lesson.subtitle,
+                                  ),
+                                  trailing: Icon(
                                     appState.isLessonMastered(lesson.id)
-                                    ? strings.pilotMastered
-                                    : null,
-                              ),
-                              onTap: () => context.push('/pilot/${lesson.id}'),
+                                        ? Icons.workspace_premium
+                                        : appState.isLessonCompleted(lesson.id)
+                                        ? Icons.check_circle_outline
+                                        : Icons.chevron_right,
+                                    semanticLabel:
+                                        appState.isLessonMastered(lesson.id)
+                                        ? strings.pilotMastered
+                                        : null,
+                                  ),
+                                  onTap: () =>
+                                      context.push('/pilot/${lesson.id}'),
+                                ),
+                                if (appState.latestPilotPerformance(
+                                      lesson.id,
+                                    ) !=
+                                    null)
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      16,
+                                      0,
+                                      16,
+                                      16,
+                                    ),
+                                    child: PilotPerformanceSummary(
+                                      lessonId: lesson.id,
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                         const SizedBox(height: 12),

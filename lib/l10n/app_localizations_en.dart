@@ -9,6 +9,25 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String pilotPracticeBaseline(int correct, int unassisted) {
+    return 'Last practice: $correct/10 first answers correct; $unassisted/10 correct without hints.';
+  }
+
+  @override
+  String pilotPracticeComparison(
+    int before,
+    int after,
+    int beforeUnassisted,
+    int afterUnassisted,
+  ) {
+    return 'Previous → latest practice: $before/10 → $after/10 correct; without hints: $beforeUnassisted/10 → $afterUnassisted/10.';
+  }
+
+  @override
+  String get pilotPracticeComparisonNote =>
+      'These are repeated practice tasks, not a new-task mastery result.';
+
+  @override
   String get pilotTitle => 'Three game lessons · pilot';
 
   @override

@@ -98,6 +98,29 @@ abstract class AppLocalizations {
     Locale('ru'),
   ];
 
+  /// No description provided for @pilotPracticeBaseline.
+  ///
+  /// In en, this message translates to:
+  /// **'Last practice: {correct}/10 first answers correct; {unassisted}/10 correct without hints.'**
+  String pilotPracticeBaseline(int correct, int unassisted);
+
+  /// No description provided for @pilotPracticeComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous → latest practice: {before}/10 → {after}/10 correct; without hints: {beforeUnassisted}/10 → {afterUnassisted}/10.'**
+  String pilotPracticeComparison(
+    int before,
+    int after,
+    int beforeUnassisted,
+    int afterUnassisted,
+  );
+
+  /// No description provided for @pilotPracticeComparisonNote.
+  ///
+  /// In en, this message translates to:
+  /// **'These are repeated practice tasks, not a new-task mastery result.'**
+  String get pilotPracticeComparisonNote;
+
   /// No description provided for @pilotTitle.
   ///
   /// In en, this message translates to:

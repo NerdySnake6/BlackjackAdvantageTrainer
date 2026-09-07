@@ -9,6 +9,7 @@ import '../core/analytics/analytics_gateway.dart';
 import '../core/analytics/crash_reporter_gateway.dart';
 import '../core/persistence/progress_repository.dart';
 import '../data/content_repository.dart';
+import '../domain/learning/lesson_performance.dart';
 import '../domain/learning/mastery.dart';
 import '../domain/learning/mastery_check.dart';
 import '../domain/learning/decision_lesson.dart';
@@ -127,6 +128,41 @@ class AppState extends ChangeNotifier {
     } on FormatException {
       return false;
     }
+  }
+
+  LessonPerformance? previousPilotPerformance(String lessonId) {
+    final saved = _progress.previousPilotResults[lessonId];
+    if (saved == null) return null;
+    try {
+      final result = LessonPerformance.fromJson(saved);
+      final lesson = catalog.pilotLessons.firstWhere((l) => l.id == lessonId);
+      return result.signature == lesson.resumeSignature ? result : null;
+    } on FormatException {
+      return null;
+    } on TypeError {
+      return null;
+    } on StateError {
+      return null;
+    }
+  }
+
+  LessonPerformance? latestPilotPerformance(String lessonId) {
+    final saved = _progress.pilotSessions[lessonId];
+    if (saved != null) {
+      try {
+        final lesson = catalog.pilotLessons.firstWhere((l) => l.id == lessonId);
+        final session = DecisionLessonSession.restore(lesson, saved);
+        if (session.phase == DecisionLessonPhase.result &&
+            session.awardedXp != null) {
+          return LessonPerformance.fromSession(session);
+        }
+      } on FormatException {
+        // A changed/corrupt session must not produce an invented comparison.
+      } on StateError {
+        return null;
+      }
+    }
+    return previousPilotPerformance(lessonId);
   }
 
   bool isLessonUnlocked(String lessonId) {
@@ -396,14 +432,37 @@ class AppState extends ChangeNotifier {
     }
     final previous = _progress;
     var next = previous;
+    if (existing != null &&
+        previousAttempt is int &&
+        session.attempt > previousAttempt) {
+      try {
+        final completed = DecisionLessonSession.restore(
+          session.lesson,
+          existing,
+        );
+        if (completed.phase == DecisionLessonPhase.result &&
+            completed.awardedXp != null) {
+          next = next.copyWith(
+            previousPilotResults: {
+              ...previous.previousPilotResults,
+              id: LessonPerformance.fromSession(completed).toJson(),
+            },
+          );
+        }
+      } on FormatException {
+        // Isolated restarts of incompatible saves have no comparable baseline.
+      }
+    }
     if (session.phase == DecisionLessonPhase.result) {
       final previousScore = previous.lessonScores[id] ?? 0;
       final score = _scorer.score(
         correctAnswers: session.correctAnswers,
         totalAnswers: session.evaluatedAnswers,
       );
-      final bonus = previousScore < 0.8 && score >= 0.8 ? 50 : 0;
-      final xp = session.correctAnswers * 10 + bonus;
+      final xp = const PilotRewardAdapter().xp(
+        correct: session.correctAnswers,
+        firstCompletion: previousScore < 0.8,
+      );
       session.recordReward(xp);
       final now = _clock();
       final date = DateTime(now.year, now.month, now.day);

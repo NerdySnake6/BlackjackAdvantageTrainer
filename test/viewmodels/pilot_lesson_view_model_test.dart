@@ -282,6 +282,101 @@ void main() {
   );
 
   test(
+    'practice comparison survives restart and failed save without touching mastery',
+    () async {
+      final storage = _Storage();
+      final repository = LocalProgressRepository.withStorage(storage);
+      final lesson = catalog.pilotLessons.first;
+      var app = AppState(
+        catalog: catalog,
+        progress: const ProgressSnapshot(),
+        progressRepository: repository,
+      );
+      var vm = PilotLessonViewModel(appState: app, lesson: lesson);
+      Future<void> finish({required int errors, bool hint = false}) async {
+        await vm.begin();
+        for (var i = 0; i < lesson.scenarios.length; i++) {
+          if (hint && i == 3) await vm.hint();
+          final expected = vm.session.current.expected;
+          final wrong = expected == 'hit' ? 'stand' : 'hit';
+          final answer = i >= 2 && i < errors + 2 ? wrong : expected;
+          await vm.answer(answer);
+          if (answer != expected) await vm.answer(expected);
+          await vm.next();
+        }
+      }
+
+      await finish(errors: 2, hint: true);
+      expect(app.latestPilotPerformance(lesson.id)!.correct, 8);
+      expect(app.latestPilotPerformance(lesson.id)!.unassisted, 8);
+      expect(app.previousPilotPerformance(lesson.id), isNull);
+      storage.fail = true;
+      await vm.restart();
+      expect(vm.saveFailed, isTrue);
+      expect(app.progress.previousPilotResults, isEmpty);
+      storage.fail = false;
+      await vm.restart();
+      expect(app.previousPilotPerformance(lesson.id)!.correct, 8);
+      await finish(errors: 0, hint: true);
+      expect(vm.session.stars, 2);
+      expect(app.latestPilotPerformance(lesson.id)!.correct, 10);
+      expect(app.latestPilotPerformance(lesson.id)!.unassisted, 9);
+      expect(app.progress.xp, 230);
+      final writes = storage.writes;
+      await app.savePilotSession(vm.session);
+      expect(storage.writes, writes);
+      vm.dispose();
+      app.dispose();
+      app = AppState(
+        catalog: catalog,
+        progress: await repository.load(),
+        progressRepository: repository,
+      );
+      vm = PilotLessonViewModel(appState: app, lesson: lesson);
+      expect(app.previousPilotPerformance(lesson.id)!.correct, 8);
+      expect(app.latestPilotPerformance(lesson.id)!.correct, 10);
+      await vm.restart();
+      await finish(errors: 3);
+      expect(app.previousPilotPerformance(lesson.id)!.correct, 10);
+      expect(app.latestPilotPerformance(lesson.id)!.correct, 7);
+      expect(app.progress.lessonScores[lesson.id], 1);
+      expect(app.progress.masteryChecks, isEmpty);
+      expect(app.progress.xp, 300);
+      vm.dispose();
+      app.dispose();
+    },
+  );
+
+  test(
+    'bad practice history cannot reset progress or fabricate comparisons',
+    () {
+      for (final history in <Map<String, Object?>>[
+        {},
+        {'correct': 'bad'},
+        {'signature': 'old', 'attempt': 1, 'correct': 8, 'unassisted': 8},
+        {'signature': 'old', 'attempt': 0, 'correct': 8, 'unassisted': 8},
+      ]) {
+        final app = AppState(
+          catalog: catalog,
+          progress: ProgressSnapshot(
+            xp: 500,
+            previousPilotResults: {'hard-12': history},
+            pilotSessions: const {
+              'hard-12': {'schema': 0},
+            },
+          ),
+          progressRepository: LocalProgressRepository.withStorage(_Storage()),
+        );
+        expect(app.previousPilotPerformance('hard-12'), isNull);
+        expect(app.latestPilotPerformance('hard-12'), isNull);
+        expect(app.latestPilotPerformance('unknown'), isNull);
+        expect(app.progress.xp, 500);
+        app.dispose();
+      }
+    },
+  );
+
+  test(
     'incompatible lesson offers explicit isolated restart, not a global reset',
     () async {
       final lesson = catalog.pilotLessons.first;

@@ -1,4 +1,9 @@
 {
+  "pilotPracticeBaseline": "Last practice: {correct}/10 first answers correct; {unassisted}/10 correct without hints.",
+  "@pilotPracticeBaseline": {"placeholders": {"correct": {"type": "int"}, "unassisted": {"type": "int"}}},
+  "pilotPracticeComparison": "Previous → latest practice: {before}/10 → {after}/10 correct; without hints: {beforeUnassisted}/10 → {afterUnassisted}/10.",
+  "@pilotPracticeComparison": {"placeholders": {"before": {"type": "int"}, "after": {"type": "int"}, "beforeUnassisted": {"type": "int"}, "afterUnassisted": {"type": "int"}}},
+  "pilotPracticeComparisonNote": "These are repeated practice tasks, not a new-task mastery result.",
   "pilotTitle": "Three game lessons · pilot",
   "pilotWarmup": "Introduction · unscored",
   "pilotPractice": "Practice · first answers count",

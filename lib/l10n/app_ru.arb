@@ -1,4 +1,9 @@
 {
+  "pilotPracticeBaseline": "Последняя практика: {correct}/10 правильных первых ответов; {unassisted}/10 правильно без подсказок.",
+  "@pilotPracticeBaseline": {"placeholders": {"correct": {"type": "int"}, "unassisted": {"type": "int"}}},
+  "pilotPracticeComparison": "Предыдущая → последняя практика: {before}/10 → {after}/10 правильно; без подсказок: {beforeUnassisted}/10 → {afterUnassisted}/10.",
+  "@pilotPracticeComparison": {"placeholders": {"before": {"type": "int"}, "after": {"type": "int"}, "beforeUnassisted": {"type": "int"}, "afterUnassisted": {"type": "int"}}},
+  "pilotPracticeComparisonNote": "Это повторяемые тренировочные задачи, а не результат освоения на новых заданиях.",
   "pilotTitle": "Три игровых урока · пилот",
   "pilotWarmup": "Знакомство · без оценки",
   "pilotPractice": "Тренировка · оценивается первый ответ",

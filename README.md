@@ -47,6 +47,8 @@ still pending. See the roadmap for the status and unchanged study criteria.
 - Separate new-task checks for these three lessons: ten first answers, 90%
   threshold, two disjoint forms, resume and end-only feedback. No extra XP;
   these narrow checks are not full-skill certificates.
+- Learn compares the last two matching practice attempts (accuracy and correct
+  answers without hints), separately from mastery and the unchanged XP rewards.
 - Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
