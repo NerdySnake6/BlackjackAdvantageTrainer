@@ -108,8 +108,11 @@ class AdaptivePracticeCard extends StatelessWidget {
                 onAction: (action) => vm.answerAdaptive(action.name),
               ),
             if (answer != null)
-              Text(
-                strings.checkpointReview(label(answer), label(task.expected)),
+              Semantics(
+                liveRegion: true,
+                child: Text(
+                  strings.checkpointReview(label(answer), label(task.expected)),
+                ),
               ),
           ],
         ),

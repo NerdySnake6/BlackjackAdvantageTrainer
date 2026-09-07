@@ -9,6 +9,35 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get cardAce => 'Туз';
+
+  @override
+  String get cardJack => 'Валет';
+
+  @override
+  String get cardQueen => 'Дама';
+
+  @override
+  String get cardKing => 'Король';
+
+  @override
+  String get cardClubs => 'треф';
+
+  @override
+  String get cardDiamonds => 'бубен';
+
+  @override
+  String get cardHearts => 'червей';
+
+  @override
+  String get cardSpades => 'пик';
+
+  @override
+  String cardDescription(String rank, String suit) {
+    return '$rank $suit';
+  }
+
+  @override
   String get adaptiveHelpTitle =>
       'Короткий пример перед самостоятельным блоком';
 

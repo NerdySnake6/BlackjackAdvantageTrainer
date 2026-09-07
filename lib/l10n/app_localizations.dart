@@ -98,6 +98,60 @@ abstract class AppLocalizations {
     Locale('ru'),
   ];
 
+  /// No description provided for @cardAce.
+  ///
+  /// In en, this message translates to:
+  /// **'Ace'**
+  String get cardAce;
+
+  /// No description provided for @cardJack.
+  ///
+  /// In en, this message translates to:
+  /// **'Jack'**
+  String get cardJack;
+
+  /// No description provided for @cardQueen.
+  ///
+  /// In en, this message translates to:
+  /// **'Queen'**
+  String get cardQueen;
+
+  /// No description provided for @cardKing.
+  ///
+  /// In en, this message translates to:
+  /// **'King'**
+  String get cardKing;
+
+  /// No description provided for @cardClubs.
+  ///
+  /// In en, this message translates to:
+  /// **'clubs'**
+  String get cardClubs;
+
+  /// No description provided for @cardDiamonds.
+  ///
+  /// In en, this message translates to:
+  /// **'diamonds'**
+  String get cardDiamonds;
+
+  /// No description provided for @cardHearts.
+  ///
+  /// In en, this message translates to:
+  /// **'hearts'**
+  String get cardHearts;
+
+  /// No description provided for @cardSpades.
+  ///
+  /// In en, this message translates to:
+  /// **'spades'**
+  String get cardSpades;
+
+  /// No description provided for @cardDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'{rank} of {suit}'**
+  String cardDescription(String rank, String suit);
+
   /// No description provided for @adaptiveHelpTitle.
   ///
   /// In en, this message translates to:

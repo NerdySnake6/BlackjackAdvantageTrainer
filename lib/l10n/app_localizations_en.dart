@@ -9,6 +9,35 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get cardAce => 'Ace';
+
+  @override
+  String get cardJack => 'Jack';
+
+  @override
+  String get cardQueen => 'Queen';
+
+  @override
+  String get cardKing => 'King';
+
+  @override
+  String get cardClubs => 'clubs';
+
+  @override
+  String get cardDiamonds => 'diamonds';
+
+  @override
+  String get cardHearts => 'hearts';
+
+  @override
+  String get cardSpades => 'spades';
+
+  @override
+  String cardDescription(String rank, String suit) {
+    return '$rank of $suit';
+  }
+
+  @override
   String get adaptiveHelpTitle =>
       'A quick example before the independent block';
 

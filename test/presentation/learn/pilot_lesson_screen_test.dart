@@ -90,6 +90,15 @@ void main() {
           find.byKey(const ValueKey('pilot-save-error')).hitTestable(),
           findsOneWidget,
         );
+        final bannerScroll = tester.state<ScrollableState>(
+          find.descendant(
+            of: find.byKey(const ValueKey('pilot-save-error')),
+            matching: find.byType(Scrollable),
+          ),
+        );
+        bannerScroll.position.jumpTo(bannerScroll.position.maxScrollExtent);
+        await tester.pumpAndSettle();
+        expect(bannerScroll.position.extentAfter, 0);
         expect(app.progress.pilotSessions, isEmpty);
         repository.fail = false;
         await tapPilot(tester, find.byKey(const ValueKey('pilot-begin')));
@@ -154,7 +163,7 @@ void main() {
       (tester) async {
         tester.view.devicePixelRatio = 1;
         tester.view.physicalSize = const Size(320, 568);
-        tester.platformDispatcher.textScaleFactorTestValue = 1.6;
+        tester.platformDispatcher.textScaleFactorTestValue = 2;
         final repository = _Repository(
           ProgressSnapshot(
             experienceLevel: ExperienceLevel.basics,
@@ -201,7 +210,7 @@ Future<(AppState, _Repository)> _openPilot(
 }) async {
   tester.view.devicePixelRatio = 1;
   tester.view.physicalSize = const Size(320, 568);
-  tester.platformDispatcher.textScaleFactorTestValue = 1.6;
+  tester.platformDispatcher.textScaleFactorTestValue = 2;
   final repository = _Repository(
     ProgressSnapshot(
       experienceLevel: ExperienceLevel.basics,

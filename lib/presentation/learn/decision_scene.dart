@@ -8,7 +8,7 @@ import '../../domain/blackjack_engine/card.dart';
 import '../../domain/blackjack_engine/game_rules.dart';
 import '../../domain/blackjack_engine/hand.dart';
 import '../../l10n/app_localizations.dart';
-import '../widgets/playing_card_view.dart';
+import '../widgets/learn_card_view.dart';
 import '../table/table_formatters.dart';
 
 /// Presents the player hand, dealer up-card, and every possible action.
@@ -57,27 +57,35 @@ class DecisionScene extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: _HandPanel(
-                    label: strings.dealer,
-                    hand: BlackjackHand([dealerUpCard]),
-                    total: null,
-                    accent: AppColors.gold,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _HandPanel(
-                    label: strings.turnPrompt,
-                    hand: playerHand,
-                    total: strings.handTotal(playerEvaluation.total),
-                    accent: AppColors.mint,
-                  ),
-                ),
-              ],
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final dealer = _HandPanel(
+                  label: strings.dealer,
+                  hand: BlackjackHand([dealerUpCard]),
+                  total: null,
+                  accent: AppColors.gold,
+                );
+                final player = _HandPanel(
+                  label: strings.turnPrompt,
+                  hand: playerHand,
+                  total: strings.handTotal(playerEvaluation.total),
+                  accent: AppColors.mint,
+                );
+                if (constraints.maxWidth < 300 ||
+                    MediaQuery.textScalerOf(context).scale(14) > 21) {
+                  return Column(
+                    children: [dealer, const SizedBox(height: 12), player],
+                  );
+                }
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: dealer),
+                    const SizedBox(width: 12),
+                    Expanded(child: player),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 14),
             Text(
@@ -140,8 +148,7 @@ class _HandPanel extends StatelessWidget {
           runSpacing: 4,
           alignment: WrapAlignment.center,
           children: [
-            for (final card in hand.cards)
-              PlayingCardView(card: card, width: 52),
+            for (final card in hand.cards) LearnCardView(card: card, width: 52),
           ],
         ),
         if (total != null) ...[

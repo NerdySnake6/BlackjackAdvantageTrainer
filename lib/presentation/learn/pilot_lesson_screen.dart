@@ -61,14 +61,23 @@ class _PilotBody extends StatelessWidget {
                 top: false,
                 child: Semantics(
                   liveRegion: true,
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    color: Theme.of(context).colorScheme.errorContainer,
-                    child: Text(
-                      strings.pilotSaveFailed,
-                      key: const ValueKey('pilot-save-error'),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onErrorContainer,
+                  child: ConstrainedBox(
+                    key: const ValueKey('pilot-save-error'),
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.sizeOf(context).height * 0.25,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        color: Theme.of(context).colorScheme.errorContainer,
+                        child: Text(
+                          strings.pilotSaveFailed,
+                          style: TextStyle(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onErrorContainer,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -224,13 +233,16 @@ class _PilotBody extends StatelessWidget {
                 ],
                 if (feedback) ...[
                   const SizedBox(height: 16),
-                  Text(
-                    session.firstAnswer == task.expected
-                        ? strings.correctAnswer
-                        : session.corrected
-                        ? strings.pilotCorrected
-                        : strings.incorrectAnswer,
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Semantics(
+                    liveRegion: true,
+                    child: Text(
+                      session.firstAnswer == task.expected
+                          ? strings.correctAnswer
+                          : session.corrected
+                          ? strings.pilotCorrected
+                          : strings.incorrectAnswer,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
                   Text(
                     strings.pilotSelected(

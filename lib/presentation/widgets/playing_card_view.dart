@@ -11,12 +11,14 @@ class PlayingCardView extends StatelessWidget {
     required this.card,
     this.width = 72,
     this.hidden = false,
+    this.redColor = const Color(0xFFC73B48),
     super.key,
   });
 
   final PlayingCard card;
   final double width;
   final bool hidden;
+  final Color redColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class PlayingCardView extends StatelessWidget {
       );
     }
 
-    final cardColor = card.isRed ? const Color(0xFFC73B48) : AppColors.ink;
+    final cardColor = card.isRed ? redColor : AppColors.ink;
     return Container(
       width: width,
       height: height,

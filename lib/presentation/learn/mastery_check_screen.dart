@@ -58,9 +58,12 @@ class _CheckBody extends StatelessWidget {
             children: [
               if (vm.busy) const LinearProgressIndicator(),
               if (vm.saveFailed)
-                Text(
-                  strings.pilotSaveFailed,
-                  key: const ValueKey('check-save-error'),
+                Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    strings.pilotSaveFailed,
+                    key: const ValueKey('check-save-error'),
+                  ),
                 ),
               if (vm.incompatibleSave)
                 Text(strings.checkpointIncompatible)
@@ -77,9 +80,12 @@ class _CheckBody extends StatelessWidget {
                   child: Text(strings.checkpointBegin),
                 ),
               ] else if (session.complete) ...[
-                Text(
-                  strings.pilotMasteryStatus((session.score * 100).round()),
-                  key: const ValueKey('check-result'),
+                Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    strings.pilotMasteryStatus((session.score * 100).round()),
+                    key: const ValueKey('check-result'),
+                  ),
                 ),
                 Text(
                   session.passed

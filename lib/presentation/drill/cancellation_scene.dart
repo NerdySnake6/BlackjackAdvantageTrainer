@@ -7,7 +7,7 @@ import '../../app/theme.dart';
 import '../../domain/blackjack_engine/card.dart';
 import '../../domain/learning/cancellation.dart';
 import '../../l10n/app_localizations.dart';
-import '../widgets/playing_card_view.dart';
+import '../widgets/learn_card_view.dart';
 
 /// Reveals a short sequence one card at a time for cancellation practice.
 class CancellationScene extends StatelessWidget {
@@ -109,7 +109,7 @@ class _RevealedCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        PlayingCardView(card: card, width: 58),
+        LearnCardView(card: card, width: 58),
         const SizedBox(height: 5),
         if (showTag)
           DecoratedBox(

@@ -18,6 +18,11 @@ Future<void> tapPilot(WidgetTester tester, Finder finder) async {
   }
   await tester.ensureVisible(finder);
   await tester.pumpAndSettle();
+  expect(
+    finder.hitTestable(),
+    findsOneWidget,
+    reason: 'The control must be reachable before simulating a tap',
+  );
   await tester.tap(finder);
   await tester.pumpAndSettle();
   expect(tester.takeException(), isNull);

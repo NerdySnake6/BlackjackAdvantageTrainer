@@ -76,7 +76,7 @@ void main() {
                     builder: (context, child) => MediaQuery(
                       data: MediaQuery.of(
                         context,
-                      ).copyWith(textScaler: const TextScaler.linear(1.5)),
+                      ).copyWith(textScaler: const TextScaler.linear(2)),
                       child: child!,
                     ),
                     home: PilotLessonScreen(lessonId: lessonId),
@@ -113,6 +113,12 @@ void main() {
               expect(
                 find.byKey(const ValueKey('pilot-save-error')),
                 findsOneWidget,
+              );
+              expect(
+                tester.getSize(find.byType(ListView)).height,
+                greaterThan(250),
+                reason:
+                    'The error banner must leave enough room to retry at 200% text',
               );
               expect(
                 app.progress.pilotSessions[lessonId]!['adaptiveAnswer'],
