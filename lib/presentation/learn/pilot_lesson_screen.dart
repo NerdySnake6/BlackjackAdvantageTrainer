@@ -16,6 +16,7 @@ import '../table/table_formatters.dart';
 import 'decision_scene.dart';
 import 'adaptive_practice_card.dart';
 import 'pilot_performance_summary.dart';
+import 'foundation_scene.dart';
 
 class PilotLessonScreen extends StatelessWidget {
   const PilotLessonScreen({super.key, required this.lessonId});
@@ -25,11 +26,12 @@ class PilotLessonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
+      key: ValueKey(lessonId),
       create: (context) {
         final appState = context.read<AppState>();
         return PilotLessonViewModel(
           appState: appState,
-          lesson: appState.catalog.pilotLessons.firstWhere(
+          lesson: appState.catalog.playableLessons.firstWhere(
             (lesson) => lesson.id == lessonId,
           ),
         );
@@ -108,6 +110,14 @@ class _PilotBody extends StatelessWidget {
                   onPressed: vm.busy ? null : vm.begin,
                   child: Text(strings.startLesson),
                 ),
+                if (context.read<AppState>().sessionFor(vm.lesson.id) != null)
+                  TextButton(
+                    key: const ValueKey('foundation-legacy-resume'),
+                    onPressed: vm.busy
+                        ? null
+                        : () => context.push('/legacy-lesson/${vm.lesson.id}'),
+                    child: Text(strings.foundationLegacyResume),
+                  ),
               ] else if (session.phase == DecisionLessonPhase.result) ...[
                 Text(
                   session.passed
@@ -127,7 +137,10 @@ class _PilotBody extends StatelessWidget {
                 PilotPerformanceSummary(lessonId: vm.lesson.id),
                 const SizedBox(height: 16),
                 Text(strings.pilotResultNote),
-                if (context.read<AppState>().isLessonCompleted(vm.lesson.id))
+                if (context.read<AppState>().catalog.pilotLessons.any(
+                      (l) => l.id == vm.lesson.id,
+                    ) &&
+                    context.read<AppState>().isLessonCompleted(vm.lesson.id))
                   FilledButton.tonal(
                     key: const ValueKey('pilot-checkpoint'),
                     onPressed: vm.busy
@@ -156,7 +169,22 @@ class _PilotBody extends StatelessWidget {
                 ),
                 Text('${session.taskNumber}/${session.taskCount}'),
                 const SizedBox(height: 12),
-                if (task.isCounting) ...[
+                if (task.isHandMission) ...[
+                  FoundationScene(
+                    task: task,
+                    revealed: session.revealed,
+                    input: session.countInput,
+                    showExplanation: showExplanation,
+                    enabled: canAnswer,
+                    onReveal:
+                        !vm.busy &&
+                            session.phase == DecisionLessonPhase.decision
+                        ? vm.reveal
+                        : null,
+                    onAdjust: vm.adjustCount,
+                    onAnswer: vm.answer,
+                  ),
+                ] else if (task.isCounting) ...[
                   Text(strings.pilotStartingCount(task.initialCount)),
                   IgnorePointer(
                     ignoring: vm.busy,
@@ -208,7 +236,8 @@ class _PilotBody extends StatelessWidget {
                         : null,
                     child: Text(strings.submitCount),
                   ),
-                ] else
+                ] else ...[
+                  if (task.prompt.isNotEmpty) Text(task.prompt),
                   DecisionScene(
                     playerHand: BlackjackHand(task.cards),
                     dealerUpCard: task.dealer!,
@@ -216,6 +245,9 @@ class _PilotBody extends StatelessWidget {
                     enabled: canAnswer,
                     onAction: (action) => vm.answer(action.name),
                   ),
+                  if (task.prompt.isNotEmpty && session.corrected)
+                    FoundationActionResult(task: task),
+                ],
                 if (!feedback) ...[
                   if (session.isWarmup || session.hintUsed)
                     Padding(
@@ -246,11 +278,14 @@ class _PilotBody extends StatelessWidget {
                   ),
                   Text(
                     strings.pilotSelected(
-                      task.isCounting
-                          ? session.firstAnswer!
-                          : actionLabel(
+                      task.usesActions
+                          ? actionLabel(
                               strings,
                               PlayerAction.values.byName(session.firstAnswer!),
+                            )
+                          : foundationAnswerLabel(
+                              strings,
+                              session.firstAnswer!,
                             ),
                     ),
                   ),

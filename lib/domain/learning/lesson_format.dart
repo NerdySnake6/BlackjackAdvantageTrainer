@@ -1,7 +1,14 @@
 /// Versioned, authored building blocks shared by playable Learn lessons.
 library;
 
-enum LessonMissionKind { decision, runningCount }
+enum LessonMissionKind {
+  decision,
+  runningCount,
+  handTotal,
+  handType,
+  handOutcome,
+  actionMeaning,
+}
 
 enum LessonMissionStage { introduction, practice, independent }
 

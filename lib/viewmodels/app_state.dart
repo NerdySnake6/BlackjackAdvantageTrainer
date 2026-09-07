@@ -135,7 +135,9 @@ class AppState extends ChangeNotifier {
     if (saved == null) return null;
     try {
       final result = LessonPerformance.fromJson(saved);
-      final lesson = catalog.pilotLessons.firstWhere((l) => l.id == lessonId);
+      final lesson = catalog.playableLessons.firstWhere(
+        (l) => l.id == lessonId,
+      );
       return result.signature == lesson.resumeSignature ? result : null;
     } on FormatException {
       return null;
@@ -150,7 +152,9 @@ class AppState extends ChangeNotifier {
     final saved = _progress.pilotSessions[lessonId];
     if (saved != null) {
       try {
-        final lesson = catalog.pilotLessons.firstWhere((l) => l.id == lessonId);
+        final lesson = catalog.playableLessons.firstWhere(
+          (l) => l.id == lessonId,
+        );
         final session = DecisionLessonSession.restore(lesson, saved);
         if (session.phase == DecisionLessonPhase.result &&
             session.awardedXp != null) {

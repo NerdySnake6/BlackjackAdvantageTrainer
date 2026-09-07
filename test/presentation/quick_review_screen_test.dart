@@ -11,12 +11,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late CourseCatalog catalog;
+  setUpAll(() async => catalog = await ContentRepository().loadCatalog());
   testWidgets('QuickReviewScreen handles empty state and active review flow', (
     tester,
   ) async {
     _setupPortrait(tester);
     final now = DateTime.utc(2026, 9, 2);
-    final catalog = await ContentRepository().loadCatalog();
     final firstExercise = catalog.lessons.first.exercises.first;
 
     // 1. Verify empty state when no reviews are due

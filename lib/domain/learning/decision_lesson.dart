@@ -147,7 +147,7 @@ class DecisionLessonSession {
   bool get canAnswer =>
       (_phase == DecisionLessonPhase.decision ||
           (_phase == DecisionLessonPhase.coaching && !_corrected)) &&
-      (!current.isCounting || _revealed == current.cards.length);
+      (!current.requiresReveal || _revealed == current.cards.length);
   int get correctAnswers => [
     for (var i = 0; i < _answers.length; i++)
       if (lesson.scenarios[i].isEvaluated &&
@@ -190,7 +190,7 @@ class DecisionLessonSession {
 
   void reveal() {
     if (_phase != DecisionLessonPhase.decision ||
-        !current.isCounting ||
+        !current.requiresReveal ||
         _revealed == current.cards.length) {
       throw StateError('No card to reveal');
     }
@@ -217,12 +217,12 @@ class DecisionLessonSession {
   }
 
   void adjustCount(int delta) {
-    if (!canAnswer || !current.isCounting || delta.abs() != 1) {
+    if (!canAnswer || !current.usesNumber || delta.abs() != 1) {
       throw StateError('Count input unavailable');
     }
     _countInput = (countInput + delta).clamp(
-      current.initialCount - current.cards.length,
-      current.initialCount + current.cards.length,
+      current.minimumInput,
+      current.maximumInput,
     );
   }
 
@@ -282,13 +282,15 @@ class DecisionLessonSession {
         _hints.length != _answers.length ||
         _revealed < 0 ||
         _revealed > current.cards.length ||
-        (!current.isCounting && _revealed != 0) ||
+        (!current.requiresReveal && _revealed != 0) ||
         (_countInput != null &&
-            (!current.isCounting ||
+            (!current.usesNumber ||
                 _revealed != current.cards.length ||
-                (_countInput! - current.initialCount).abs() >
-                    current.cards.length)) ||
-        (answered && current.isCounting && _revealed != current.cards.length) ||
+                _countInput! < current.minimumInput ||
+                _countInput! > current.maximumInput)) ||
+        (answered &&
+            current.requiresReveal &&
+            _revealed != current.cards.length) ||
         (_phase == DecisionLessonPhase.theory &&
             (_index != 0 || _revealed != 0 || _hint)) ||
         (!answered && _corrected) ||

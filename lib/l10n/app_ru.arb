@@ -251,5 +251,25 @@
   "languageLabel": "Язык",
   "systemDefault": "Как в системе",
   "englishLanguage": "English",
-  "russianLanguage": "Русский"
+  "russianLanguage": "Русский",
+  "foundationHard": "Жёсткая: нет туза за 11",
+  "foundationSoft": "Мягкая: один туз за 11",
+  "foundationNatural": "Натуральный блэкджек",
+  "foundationTwentyOne": "Обычные 21",
+  "foundationBust": "Перебор: больше 21",
+  "foundationInPlay": "Ниже 21: без перебора",
+  "foundationDeal": "Добавить следующую карту в руку",
+  "foundationDecrease": "Уменьшить сумму руки",
+  "foundationIncrease": "Увеличить сумму руки",
+  "foundationCheck": "Проверить сумму руки",
+  "foundationInput": "Твоя сумма: {total}",
+  "foundationActionResult": "Демонстрация действия (не исход раздачи)",
+  "foundationLegacyResume": "Закончить сохранённый урок прежнего формата",
+  "@foundationInput": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

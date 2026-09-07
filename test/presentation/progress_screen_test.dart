@@ -11,11 +11,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late CourseCatalog catalog;
+  setUpAll(() async => catalog = await ContentRepository().loadCatalog());
   testWidgets(
     'ProgressScreen displays stats, toggles consent, and handles reset flow',
     (tester) async {
       _setupPortrait(tester);
-      final appState = await _createAppState(
+      final appState = _createAppState(
+        catalog,
         progress: ProgressSnapshot(
           xp: 250,
           streakDays: 4,
@@ -122,10 +126,10 @@ Future<void> _pumpScreen(WidgetTester tester, AppState appState) async {
   await tester.pump(const Duration(milliseconds: 50));
 }
 
-Future<AppState> _createAppState({
+AppState _createAppState(
+  CourseCatalog catalog, {
   ProgressSnapshot progress = const ProgressSnapshot(),
-}) async {
-  final catalog = await ContentRepository().loadCatalog();
+}) {
   return AppState(
     catalog: catalog,
     progress: progress,

@@ -82,6 +82,21 @@ GoRouter createRouter({required AppState appState}) {
               ? null
               : '/learn';
         },
+        builder: (context, state) {
+          final id = state.pathParameters['lessonId']!;
+          return appState.catalog.foundationLessons.any((l) => l.id == id)
+              ? PilotLessonScreen(lessonId: id)
+              : LessonScreen(lessonId: id);
+        },
+      ),
+      GoRoute(
+        path: '/legacy-lesson/:lessonId',
+        redirect: (context, state) =>
+            appState.catalog.lessons.any(
+              (l) => l.id == state.pathParameters['lessonId'],
+            )
+            ? null
+            : '/learn',
         builder: (context, state) =>
             LessonScreen(lessonId: state.pathParameters['lessonId']!),
       ),

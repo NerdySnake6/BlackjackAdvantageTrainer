@@ -2,6 +2,7 @@
 library;
 
 import '../blackjack_engine/game_rules.dart';
+import 'lesson_format.dart';
 import 'models.dart';
 
 class ContentValidator {
@@ -10,6 +11,7 @@ class ContentValidator {
   CourseCatalog parse({
     required Map<String, Object?> catalog,
     required Object? pilotLessons,
+    Object? foundationLessons,
     required Map<String, Object?> manifest,
     required Map<String, Object?> glossary,
   }) {
@@ -21,6 +23,7 @@ class ContentValidator {
       final parsed = CourseCatalog.fromJson({
         ...catalog,
         'pilotLessons': pilotLessons,
+        'foundationLessons': foundationLessons,
       });
       validate(parsed, manifest: manifest, glossary: glossary);
       return parsed;
@@ -128,8 +131,25 @@ class ContentValidator {
       catalog.pilotLessons.isNotEmpty,
       '$locale: missing playable lessons',
     );
-    for (final lesson in catalog.pilotLessons) {
-      register(lesson.id);
+    if (catalog.contentVersion >= 4 || catalog.foundationLessons.isNotEmpty) {
+      _require(
+        catalog.foundationLessons.map((l) => l.id).join(',') ==
+                'quick-start,card-values,hard-and-soft,player-actions' &&
+            manifest['foundationLessonFile'] ==
+                'assets/content/$locale/foundation_lessons.json',
+        '$locale: invalid foundation package',
+      );
+    }
+    for (final lesson in catalog.playableLessons) {
+      if (catalog.foundationLessons.contains(lesson)) {
+        final legacy = catalog.lessonById(lesson.id);
+        _require(
+          legacy.skillId == lesson.skillId,
+          '$locale: foundation skill mismatch',
+        );
+      } else {
+        register(lesson.id);
+      }
       register(lesson.theoryBlock.id);
       final path = '$locale/${lesson.id}';
       _text(lesson.skillId, '$path/skillId');
@@ -141,15 +161,25 @@ class ContentValidator {
         '$path: unverified rule profile',
       );
       for (final task in lesson.scenarios) {
+        if (catalog.foundationLessons.contains(lesson)) {
+          final kind = switch (lesson.id) {
+            'quick-start' => LessonMissionKind.handOutcome,
+            'card-values' => LessonMissionKind.handTotal,
+            'hard-and-soft' => LessonMissionKind.handType,
+            _ => LessonMissionKind.actionMeaning,
+          };
+          _require(
+            task.kind == kind,
+            '$path/${task.id}: unexpected foundation mission',
+          );
+        }
         register(task.id);
         _text(task.explanation, '$path/${task.id}/explanation');
         _text(task.contrast, '$path/${task.id}/contrast');
-        final keys = task.isCounting
-            ? {'count'}
-            : task.availableActions.map((a) => a.name).toSet();
-        final allowedKeys = task.isCounting
-            ? {'count'}
-            : PlayerAction.values.map((action) => action.name).toSet();
+        final keys = task.answerKeys;
+        final allowedKeys = task.usesActions
+            ? PlayerAction.values.map((action) => action.name).toSet()
+            : keys;
         _require(
           task.mistakes.keys.toSet().containsAll(keys) &&
               allowedKeys.containsAll(task.mistakes.keys),
@@ -163,7 +193,7 @@ class ContentValidator {
             task.expected == task.countAfter(task.cards.length).toString(),
             '$path/${task.id}: inconsistent count answer',
           );
-        } else {
+        } else if (task.usesActions) {
           _require(
             task.cards.length >= 2 &&
                 (task.cards.length == 2 ||
@@ -175,6 +205,68 @@ class ContentValidator {
             '$path/${task.id}: unavailable two-card action',
           );
         }
+        if (task.isHandMission ||
+            task.kind == LessonMissionKind.actionMeaning) {
+          _text(task.prompt, '$path/${task.id}/prompt');
+          _require(
+            task.cards.length >= 2 &&
+                task.cards.length <= 5 &&
+                task.initialCount == 0,
+            '$path/${task.id}: invalid foundation hand',
+          );
+          final evaluation = task.evaluation;
+          if (task.isHandMission) {
+            final expected = switch (task.kind) {
+              LessonMissionKind.handTotal => '${evaluation.total}',
+              LessonMissionKind.handType => evaluation.isSoft ? 'soft' : 'hard',
+              _ =>
+                evaluation.isBust
+                    ? 'bust'
+                    : evaluation.isBlackjack && !task.afterSplit
+                    ? 'natural'
+                    : evaluation.total == 21
+                    ? 'twentyOne'
+                    : 'inPlay',
+            };
+            _require(
+              task.expected == expected && task.drawCards.isEmpty,
+              '$path/${task.id}: inconsistent hand answer',
+            );
+          } else {
+            final legal = <PlayerAction>{
+              PlayerAction.hit,
+              PlayerAction.stand,
+              if (task.cards.length == 2) ...[
+                PlayerAction.doubleDown,
+                if (!task.afterSplit) PlayerAction.surrender,
+                if (task.cards[0].rank.blackjackValue ==
+                    task.cards[1].rank.blackjackValue)
+                  PlayerAction.split,
+              ],
+            };
+            _require(
+              !evaluation.isBust &&
+                  evaluation.total < 21 &&
+                  legal.length == task.availableActions.length &&
+                  legal.containsAll(task.availableActions),
+              '$path/${task.id}: invalid legal actions',
+            );
+            final draws = switch (task.expected) {
+              'hit' || 'doubleDown' => 1,
+              'split' => 2,
+              _ => 0,
+            };
+            _require(
+              task.drawCards.length == draws,
+              '$path/${task.id}: invalid action demonstration',
+            );
+          }
+        } else {
+          _require(
+            task.prompt.isEmpty && !task.afterSplit && task.drawCards.isEmpty,
+            '$path/${task.id}: unexpected foundation fields',
+          );
+        }
       }
     }
   }
@@ -184,7 +276,7 @@ class ContentValidator {
     CourseCatalog catalog,
     Map<String, String> skillsByLesson,
   ) {
-    for (final lesson in catalog.pilotLessons) {
+    for (final lesson in catalog.playableLessons) {
       _require(
         skillsByLesson[lesson.id] == lesson.skillId,
         '${catalog.locale}/${lesson.id}: unknown lesson/skill reference',
@@ -217,6 +309,17 @@ class ContentValidator {
         source.pilotLessons[i].resumeSignature ==
             translation.pilotLessons[i].resumeSignature,
         '${translation.locale}/${translation.pilotLessons[i].id}: lesson semantics differ from source',
+      );
+    }
+    _require(
+      source.foundationLessons.length == translation.foundationLessons.length,
+      '${translation.locale}: foundation count differs',
+    );
+    for (var i = 0; i < source.foundationLessons.length; i++) {
+      _require(
+        source.foundationLessons[i].resumeSignature ==
+            translation.foundationLessons[i].resumeSignature,
+        '${translation.locale}: foundation semantics differ',
       );
     }
   }

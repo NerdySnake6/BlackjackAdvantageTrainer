@@ -1,5 +1,5 @@
 {
-  "contentVersion": 3,
+  "contentVersion": 4,
   "locale": "ru",
   "sections": [
     {
@@ -12,7 +12,7 @@
           "id": "quick-start",
           "skillId": "foundation.quick_start",
           "title": "Первая раздача",
-          "subtitle": "Наберите до 21 очка без перебора",
+          "subtitle": "Обыграть дилера без перебора",
           "estimatedMinutes": 6,
           "exercises": [
             {

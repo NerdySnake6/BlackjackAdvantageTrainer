@@ -864,4 +864,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get russianLanguage => 'Русский';
+
+  @override
+  String get foundationHard => 'Hard: no ace worth 11';
+
+  @override
+  String get foundationSoft => 'Soft: one ace worth 11';
+
+  @override
+  String get foundationNatural => 'Natural blackjack';
+
+  @override
+  String get foundationTwentyOne => 'Ordinary 21';
+
+  @override
+  String get foundationBust => 'Bust: over 21';
+
+  @override
+  String get foundationInPlay => 'Below 21: not bust';
+
+  @override
+  String get foundationDeal => 'Deal next card into the hand';
+
+  @override
+  String get foundationDecrease => 'Decrease hand total';
+
+  @override
+  String get foundationIncrease => 'Increase hand total';
+
+  @override
+  String get foundationCheck => 'Check hand total';
+
+  @override
+  String foundationInput(int total) {
+    return 'Your total: $total';
+  }
+
+  @override
+  String get foundationActionResult =>
+      'Action demonstration (not a round outcome)';
+
+  @override
+  String get foundationLegacyResume => 'Finish my saved previous-format lesson';
 }

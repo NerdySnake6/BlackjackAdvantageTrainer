@@ -9,6 +9,7 @@ Map<String, dynamic> _package(String locale) => {
   for (final (key, filename) in [
     ('catalog', 'lessons'),
     ('pilotLessons', 'pilot_lessons'),
+    ('foundationLessons', 'foundation_lessons'),
     ('manifest', 'manifest'),
     ('glossary', 'glossary'),
   ])
@@ -21,6 +22,7 @@ CourseCatalog _parse(Map<String, dynamic> raw) =>
     const ContentValidator().parse(
       catalog: raw['catalog'] as Map<String, Object?>,
       pilotLessons: raw['pilotLessons'],
+      foundationLessons: raw['foundationLessons'],
       manifest: raw['manifest'] as Map<String, Object?>,
       glossary: raw['glossary'] as Map<String, Object?>,
     );
@@ -71,6 +73,8 @@ void main() {
   for (final (path, value) in <(String, Object?)>[
     ('pilotLessons', null),
     ('pilotLessons', []),
+    ('foundationLessons', null),
+    ('foundationLessons', []),
     ('pilotLessons/0/theory/text', '  '),
     ('pilotLessons/0/title', ''),
     ('pilotLessons/0/subtitle', ''),

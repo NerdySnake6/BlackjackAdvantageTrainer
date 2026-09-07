@@ -21,6 +21,9 @@ void main() {
           catalog: validator.parse(
             catalog: _object('assets/content/$locale/lessons.json'),
             pilotLessons: _json('assets/content/$locale/pilot_lessons.json'),
+            foundationLessons: _json(
+              'assets/content/$locale/foundation_lessons.json',
+            ),
             manifest: _object('assets/content/$locale/manifest.json'),
             glossary: _object('assets/content/$locale/glossary.json'),
           ),

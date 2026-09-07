@@ -1542,6 +1542,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Русский'**
   String get russianLanguage;
+
+  /// No description provided for @foundationHard.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard: no ace worth 11'**
+  String get foundationHard;
+
+  /// No description provided for @foundationSoft.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft: one ace worth 11'**
+  String get foundationSoft;
+
+  /// No description provided for @foundationNatural.
+  ///
+  /// In en, this message translates to:
+  /// **'Natural blackjack'**
+  String get foundationNatural;
+
+  /// No description provided for @foundationTwentyOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordinary 21'**
+  String get foundationTwentyOne;
+
+  /// No description provided for @foundationBust.
+  ///
+  /// In en, this message translates to:
+  /// **'Bust: over 21'**
+  String get foundationBust;
+
+  /// No description provided for @foundationInPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Below 21: not bust'**
+  String get foundationInPlay;
+
+  /// No description provided for @foundationDeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Deal next card into the hand'**
+  String get foundationDeal;
+
+  /// No description provided for @foundationDecrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease hand total'**
+  String get foundationDecrease;
+
+  /// No description provided for @foundationIncrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase hand total'**
+  String get foundationIncrease;
+
+  /// No description provided for @foundationCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check hand total'**
+  String get foundationCheck;
+
+  /// No description provided for @foundationInput.
+  ///
+  /// In en, this message translates to:
+  /// **'Your total: {total}'**
+  String foundationInput(int total);
+
+  /// No description provided for @foundationActionResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Action demonstration (not a round outcome)'**
+  String get foundationActionResult;
+
+  /// No description provided for @foundationLegacyResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish my saved previous-format lesson'**
+  String get foundationLegacyResume;
 }
 
 class _AppLocalizationsDelegate

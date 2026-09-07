@@ -864,4 +864,47 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get russianLanguage => 'Русский';
+
+  @override
+  String get foundationHard => 'Жёсткая: нет туза за 11';
+
+  @override
+  String get foundationSoft => 'Мягкая: один туз за 11';
+
+  @override
+  String get foundationNatural => 'Натуральный блэкджек';
+
+  @override
+  String get foundationTwentyOne => 'Обычные 21';
+
+  @override
+  String get foundationBust => 'Перебор: больше 21';
+
+  @override
+  String get foundationInPlay => 'Ниже 21: без перебора';
+
+  @override
+  String get foundationDeal => 'Добавить следующую карту в руку';
+
+  @override
+  String get foundationDecrease => 'Уменьшить сумму руки';
+
+  @override
+  String get foundationIncrease => 'Увеличить сумму руки';
+
+  @override
+  String get foundationCheck => 'Проверить сумму руки';
+
+  @override
+  String foundationInput(int total) {
+    return 'Твоя сумма: $total';
+  }
+
+  @override
+  String get foundationActionResult =>
+      'Демонстрация действия (не исход раздачи)';
+
+  @override
+  String get foundationLegacyResume =>
+      'Закончить сохранённый урок прежнего формата';
 }

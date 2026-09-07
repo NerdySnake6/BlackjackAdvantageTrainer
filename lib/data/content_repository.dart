@@ -46,6 +46,11 @@ class ContentRepository {
     return const ContentValidator().parse(
       catalog: json,
       pilotLessons: jsonDecode(pilotJson),
+      foundationLessons: jsonDecode(
+        await _bundle.loadString(
+          'assets/content/$locale/foundation_lessons.json',
+        ),
+      ),
       manifest: manifest,
       glossary: glossary,
     );

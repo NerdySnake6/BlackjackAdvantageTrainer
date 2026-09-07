@@ -57,10 +57,7 @@ void main() {
     await tester.tap(find.text('Your first hand'));
     await tester.pumpAndSettle();
 
-    expect(
-      find.text('What is the main goal of a blackjack hand?'),
-      findsOneWidget,
-    );
+    expect(find.text(catalog.foundationLessons.first.theory), findsOneWidget);
 
     await appState.chooseExperienceLevel(ExperienceLevel.experienced);
     await tester.pump();

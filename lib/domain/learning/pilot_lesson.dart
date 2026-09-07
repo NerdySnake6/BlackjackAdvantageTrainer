@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import '../blackjack_engine/card.dart';
 import '../blackjack_engine/game_rules.dart';
+import '../blackjack_engine/hand.dart';
 import 'lesson_format.dart';
 
 class PilotScenario {
@@ -29,13 +30,20 @@ class PilotScenario {
         ),
       ),
       initialCount = json['initialCount'] as int? ?? 0,
+      prompt = json['prompt'] as String? ?? '',
+      afterSplit = json['afterSplit'] as bool? ?? false,
+      drawCards = List.unmodifiable(
+        (json['drawCards'] as List? ?? []).indexed.map(
+          (entry) => cardFromLabel(entry.$2 as String, entry.$1 + 8),
+        ),
+      ),
       expected = json['expected']! as String,
       coaching = LessonCoaching.fromJson(
         json['coaching']! as Map<String, Object?>,
       ) {
     if (cards.isEmpty ||
-        isCounting != (dealer == null) ||
-        (isCounting && availableActions.isNotEmpty) ||
+        usesActions != (dealer != null) ||
+        (!usesActions && availableActions.isNotEmpty) ||
         !accepts(expected)) {
       throw FormatException('Invalid pilot scenario: $id');
     }
@@ -48,6 +56,9 @@ class PilotScenario {
   final PlayingCard? dealer;
   final Set<PlayerAction> availableActions;
   final int initialCount;
+  final String prompt;
+  final bool afterSplit;
+  final List<PlayingCard> drawCards;
   final String expected;
   final LessonCoaching coaching;
 
@@ -56,16 +67,55 @@ class PilotScenario {
   Map<String, String> get mistakes => coaching.mistakes;
 
   bool get isCounting => kind == LessonMissionKind.runningCount;
+  bool get isHandMission => const {
+    LessonMissionKind.handTotal,
+    LessonMissionKind.handType,
+    LessonMissionKind.handOutcome,
+  }.contains(kind);
+  bool get usesActions =>
+      kind == LessonMissionKind.decision ||
+      kind == LessonMissionKind.actionMeaning;
+  bool get requiresReveal => isCounting || isHandMission;
+  bool get usesNumber => isCounting || kind == LessonMissionKind.handTotal;
+  int get minimumInput => isCounting ? initialCount - cards.length : 0;
+  int get maximumInput =>
+      isCounting ? initialCount + cards.length : 10 * cards.length + 1;
+  Set<String> get answerKeys => switch (kind) {
+    LessonMissionKind.runningCount => {'count'},
+    LessonMissionKind.handTotal => {'total'},
+    LessonMissionKind.handType => {'hard', 'soft'},
+    LessonMissionKind.handOutcome => {'natural', 'twentyOne', 'bust', 'inPlay'},
+    _ => availableActions.map((a) => a.name).toSet(),
+  };
+  HandEvaluation get evaluation => const HandEvaluator().evaluate(cards);
+
+  /// Authored one-action demonstration, not a second round engine.
+  List<List<PlayingCard>> get demonstrationHands => expected == 'split'
+      ? [
+          [cards[0], drawCards[0]],
+          [cards[1], drawCards[1]],
+        ]
+      : [
+          [...cards, ...drawCards],
+        ];
   bool get isEvaluated => stage != LessonMissionStage.introduction;
   bool get allowsHint => stage != LessonMissionStage.independent;
 
-  bool accepts(String answer) => isCounting
-      ? int.tryParse(answer) != null
-      : availableActions.any((action) => action.name == answer);
+  bool accepts(String answer) => usesNumber
+      ? int.tryParse(answer) != null &&
+            (isCounting ||
+                (answer == int.parse(answer).toString() &&
+                    int.parse(answer) >= minimumInput &&
+                    int.parse(answer) <= maximumInput))
+      : answerKeys.contains(answer);
 
   String feedback(String answer) => answer == expected
       ? explanation
-      : '${mistakes[isCounting ? 'count' : answer]}\n\n$explanation';
+      : '${mistakes[isCounting
+            ? 'count'
+            : kind == LessonMissionKind.handTotal
+            ? 'total'
+            : answer]}\n\n$explanation';
 
   int countAfter(int revealed) =>
       initialCount +
@@ -156,6 +206,11 @@ class PilotLesson {
           'initialCount': task.initialCount,
           'expected': task.expected,
           'mistakes': task.mistakes.keys.toList()..sort(),
+          if (task.isHandMission ||
+              task.kind == LessonMissionKind.actionMeaning) ...{
+            'afterSplit': task.afterSplit,
+            'drawCards': task.drawCards.map((c) => c.rank.label).toList(),
+          },
         },
     ],
   });

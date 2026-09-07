@@ -39,9 +39,17 @@ Iteration 10's observed pilot is temporarily deferred by the owner (2026-09-05).
 Iteration 11 includes technical lesson-UI fixes; validation with real users is
 still pending. See the roadmap for the status and unchanged study criteria.
 
+On 2026-09-08 the owner also deferred the pre-expansion pilot requirement to
+begin iteration 21. This permits Free lesson work, not a claim that the pilot
+passed; Free-beta, Pro and independent mathematical-review gates remain.
+
 ## Implemented vertical slice
 
-- A six-node learning path with 54 original exercises.
+- A six-node learning path: four introductory nodes now open interactive
+  lessons (48 EN/RU tasks). Build hands, enter totals, classify hard/soft and
+  blackjack/bust, and try all five actions with fixed consequence demonstrations.
+- All 54 original exercises remain available to Quick Review and saved
+  previous-format sessions. Experienced players can still start at basic strategy.
 - Three additional playable pilot lessons in Learn: hard 12, soft 18, and
   Hi-Lo cancellation. Each has theory, two unscored introductions, five practice
   tasks, five independent tasks, correction, resume, and an idempotent XP result.

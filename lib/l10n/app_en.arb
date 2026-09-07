@@ -323,5 +323,25 @@
   "languageLabel": "Language",
   "systemDefault": "System default",
   "englishLanguage": "English",
-  "russianLanguage": "Русский"
+  "russianLanguage": "Русский",
+  "foundationHard": "Hard: no ace worth 11",
+  "foundationSoft": "Soft: one ace worth 11",
+  "foundationNatural": "Natural blackjack",
+  "foundationTwentyOne": "Ordinary 21",
+  "foundationBust": "Bust: over 21",
+  "foundationInPlay": "Below 21: not bust",
+  "foundationDeal": "Deal next card into the hand",
+  "foundationDecrease": "Decrease hand total",
+  "foundationIncrease": "Increase hand total",
+  "foundationCheck": "Check hand total",
+  "foundationInput": "Your total: {total}",
+  "foundationActionResult": "Action demonstration (not a round outcome)",
+  "foundationLegacyResume": "Finish my saved previous-format lesson",
+  "@foundationInput": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

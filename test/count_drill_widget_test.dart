@@ -11,12 +11,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late CourseCatalog catalog;
+  setUpAll(() async => catalog = await ContentRepository().loadCatalog());
   testWidgets('count drill intro can be acknowledged once', (tester) async {
     addTearDown(() async {
       await tester.pumpWidget(const SizedBox());
       tester.view.reset();
     });
-    final catalog = await ContentRepository().loadCatalog();
     final appState = AppState(
       catalog: catalog,
       progress: const ProgressSnapshot(

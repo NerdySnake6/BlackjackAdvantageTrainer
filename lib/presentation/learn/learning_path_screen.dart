@@ -158,7 +158,14 @@ class LearningPathScreen extends StatelessWidget {
                       unlocked: appState.isLessonUnlocked(lesson.id),
                       completed: appState.isLessonCompleted(lesson.id),
                       score: appState.progress.lessonScores[lesson.id],
-                      hasSession: appState.sessionFor(lesson.id) != null,
+                      hasSession:
+                          appState.sessionFor(lesson.id) != null ||
+                          (appState.progress.pilotSessions[lesson
+                                      .id]?['phase'] !=
+                                  null &&
+                              appState.progress.pilotSessions[lesson
+                                      .id]?['phase'] !=
+                                  'result'),
                       recommended: appState.isRecommendedStart(lesson.id),
                     );
                   },

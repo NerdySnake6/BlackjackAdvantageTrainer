@@ -12,7 +12,7 @@ class PilotProgressMigration {
       progress.pilotSessions,
     );
     var changed = false;
-    for (final lesson in catalog.pilotLessons) {
+    for (final lesson in catalog.playableLessons) {
       final saved = sessions[lesson.id];
       if (saved == null || saved['schema'] != 1) continue;
       try {

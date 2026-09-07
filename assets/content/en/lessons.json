@@ -1,5 +1,5 @@
 {
-  "contentVersion": 3,
+  "contentVersion": 4,
   "locale": "en",
   "sections": [
     {
@@ -12,7 +12,7 @@
           "id": "quick-start",
           "skillId": "foundation.quick_start",
           "title": "Your first hand",
-          "subtitle": "Reach 21 without going over",
+          "subtitle": "Beat the dealer without busting",
           "estimatedMinutes": 6,
           "exercises": [
             {
