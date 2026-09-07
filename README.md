@@ -49,6 +49,8 @@ still pending. See the roadmap for the status and unchanged study criteria.
   these narrow checks are not full-skill certificates.
 - Learn compares the last two matching practice attempts (accuracy and correct
   answers without hints), separately from mastery and the unchanged XP rewards.
+- Between pilot practice and independent tasks, optional unscored examples
+  respond to repeated errors or add one extra card after consistent success.
 - Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,

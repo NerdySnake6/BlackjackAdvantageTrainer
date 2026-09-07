@@ -187,6 +187,8 @@ void main() {
         ...saved,
         'schema': 2,
         'contentSignature': lesson.resumeSignature,
+        'adaptiveAnswer': null,
+        'adaptiveCount': 0,
       });
       expect(session.firstAnswer, 'stand');
       expect(session.corrected, isTrue);

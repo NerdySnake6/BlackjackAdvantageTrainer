@@ -37,6 +37,10 @@ class PilotLessonViewModel extends ChangeNotifier {
       _change((next) => next.adjustCount(delta));
   Future<void> answer(String answer) => _change((next) => next.answer(answer));
   Future<void> next() => _change((next) => next.next());
+  Future<void> answerAdaptive(String answer) =>
+      _change((next) => next.answerAdaptive(answer));
+  Future<void> adjustAdaptiveCount(int delta) =>
+      _change((next) => next.adjustAdaptiveCount(delta));
 
   Future<void> restart() async {
     if (busy) return;

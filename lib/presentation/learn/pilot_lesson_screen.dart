@@ -14,6 +14,7 @@ import '../../viewmodels/pilot_lesson_view_model.dart';
 import '../drill/cancellation_scene.dart';
 import '../table/table_formatters.dart';
 import 'decision_scene.dart';
+import 'adaptive_practice_card.dart';
 import 'pilot_performance_summary.dart';
 
 class PilotLessonScreen extends StatelessWidget {
@@ -247,6 +248,7 @@ class _PilotBody extends StatelessWidget {
                     Text(task.contrast),
                   ],
                   if (!session.corrected) Text(strings.pilotCorrectTask),
+                  const AdaptivePracticeCard(),
                   const SizedBox(height: 16),
                   FilledButton(
                     key: const ValueKey('pilot-next'),

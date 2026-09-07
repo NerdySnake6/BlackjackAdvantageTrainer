@@ -98,6 +98,84 @@ abstract class AppLocalizations {
     Locale('ru'),
   ];
 
+  /// No description provided for @adaptiveHelpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A quick example before the independent block'**
+  String get adaptiveHelpTitle;
+
+  /// No description provided for @adaptiveChallengeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Five correct without hints — try one extra card'**
+  String get adaptiveChallengeTitle;
+
+  /// No description provided for @adaptiveOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional, unscored practice. You can continue to the unchanged independent tasks.'**
+  String get adaptiveOptional;
+
+  /// No description provided for @adaptiveHardStand.
+  ///
+  /// In en, this message translates to:
+  /// **'This rule boundary caused more than one error. Hard 12 stands against 4–6. Compare 10+2 against 6 (Stand) with the same hand against 3 (Hit).'**
+  String get adaptiveHardStand;
+
+  /// No description provided for @adaptiveHardHit.
+  ///
+  /// In en, this message translates to:
+  /// **'This rule boundary caused more than one error. Hard 12 hits against 2–3 and 7–A. A small dealer card does not always mean Stand: against 3 choose Hit, against 4 choose Stand.'**
+  String get adaptiveHardHit;
+
+  /// No description provided for @adaptiveSoftDouble.
+  ///
+  /// In en, this message translates to:
+  /// **'The available Double was missed more than once. With A+7 against 3–6, Double is the standard choice. Without Double, use Stand, not Hit.'**
+  String get adaptiveSoftDouble;
+
+  /// No description provided for @adaptiveSoftStand.
+  ///
+  /// In en, this message translates to:
+  /// **'The soft-18 Stand cases caused more than one error. A+7 stands against 2, 7 or 8; against 9, 10 or A it hits.'**
+  String get adaptiveSoftStand;
+
+  /// No description provided for @adaptiveSoftHit.
+  ///
+  /// In en, this message translates to:
+  /// **'The soft-18 Hit cases caused more than one error. Against 9, 10 or A, choose Hit. The ace can change from 11 to 1, so this is not hard 18.'**
+  String get adaptiveSoftHit;
+
+  /// No description provided for @adaptiveSoftFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'The unavailable-Double cases caused more than one error. A+2+5 is soft 18, but Double is unavailable after an extra card. Against 3–6, the fallback is Stand.'**
+  String get adaptiveSoftFallback;
+
+  /// No description provided for @adaptiveCountResult.
+  ///
+  /// In en, this message translates to:
+  /// **'More than one final count was incorrect. That alone does not identify the cause. Start with a simple pair: 3 adds +1 and K adds −1; together they leave RC unchanged.'**
+  String get adaptiveCountResult;
+
+  /// No description provided for @adaptiveExtraHard.
+  ///
+  /// In en, this message translates to:
+  /// **'3+4+5 is still hard 12. An extra card does not change the rule: against 4, choose Stand. There is no timer.'**
+  String get adaptiveExtraHard;
+
+  /// No description provided for @adaptiveExtraSoft.
+  ///
+  /// In en, this message translates to:
+  /// **'A+3+4 is soft 18. The extra card makes Double unavailable: against 6, the fallback is Stand. There is no timer.'**
+  String get adaptiveExtraSoft;
+
+  /// No description provided for @adaptiveExtraCount.
+  ///
+  /// In en, this message translates to:
+  /// **'One extra card, the same Hi-Lo tags, no timer: +1, 0, −1, +1, −1. Starting from zero, the final RC is zero.'**
+  String get adaptiveExtraCount;
+
   /// No description provided for @pilotPracticeBaseline.
   ///
   /// In en, this message translates to:

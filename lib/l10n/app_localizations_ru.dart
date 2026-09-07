@@ -9,6 +9,58 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get adaptiveHelpTitle =>
+      'Короткий пример перед самостоятельным блоком';
+
+  @override
+  String get adaptiveChallengeTitle =>
+      'Пять правильно без подсказок — попробуй ещё одну карту';
+
+  @override
+  String get adaptiveOptional =>
+      'Дополнительная практика без оценки. Можно сразу перейти к неизменным самостоятельным задачам.';
+
+  @override
+  String get adaptiveHardStand =>
+      'На этой границе правила было больше одной ошибки. Hard 12 стоит против 4–6. Сравни 10+2 против 6 (Stand) с той же рукой против 3 (Hit).';
+
+  @override
+  String get adaptiveHardHit =>
+      'На этой границе правила было больше одной ошибки. Hard 12 берёт карту против 2–3 и 7–A. Маленькая карта дилера не всегда означает Stand: против 3 — Hit, против 4 — Stand.';
+
+  @override
+  String get adaptiveSoftDouble =>
+      'Доступный Double был пропущен больше одного раза. С A+7 против 3–6 стандартный выбор — Double. Если он недоступен, выбирай Stand, не Hit.';
+
+  @override
+  String get adaptiveSoftStand =>
+      'В случаях Stand для soft 18 было больше одной ошибки. A+7 стоит против 2, 7 или 8; против 9, 10 или A берёт карту.';
+
+  @override
+  String get adaptiveSoftHit =>
+      'В случаях Hit для soft 18 было больше одной ошибки. Против 9, 10 или A выбирай Hit. Туз может сменить 11 на 1, поэтому это не hard 18.';
+
+  @override
+  String get adaptiveSoftFallback =>
+      'В случаях без Double было больше одной ошибки. A+2+5 — soft 18, но после дополнительной карты Double недоступен. Против 3–6 запасное действие — Stand.';
+
+  @override
+  String get adaptiveCountResult =>
+      'Конечный счёт оказался неверным больше одного раза. По одному итогу нельзя определить причину. Начни с простой пары: 3 добавляет +1, K добавляет −1; вместе они не меняют RC.';
+
+  @override
+  String get adaptiveExtraHard =>
+      '3+4+5 — всё ещё hard 12. Дополнительная карта не меняет правило: против 4 выбирай Stand. Таймера нет.';
+
+  @override
+  String get adaptiveExtraSoft =>
+      'A+3+4 — soft 18. Дополнительная карта делает Double недоступным: против 6 запасное действие — Stand. Таймера нет.';
+
+  @override
+  String get adaptiveExtraCount =>
+      'На одну карту больше, прежние теги Hi-Lo, без таймера: +1, 0, −1, +1, −1. При начальном нуле конечный RC — ноль.';
+
+  @override
   String pilotPracticeBaseline(int correct, int unassisted) {
     return 'Последняя практика: $correct/10 правильных первых ответов; $unassisted/10 правильно без подсказок.';
   }

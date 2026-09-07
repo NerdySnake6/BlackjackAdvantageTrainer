@@ -2,6 +2,7 @@
 library;
 
 import 'lesson_format.dart';
+import 'lesson_adaptation.dart';
 import 'pilot_lesson.dart';
 
 enum DecisionLessonPhase { theory, decision, coaching, result }
@@ -56,6 +57,8 @@ class DecisionLessonSession {
     session._answers.addAll((json['answers']! as List).cast<String>());
     session._hints.addAll((json['hints']! as List).cast<bool>());
     session._awardedXp = json['awardedXp'] as int?;
+    session._adaptiveAnswer = json['adaptiveAnswer'] as String?;
+    session._adaptiveCount = json['adaptiveCount'] as int? ?? 0;
     session._validate();
     return session;
   }
@@ -71,6 +74,47 @@ class DecisionLessonSession {
   final List<String> _answers = [];
   final List<bool> _hints = [];
   int? _awardedXp;
+  String? _adaptiveAnswer;
+  int _adaptiveCount = 0;
+
+  LessonAdaptation? get adaptation =>
+      LessonAdaptation.select(lesson, _answers, _hints);
+  String? get adaptiveAnswer => _adaptiveAnswer;
+  int get adaptiveCount => _adaptiveCount;
+  bool get isAdaptiveBoundary =>
+      _phase == DecisionLessonPhase.coaching &&
+      _corrected &&
+      current.stage == LessonMissionStage.practice &&
+      !isLastTask &&
+      lesson.scenarios[_index + 1].stage == LessonMissionStage.independent;
+
+  void answerAdaptive(String answer) {
+    final plan = adaptation;
+    if (!isAdaptiveBoundary ||
+        plan == null ||
+        _adaptiveAnswer != null ||
+        !plan.example.accepts(answer)) {
+      throw StateError('Adaptive answer unavailable');
+    }
+    _adaptiveAnswer = plan.example.isCounting
+        ? int.parse(answer).toString()
+        : answer;
+  }
+
+  void adjustAdaptiveCount(int delta) {
+    final plan = adaptation;
+    if (!isAdaptiveBoundary ||
+        plan == null ||
+        !plan.example.isCounting ||
+        _adaptiveAnswer != null ||
+        delta.abs() != 1) {
+      throw StateError('Adaptive count input unavailable');
+    }
+    _adaptiveCount = (_adaptiveCount + delta).clamp(
+      -plan.example.cards.length,
+      plan.example.cards.length,
+    );
+  }
 
   DecisionLessonPhase get phase => _phase;
   int get index => _index;
@@ -209,6 +253,8 @@ class DecisionLessonSession {
     'answers': List<String>.of(_answers),
     'hints': List<bool>.of(_hints),
     'awardedXp': _awardedXp,
+    'adaptiveAnswer': _adaptiveAnswer,
+    'adaptiveCount': _adaptiveCount,
   };
 
   void _validate() {
@@ -247,6 +293,15 @@ class DecisionLessonSession {
           (!lesson.scenarios[i].allowsHint && _hints[i])) {
         throw const FormatException('Invalid pilot answer');
       }
+    }
+    final plan = adaptation;
+    if ((_adaptiveAnswer != null &&
+            (plan == null || !plan.example.accepts(_adaptiveAnswer!))) ||
+        (_adaptiveCount != 0 &&
+            (plan == null ||
+                !plan.example.isCounting ||
+                _adaptiveCount.abs() > plan.example.cards.length))) {
+      throw const FormatException('Invalid adaptive practice state');
     }
   }
 }

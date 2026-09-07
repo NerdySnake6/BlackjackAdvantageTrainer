@@ -9,6 +9,58 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get adaptiveHelpTitle =>
+      'A quick example before the independent block';
+
+  @override
+  String get adaptiveChallengeTitle =>
+      'Five correct without hints — try one extra card';
+
+  @override
+  String get adaptiveOptional =>
+      'Optional, unscored practice. You can continue to the unchanged independent tasks.';
+
+  @override
+  String get adaptiveHardStand =>
+      'This rule boundary caused more than one error. Hard 12 stands against 4–6. Compare 10+2 against 6 (Stand) with the same hand against 3 (Hit).';
+
+  @override
+  String get adaptiveHardHit =>
+      'This rule boundary caused more than one error. Hard 12 hits against 2–3 and 7–A. A small dealer card does not always mean Stand: against 3 choose Hit, against 4 choose Stand.';
+
+  @override
+  String get adaptiveSoftDouble =>
+      'The available Double was missed more than once. With A+7 against 3–6, Double is the standard choice. Without Double, use Stand, not Hit.';
+
+  @override
+  String get adaptiveSoftStand =>
+      'The soft-18 Stand cases caused more than one error. A+7 stands against 2, 7 or 8; against 9, 10 or A it hits.';
+
+  @override
+  String get adaptiveSoftHit =>
+      'The soft-18 Hit cases caused more than one error. Against 9, 10 or A, choose Hit. The ace can change from 11 to 1, so this is not hard 18.';
+
+  @override
+  String get adaptiveSoftFallback =>
+      'The unavailable-Double cases caused more than one error. A+2+5 is soft 18, but Double is unavailable after an extra card. Against 3–6, the fallback is Stand.';
+
+  @override
+  String get adaptiveCountResult =>
+      'More than one final count was incorrect. That alone does not identify the cause. Start with a simple pair: 3 adds +1 and K adds −1; together they leave RC unchanged.';
+
+  @override
+  String get adaptiveExtraHard =>
+      '3+4+5 is still hard 12. An extra card does not change the rule: against 4, choose Stand. There is no timer.';
+
+  @override
+  String get adaptiveExtraSoft =>
+      'A+3+4 is soft 18. The extra card makes Double unavailable: against 6, the fallback is Stand. There is no timer.';
+
+  @override
+  String get adaptiveExtraCount =>
+      'One extra card, the same Hi-Lo tags, no timer: +1, 0, −1, +1, −1. Starting from zero, the final RC is zero.';
+
+  @override
   String pilotPracticeBaseline(int correct, int unassisted) {
     return 'Last practice: $correct/10 first answers correct; $unassisted/10 correct without hints.';
   }
