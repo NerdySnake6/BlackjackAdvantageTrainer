@@ -206,6 +206,8 @@ class PilotLesson {
           'initialCount': task.initialCount,
           'expected': task.expected,
           'mistakes': task.mistakes.keys.toList()..sort(),
+          if (task.kind == LessonMissionKind.decision && task.afterSplit)
+            'afterSplit': true,
           if (task.isHandMission ||
               task.kind == LessonMissionKind.actionMeaning) ...{
             'afterSplit': task.afterSplit,

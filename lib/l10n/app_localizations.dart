@@ -1624,7 +1624,7 @@ abstract class AppLocalizations {
   /// No description provided for @strategyLessonsTitle.
   ///
   /// In en, this message translates to:
-  /// **'First strategy decisions'**
+  /// **'Strategy decisions'**
   String get strategyLessonsTitle;
 }
 

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../domain/blackjack_engine/game_rules.dart';
 import '../../domain/blackjack_engine/hand.dart';
 import '../../domain/learning/decision_lesson.dart';
+import '../../domain/learning/lesson_format.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
 import '../../viewmodels/pilot_lesson_view_model.dart';
@@ -245,7 +246,8 @@ class _PilotBody extends StatelessWidget {
                     enabled: canAnswer,
                     onAction: (action) => vm.answer(action.name),
                   ),
-                  if (task.prompt.isNotEmpty && session.corrected)
+                  if (task.kind == LessonMissionKind.actionMeaning &&
+                      session.corrected)
                     FoundationActionResult(task: task),
                 ],
                 if (!feedback) ...[

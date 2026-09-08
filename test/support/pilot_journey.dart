@@ -3,6 +3,7 @@ import 'package:blackjack_advantage_trainer/domain/learning/pilot_lesson.dart';
 import 'package:blackjack_advantage_trainer/l10n/app_localizations.dart';
 import 'package:blackjack_advantage_trainer/presentation/drill/cancellation_scene.dart';
 import 'package:blackjack_advantage_trainer/presentation/learn/decision_scene.dart';
+import 'package:blackjack_advantage_trainer/presentation/learn/foundation_scene.dart';
 import 'package:blackjack_advantage_trainer/presentation/learn/pilot_lesson_screen.dart';
 import 'package:blackjack_advantage_trainer/presentation/table/table_formatters.dart';
 import 'package:blackjack_advantage_trainer/viewmodels/app_state.dart';
@@ -59,11 +60,34 @@ Future<void> runPilotJourney(
       expect(scene.showExplanation, index < 2 || index == 3);
       expect(scene.revealedCount, task.cards.length);
     } else {
+      if (task.afterSplit) {
+        expect(find.text(task.prompt), findsOneWidget);
+        await tester.ensureVisible(find.text(task.prompt));
+        await tester.pumpAndSettle();
+      }
+      if (find.byType(DecisionScene).evaluate().isEmpty) {
+        await tester.scrollUntilVisible(
+          find.byType(DecisionScene),
+          180,
+          scrollable: find.byType(Scrollable).first,
+        );
+      }
+      expect(
+        find.byType(DecisionScene),
+        findsOneWidget,
+        reason: '${lesson.id}, scenario $index (${task.id})',
+      );
       final scene = tester.widget<DecisionScene>(find.byType(DecisionScene));
       expect(
         scene.availableActions.contains(PlayerAction.doubleDown),
         task.cards.length == 2,
       );
+      if (task.afterSplit) {
+        expect(
+          scene.availableActions.contains(PlayerAction.surrender),
+          isFalse,
+        );
+      }
     }
 
     Future<void> answer(String value) async {
@@ -121,6 +145,9 @@ Future<void> runPilotJourney(
       );
     } else {
       await answer(task.expected);
+    }
+    if (task.afterSplit) {
+      expect(find.byType(FoundationActionResult), findsNothing);
     }
     await tapPilot(tester, find.byKey(const ValueKey('pilot-next')));
   }

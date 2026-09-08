@@ -1039,5 +1039,1095 @@
         }
       }
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "hard-13-16",
+    "skillId": "strategy.hard_13_16",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Hard 13–16: stay, draw or surrender",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "hard-13-16-interactive-theory",
+      "text": "These are hard hands, not pairs of eights. Against 2–6, Stand on hard 13–16. Against 7–A, usually Hit, with precise late-surrender exceptions: original two-card hard 15 against 10, and hard 16 against 9, 10 or A. Surrender is considered only after the dealer's blackjack check in our 6D/S17/DAS/late-surrender/peek/3:2 profile. After an extra card, Surrender is unavailable and those exceptions become Hit. Compare 10+6 against 6 (Stand), against 10 (Surrender), and 4+6+6 against 10 (Hit). A pair of eights with Split available is a different case: do not apply the hard-16 surrender shortcut to it. The decision is about the better average continuation, not predicting the next card."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "hard-13-16-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "10",
+          "6"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 16 against 6. With hard 13–16 against 2–6, Stand: reaching 21 is not compulsory.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "10",
+          "6"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "coaching": {
+          "explanation": "Hard 16 against 10. On the original two cards, late Surrender applies to 15 vs 10 and 16 vs 9, 10, A. A splittable 8+8 is an exception.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "4"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 13 against 2. With hard 13–16 against 2–6, Stand: reaching 21 is not compulsory.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "6"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 15 against 9. Against 7–A, Hit unless an exact Surrender exception applies. On 15 vs 9, surrender is not recommended.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "4"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 14 against A. Against 7–A, Hit unless an exact Surrender exception applies. On 15 vs 9, surrender is not recommended.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "6"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "coaching": {
+          "explanation": "Hard 15 against 10. On the original two cards, late Surrender applies to 15 vs 10 and 16 vs 9, 10, A. A splittable 8+8 is an exception.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "6"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "coaching": {
+          "explanation": "Hard 16 against 9. On the original two cards, late Surrender applies to 15 vs 10 and 16 vs 9, 10, A. A splittable 8+8 is an exception.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "5"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 13 against A. Against 7–A, Hit unless an exact Surrender exception applies. On 15 vs 9, surrender is not recommended.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "5"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 14 against 6. With hard 13–16 against 2–6, Stand: reaching 21 is not compulsory.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "3",
+          "10"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 15 against 10. After a hit, Surrender is unavailable. Against this strong upcard, choose Hit.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "4",
+          "6",
+          "6"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 16 against 9. After a hit, Surrender is unavailable. Against this strong upcard, choose Hit.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "hard-13-16-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "K",
+          "6"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "coaching": {
+          "explanation": "Hard 16 against A. On the original two cards, late Surrender applies to 15 vs 10 and 16 vs 9, 10, A. A splittable 8+8 is an exception.",
+          "contrast": "Compare hard 15 vs 9 → Hit with 15 vs 10 → Surrender on two cards; 2+3+10 vs 10 → Hit after an extra card.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "soft-13-17",
+    "skillId": "strategy.soft_13_17",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Soft 13–17: use the ace, check Double",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "soft-13-17-interactive-theory",
+      "text": "A soft hand has an ace worth 11 now, but repeated hits can turn it hard and eventually bust. In our standard six-deck S17 profile, soft 13–14 Double against 5–6; soft 15–16 against 4–6; soft 17 against 3–6. Otherwise Hit. Do not Stand on soft 17 just because the dealer stands on soft 17: that is a dealer rule, not your strategy. Double requires the first two cards; when it is unavailable, all soft 13–17 Double cases fall back to Hit. Compare A+6 against 4 (Double) and A+2+4 against 4 (Hit). Soft 18 is taught separately because its fallback can be Stand instead."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "soft-13-17-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "2"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Soft 13 against 5. Soft 13–14: Double against 5–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "2"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 13 against 4. Soft 13–14: Double against 5–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "3"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Soft 14 against 6. Soft 13–14: Double against 5–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "4"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Soft 15 against 4. Soft 15–16: Double against 4–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "5"
+        ],
+        "dealer": "3",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 16 against 3. Soft 15–16: Double against 4–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "6"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 17 against 2. Soft 17: Double against 3–6, otherwise Hit. The S17 rule belongs to the dealer.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "6"
+        ],
+        "dealer": "3",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Soft 17 against 3. Soft 17: Double against 3–6, otherwise Hit. The S17 rule belongs to the dealer.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "2",
+          "2"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 15 against 4. Double is unavailable after the third card. For soft 13–17, the fallback is Hit, not Stand.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "3",
+          "2"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 16 against 5. Double is unavailable after the third card. For soft 13–17, the fallback is Hit, not Stand.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "2",
+          "4"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 17 against 6. Double is unavailable after the third card. For soft 13–17, the fallback is Hit, not Stand.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "3"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 14 against 4. Soft 13–14: Double against 5–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "soft-13-17-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "5"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Soft 16 against 6. Soft 15–16: Double against 4–6, otherwise Hit.",
+          "contrast": "Compare A+6 vs 2 → Hit, A+6 vs 3 → Double and A+2+4 vs 3 → Hit: the upcard and available actions both matter.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pairs-core",
+    "skillId": "strategy.pairs_core",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Core pairs: Split is not automatic",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "pairs-core-interactive-theory",
+      "text": "Our standard profile allows Split for two cards of equal value, including 10+K, up to four hands. Availability is not a recommendation. Split aces and eights against any upcard. Stand on ten-value pairs. For 9+9, Split against 2–6, 8 or 9, but Stand against 7, 10 or A. With 8+8 against 10, Split takes priority over the surrender rule for ordinary hard 16. Each split hand starts from one card of the pair and receives a new card. Aces receive only one card each and stop; 21 after Split is not natural blackjack. With other pairs, DAS allows Double on the new two-card hand, but Surrender is unavailable. After one 8+8 example, decide what to do with the resulting 8+3 hand. Smaller DAS-dependent pairs follow in the next lesson."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "pairs-core-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "A"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Soft 12 against 10. Split aces and eights against every upcard. For 8+8, an available Split takes priority over surrendering ordinary 16.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Hard 16 against 10. Split aces and eights against every upcard. For 8+8, an available Split takes priority over surrendering ordinary 16.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "9"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 18 against 7. Split 9+9 against 2–6, 8 and 9, but Stand against 7, 10 and A.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "9"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Hard 18 against 8. Split 9+9 against 2–6, 8 and 9, but Stand against 7, 10 and A.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "K"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 20 against 6. This is a value pair: both cards are worth 10 even when their ranks differ. Split is available, but the strategy is Stand.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Hard 16 against 6. Split aces and eights against every upcard. For 8+8, an available Split takes priority over surrendering ordinary 16.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "8",
+          "3"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "doubleDown",
+        "afterSplit": true,
+        "prompt": "After splitting 8+8 against 6, one hand received a 3 and became 8+3. Choose the action for this new hand.",
+        "coaching": {
+          "explanation": "Hard 11 against 6. After splitting eights, the new 8+3 hand is hard 11. DAS permits Double against 6 on these two cards; Surrender is unavailable.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "9"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Hard 18 against 9. Split 9+9 against 2–6, 8 and 9, but Stand against 7, 10 and A.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "9"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 18 against 10. Split 9+9 against 2–6, 8 and 9, but Stand against 7, 10 and A.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "Q",
+          "Q"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 20 against A. This is a value pair: both cards are worth 10 even when their ranks differ. Split is available, but the strategy is Stand.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "A"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Soft 12 against 7. Split aces and eights against every upcard. For 8+8, an available Split takes priority over surrendering ordinary 16.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      },
+      {
+        "id": "pairs-core-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "split",
+          "surrender"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Hard 16 against A. Split aces and eights against every upcard. For 8+8, an available Split takes priority over surrendering ordinary 16.",
+          "contrast": "Compare 9+9 vs 7 → Stand, vs 8 → Split, vs 10 → Stand. Split is not a rule for every pair or every upcard.",
+          "mistakes": {
+            "hit": "An extra card is not always the best continuation. Check the hand's exact row, the upcard, and whether Double or Split is available.",
+            "stand": "Standing is not always enough. Do not confuse the dealer's S17 rule with player strategy or transfer one pair's rule to another.",
+            "doubleDown": "Double means exactly one card and stopping. Check the upcard range; for a pair, check Split first.",
+            "split": "Equal values make Split available, not compulsory. Ten-value pairs stand, and nines have exceptions against 7, 10 and A.",
+            "surrender": "Surrender has exact original-hand 15/16 exceptions; it is not general risk avoidance. Splittable eights take Split first, and Surrender is unavailable after a split."
+          }
+        }
+      }
+    ]
   }
 ]

@@ -145,7 +145,7 @@ class ContentValidator {
     if (catalog.contentVersion >= 5 || catalog.strategyLessons.isNotEmpty) {
       _require(
         catalog.strategyLessons.map((l) => l.id).join(',') ==
-                'first-strategy,dealer-upcard,hard-doubles' &&
+                'first-strategy,dealer-upcard,hard-doubles,hard-13-16,soft-13-17,pairs-core' &&
             manifest['strategyLessonFile'] ==
                 'assets/content/$locale/strategy_lessons.json',
         '$locale: invalid strategy package',
@@ -280,6 +280,15 @@ class ContentValidator {
               '$path/${task.id}: invalid action demonstration',
             );
           }
+        } else if (task.kind == LessonMissionKind.decision && task.afterSplit) {
+          _text(task.prompt, '$path/${task.id}/prompt');
+          _require(
+            task.drawCards.isEmpty &&
+                !task.availableActions.contains(PlayerAction.surrender) &&
+                task.cards.first.rank.label != 'A' &&
+                task.evaluation.total < 21,
+            '$path/${task.id}: invalid decision after split',
+          );
         } else {
           _require(
             task.prompt.isEmpty && !task.afterSplit && task.drawCards.isEmpty,

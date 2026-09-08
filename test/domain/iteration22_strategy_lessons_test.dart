@@ -16,6 +16,7 @@ List<PilotLesson> lessons(String locale) =>
               ).readAsStringSync(),
             )
             as List)
+        .take(3)
         .map((l) => PilotLesson.fromJson(l as Map<String, Object?>))
         .toList();
 

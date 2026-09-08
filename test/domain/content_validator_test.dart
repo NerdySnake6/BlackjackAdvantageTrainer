@@ -82,6 +82,14 @@ void main() {
     ('strategyLessons/0/skillId', 'wrong.skill'),
     ('strategyLessons/0/scenarios/0/kind', 'runningCount'),
     ('strategyLessons/0/id', 'quick-start'),
+    (
+      'strategyLessons/5/scenarios/6/actions',
+      ['hit', 'stand', 'doubleDown', 'surrender'],
+    ),
+    ('strategyLessons/5/scenarios/6/prompt', ''),
+    ('strategyLessons/5/scenarios/6/cards', ['A', '3']),
+    ('strategyLessons/5/scenarios/6/drawCards', ['5']),
+    ('strategyLessons/5/scenarios/6/expected', 'surrender'),
     ('manifest/strategyLessonFile', 'assets/content/ru/strategy_lessons.json'),
     ('pilotLessons/0/theory/text', '  '),
     ('pilotLessons/0/title', ''),
@@ -149,6 +157,7 @@ void main() {
     ('pilotLessons/0/scenarios/0/expected', 'hit'),
     ('strategyLessons/0/scenarios/0/expected', 'stand'),
     ('strategyLessons/1/scenarios/0/dealer', '5'),
+    ('strategyLessons/5/scenarios/6/expected', 'hit'),
   ]) {
     test('rejects translated semantic drift at $path', () {
       final en = _package('en');
