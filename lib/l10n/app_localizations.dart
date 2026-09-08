@@ -1620,6 +1620,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finish my saved previous-format lesson'**
   String get foundationLegacyResume;
+
+  /// No description provided for @strategyLessonsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'First strategy decisions'**
+  String get strategyLessonsTitle;
 }
 
 class _AppLocalizationsDelegate

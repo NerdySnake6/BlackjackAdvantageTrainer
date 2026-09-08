@@ -1,0 +1,1043 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "first-strategy",
+    "skillId": "strategy.first_decisions",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "First strategy: read the hand, not the last win",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "first-strategy-interactive-theory",
+      "text": "Use your current hand and the dealer upcard, not the previous round's win or loss. In our 6D/S17/DAS/late-surrender/peek/3:2 profile, hard 5–8 always Hit; hard 17–20 Stand. These boundaries remain the same against a small card or an ace. For example, 3+5 against 6 needs Hit, but 10+7 against 10 needs Stand. A strong dealer card does not mean you should always draw, and a good action can still lose. This first lesson focuses on hard hands without a splittable pair; soft hands, doubles and pairs follow separately. Try two guided examples, then ten scored decisions. Correct a mistake to continue, but the first answer remains the score."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "first-strategy-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "3",
+          "5"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 8 against 6. With 5–8, Hit against any upcard: this hand needs improvement.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "10",
+          "7"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 17 against 10. With 17–20, Stand against any upcard: do not chase 21 at any cost.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "3"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 5 against A. With 5–8, Hit against any upcard: this hand needs improvement.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "4"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 6 against 2. With 5–8, Hit against any upcard: this hand needs improvement.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "4"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 7 against 9. With 5–8, Hit against any upcard: this hand needs improvement.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "8"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 18 against 6. With 17–20, Stand against any upcard: do not chase 21 at any cost.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "9"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 19 against A. With 17–20, Stand against any upcard: do not chase 21 at any cost.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "3",
+          "3"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 8 against 10. With 5–8, Hit against any upcard: this hand needs improvement.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "2",
+          "3"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 7 against 6. With 5–8, Hit against any upcard: this hand needs improvement.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "10",
+          "6",
+          "A"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 17 against 9. With 17–20, Stand against any upcard: do not chase 21 at any cost.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "5",
+          "4"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 18 against 7. With 17–20, Stand against any upcard: do not chase 21 at any cost.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "first-strategy-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "K",
+          "8"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 18 against 2. With 17–20, Stand against any upcard: do not chase 21 at any cost.",
+          "contrast": "Compare 3+5 against 10 → Hit with 10+7 against 10 → Stand: the dealer is unchanged, but your total crosses the boundary.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "dealer-upcard",
+    "skillId": "strategy.dealer_upcard",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Dealer upcard: find the boundary",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "dealer-upcard-interactive-theory",
+      "text": "Keep the hand fixed and change only the dealer upcard. It often changes the best action, but the groups are not absolute. With hard 12, Stand against 4–6; Hit against 2–3 and 7–A. With hard 13–14, Stand against 2–6 and Hit against 7–A. Hard 8 still Hits a small card, while hard 17 still Stands against an ace. Compare 10+2 against 3 (Hit) and against 4 (Stand). Do not imagine that the dealer's hidden card is always ten; this is a reference strategy for the stated six-deck rules, not a prediction of one round. Practise recognizing the boundary before memorizing more totals."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "dealer-upcard-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "10",
+          "2"
+        ],
+        "dealer": "3",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 12 against 3. At 12 the boundary lies between 3 and 4: Stand only against 4–6.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "10",
+          "2"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 12 against 4. At 12 the boundary lies between 3 and 4: Stand only against 4–6.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "4"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 13 against 6. At 13–14: Stand against 2–6, Hit against 7–A.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "4"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 13 against 7. At 13–14: Stand against 2–6, Hit against 7–A.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "5"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 8 against 10. A low total of 8 needs improvement: Hit even against a small upcard.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "7"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 17 against 10. A strong dealer card does not force Hit on 17: Stand.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "8",
+          "4"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 12 against 2. At 12 the boundary lies between 3 and 4: Stand only against 4–6.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "10",
+          "3"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 13 against 2. At 13–14: Stand against 2–6, Hit against 7–A.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "10",
+          "3"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 13 against A. At 13–14: Stand against 2–6, Hit against 7–A.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "5"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 14 against 9. At 13–14: Stand against 2–6, Hit against 7–A.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "K",
+          "7"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 17 against A. A strong dealer card does not force Hit on 17: Stand.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "dealer-upcard-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "3"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Hard 12 against 6. At 12 the boundary lies between 3 and 4: Stand only against 4–6.",
+          "contrast": "Compare 9+3 against 3 → Hit and against 4 → Stand. Then compare 9+4 against 6 → Stand and against 7 → Hit: the boundary depends on the hand.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "hard-doubles",
+    "skillId": "strategy.hard_doubles",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Hard 9–11: Double or Hit?",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "hard-doubles-interactive-theory",
+      "text": "Double takes exactly one more card and ends the hand, so a small total alone is not enough. In our six-deck S17 profile, hard 9 doubles against 3–6; hard 10 against 2–9; hard 11 against 2–10, but Hits against an ace. Outside each range choose Hit. Double is available only on the first two cards here: after an extra card, the fallback for hard 9–11 is Hit, not Stand. Compare 5+6 against 6 (Double), 5+6 against A (Hit), and 2+3+6 against 6 (Hit because Double is unavailable). Follow the dealer boundary and the actual controls; do not transfer these rules automatically to H17 or another profile."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "hard-doubles-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "5",
+          "6"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 11 against 6. Hard 11 with S17: Double against 2–10, but Hit against A.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Hit draws a card but misses the reference-strategy double on this two-card hand.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "5",
+          "6"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 11 against A. Hard 11 with S17: Double against 2–10, but Hit against A.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "5"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 9 against 2. Hard 9: Double against 3–6, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "5"
+        ],
+        "dealer": "3",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 9 against 3. Hard 9: Double against 3–6, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Hit draws a card but misses the reference-strategy double on this two-card hand.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "6"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 10 against 9. Hard 10: Double against 2–9, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Hit draws a card but misses the reference-strategy double on this two-card hand.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "6"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 10 against 10. Hard 10: Double against 2–9, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "3",
+          "6"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 11 against 6. After an extra card Double is unavailable. For hard 9–11 the fallback is Hit, not Stand.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "6"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 9 against 6. Hard 9: Double against 3–6, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Hit draws a card but misses the reference-strategy double on this two-card hand.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "6"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 9 against 7. Hard 9: Double against 3–6, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "8"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 10 against 8. Hard 10: Double against 2–9, otherwise Hit.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Hit draws a card but misses the reference-strategy double on this two-card hand.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "8"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 11 against 10. Hard 11 with S17: Double against 2–10, but Hit against A.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Hit draws a card but misses the reference-strategy double on this two-card hand.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      },
+      {
+        "id": "hard-doubles-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "4",
+          "4"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 10 against 5. After an extra card Double is unavailable. For hard 9–11 the fallback is Hit, not Stand.",
+          "contrast": "Compare 4+5 against 2 → Hit and against 3 → Double. With 2+3+4 against 3, Double is unavailable, so Hit.",
+          "mistakes": {
+            "hit": "Being allowed to draw does not make it best. Compare your total and the dealer boundary.",
+            "stand": "Standing does not improve this hand. Check whether Hit or an available Double is required; ignore the previous outcome.",
+            "doubleDown": "Not every small total calls for Double: it needs the right upcard and a two-card hand.",
+            "surrender": "A fixed half-stake loss is not the best continuation here. Surrender has specific cases; it is not a general response to a strong upcard."
+          }
+        }
+      }
+    ]
+  }
+]

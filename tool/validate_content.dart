@@ -25,6 +25,9 @@ void main() {
               'assets/content/$locale/foundation_lessons.json',
             ),
             manifest: _object('assets/content/$locale/manifest.json'),
+            strategyLessons: _json(
+              'assets/content/$locale/strategy_lessons.json',
+            ),
             glossary: _object('assets/content/$locale/glossary.json'),
           ),
           glossary: _object('assets/content/$locale/glossary.json'),

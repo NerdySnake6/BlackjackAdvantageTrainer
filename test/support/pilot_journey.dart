@@ -34,8 +34,9 @@ Future<void> runPilotJourney(
   AppState app,
   PilotLesson lesson, {
   Future<AppState> Function()? reloadApp,
+  String entryKeyPrefix = 'pilot',
 }) async {
-  await tapPilot(tester, find.byKey(ValueKey('pilot-${lesson.id}')));
+  await tapPilot(tester, find.byKey(ValueKey('$entryKeyPrefix-${lesson.id}')));
   final strings = AppLocalizations.of(
     tester.element(find.byType(PilotLessonScreen)),
   );
@@ -107,7 +108,10 @@ Future<void> runPilotJourney(
       if (reloadApp != null) {
         final snapshot = app.progress.pilotSessions[lesson.id];
         app = await reloadApp();
-        await tapPilot(tester, find.byKey(ValueKey('pilot-${lesson.id}')));
+        await tapPilot(
+          tester,
+          find.byKey(ValueKey('$entryKeyPrefix-${lesson.id}')),
+        );
         expect(app.progress.pilotSessions[lesson.id], snapshot);
       }
       await answer(task.expected);
@@ -140,7 +144,7 @@ Future<void> runPilotJourney(
   expect(find.text(strings.pilotReward(140)), findsOneWidget);
   final xp = app.progress.xp;
   await tapPilot(tester, find.widgetWithText(FilledButton, strings.backToPath));
-  await tapPilot(tester, find.byKey(ValueKey('pilot-${lesson.id}')));
+  await tapPilot(tester, find.byKey(ValueKey('$entryKeyPrefix-${lesson.id}')));
   expect(find.text(strings.lessonResult(9, 10)), findsOneWidget);
   expect(app.progress.xp, xp);
   await tapPilot(tester, find.widgetWithText(FilledButton, strings.backToPath));

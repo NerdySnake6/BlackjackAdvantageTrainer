@@ -78,13 +78,18 @@ GoRouter createRouter({required AppState appState}) {
         path: '/lesson/:lessonId',
         redirect: (context, state) {
           final lessonId = state.pathParameters['lessonId'];
-          return appState.catalog.lessons.any((lesson) => lesson.id == lessonId)
+          return (appState.catalog.lessons.any(
+                    (lesson) => lesson.id == lessonId,
+                  ) ||
+                  appState.catalog.strategyLessons.any(
+                    (lesson) => lesson.id == lessonId,
+                  ))
               ? null
               : '/learn';
         },
         builder: (context, state) {
           final id = state.pathParameters['lessonId']!;
-          return appState.catalog.foundationLessons.any((l) => l.id == id)
+          return appState.catalog.playableLessons.any((l) => l.id == id)
               ? PilotLessonScreen(lessonId: id)
               : LessonScreen(lessonId: id);
         },

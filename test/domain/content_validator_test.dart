@@ -10,6 +10,7 @@ Map<String, dynamic> _package(String locale) => {
     ('catalog', 'lessons'),
     ('pilotLessons', 'pilot_lessons'),
     ('foundationLessons', 'foundation_lessons'),
+    ('strategyLessons', 'strategy_lessons'),
     ('manifest', 'manifest'),
     ('glossary', 'glossary'),
   ])
@@ -23,6 +24,7 @@ CourseCatalog _parse(Map<String, dynamic> raw) =>
       catalog: raw['catalog'] as Map<String, Object?>,
       pilotLessons: raw['pilotLessons'],
       foundationLessons: raw['foundationLessons'],
+      strategyLessons: raw['strategyLessons'],
       manifest: raw['manifest'] as Map<String, Object?>,
       glossary: raw['glossary'] as Map<String, Object?>,
     );
@@ -75,6 +77,12 @@ void main() {
     ('pilotLessons', []),
     ('foundationLessons', null),
     ('foundationLessons', []),
+    ('strategyLessons', null),
+    ('strategyLessons', []),
+    ('strategyLessons/0/skillId', 'wrong.skill'),
+    ('strategyLessons/0/scenarios/0/kind', 'runningCount'),
+    ('strategyLessons/0/id', 'quick-start'),
+    ('manifest/strategyLessonFile', 'assets/content/ru/strategy_lessons.json'),
     ('pilotLessons/0/theory/text', '  '),
     ('pilotLessons/0/title', ''),
     ('pilotLessons/0/subtitle', ''),
@@ -139,6 +147,8 @@ void main() {
     ('pilotLessons/0/scenarios/0/cards', ['9', '3']),
     ('pilotLessons/0/scenarios/0/dealer', '5'),
     ('pilotLessons/0/scenarios/0/expected', 'hit'),
+    ('strategyLessons/0/scenarios/0/expected', 'stand'),
+    ('strategyLessons/1/scenarios/0/dealer', '5'),
   ]) {
     test('rejects translated semantic drift at $path', () {
       final en = _package('en');

@@ -12,6 +12,7 @@ class ContentValidator {
     required Map<String, Object?> catalog,
     required Object? pilotLessons,
     Object? foundationLessons,
+    Object? strategyLessons,
     required Map<String, Object?> manifest,
     required Map<String, Object?> glossary,
   }) {
@@ -24,6 +25,7 @@ class ContentValidator {
         ...catalog,
         'pilotLessons': pilotLessons,
         'foundationLessons': foundationLessons,
+        'strategyLessons': strategyLessons,
       });
       validate(parsed, manifest: manifest, glossary: glossary);
       return parsed;
@@ -140,8 +142,19 @@ class ContentValidator {
         '$locale: invalid foundation package',
       );
     }
+    if (catalog.contentVersion >= 5 || catalog.strategyLessons.isNotEmpty) {
+      _require(
+        catalog.strategyLessons.map((l) => l.id).join(',') ==
+                'first-strategy,dealer-upcard,hard-doubles' &&
+            manifest['strategyLessonFile'] ==
+                'assets/content/$locale/strategy_lessons.json',
+        '$locale: invalid strategy package',
+      );
+    }
     for (final lesson in catalog.playableLessons) {
-      if (catalog.foundationLessons.contains(lesson)) {
+      if (catalog.foundationLessons.contains(lesson) ||
+          (catalog.strategyLessons.contains(lesson) &&
+              lesson.id == 'first-strategy')) {
         final legacy = catalog.lessonById(lesson.id);
         _require(
           legacy.skillId == lesson.skillId,
@@ -161,6 +174,12 @@ class ContentValidator {
         '$path: unverified rule profile',
       );
       for (final task in lesson.scenarios) {
+        if (catalog.strategyLessons.contains(lesson)) {
+          _require(
+            task.kind == LessonMissionKind.decision,
+            '$path/${task.id}: unexpected strategy mission',
+          );
+        }
         if (catalog.foundationLessons.contains(lesson)) {
           final kind = switch (lesson.id) {
             'quick-start' => LessonMissionKind.handOutcome,
@@ -320,6 +339,17 @@ class ContentValidator {
         source.foundationLessons[i].resumeSignature ==
             translation.foundationLessons[i].resumeSignature,
         '${translation.locale}: foundation semantics differ',
+      );
+    }
+    _require(
+      source.strategyLessons.length == translation.strategyLessons.length,
+      '${translation.locale}: strategy count differs',
+    );
+    for (var i = 0; i < source.strategyLessons.length; i++) {
+      _require(
+        source.strategyLessons[i].resumeSignature ==
+            translation.strategyLessons[i].resumeSignature,
+        '${translation.locale}: strategy semantics differ',
       );
     }
   }

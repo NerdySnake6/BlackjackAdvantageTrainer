@@ -48,6 +48,30 @@ class LearningPathScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                       const _DiagnosticCard(),
                       const SizedBox(height: 12),
+                      if (appState.catalog.strategyLessons.isNotEmpty) ...[
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            strings.strategyLessonsTitle,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                        for (final lesson in appState.catalog.strategyLessons)
+                          Card(
+                            child: ListTile(
+                              key: ValueKey('strategy-${lesson.id}'),
+                              title: Text(lesson.title),
+                              subtitle: Text(lesson.subtitle),
+                              trailing: Icon(
+                                appState.isLessonCompleted(lesson.id)
+                                    ? Icons.check_circle_outline
+                                    : Icons.chevron_right,
+                              ),
+                              onTap: () => context.push('/lesson/${lesson.id}'),
+                            ),
+                          ),
+                        const SizedBox(height: 12),
+                      ],
                       if (appState.catalog.pilotLessons.isNotEmpty) ...[
                         Align(
                           alignment: Alignment.centerLeft,

@@ -907,4 +907,7 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get foundationLegacyResume =>
       'Закончить сохранённый урок прежнего формата';
+
+  @override
+  String get strategyLessonsTitle => 'Первые решения стратегии';
 }

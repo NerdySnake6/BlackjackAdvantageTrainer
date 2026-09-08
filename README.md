@@ -50,6 +50,9 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
   blackjack/bust, and try all five actions with fixed consequence demonstrations.
 - All 54 original exercises remain available to Quick Review and saved
   previous-format sessions. Experienced players can still start at basic strategy.
+- `first-strategy` now opens interactive decisions, followed by new dealer-upcard
+  and hard-doubles lessons (36 EN/RU tasks). The existing hard-12 lesson and its
+  held-out checks remain unchanged. All three are accessible from Learn's strategy group.
 - Three additional playable pilot lessons in Learn: hard 12, soft 18, and
   Hi-Lo cancellation. Each has theory, two unscored introductions, five practice
   tasks, five independent tasks, correction, resume, and an idempotent XP result.

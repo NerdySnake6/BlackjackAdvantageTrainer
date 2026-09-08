@@ -906,4 +906,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get foundationLegacyResume => 'Finish my saved previous-format lesson';
+
+  @override
+  String get strategyLessonsTitle => 'First strategy decisions';
 }

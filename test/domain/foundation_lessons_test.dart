@@ -289,6 +289,9 @@ void main() {
             File('assets/content/en/pilot_lessons.json').readAsStringSync(),
           ),
           foundationLessons: raw,
+          strategyLessons: jsonDecode(
+            File('assets/content/en/strategy_lessons.json').readAsStringSync(),
+          ),
           manifest: read('manifest'),
           glossary: read('glossary'),
         ),

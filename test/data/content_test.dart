@@ -18,7 +18,7 @@ void main() {
     final lessons = catalog.lessons;
     final exercises = [for (final lesson in lessons) ...lesson.exercises];
 
-    expect(catalog.contentVersion, 4);
+    expect(catalog.contentVersion, 5);
     expect(manifest['contentVersion'], catalog.contentVersion);
     expect(manifest['locale'], catalog.locale);
     expect(catalog.locale, 'en');

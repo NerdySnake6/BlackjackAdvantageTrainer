@@ -52,6 +52,11 @@ class ContentRepository {
         ),
       ),
       manifest: manifest,
+      strategyLessons: jsonDecode(
+        await _bundle.loadString(
+          'assets/content/$locale/strategy_lessons.json',
+        ),
+      ),
       glossary: glossary,
     );
   }
