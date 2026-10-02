@@ -975,4 +975,29 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get revealChunk => 'Раскрой группу карт';
+
+  @override
+  String get countCertificationTitle => 'Три полные колоды';
+
+  @override
+  String get countCertificationIntro =>
+      'Учитывай каждую карту один раз. Вводи RC каждые восемь карт и после 52-й. Каждая полная колода должна быть точной за 60, затем 45, затем 30 активных секунд. Сворачивание и сохранение останавливают время. Без подсказок и XP. Неудачная попытка начинает все три уровня заново с новыми колодами.';
+
+  @override
+  String get countCertificationPassed =>
+      'Подтверждены три полные точные колоды. Это внутренний учебный стандарт, не гарантия выигрыша.';
+
+  @override
+  String get countCertificationFailed =>
+      'Контрольная точка неверна или время превышено. Отработай точность и начни новую попытку с первого уровня.';
+
+  @override
+  String countCertificationStage(int level, int seconds) {
+    return 'Колода $level/3 · лимит $seconds секунд';
+  }
+
+  @override
+  String countCertificationTime(int seconds) {
+    return 'Активное время: $seconds секунд';
+  }
 }

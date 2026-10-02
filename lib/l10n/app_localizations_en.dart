@@ -974,4 +974,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get revealChunk => 'Reveal the chunk';
+
+  @override
+  String get countCertificationTitle => 'Three full decks';
+
+  @override
+  String get countCertificationIntro =>
+      'Count every card once. Enter RC after every eight cards and after card 52. Each complete deck must be exact, within 60, then 45, then 30 active seconds. Background and storage pause the clock. No hints or XP. A failed attempt restarts all three levels with new decks.';
+
+  @override
+  String get countCertificationPassed =>
+      'Three complete accurate decks confirmed. This is an internal training standard, not a guarantee of winning.';
+
+  @override
+  String get countCertificationFailed =>
+      'A checkpoint was wrong or the time limit was exceeded. Practise accuracy, then start a fresh attempt from level one.';
+
+  @override
+  String countCertificationStage(int level, int seconds) {
+    return 'Deck $level/3 · limit $seconds seconds';
+  }
+
+  @override
+  String countCertificationTime(int seconds) {
+    return 'Active time: $seconds seconds';
+  }
 }

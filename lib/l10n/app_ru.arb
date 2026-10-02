@@ -330,5 +330,28 @@
     }
   },
   "countLessonsTitle": "Hi-Lo и running count",
-  "revealChunk": "Раскрой группу карт"
+  "revealChunk": "Раскрой группу карт",
+  "countCertificationTitle": "Три полные колоды",
+  "countCertificationIntro": "Учитывай каждую карту один раз. Вводи RC каждые восемь карт и после 52-й. Каждая полная колода должна быть точной за 60, затем 45, затем 30 активных секунд. Сворачивание и сохранение останавливают время. Без подсказок и XP. Неудачная попытка начинает все три уровня заново с новыми колодами.",
+  "countCertificationPassed": "Подтверждены три полные точные колоды. Это внутренний учебный стандарт, не гарантия выигрыша.",
+  "countCertificationFailed": "Контрольная точка неверна или время превышено. Отработай точность и начни новую попытку с первого уровня.",
+  "countCertificationStage": "Колода {level}/3 · лимит {seconds} секунд",
+  "countCertificationTime": "Активное время: {seconds} секунд",
+  "@countCertificationStage": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "@countCertificationTime": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  }
 }

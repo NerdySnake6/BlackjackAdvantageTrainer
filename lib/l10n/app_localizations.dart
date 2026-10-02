@@ -1728,6 +1728,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reveal the chunk'**
   String get revealChunk;
+
+  /// No description provided for @countCertificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Three full decks'**
+  String get countCertificationTitle;
+
+  /// No description provided for @countCertificationIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Count every card once. Enter RC after every eight cards and after card 52. Each complete deck must be exact, within 60, then 45, then 30 active seconds. Background and storage pause the clock. No hints or XP. A failed attempt restarts all three levels with new decks.'**
+  String get countCertificationIntro;
+
+  /// No description provided for @countCertificationPassed.
+  ///
+  /// In en, this message translates to:
+  /// **'Three complete accurate decks confirmed. This is an internal training standard, not a guarantee of winning.'**
+  String get countCertificationPassed;
+
+  /// No description provided for @countCertificationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'A checkpoint was wrong or the time limit was exceeded. Practise accuracy, then start a fresh attempt from level one.'**
+  String get countCertificationFailed;
+
+  /// No description provided for @countCertificationStage.
+  ///
+  /// In en, this message translates to:
+  /// **'Deck {level}/3 · limit {seconds} seconds'**
+  String countCertificationStage(int level, int seconds);
+
+  /// No description provided for @countCertificationTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Active time: {seconds} seconds'**
+  String countCertificationTime(int seconds);
 }
 
 class _AppLocalizationsDelegate

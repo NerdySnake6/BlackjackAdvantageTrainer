@@ -10,6 +10,7 @@ import '../presentation/home/app_shell.dart';
 import '../presentation/learn/learning_path_screen.dart';
 import '../presentation/learn/lesson_screen.dart';
 import '../presentation/learn/mastery_check_screen.dart';
+import '../presentation/learn/count_certification_screen.dart';
 import '../presentation/learn/pilot_lesson_screen.dart';
 import '../presentation/onboarding/experience_level_screen.dart';
 import '../presentation/onboarding/telemetry_consent_screen.dart';
@@ -111,6 +112,12 @@ GoRouter createRouter({required AppState appState}) {
       GoRoute(
         path: '/review',
         builder: (context, state) => const QuickReviewScreen(),
+      ),
+      GoRoute(
+        path: '/count-certification',
+        redirect: (context, state) =>
+            appState.isLessonCompleted('running-count-speed') ? null : '/learn',
+        builder: (context, state) => const CountCertificationScreen(),
       ),
       GoRoute(
         path: '/checkpoint/:lessonId',

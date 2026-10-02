@@ -22,7 +22,7 @@ void main() {
   });
   for (final locale in ['en', 'ru']) {
     testWidgets(
-      '$locale iteration 26 count lessons: 320px/200%, first-answer error, hint and storage reload',
+      '$locale iteration 27 count lessons: 320px/200%, first-answer error, hint and storage reload',
       (tester) async {
         tester.view.devicePixelRatio = 1;
         tester.view.physicalSize = const Size(320, 568);
@@ -55,7 +55,7 @@ void main() {
           tester.platformDispatcher.clearTextScaleFactorTestValue();
         });
         await reload();
-        for (final lesson in catalogs[locale]!.countLessons.take(2)) {
+        for (final lesson in catalogs[locale]!.countLessons.skip(2)) {
           await runPilotJourney(
             tester,
             app!,
@@ -65,7 +65,7 @@ void main() {
           );
           expect(app!.isLessonMastered(lesson.id), isFalse);
         }
-        expect(app!.progress.xp, 280);
+        expect(app!.progress.xp, 420);
         expect(tester.takeException(), isNull);
       },
       timeout: const Timeout(Duration(seconds: 60)),

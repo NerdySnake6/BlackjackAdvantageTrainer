@@ -13,6 +13,7 @@ List<PilotLesson> countLessons(String locale) =>
             )
             as List)
         .map((l) => PilotLesson.fromJson(l as Map<String, Object?>))
+        .take(2)
         .toList();
 
 const tags = {
@@ -102,12 +103,11 @@ void main() {
   test('chunk layout changes cannot silently reuse an old saved task', () {
     final raw =
         (jsonDecode(
-                      File(
-                        'assets/content/en/count_lessons.json',
-                      ).readAsStringSync(),
-                    )
-                    as List)
-                .last
+                  File(
+                    'assets/content/en/count_lessons.json',
+                  ).readAsStringSync(),
+                )
+                as List)[1]
             as Map<String, Object?>;
     final original = PilotLesson.fromJson(raw);
     final saved = DecisionLessonSession(original).toJson();

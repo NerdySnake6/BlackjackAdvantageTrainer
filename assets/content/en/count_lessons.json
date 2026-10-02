@@ -507,5 +507,791 @@
         "chunked": true
       }
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "running-count-continuity",
+    "skillId": "counting.continuity",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Running count between hands",
+    "subtitle": "Continue from the known checkpoint.",
+    "theory": {
+      "id": "running-count-continuity-interactive-theory",
+      "text": "RC continues between hands: a new hand does not reset it. Only a shuffle resets the count. Each sequence here starts at the known count left by the preceding sequence. For example, RC +2 followed by A, 3, 7 stays +2. After a pause, return to the saved cards and last known checkpoint; do not count exposed cards twice or invent a missing count. In this lesson the starting checkpoint is explicit. The separate full-deck check hides true intermediate counts."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "running-count-continuity-interactive-01",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "2",
+          "K",
+          "5"
+        ],
+        "initialCount": 2,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +2. The new cards 2, K, 5 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +2. The new cards 2, K, 5 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-02",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "3",
+          "7",
+          "8"
+        ],
+        "initialCount": 3,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards A, 3, 7, 8 change it by +0, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards A, 3, 7, 8 change it by +0, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-03",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "Q",
+          "6"
+        ],
+        "initialCount": 3,
+        "expected": "4",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards 4, Q, 6 change it by +1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards 4, Q, 6 change it by +1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-04",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "J",
+          "2",
+          "3"
+        ],
+        "initialCount": 4,
+        "expected": "5",
+        "coaching": {
+          "explanation": "Start at the known RC +4. The new cards 9, J, 2, 3 change it by +1, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +4. The new cards 9, J, 2, 3 change it by +1, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-05",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "K",
+          "5",
+          "7"
+        ],
+        "initialCount": 5,
+        "expected": "4",
+        "coaching": {
+          "explanation": "Start at the known RC +5. The new cards A, K, 5, 7 change it by -1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +5. The new cards A, K, 5, 7 change it by -1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-06",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "4",
+          "10",
+          "8"
+        ],
+        "initialCount": 4,
+        "expected": "5",
+        "coaching": {
+          "explanation": "Start at the known RC +4. The new cards 6, 4, 10, 8 change it by +1, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +4. The new cards 6, 4, 10, 8 change it by +1, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-07",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "Q",
+          "3",
+          "A"
+        ],
+        "initialCount": 5,
+        "expected": "4",
+        "coaching": {
+          "explanation": "Start at the known RC +5. The new cards Q, 3, A change it by -1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +5. The new cards Q, 3, A change it by -1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-08",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "5",
+          "7",
+          "K"
+        ],
+        "initialCount": 4,
+        "expected": "5",
+        "coaching": {
+          "explanation": "Start at the known RC +4. The new cards 2, 5, 7, K change it by +1, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +4. The new cards 2, 5, 7, K change it by +1, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-09",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "4",
+          "6",
+          "A",
+          "10"
+        ],
+        "initialCount": 5,
+        "expected": "5",
+        "coaching": {
+          "explanation": "Start at the known RC +5. The new cards 4, 6, A, 10 change it by +0, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +5. The new cards 4, 6, A, 10 change it by +0, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-10",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "9",
+          "J",
+          "5"
+        ],
+        "initialCount": 5,
+        "expected": "5",
+        "coaching": {
+          "explanation": "Start at the known RC +5. The new cards 8, 9, J, 5 change it by +0, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +5. The new cards 8, 9, J, 5 change it by +0, so the checkpoint is +5. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-11",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "Q",
+          "2",
+          "7"
+        ],
+        "initialCount": 5,
+        "expected": "6",
+        "coaching": {
+          "explanation": "Start at the known RC +5. The new cards 3, Q, 2, 7 change it by +1, so the checkpoint is +6. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +5. The new cards 3, Q, 2, 7 change it by +1, so the checkpoint is +6. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-continuity-interactive-12",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "6",
+          "K",
+          "4",
+          "A"
+        ],
+        "initialCount": 6,
+        "expected": "6",
+        "coaching": {
+          "explanation": "Start at the known RC +6. The new cards 6, K, 4, A change it by +0, so the checkpoint is +6. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +6. The new cards 6, K, 4, A change it by +0, so the checkpoint is +6. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "running-count-checkpoints",
+    "skillId": "counting.checkpoints",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Intermediate count checkpoints",
+    "subtitle": "Continue from the known checkpoint.",
+    "theory": {
+      "id": "running-count-checkpoints-interactive-theory",
+      "text": "A full deck ends at zero because Hi-Lo is balanced, but two mistakes can cancel. Therefore a zero ending cannot prove correct counting. Update a known checkpoint using only the cards exposed after it. For example, RC −3 plus 2, 4, K becomes −2, not +1. The full-deck check asks for RC after every eight cards and after card 52; any wrong checkpoint fails that attempt. The ordinary tasks below prepare the same calculation on short sequences."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "running-count-checkpoints-interactive-01",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "5",
+          "K",
+          "2"
+        ],
+        "initialCount": -3,
+        "expected": "-2",
+        "coaching": {
+          "explanation": "Start at the known RC -3. The new cards 5, K, 2 change it by +1, so the checkpoint is -2. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC -3. The new cards 5, K, 2 change it by +1, so the checkpoint is -2. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-02",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "8",
+          "7",
+          "3",
+          "A"
+        ],
+        "initialCount": -2,
+        "expected": "-2",
+        "coaching": {
+          "explanation": "Start at the known RC -2. The new cards 8, 7, 3, A change it by +0, so the checkpoint is -2. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC -2. The new cards 8, 7, 3, A change it by +0, so the checkpoint is -2. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-03",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "Q",
+          "4"
+        ],
+        "initialCount": -2,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "Start at the known RC -2. The new cards 6, Q, 4 change it by +1, so the checkpoint is -1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC -2. The new cards 6, Q, 4 change it by +1, so the checkpoint is -1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-04",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "2",
+          "J",
+          "9"
+        ],
+        "initialCount": -1,
+        "expected": "0",
+        "coaching": {
+          "explanation": "Start at the known RC -1. The new cards 3, 2, J, 9 change it by +1, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC -1. The new cards 3, 2, J, 9 change it by +1, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-05",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "7",
+          "5",
+          "K",
+          "A"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "Start at the known RC +0. The new cards 7, 5, K, A change it by -1, so the checkpoint is -1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +0. The new cards 7, 5, K, A change it by -1, so the checkpoint is -1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-06",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "8",
+          "10",
+          "4",
+          "6"
+        ],
+        "initialCount": -1,
+        "expected": "0",
+        "coaching": {
+          "explanation": "Start at the known RC -1. The new cards 8, 10, 4, 6 change it by +1, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC -1. The new cards 8, 10, 4, 6 change it by +1, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-07",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "3",
+          "Q"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "Start at the known RC +0. The new cards A, 3, Q change it by -1, so the checkpoint is -1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +0. The new cards A, 3, Q change it by -1, so the checkpoint is -1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-08",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "K",
+          "7",
+          "5",
+          "2"
+        ],
+        "initialCount": -1,
+        "expected": "0",
+        "coaching": {
+          "explanation": "Start at the known RC -1. The new cards K, 7, 5, 2 change it by +1, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC -1. The new cards K, 7, 5, 2 change it by +1, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-09",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "10",
+          "A",
+          "6",
+          "4"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "Start at the known RC +0. The new cards 10, A, 6, 4 change it by +0, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +0. The new cards 10, A, 6, 4 change it by +0, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-10",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "5",
+          "J",
+          "9",
+          "8"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "Start at the known RC +0. The new cards 5, J, 9, 8 change it by +0, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +0. The new cards 5, J, 9, 8 change it by +0, so the checkpoint is +0. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-11",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "2",
+          "Q",
+          "3"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "Start at the known RC +0. The new cards 7, 2, Q, 3 change it by +1, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +0. The new cards 7, 2, Q, 3 change it by +1, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-checkpoints-interactive-12",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "4",
+          "K",
+          "6"
+        ],
+        "initialCount": 1,
+        "expected": "1",
+        "coaching": {
+          "explanation": "Start at the known RC +1. The new cards A, 4, K, 6 change it by +0, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +1. The new cards A, 4, K, 6 change it by +0, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "running-count-speed",
+    "skillId": "counting.speed",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Accuracy before speed",
+    "subtitle": "Continue from the known checkpoint.",
+    "theory": {
+      "id": "running-count-speed-interactive-theory",
+      "text": "Accuracy comes first. Practise short sequences without a timer; then optionally open the separate full-deck check after completing this lesson. Three fresh complete decks must be correct at every checkpoint, successively within 60, 45 and 30 seconds of active interaction. Storage and background time are excluded. A failed count or missed deadline requires a fresh attempt from the first level. No hints, count tags or extra XP are provided by the check. This is an internal learning standard, not evidence of a financial edge."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "running-count-speed-interactive-01",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "K",
+          "5",
+          "2"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "Start at the known RC +0. The new cards K, 5, 2 change it by +1, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +0. The new cards K, 5, 2 change it by +1, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-02",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "3",
+          "7",
+          "8",
+          "A"
+        ],
+        "initialCount": 1,
+        "expected": "1",
+        "coaching": {
+          "explanation": "Start at the known RC +1. The new cards 3, 7, 8, A change it by +0, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +1. The new cards 3, 7, 8, A change it by +0, so the checkpoint is +1. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-03",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "Q",
+          "6",
+          "4"
+        ],
+        "initialCount": 1,
+        "expected": "2",
+        "coaching": {
+          "explanation": "Start at the known RC +1. The new cards Q, 6, 4 change it by +1, so the checkpoint is +2. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +1. The new cards Q, 6, 4 change it by +1, so the checkpoint is +2. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-04",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "J",
+          "2",
+          "3",
+          "9"
+        ],
+        "initialCount": 2,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +2. The new cards J, 2, 3, 9 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +2. The new cards J, 2, 3, 9 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-05",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "K",
+          "5",
+          "7",
+          "A"
+        ],
+        "initialCount": 3,
+        "expected": "2",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards K, 5, 7, A change it by -1, so the checkpoint is +2. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards K, 5, 7, A change it by -1, so the checkpoint is +2. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-06",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "10",
+          "8",
+          "6"
+        ],
+        "initialCount": 2,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +2. The new cards 4, 10, 8, 6 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +2. The new cards 4, 10, 8, 6 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-07",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "A",
+          "Q"
+        ],
+        "initialCount": 3,
+        "expected": "2",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards 3, A, Q change it by -1, so the checkpoint is +2. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards 3, A, Q change it by -1, so the checkpoint is +2. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-08",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "5",
+          "7",
+          "K",
+          "2"
+        ],
+        "initialCount": 2,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +2. The new cards 5, 7, K, 2 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +2. The new cards 5, 7, K, 2 change it by +1, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-09",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "6",
+          "A",
+          "10",
+          "4"
+        ],
+        "initialCount": 3,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards 6, A, 10, 4 change it by +0, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards 6, A, 10, 4 change it by +0, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-10",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "J",
+          "5",
+          "8"
+        ],
+        "initialCount": 3,
+        "expected": "3",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards 9, J, 5, 8 change it by +0, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards 9, J, 5, 8 change it by +0, so the checkpoint is +3. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-11",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "Q",
+          "2",
+          "7",
+          "3"
+        ],
+        "initialCount": 3,
+        "expected": "4",
+        "coaching": {
+          "explanation": "Start at the known RC +3. The new cards Q, 2, 7, 3 change it by +1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +3. The new cards Q, 2, 7, 3 change it by +1, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      },
+      {
+        "id": "running-count-speed-interactive-12",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "K",
+          "4",
+          "A",
+          "6"
+        ],
+        "initialCount": 4,
+        "expected": "4",
+        "coaching": {
+          "explanation": "Start at the known RC +4. The new cards K, 4, A, 6 change it by +0, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand.",
+          "contrast": "At RC +2, a cancelling low/high pair leaves +2; starting again at zero would give a wrong checkpoint.",
+          "mistakes": {
+            "count": "Keep the starting count and add only the new tags. Start at the known RC +4. The new cards K, 4, A, 6 change it by +0, so the checkpoint is +4. This is a continuation, not a reset at the start of a hand."
+          }
+        }
+      }
+    ]
   }
 ]

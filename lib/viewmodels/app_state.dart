@@ -12,6 +12,7 @@ import '../data/content_repository.dart';
 import '../domain/learning/lesson_performance.dart';
 import '../domain/learning/mastery.dart';
 import '../domain/learning/mastery_check.dart';
+import '../domain/learning/count_certification.dart';
 import '../domain/learning/decision_lesson.dart';
 import '../domain/learning/models.dart';
 import '../domain/learning/pilot_progress_migration.dart';
@@ -124,6 +125,9 @@ class AppState extends ChangeNotifier {
     final saved = _progress.masteryChecks[lessonId];
     if (saved == null || !isLessonCompleted(lessonId)) return false;
     try {
+      if (lessonId == 'running-count-speed') {
+        return CountCertificationSession.restore(saved).passed;
+      }
       return MasteryCheckSession.restore(lessonId, saved).passed;
     } on FormatException {
       return false;
@@ -490,6 +494,22 @@ class AppState extends ChangeNotifier {
       if (identical(_progress, next)) _progress = previous;
       rethrow;
     }
+    notifyListeners();
+  }
+
+  /// Saves full-deck count evidence without changing XP or legacy scores.
+  Future<void> saveCountCertification(CountCertificationSession session) async {
+    const id = 'running-count-speed';
+    if (!isLessonCompleted(id)) {
+      throw StateError('Complete count lessons first');
+    }
+    final saved = session.toJson();
+    CountCertificationSession.restore(saved);
+    final next = _progress.copyWith(
+      masteryChecks: {..._progress.masteryChecks, id: saved},
+    );
+    await _progressRepository.save(next);
+    _progress = next;
     notifyListeners();
   }
 

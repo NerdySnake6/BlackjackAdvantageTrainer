@@ -167,7 +167,7 @@ class ContentValidator {
     if (catalog.contentVersion >= 9 || catalog.countLessons.isNotEmpty) {
       _require(
         catalog.countLessons.map((l) => l.id).join(',') ==
-                'hi-lo-intro,hi-lo-chunks' &&
+                'hi-lo-intro,hi-lo-chunks,running-count-continuity,running-count-checkpoints,running-count-speed' &&
             manifest['countLessonFile'] ==
                 'assets/content/$locale/count_lessons.json',
         '$locale: invalid counting package',

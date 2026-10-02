@@ -79,6 +79,9 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
 - `hi-lo-intro` now opens saved interactive card-tag tasks; a new chunks
   lesson reveals groups of 3–5 cards together and checks their combined count.
   All 13 ranks are covered on EN/RU; legacy MCQ remains in Quick Review.
+- Three further Learn lessons cover RC continuity, intermediate checks and
+  speed preparation. An optional saved check requires three full exact decks
+  at 60/45/30 active seconds, checking RC every eight cards and at card 52.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
   strategy feedback, per-round count checks, and five-round summaries. Each

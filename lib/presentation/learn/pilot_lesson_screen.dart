@@ -140,6 +140,14 @@ class _PilotBody extends StatelessWidget {
                 PilotPerformanceSummary(lessonId: vm.lesson.id),
                 const SizedBox(height: 16),
                 Text(strings.pilotResultNote),
+                if (vm.lesson.id == 'running-count-speed' && session.passed)
+                  FilledButton.tonal(
+                    key: const ValueKey('count-certification'),
+                    onPressed: vm.busy
+                        ? null
+                        : () => context.push('/count-certification'),
+                    child: Text(strings.countCertificationTitle),
+                  ),
                 if (MasteryCheckBank.supports(vm.lesson.id) &&
                     context.read<AppState>().isLessonCompleted(vm.lesson.id))
                   FilledButton.tonal(
