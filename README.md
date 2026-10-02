@@ -35,6 +35,8 @@ and agents. Read them before changing the product or code:
 - [Free-beta study protocol](docs/FREE_BETA_RUNBOOK.md)
 - [Free-beta participant guide](docs/FREE_BETA_PARTICIPANT_GUIDE.md)
 - [Tester feedback fix plan](docs/TESTER_FEEDBACK_FIX_PLAN.md)
+- [Fixed APK for feedback retest](docs/FEEDBACK_RETEST_BUILD.md)
+- [Feedback retest report template](docs/FEEDBACK_RETEST_REPORT.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 
@@ -113,8 +115,8 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
 The approved course redesign targets 26 Free and 32 Pro lessons, delivered in
 70 individually verified, committed, and pushed iterations. The first milestone
 is three playable lessons and a target-audience pilot, not the entire catalog.
-Only Learn is redesigned; shared correctness fixes and compatibility adapters
-must preserve the other sections. Android is the release priority; iOS publication
+The course redesign focuses on Learn. The owner also approved Table readability
+and beginner portrait presets on 2026-10-02; the other sections remain compatible. Android is the release priority; iOS publication
 and real purchases are deferred. Additional profiles require independent validation.
 See the [course roadmap](docs/COURSE_ROADMAP.md) and the
 [closed-beta release checklist](docs/BETA_RELEASE.md).
