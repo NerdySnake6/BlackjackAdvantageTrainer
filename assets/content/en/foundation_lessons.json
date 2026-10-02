@@ -9,7 +9,7 @@
     "subtitle": "2 introductions · 5 practice · 5 independent tasks",
     "theory": {
       "id": "quick-start-interactive-theory",
-      "text": "The goal is to beat the dealer without busting, not to keep drawing until 21. An ace is 1 or 11; J, Q and K are 10. Assemble each hand one card at a time. Classify the completed hand: natural blackjack is an ace plus a ten-value card in the original two-card hand; three-card 21 and 21 after a split are not natural blackjack. More than 21 is bust. A hand below 21 is still in play, but this does not mean you should hit. Even 21 is no promise of a win: the dealer can tie, and a dealer natural beats ordinary 21. Try two guided hands and then ten scored tasks. Only your first answer counts."
+      "text": "Now build a hand one card at a time and describe its result. A blackjack is an ace plus a ten-point card in the original two-card hand. Ordinary 21 and a bust (more than 21) are different results. A hand below 21 is still in play; that does not automatically mean you should take another card. After Split, two cards totalling 21 count as ordinary 21. The first two examples explain the answers. The next ten tasks record only your first answer."
     },
     "scoring": {
       "policyId": "first_answer_v1",

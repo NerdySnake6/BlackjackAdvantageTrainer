@@ -57,6 +57,12 @@ void main() {
     await tester.tap(find.text('Your first hand'));
     await tester.pumpAndSettle();
 
+    expect(find.text('Start with the basics'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text(catalog.foundationLessons.first.theory),
+      200,
+      scrollable: find.byType(Scrollable).last,
+    );
     expect(find.text(catalog.foundationLessons.first.theory), findsOneWidget);
 
     await appState.chooseExperienceLevel(ExperienceLevel.experienced);

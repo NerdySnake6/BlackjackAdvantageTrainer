@@ -1902,6 +1902,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hand {number}'**
   String tableHandNumber(int number);
+
+  /// No description provided for @primerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with the basics'**
+  String get primerTitle;
+
+  /// No description provided for @primerGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'The dealer is the other side in this simulation. Your hand is your group of cards. You win by finishing with more points than the dealer, without going over 21. You do not have to reach 21. Equal totals usually mean a tie.'**
+  String get primerGoal;
+
+  /// No description provided for @primerValues.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards 2–10 use their number. J, Q and K count as 10. An ace counts as 1 or 11: use 1 when 11 would put the hand over 21. Reveal the examples before trying the lesson.'**
+  String get primerValues;
+
+  /// No description provided for @primerCompare.
+  ///
+  /// In en, this message translates to:
+  /// **'17 beats the dealer’s 16 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.'**
+  String get primerCompare;
+
+  /// No description provided for @primerBust.
+  ///
+  /// In en, this message translates to:
+  /// **'10 + 6 + 8 = 24. More than 21 is a bust: this hand loses, even if the dealer later goes over 21 too.'**
+  String get primerBust;
+
+  /// No description provided for @primerBlackjack.
+  ///
+  /// In en, this message translates to:
+  /// **'An ace and a ten-point card in the original two-card hand make a blackjack. It beats ordinary 21, but ties another blackjack. Three cards totalling 21 are ordinary 21. Split hands are explained in the actions lesson.'**
+  String get primerBlackjack;
+
+  /// No description provided for @primerUnscored.
+  ///
+  /// In en, this message translates to:
+  /// **'These examples are optional and unscored. You can reopen them; they do not change saved answers or XP.'**
+  String get primerUnscored;
+
+  /// No description provided for @primerExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Example {number} of 3'**
+  String primerExample(int number);
+
+  /// No description provided for @moreLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Other lessons and practice'**
+  String get moreLearning;
 }
 
 class _AppLocalizationsDelegate

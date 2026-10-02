@@ -19,6 +19,7 @@ import 'decision_scene.dart';
 import 'adaptive_practice_card.dart';
 import 'pilot_performance_summary.dart';
 import 'foundation_scene.dart';
+import 'beginner_primer.dart';
 import 'math_comparison_scene.dart';
 
 class PilotLessonScreen extends StatelessWidget {
@@ -103,6 +104,7 @@ class _PilotBody extends StatelessWidget {
                   child: Text(strings.retryLesson),
                 ),
               ] else if (session.phase == DecisionLessonPhase.theory) ...[
+                if (vm.lesson.id == 'quick-start') const BeginnerPrimer(),
                 Text(
                   vm.lesson.theory,
                   style: Theme.of(context).textTheme.bodyLarge,

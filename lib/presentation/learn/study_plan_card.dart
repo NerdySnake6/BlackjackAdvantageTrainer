@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
+import '../../domain/learning/models.dart';
 
 class StudyPlanCard extends StatelessWidget {
   const StudyPlanCard({super.key});
@@ -41,11 +42,14 @@ class StudyPlanCard extends StatelessWidget {
                 onPressed: () => context.push('/lesson/${plan.nextLesson!.id}'),
                 child: Text(strings.studyNextLesson(plan.nextLesson!.title)),
               ),
-            OutlinedButton(
-              key: const ValueKey('study-combined'),
-              onPressed: () => context.push('/combined-practice'),
-              child: Text(strings.combinedTitle),
-            ),
+            if (context.read<AppState>().progress.experienceLevel !=
+                    ExperienceLevel.beginner ||
+                context.read<AppState>().isLessonCompleted('hi-lo-intro'))
+              OutlinedButton(
+                key: const ValueKey('study-combined'),
+                onPressed: () => context.push('/combined-practice'),
+                child: Text(strings.combinedTitle),
+              ),
             if (plan.challengeLesson != null)
               OutlinedButton(
                 key: const ValueKey('study-challenge'),

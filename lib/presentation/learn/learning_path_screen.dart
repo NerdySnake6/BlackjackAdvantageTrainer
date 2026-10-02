@@ -21,6 +21,8 @@ class LearningPathScreen extends StatelessWidget {
     final strings = AppLocalizations.of(context);
     final appState = context.watch<AppState>();
     final section = appState.catalog.sections.first;
+    final beginner =
+        appState.progress.experienceLevel == ExperienceLevel.beginner;
 
     return SafeArea(
       child: LayoutBuilder(
@@ -47,183 +49,220 @@ class LearningPathScreen extends StatelessWidget {
                     children: [
                       const StudyPlanCard(),
                       const SizedBox(height: 12),
-                      _QuickReviewCard(appState: appState),
-                      const SizedBox(height: 12),
-                      const _DiagnosticCard(),
-                      const SizedBox(height: 12),
-                      if (appState.catalog.countLessons.isNotEmpty) ...[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            strings.countLessonsTitle,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                        for (final lesson in appState.catalog.countLessons)
+                      if (beginner)
+                        for (final lesson in appState.catalog.foundationLessons)
                           Card(
                             child: ListTile(
-                              key: ValueKey('count-${lesson.id}'),
+                              key: ValueKey('beginner-${lesson.id}'),
                               title: Text(lesson.title),
-                              subtitle: Text(lesson.subtitle),
                               onTap: () => context.push('/lesson/${lesson.id}'),
                             ),
                           ),
-                        const SizedBox(height: 12),
-                      ],
-                      if (appState.catalog.mathLessons.isNotEmpty) ...[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            strings.mathLessonsTitle,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                        for (final lesson in appState.catalog.mathLessons)
-                          Card(
-                            child: ListTile(
-                              key: ValueKey('math-${lesson.id}'),
-                              title: Text(lesson.title),
-                              subtitle: Text(lesson.subtitle),
-                              onTap: () => context.push('/lesson/${lesson.id}'),
+                      ExpansionTile(
+                        key: const ValueKey('learn-course-groups'),
+                        initiallyExpanded: !beginner,
+                        maintainState: true,
+                        title: Text(strings.moreLearning),
+                        children: [
+                          if (beginner)
+                            OutlinedButton(
+                              onPressed: () =>
+                                  context.push('/combined-practice'),
+                              child: Text(strings.combinedTitle),
                             ),
-                          ),
-                        const SizedBox(height: 12),
-                      ],
-                      if (appState.catalog.strategyLessons.isNotEmpty) ...[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            strings.strategyLessonsTitle,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                        for (final lesson in appState.catalog.strategyLessons)
-                          Card(
-                            child: ListTile(
-                              key: ValueKey('strategy-${lesson.id}'),
-                              title: Text(lesson.title),
-                              subtitle: Text(lesson.subtitle),
-                              trailing: Icon(
-                                appState.isLessonCompleted(lesson.id)
-                                    ? Icons.check_circle_outline
-                                    : Icons.chevron_right,
+                          _QuickReviewCard(appState: appState),
+                          const SizedBox(height: 12),
+                          const _DiagnosticCard(),
+                          const SizedBox(height: 12),
+                          if (appState.catalog.countLessons.isNotEmpty) ...[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                strings.countLessonsTitle,
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              onTap: () => context.push('/lesson/${lesson.id}'),
                             ),
-                          ),
-                        Card(
-                          child: ListTile(
-                            key: const ValueKey('basic-strategy-checkpoint'),
-                            title: Text(strings.basicStrategyCheckpointTitle),
-                            subtitle: Text(
-                              appState.isLessonCompleted('mixed-basic-strategy')
-                                  ? strings.basicStrategyCheckpointDescription
-                                  : strings.basicStrategyCheckpointLocked,
-                            ),
-                            trailing: Icon(
-                              appState.isLessonMastered('mixed-basic-strategy')
-                                  ? Icons.workspace_premium
-                                  : Icons.chevron_right,
-                            ),
-                            onTap:
-                                appState.isLessonCompleted(
-                                  'mixed-basic-strategy',
-                                )
-                                ? () => context.push(
-                                    '/lesson/basic-strategy-checkpoint',
-                                  )
-                                : null,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                      ],
-                      if (appState.catalog.pilotLessons.isNotEmpty) ...[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            strings.pilotTitle,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                        for (final lesson in appState.catalog.pilotLessons)
-                          Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  key: ValueKey('pilot-${lesson.id}'),
+                            for (final lesson in appState.catalog.countLessons)
+                              Card(
+                                child: ListTile(
+                                  key: ValueKey('count-${lesson.id}'),
                                   title: Text(lesson.title),
-                                  subtitle: Text(
-                                    appState.progress.pilotSessions.containsKey(
-                                          lesson.id,
-                                        )
-                                        ? strings.continueLesson
-                                        : lesson.subtitle,
-                                  ),
+                                  subtitle: Text(lesson.subtitle),
+                                  onTap: () =>
+                                      context.push('/lesson/${lesson.id}'),
+                                ),
+                              ),
+                            const SizedBox(height: 12),
+                          ],
+                          if (appState.catalog.mathLessons.isNotEmpty) ...[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                strings.mathLessonsTitle,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                            ),
+                            for (final lesson in appState.catalog.mathLessons)
+                              Card(
+                                child: ListTile(
+                                  key: ValueKey('math-${lesson.id}'),
+                                  title: Text(lesson.title),
+                                  subtitle: Text(lesson.subtitle),
+                                  onTap: () =>
+                                      context.push('/lesson/${lesson.id}'),
+                                ),
+                              ),
+                            const SizedBox(height: 12),
+                          ],
+                          if (appState.catalog.strategyLessons.isNotEmpty) ...[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                strings.strategyLessonsTitle,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                            ),
+                            for (final lesson
+                                in appState.catalog.strategyLessons)
+                              Card(
+                                child: ListTile(
+                                  key: ValueKey('strategy-${lesson.id}'),
+                                  title: Text(lesson.title),
+                                  subtitle: Text(lesson.subtitle),
                                   trailing: Icon(
-                                    appState.isLessonMastered(lesson.id)
-                                        ? Icons.workspace_premium
-                                        : appState.isLessonCompleted(lesson.id)
+                                    appState.isLessonCompleted(lesson.id)
                                         ? Icons.check_circle_outline
                                         : Icons.chevron_right,
-                                    semanticLabel:
-                                        appState.isLessonMastered(lesson.id)
-                                        ? strings.pilotMastered
-                                        : null,
                                   ),
                                   onTap: () =>
-                                      context.push('/pilot/${lesson.id}'),
+                                      context.push('/lesson/${lesson.id}'),
                                 ),
-                                if (appState.latestPilotPerformance(
-                                      lesson.id,
-                                    ) !=
-                                    null)
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      16,
-                                      0,
-                                      16,
-                                      16,
+                              ),
+                            Card(
+                              child: ListTile(
+                                key: const ValueKey(
+                                  'basic-strategy-checkpoint',
+                                ),
+                                title: Text(
+                                  strings.basicStrategyCheckpointTitle,
+                                ),
+                                subtitle: Text(
+                                  appState.isLessonCompleted(
+                                        'mixed-basic-strategy',
+                                      )
+                                      ? strings
+                                            .basicStrategyCheckpointDescription
+                                      : strings.basicStrategyCheckpointLocked,
+                                ),
+                                trailing: Icon(
+                                  appState.isLessonMastered(
+                                        'mixed-basic-strategy',
+                                      )
+                                      ? Icons.workspace_premium
+                                      : Icons.chevron_right,
+                                ),
+                                onTap:
+                                    appState.isLessonCompleted(
+                                      'mixed-basic-strategy',
+                                    )
+                                    ? () => context.push(
+                                        '/lesson/basic-strategy-checkpoint',
+                                      )
+                                    : null,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                          if (appState.catalog.pilotLessons.isNotEmpty) ...[
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                strings.pilotTitle,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                            ),
+                            for (final lesson in appState.catalog.pilotLessons)
+                              Card(
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      key: ValueKey('pilot-${lesson.id}'),
+                                      title: Text(lesson.title),
+                                      subtitle: Text(
+                                        appState.progress.pilotSessions
+                                                .containsKey(lesson.id)
+                                            ? strings.continueLesson
+                                            : lesson.subtitle,
+                                      ),
+                                      trailing: Icon(
+                                        appState.isLessonMastered(lesson.id)
+                                            ? Icons.workspace_premium
+                                            : appState.isLessonCompleted(
+                                                lesson.id,
+                                              )
+                                            ? Icons.check_circle_outline
+                                            : Icons.chevron_right,
+                                        semanticLabel:
+                                            appState.isLessonMastered(lesson.id)
+                                            ? strings.pilotMastered
+                                            : null,
+                                      ),
+                                      onTap: () =>
+                                          context.push('/pilot/${lesson.id}'),
                                     ),
-                                    child: PilotPerformanceSummary(
-                                      lessonId: lesson.id,
-                                    ),
+                                    if (appState.latestPilotPerformance(
+                                          lesson.id,
+                                        ) !=
+                                        null)
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          16,
+                                          0,
+                                          16,
+                                          16,
+                                        ),
+                                        child: PilotPerformanceSummary(
+                                          lessonId: lesson.id,
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            const SizedBox(height: 12),
+                          ],
+                          Container(
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [AppColors.feltLight, AppColors.felt],
+                              ),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  strings.freeLabel,
+                                  style: const TextStyle(
+                                    color: AppColors.gold,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 1.3,
                                   ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  section.title,
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  section.summary,
+                                  style: const TextStyle(color: Colors.white70),
+                                ),
                               ],
                             ),
                           ),
-                        const SizedBox(height: 12),
-                      ],
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [AppColors.feltLight, AppColors.felt],
-                          ),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              strings.freeLabel,
-                              style: const TextStyle(
-                                color: AppColors.gold,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 1.3,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              section.title,
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              section.summary,
-                              style: const TextStyle(color: Colors.white70),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
                     ],
                   ),

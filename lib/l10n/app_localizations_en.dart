@@ -1095,4 +1095,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String tableHandNumber(int number) {
     return 'Hand $number';
   }
+
+  @override
+  String get primerTitle => 'Start with the basics';
+
+  @override
+  String get primerGoal =>
+      'The dealer is the other side in this simulation. Your hand is your group of cards. You win by finishing with more points than the dealer, without going over 21. You do not have to reach 21. Equal totals usually mean a tie.';
+
+  @override
+  String get primerValues =>
+      'Cards 2–10 use their number. J, Q and K count as 10. An ace counts as 1 or 11: use 1 when 11 would put the hand over 21. Reveal the examples before trying the lesson.';
+
+  @override
+  String get primerCompare =>
+      '17 beats the dealer’s 16 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.';
+
+  @override
+  String get primerBust =>
+      '10 + 6 + 8 = 24. More than 21 is a bust: this hand loses, even if the dealer later goes over 21 too.';
+
+  @override
+  String get primerBlackjack =>
+      'An ace and a ten-point card in the original two-card hand make a blackjack. It beats ordinary 21, but ties another blackjack. Three cards totalling 21 are ordinary 21. Split hands are explained in the actions lesson.';
+
+  @override
+  String get primerUnscored =>
+      'These examples are optional and unscored. You can reopen them; they do not change saved answers or XP.';
+
+  @override
+  String primerExample(int number) {
+    return 'Example $number of 3';
+  }
+
+  @override
+  String get moreLearning => 'Other lessons and practice';
 }
