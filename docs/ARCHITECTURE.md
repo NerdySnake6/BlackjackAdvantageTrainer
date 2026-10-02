@@ -358,3 +358,8 @@ TableScreen владеет одним TableViewModel до dispose; rebuild по�
 ролям engine, включая применённые отложенные изменения: solo — portraitUp,
 остальное — landscapeLeft/right; dispose возвращает portraitUp.
 Действия переносятся и прокручиваются с системным масштабом текста.
+
+Итерация 31 на стадии исследования: карточка концепции и интервью находятся
+в docs, runtime не меняется. FakePurchaseGateway, доступ Free и политика
+Pro сохраняются; карточка не является paywall, покупкой или тестовым entitlement.
+Новые математические профили, индексы и store adapters не добавлены.
