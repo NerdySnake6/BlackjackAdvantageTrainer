@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 1,
+  "status": "specified-pending-independent-review",
+  "productionEnabled": false,
+  "profile": {
+    "id": "standard_6d_s17_das_ls_peek_3to2",
+    "deckCount": 6,
+    "cardsPerDeck": 52,
+    "dealerHitsSoft17": false,
+    "doubleAfterSplit": true,
+    "lateSurrender": true,
+    "dealerPeek": true,
+    "blackjackProfitNumerator": 3,
+    "blackjackProfitDenominator": 2,
+    "penetrationNumerator": 3,
+    "penetrationDenominator": 4,
+    "maxSplitHands": 4,
+    "hitSplitAces": false,
+    "resplitAces": false
+  },
+  "counting": {
+    "system": "Hi-Lo",
+    "tags": {
+      "two": 1,
+      "three": 1,
+      "four": 1,
+      "five": 1,
+      "six": 1,
+      "seven": 0,
+      "eight": 0,
+      "nine": 0,
+      "ten": -1,
+      "jack": -1,
+      "queen": -1,
+      "king": -1,
+      "ace": -1
+    },
+    "countOnlyExposed": true,
+    "oneRevealPerPhysicalCard": true,
+    "resetOnlyOnShuffle": true
+  },
+  "trueCount": {
+    "rounding": "floor",
+    "denominator": "learner-estimated-decks",
+    "quarterDeckNumeratorMin": 1,
+    "quarterDeckNumeratorMax": 24,
+    "nonPositiveDenominator": "invalid",
+    "legacyPolicyUnchanged": true
+  },
+  "indices": {
+    "type": "ev-maximizing",
+    "approvedEntries": [],
+    "requiredIndependentReview": true,
+    "requiredFields": [
+      "profileId",
+      "contractVersion",
+      "countingSystem",
+      "denominatorPolicy",
+      "rounding",
+      "handClass",
+      "dealerUpcard",
+      "legalActions",
+      "peekInformation",
+      "baseline",
+      "alternative",
+      "threshold",
+      "comparison",
+      "applicability",
+      "compositionSampling",
+      "sourceLicense",
+      "solverVersion",
+      "reproductionParameters",
+      "reviewApproval"
+    ]
+  },
+  "risk": {
+    "units": "fictional",
+    "horizonUnit": "completed-round",
+    "replenishment": false,
+    "credit": false,
+    "persistentBalance": false,
+    "approvedBlackjackDistributions": [],
+    "confidenceLevelPercent": 95
+  },
+  "trueCountCases": [
+    {
+      "runningCount": 7,
+      "quarterDecks": 16,
+      "expectedFloor": 1
+    },
+    {
+      "runningCount": -7,
+      "quarterDecks": 16,
+      "expectedFloor": -2
+    },
+    {
+      "runningCount": 5,
+      "quarterDecks": 16,
+      "expectedFloor": 1
+    },
+    {
+      "runningCount": -5,
+      "quarterDecks": 16,
+      "expectedFloor": -2
+    },
+    {
+      "runningCount": -4,
+      "quarterDecks": 16,
+      "expectedFloor": -1
+    },
+    {
+      "runningCount": 0,
+      "quarterDecks": 16,
+      "expectedFloor": 0
+    },
+    {
+      "runningCount": 6,
+      "quarterDecks": 10,
+      "expectedFloor": 2
+    },
+    {
+      "runningCount": -6,
+      "quarterDecks": 10,
+      "expectedFloor": -3
+    },
+    {
+      "runningCount": 1,
+      "quarterDecks": 4,
+      "expectedFloor": 1
+    },
+    {
+      "runningCount": -1,
+      "quarterDecks": 4,
+      "expectedFloor": -1
+    },
+    {
+      "runningCount": 1,
+      "quarterDecks": 5,
+      "expectedFloor": 0
+    },
+    {
+      "runningCount": -1,
+      "quarterDecks": 5,
+      "expectedFloor": -1
+    },
+    {
+      "runningCount": 1,
+      "quarterDecks": 1,
+      "expectedFloor": 4
+    },
+    {
+      "runningCount": -1,
+      "quarterDecks": 1,
+      "expectedFloor": -4
+    },
+    {
+      "runningCount": 1,
+      "quarterDecks": 24,
+      "expectedFloor": 0
+    },
+    {
+      "runningCount": -1,
+      "quarterDecks": 24,
+      "expectedFloor": -1
+    }
+  ],
+  "riskDiagnostic": {
+    "model": "toy-not-blackjack",
+    "initialUnits": 2,
+    "horizonRounds": 2,
+    "outcomes": [
+      -1,
+      1
+    ],
+    "equallyLikelyIndependentRounds": true,
+    "exhaustionBoundary": 0,
+    "expectedExhaustionPaths": 1,
+    "expectedTotalPaths": 4
+  },
+  "sources": [
+    {
+      "id": "hilo-reference",
+      "url": "https://wizardofodds.com/games/blackjack/card-counting/high-low/",
+      "checkedAt": "2026-10-02",
+      "scope": "tags-and-raw-conversion-not-floor-indices"
+    },
+    {
+      "id": "binomial-reference",
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+      "checkedAt": "2026-10-02",
+      "scope": "binomial-confidence-interval-method"
+    }
+  ]
+}

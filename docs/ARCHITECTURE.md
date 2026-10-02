@@ -363,3 +363,10 @@ TableScreen владеет одним TableViewModel до dispose; rebuild по�
 в docs, runtime не меняется. FakePurchaseGateway, доступ Free и политика
 Pro сохраняются; карточка не является paywall, покупкой или тестовым entitlement.
 Новые математические профили, индексы и store adapters не добавлены.
+
+Итерация 32: docs/PRO_MATH_CONTRACT.json — версия спецификации, не runtime
+asset и не новый GameRulesProfile. test/data/pro_math_contract_test.dart
+сверяет baseline, Hi-Lo, рациональные floor bounds и игрушечный finite-horizon
+benchmark. Авторские playing indices и blackjack risk distributions пусты до
+review. Отдельный floor converter реализуется по плану в итерации 42; существующий
+CountingEngine и его invalid-denominator fallback сохраняются.

@@ -758,3 +758,25 @@ Runtime, billing, telemetry, IDs и учебная математика не м�
 Проверки подготовки: относительные Markdown-ссылки и EN/RU статус/ценовая
 гипотеза сверены; git diff --check успешен. Изменены только документы,
 повторные Flutter builds не требуются.
+
+### Итерация 32 — математический контракт для независимого review
+
+2026-10-02 владелец разрешил продолжение после вопроса о техническом переходе
+к 32. Это разрешает подготовку контракта параллельно исследованию, но не
+объявляет выполненными реальные gates Free-beta и интереса к Pro.
+PRO_MATH_CONTRACT.md и JSON фиксируют правила первого standard пакета, Hi-Lo,
+видимость карт, physical/estimated remaining decks, отдельное floor TC,
+тип EV-maximizing indices, обязательные поля воспроизведения/лицензии/review,
+units, horizon, stopping/funding и методы интервала риска. Числовых индексов,
+преимущества blackjack, spread рекомендаций и новых профилей не добавлено.
+
+16 авторских примеров TC проверяются целочисленными bounds без production
+oracle. Benchmark риска: игрушечные ±1, B0=2, H=2, 1 из 4 exhaustion paths;
+это не blackjack модель. Источники Hi-Lo и метода binomial interval проверены;
+их чужие индексы не переносятся. Independent specialist review не проводился
+и остаётся работой итерации 33. Runtime и assets не меняются.
+
+Проверки итерации 32: 460 тестов прошли, domain coverage 99,2%, format,
+analyze, EN/RU content validation, JSON/ссылки и diff check успешны. Изменены
+документы, плановая JSON-спецификация и её тесты; lib/assets/platform configs
+не менялись, поэтому повторные platform builds не выполнялись.

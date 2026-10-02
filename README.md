@@ -40,6 +40,7 @@ and agents. Read them before changing the product or code:
 - [Android emulator retest results](docs/FEEDBACK_RETEST_EMULATOR.md)
 - [Pro interest study — iteration 31](docs/PRO_INTEREST_RUNBOOK.md)
 - [Pro concept card EN/RU](docs/PRO_CONCEPT_CARD.md)
+- [Pro mathematical contract — pending independent review](docs/PRO_MATH_CONTRACT.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 
