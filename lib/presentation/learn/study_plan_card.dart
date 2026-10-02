@@ -41,6 +41,11 @@ class StudyPlanCard extends StatelessWidget {
                 onPressed: () => context.push('/lesson/${plan.nextLesson!.id}'),
                 child: Text(strings.studyNextLesson(plan.nextLesson!.title)),
               ),
+            OutlinedButton(
+              key: const ValueKey('study-combined'),
+              onPressed: () => context.push('/combined-practice'),
+              child: Text(strings.combinedTitle),
+            ),
             if (plan.challengeLesson != null)
               OutlinedButton(
                 key: const ValueKey('study-challenge'),

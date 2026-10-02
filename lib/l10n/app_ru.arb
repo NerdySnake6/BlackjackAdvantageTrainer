@@ -382,5 +382,73 @@
         "type": "String"
       }
     }
+  },
+  "combinedTitle": "Недельный вызов: стратегия и счёт",
+  "combinedIntro": "Десять повторяемых авторских решений. Начните RC с нуля, учитывайте каждую раскрытую карту, включая открытую карту дилера (последнюю). Выберите basic strategy, затем введите общий RC. Это фиксированные задачи, а не сыгранные раздачи. После разбора следующая задача начинается с верного RC. Без XP и подтверждения освоения.",
+  "combinedTimer": "Измерять активное время (необязательно; без лимита)",
+  "combinedWeek": "Неделя с {week}",
+  "@combinedWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "combinedStep": "Решение {step} из {total}",
+  "@combinedStep": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "combinedDecision": "После карт вашей руки показана открытая карта дилера. Какое действие рекомендует basic strategy?",
+  "combinedDealer": "Открытая карта дилера: {rank}",
+  "@combinedDealer": {
+    "placeholders": {
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "combinedFeedback": "Верное действие: {action}. Общий RC: {count}.",
+  "@combinedFeedback": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "combinedCarry": "Сохраните этот исправленный RC для следующего решения. Каждый первый ответ остаётся записанным.",
+  "combinedResult": "Стратегия: {strategy}/{total}. RC: {count}/{total}. Оба ответа верны: {both}/{total}. Повторяемая практика, не сертификат.",
+  "@combinedResult": {
+    "placeholders": {
+      "strategy": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      },
+      "both": {
+        "type": "int"
+      }
+    }
+  },
+  "combinedTime": "Активное время: {seconds} с (без разбора и времени в фоне).",
+  "@combinedTime": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
   }
 }

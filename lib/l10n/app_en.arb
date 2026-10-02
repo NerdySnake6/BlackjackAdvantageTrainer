@@ -454,5 +454,73 @@
         "type": "String"
       }
     }
+  },
+  "combinedTitle": "Weekly strategy + count challenge",
+  "combinedIntro": "Ten repeatable authored decisions. Start RC at zero and count every revealed card, including the dealer upcard (last card). Choose basic strategy, then enter cumulative RC. These are fixed decision scenes, not played rounds. Feedback restores the correct RC before the next scene. No XP or mastery evidence.",
+  "combinedTimer": "Measure active time (optional; no time limit)",
+  "combinedWeek": "Week starting {week}",
+  "@combinedWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "combinedStep": "Decision {step} of {total}",
+  "@combinedStep": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "combinedDecision": "Your hand is followed by the dealer upcard. What is the basic-strategy action?",
+  "combinedDealer": "Dealer upcard: {rank}",
+  "@combinedDealer": {
+    "placeholders": {
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "combinedFeedback": "Correct action: {action}. Cumulative RC: {count}.",
+  "@combinedFeedback": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "combinedCarry": "Carry this corrected RC into the next decision. Each first answer stays recorded.",
+  "combinedResult": "Strategy: {strategy}/{total}. RC: {count}/{total}. Both correct: {both}/{total}. Repeatable practice, not a certificate.",
+  "@combinedResult": {
+    "placeholders": {
+      "strategy": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      },
+      "both": {
+        "type": "int"
+      }
+    }
+  },
+  "combinedTime": "Active time: {seconds} s (feedback and background excluded).",
+  "@combinedTime": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
   }
 }

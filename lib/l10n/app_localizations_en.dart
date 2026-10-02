@@ -1031,4 +1031,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String studyOptionalChallenge(String lesson) {
     return 'Optional challenge: $lesson';
   }
+
+  @override
+  String get combinedTitle => 'Weekly strategy + count challenge';
+
+  @override
+  String get combinedIntro =>
+      'Ten repeatable authored decisions. Start RC at zero and count every revealed card, including the dealer upcard (last card). Choose basic strategy, then enter cumulative RC. These are fixed decision scenes, not played rounds. Feedback restores the correct RC before the next scene. No XP or mastery evidence.';
+
+  @override
+  String get combinedTimer => 'Measure active time (optional; no time limit)';
+
+  @override
+  String combinedWeek(String week) {
+    return 'Week starting $week';
+  }
+
+  @override
+  String combinedStep(int step, int total) {
+    return 'Decision $step of $total';
+  }
+
+  @override
+  String get combinedDecision =>
+      'Your hand is followed by the dealer upcard. What is the basic-strategy action?';
+
+  @override
+  String combinedDealer(String rank) {
+    return 'Dealer upcard: $rank';
+  }
+
+  @override
+  String combinedFeedback(String action, int count) {
+    return 'Correct action: $action. Cumulative RC: $count.';
+  }
+
+  @override
+  String get combinedCarry =>
+      'Carry this corrected RC into the next decision. Each first answer stays recorded.';
+
+  @override
+  String combinedResult(int strategy, int total, int count, int both) {
+    return 'Strategy: $strategy/$total. RC: $count/$total. Both correct: $both/$total. Repeatable practice, not a certificate.';
+  }
+
+  @override
+  String combinedTime(int seconds) {
+    return 'Active time: $seconds s (feedback and background excluded).';
+  }
 }

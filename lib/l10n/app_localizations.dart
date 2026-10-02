@@ -1812,6 +1812,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Optional challenge: {lesson}'**
   String studyOptionalChallenge(String lesson);
+
+  /// No description provided for @combinedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly strategy + count challenge'**
+  String get combinedTitle;
+
+  /// No description provided for @combinedIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Ten repeatable authored decisions. Start RC at zero and count every revealed card, including the dealer upcard (last card). Choose basic strategy, then enter cumulative RC. These are fixed decision scenes, not played rounds. Feedback restores the correct RC before the next scene. No XP or mastery evidence.'**
+  String get combinedIntro;
+
+  /// No description provided for @combinedTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Measure active time (optional; no time limit)'**
+  String get combinedTimer;
+
+  /// No description provided for @combinedWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week starting {week}'**
+  String combinedWeek(String week);
+
+  /// No description provided for @combinedStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Decision {step} of {total}'**
+  String combinedStep(int step, int total);
+
+  /// No description provided for @combinedDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Your hand is followed by the dealer upcard. What is the basic-strategy action?'**
+  String get combinedDecision;
+
+  /// No description provided for @combinedDealer.
+  ///
+  /// In en, this message translates to:
+  /// **'Dealer upcard: {rank}'**
+  String combinedDealer(String rank);
+
+  /// No description provided for @combinedFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct action: {action}. Cumulative RC: {count}.'**
+  String combinedFeedback(String action, int count);
+
+  /// No description provided for @combinedCarry.
+  ///
+  /// In en, this message translates to:
+  /// **'Carry this corrected RC into the next decision. Each first answer stays recorded.'**
+  String get combinedCarry;
+
+  /// No description provided for @combinedResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Strategy: {strategy}/{total}. RC: {count}/{total}. Both correct: {both}/{total}. Repeatable practice, not a certificate.'**
+  String combinedResult(int strategy, int total, int count, int both);
+
+  /// No description provided for @combinedTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Active time: {seconds} s (feedback and background excluded).'**
+  String combinedTime(int seconds);
 }
 
 class _AppLocalizationsDelegate

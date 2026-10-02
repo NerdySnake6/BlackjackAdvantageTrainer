@@ -1032,4 +1032,53 @@ class AppLocalizationsRu extends AppLocalizations {
   String studyOptionalChallenge(String lesson) {
     return 'Необязательный вызов: $lesson';
   }
+
+  @override
+  String get combinedTitle => 'Недельный вызов: стратегия и счёт';
+
+  @override
+  String get combinedIntro =>
+      'Десять повторяемых авторских решений. Начните RC с нуля, учитывайте каждую раскрытую карту, включая открытую карту дилера (последнюю). Выберите basic strategy, затем введите общий RC. Это фиксированные задачи, а не сыгранные раздачи. После разбора следующая задача начинается с верного RC. Без XP и подтверждения освоения.';
+
+  @override
+  String get combinedTimer =>
+      'Измерять активное время (необязательно; без лимита)';
+
+  @override
+  String combinedWeek(String week) {
+    return 'Неделя с $week';
+  }
+
+  @override
+  String combinedStep(int step, int total) {
+    return 'Решение $step из $total';
+  }
+
+  @override
+  String get combinedDecision =>
+      'После карт вашей руки показана открытая карта дилера. Какое действие рекомендует basic strategy?';
+
+  @override
+  String combinedDealer(String rank) {
+    return 'Открытая карта дилера: $rank';
+  }
+
+  @override
+  String combinedFeedback(String action, int count) {
+    return 'Верное действие: $action. Общий RC: $count.';
+  }
+
+  @override
+  String get combinedCarry =>
+      'Сохраните этот исправленный RC для следующего решения. Каждый первый ответ остаётся записанным.';
+
+  @override
+  String combinedResult(int strategy, int total, int count, int both) {
+    return 'Стратегия: $strategy/$total. RC: $count/$total. Оба ответа верны: $both/$total. Повторяемая практика, не сертификат.';
+  }
+
+  @override
+  String combinedTime(int seconds) {
+    return 'Активное время: $seconds с (без разбора и времени в фоне).';
+  }
 }

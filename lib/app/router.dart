@@ -8,6 +8,7 @@ import '../domain/learning/mastery_check.dart';
 import '../presentation/drill/count_drill_screen.dart';
 import '../presentation/home/app_shell.dart';
 import '../presentation/learn/learning_path_screen.dart';
+import '../presentation/learn/combined_practice_screen.dart';
 import '../presentation/learn/learn_review_screen.dart';
 import '../presentation/learn/lesson_screen.dart';
 import '../presentation/learn/mastery_check_screen.dart';
@@ -125,6 +126,10 @@ GoRouter createRouter({required AppState appState}) {
         },
         builder: (context, state) =>
             LearnReviewScreen(lessonId: state.pathParameters['lessonId']!),
+      ),
+      GoRoute(
+        path: '/combined-practice',
+        builder: (context, state) => const CombinedPracticeScreen(),
       ),
       GoRoute(
         path: '/count-certification',

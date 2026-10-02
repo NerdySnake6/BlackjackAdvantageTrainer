@@ -15,6 +15,7 @@ import '../domain/learning/mastery_check.dart';
 import '../domain/learning/count_certification.dart';
 import '../domain/learning/learn_review.dart';
 import '../domain/learning/study_plan.dart';
+import '../domain/learning/combined_practice.dart';
 import '../domain/learning/decision_lesson.dart';
 import '../domain/learning/models.dart';
 import '../domain/learning/pilot_progress_migration.dart';
@@ -553,6 +554,56 @@ class AppState extends ChangeNotifier {
     final next = _progress.copyWith(
       learnReviews: schedules,
       learnReviewSessions: {..._progress.learnReviewSessions, id: data},
+    );
+    await _progressRepository.save(next);
+    _progress = next;
+    notifyListeners();
+  }
+
+  DateTime get studyDate => _clock();
+
+  /// Stores repeatable joint practice independently of rewards and certificates.
+  Future<void> saveCombinedPractice(CombinedPracticeSession session) async {
+    final data = session.toJson();
+    CombinedPracticeSession.restore(catalog, data);
+    final raw = _progress.combinedPracticeSessions[session.week];
+    if (raw != null) {
+      try {
+        final old = CombinedPracticeSession.restore(catalog, raw);
+        if (old.attempt == session.attempt) {
+          if (session.index < old.index ||
+              session.index > old.index + 1 ||
+              old.decisions.indexed.any(
+                (e) => session.decisions[e.$1] != e.$2,
+              ) ||
+              old.counts.indexed.any((e) => session.counts[e.$1] != e.$2) ||
+              session.elapsedMs < old.elapsedMs ||
+              session.timed != old.timed ||
+              (session.index == old.index &&
+                  !old.feedback &&
+                  (session.revealed < old.revealed ||
+                      (old.decision != null &&
+                          session.decision != old.decision))) ||
+              (session.index == old.index + 1 &&
+                  old.decision != null &&
+                  session.decisions.last != old.decision)) {
+            throw StateError('Practice cannot rewind');
+          }
+          if (old.complete) return;
+        } else if ((!old.complete && old.started) ||
+            session.attempt != old.attempt + 1 ||
+            session.started) {
+          throw StateError('Finish practice before repeating');
+        }
+      } on FormatException {
+        // Explicit restart replaces only this incompatible weekly record.
+      }
+    }
+    final next = _progress.copyWith(
+      combinedPracticeSessions: {
+        ..._progress.combinedPracticeSessions,
+        session.week: data,
+      },
     );
     await _progressRepository.save(next);
     _progress = next;

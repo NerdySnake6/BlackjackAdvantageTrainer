@@ -86,6 +86,10 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
   repeatable challenge. Saved single-task reviews use separate 1/3/7/14/30-day
   intervals, preserve first answers and do not award XP or mastery. Completed
   lessons also expose review directly; the legacy Quick Review bank is unchanged.
+- An optional weekly Learn challenge alternates ten authored strategy decisions
+  with cumulative RC on the same revealed cards. It saves first answers and
+  resume, reports separate and joint accuracy, and optionally measures active
+  time. Repeatable practice awards no XP or mastery.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
   strategy feedback, per-round count checks, and five-round summaries. Each
