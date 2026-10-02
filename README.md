@@ -37,6 +37,7 @@ and agents. Read them before changing the product or code:
 - [Tester feedback fix plan](docs/TESTER_FEEDBACK_FIX_PLAN.md)
 - [Fixed APK for feedback retest](docs/FEEDBACK_RETEST_BUILD.md)
 - [Feedback retest report template](docs/FEEDBACK_RETEST_REPORT.md)
+- [Android emulator retest results](docs/FEEDBACK_RETEST_EMULATOR.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 

@@ -146,3 +146,9 @@ Snake case в Dart package name правилен и не должен замен
 в portrait; полный preset — в landscape. Проверять переключение между
 раундами, сохранение состояния при rebuild и возврат в portrait после выхода.
 Для этого общего runtime требуются Android и iOS builds; SDK не менялся.
+
+Нативная проверка portrait/full пресетов на выделенном Android:
+`flutter test integration_test/table_presets_test.dart -d <device-id>`.
+Использует реальный SharedPreferencesAsync под отдельными тестовыми ключами;
+проверяет EN/RU, ориентацию и запрет смены во время раздачи. Результат AVD
+описан в [FEEDBACK_RETEST_EMULATOR.md](FEEDBACK_RETEST_EMULATOR.md).
