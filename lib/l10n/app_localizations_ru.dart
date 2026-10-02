@@ -1000,4 +1000,36 @@ class AppLocalizationsRu extends AppLocalizations {
   String countCertificationTime(int seconds) {
     return 'Активное время: $seconds секунд';
   }
+
+  @override
+  String get studyPlanTitle => 'Следующее занятие';
+
+  @override
+  String get studyReviewTitle => 'Одна задача повторения';
+
+  @override
+  String get studyReviewNote =>
+      'Повторяемая самостоятельная задача. Без подсказок, XP или подтверждения освоения. Первый ответ и раскрытые карты сохраняются.';
+
+  @override
+  String get studyNoReview => 'В Learn нет назначенного повторения.';
+
+  @override
+  String get studyCoursePractised =>
+      'Уроки пройдены в практике. Самостоятельные проверки и необязательные вызовы доступны.';
+
+  @override
+  String studyDueReview(String lesson) {
+    return 'Повторение: $lesson';
+  }
+
+  @override
+  String studyNextLesson(String lesson) {
+    return 'Следующий урок: $lesson';
+  }
+
+  @override
+  String studyOptionalChallenge(String lesson) {
+    return 'Необязательный вызов: $lesson';
+  }
 }

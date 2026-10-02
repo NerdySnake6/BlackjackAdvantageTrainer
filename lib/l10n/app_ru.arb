@@ -353,5 +353,34 @@
         "type": "int"
       }
     }
+  },
+  "studyPlanTitle": "Следующее занятие",
+  "studyReviewTitle": "Одна задача повторения",
+  "studyReviewNote": "Повторяемая самостоятельная задача. Без подсказок, XP или подтверждения освоения. Первый ответ и раскрытые карты сохраняются.",
+  "studyNoReview": "В Learn нет назначенного повторения.",
+  "studyCoursePractised": "Уроки пройдены в практике. Самостоятельные проверки и необязательные вызовы доступны.",
+  "studyDueReview": "Повторение: {lesson}",
+  "studyNextLesson": "Следующий урок: {lesson}",
+  "studyOptionalChallenge": "Необязательный вызов: {lesson}",
+  "@studyDueReview": {
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "@studyNextLesson": {
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "@studyOptionalChallenge": {
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
   }
 }

@@ -1764,6 +1764,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Active time: {seconds} seconds'**
   String countCertificationTime(int seconds);
+
+  /// No description provided for @studyPlanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your next session'**
+  String get studyPlanTitle;
+
+  /// No description provided for @studyReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'One Learn review'**
+  String get studyReviewTitle;
+
+  /// No description provided for @studyReviewNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A repeatable independent practice task. No hints, XP or mastery award. Your first answer and revealed cards are saved.'**
+  String get studyReviewNote;
+
+  /// No description provided for @studyNoReview.
+  ///
+  /// In en, this message translates to:
+  /// **'No Learn review is due.'**
+  String get studyNoReview;
+
+  /// No description provided for @studyCoursePractised.
+  ///
+  /// In en, this message translates to:
+  /// **'The lessons have been practised. Independent checks and optional challenges remain available.'**
+  String get studyCoursePractised;
+
+  /// No description provided for @studyDueReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review: {lesson}'**
+  String studyDueReview(String lesson);
+
+  /// No description provided for @studyNextLesson.
+  ///
+  /// In en, this message translates to:
+  /// **'Next lesson: {lesson}'**
+  String studyNextLesson(String lesson);
+
+  /// No description provided for @studyOptionalChallenge.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional challenge: {lesson}'**
+  String studyOptionalChallenge(String lesson);
 }
 
 class _AppLocalizationsDelegate

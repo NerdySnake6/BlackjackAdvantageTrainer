@@ -11,6 +11,7 @@ import '../../domain/learning/diagnostic.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
 import 'pilot_performance_summary.dart';
+import 'study_plan_card.dart';
 
 class LearningPathScreen extends StatelessWidget {
   const LearningPathScreen({super.key});
@@ -44,6 +45,8 @@ class LearningPathScreen extends StatelessWidget {
                 sliver: SliverToBoxAdapter(
                   child: Column(
                     children: [
+                      const StudyPlanCard(),
+                      const SizedBox(height: 12),
                       _QuickReviewCard(appState: appState),
                       const SizedBox(height: 12),
                       const _DiagnosticCard(),

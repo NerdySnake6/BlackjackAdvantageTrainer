@@ -999,4 +999,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String countCertificationTime(int seconds) {
     return 'Active time: $seconds seconds';
   }
+
+  @override
+  String get studyPlanTitle => 'Your next session';
+
+  @override
+  String get studyReviewTitle => 'One Learn review';
+
+  @override
+  String get studyReviewNote =>
+      'A repeatable independent practice task. No hints, XP or mastery award. Your first answer and revealed cards are saved.';
+
+  @override
+  String get studyNoReview => 'No Learn review is due.';
+
+  @override
+  String get studyCoursePractised =>
+      'The lessons have been practised. Independent checks and optional challenges remain available.';
+
+  @override
+  String studyDueReview(String lesson) {
+    return 'Review: $lesson';
+  }
+
+  @override
+  String studyNextLesson(String lesson) {
+    return 'Next lesson: $lesson';
+  }
+
+  @override
+  String studyOptionalChallenge(String lesson) {
+    return 'Optional challenge: $lesson';
+  }
 }

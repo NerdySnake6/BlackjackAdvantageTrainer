@@ -278,6 +278,8 @@ class ProgressSnapshot {
   const ProgressSnapshot({
     this.lessonScores = const {},
     this.masteryChecks = const {},
+    this.learnReviews = const {},
+    this.learnReviewSessions = const {},
     this.previousPilotResults = const {},
     this.activeSessions = const {},
     this.pilotSessions = const {},
@@ -310,6 +312,8 @@ class ProgressSnapshot {
       ),
       pilotSessions: _readPilotSessions(json['pilotSessions']),
       masteryChecks: _readPilotSessions(json['masteryChecks']),
+      learnReviews: _readPilotSessions(json['learnReviews']),
+      learnReviewSessions: _readPilotSessions(json['learnReviewSessions']),
       previousPilotResults: _readPilotSessions(json['previousPilotResults']),
       exerciseReviewStates: rawReviewStates.map(
         (key, value) => MapEntry(
@@ -344,6 +348,8 @@ class ProgressSnapshot {
 
   final Map<String, double> lessonScores;
   final Map<String, Map<String, Object?>> masteryChecks;
+  final Map<String, Map<String, Object?>> learnReviews;
+  final Map<String, Map<String, Object?>> learnReviewSessions;
   final Map<String, Map<String, Object?>> previousPilotResults;
   final Map<String, LessonSessionProgress> activeSessions;
   final Map<String, Map<String, Object?>> pilotSessions;
@@ -381,6 +387,8 @@ class ProgressSnapshot {
     'lessonScores': lessonScores,
     'pilotSessions': pilotSessions,
     'masteryChecks': masteryChecks,
+    'learnReviews': learnReviews,
+    'learnReviewSessions': learnReviewSessions,
     'previousPilotResults': previousPilotResults,
     'activeSessions': activeSessions.map(
       (key, value) => MapEntry(key, value.toJson()),
@@ -402,6 +410,8 @@ class ProgressSnapshot {
   ProgressSnapshot copyWith({
     Map<String, double>? lessonScores,
     Map<String, Map<String, Object?>>? masteryChecks,
+    Map<String, Map<String, Object?>>? learnReviews,
+    Map<String, Map<String, Object?>>? learnReviewSessions,
     Map<String, Map<String, Object?>>? previousPilotResults,
     Map<String, LessonSessionProgress>? activeSessions,
     Map<String, Map<String, Object?>>? pilotSessions,
@@ -421,6 +431,8 @@ class ProgressSnapshot {
     return ProgressSnapshot(
       lessonScores: lessonScores ?? this.lessonScores,
       masteryChecks: masteryChecks ?? this.masteryChecks,
+      learnReviews: learnReviews ?? this.learnReviews,
+      learnReviewSessions: learnReviewSessions ?? this.learnReviewSessions,
       previousPilotResults: previousPilotResults ?? this.previousPilotResults,
       activeSessions: activeSessions ?? this.activeSessions,
       pilotSessions: pilotSessions ?? this.pilotSessions,

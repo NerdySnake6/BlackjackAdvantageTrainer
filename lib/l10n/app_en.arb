@@ -425,5 +425,34 @@
         "type": "int"
       }
     }
+  },
+  "studyPlanTitle": "Your next session",
+  "studyReviewTitle": "One Learn review",
+  "studyReviewNote": "A repeatable independent practice task. No hints, XP or mastery award. Your first answer and revealed cards are saved.",
+  "studyNoReview": "No Learn review is due.",
+  "studyCoursePractised": "The lessons have been practised. Independent checks and optional challenges remain available.",
+  "studyDueReview": "Review: {lesson}",
+  "studyNextLesson": "Next lesson: {lesson}",
+  "studyOptionalChallenge": "Optional challenge: {lesson}",
+  "@studyDueReview": {
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "@studyNextLesson": {
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "@studyOptionalChallenge": {
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
   }
 }

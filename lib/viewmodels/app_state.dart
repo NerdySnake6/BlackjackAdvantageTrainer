@@ -13,6 +13,8 @@ import '../domain/learning/lesson_performance.dart';
 import '../domain/learning/mastery.dart';
 import '../domain/learning/mastery_check.dart';
 import '../domain/learning/count_certification.dart';
+import '../domain/learning/learn_review.dart';
+import '../domain/learning/study_plan.dart';
 import '../domain/learning/decision_lesson.dart';
 import '../domain/learning/models.dart';
 import '../domain/learning/pilot_progress_migration.dart';
@@ -120,6 +122,8 @@ class AppState extends ChangeNotifier {
   bool isLessonCompleted(String lessonId) {
     return _scorer.isLessonComplete(_progress.lessonScores[lessonId] ?? 0);
   }
+
+  StudyPlan get studyPlan => StudyPlan.select(catalog, _progress, _clock());
 
   bool isLessonMastered(String lessonId) {
     final saved = _progress.masteryChecks[lessonId];
@@ -474,6 +478,16 @@ class AppState extends ChangeNotifier {
       session.recordReward(xp);
       final now = _clock();
       final date = DateTime(now.year, now.month, now.day);
+      if (session.passed && !previous.learnReviews.containsKey(id)) {
+        next = next.copyWith(
+          learnReviews: {
+            ...previous.learnReviews,
+            id: LearnReviewSchedule(
+              dueAt: now.add(const Duration(days: 1)),
+            ).toJson(),
+          },
+        );
+      }
       next = next.copyWith(
         lessonScores: {
           ...previous.lessonScores,
@@ -494,6 +508,54 @@ class AppState extends ChangeNotifier {
       if (identical(_progress, next)) _progress = previous;
       rethrow;
     }
+    notifyListeners();
+  }
+
+  /// Saves one repeatable Learn task, independently of XP and mastery evidence.
+  Future<void> saveLearnReview(LearnReviewSession session) async {
+    final id = session.lesson.id;
+    if (!isLessonCompleted(id)) throw StateError('Complete the lesson first');
+    final data = session.toJson();
+    LearnReviewSession.restore(session.lesson, data);
+    final existing = _progress.learnReviewSessions[id];
+    if (existing != null && existing['attempt'] == session.attempt) {
+      try {
+        final previous = LearnReviewSession.restore(session.lesson, existing);
+        if (previous.complete) return;
+        if (session.revealed < previous.revealed) {
+          throw StateError('Review cannot rewind');
+        }
+      } on FormatException {
+        // Explicit per-review restart may replace isolated invalid data.
+      }
+    }
+    var schedules = _progress.learnReviews;
+    if (session.complete) {
+      var schedule = LearnReviewSchedule(dueAt: _clock());
+      final raw = schedules[id];
+      if (raw != null) {
+        try {
+          schedule = LearnReviewSchedule.fromJson(raw);
+        } on FormatException {
+          // Rebuild only this review's schedule after a real new answer.
+        }
+      }
+      schedule = LearnReviewSchedule(
+        dueAt: schedule.dueAt,
+        step: schedule.step,
+        runs: session.attempt,
+      );
+      schedules = {
+        ...schedules,
+        id: schedule.answered(correct: session.correct, now: _clock()).toJson(),
+      };
+    }
+    final next = _progress.copyWith(
+      learnReviews: schedules,
+      learnReviewSessions: {..._progress.learnReviewSessions, id: data},
+    );
+    await _progressRepository.save(next);
+    _progress = next;
     notifyListeners();
   }
 

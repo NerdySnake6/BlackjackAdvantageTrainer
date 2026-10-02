@@ -8,6 +8,7 @@ import '../domain/learning/mastery_check.dart';
 import '../presentation/drill/count_drill_screen.dart';
 import '../presentation/home/app_shell.dart';
 import '../presentation/learn/learning_path_screen.dart';
+import '../presentation/learn/learn_review_screen.dart';
 import '../presentation/learn/lesson_screen.dart';
 import '../presentation/learn/mastery_check_screen.dart';
 import '../presentation/learn/count_certification_screen.dart';
@@ -112,6 +113,18 @@ GoRouter createRouter({required AppState appState}) {
       GoRoute(
         path: '/review',
         builder: (context, state) => const QuickReviewScreen(),
+      ),
+      GoRoute(
+        path: '/learn-review/:lessonId',
+        redirect: (context, state) {
+          final id = state.pathParameters['lessonId']!;
+          return appState.catalog.playableLessons.any((l) => l.id == id) &&
+                  appState.isLessonCompleted(id)
+              ? null
+              : '/learn';
+        },
+        builder: (context, state) =>
+            LearnReviewScreen(lessonId: state.pathParameters['lessonId']!),
       ),
       GoRoute(
         path: '/count-certification',

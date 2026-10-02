@@ -82,6 +82,10 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
 - Three further Learn lessons cover RC continuity, intermediate checks and
   speed preparation. An optional saved check requires three full exact decks
   at 60/45/30 active seconds, checking RC every eight cards and at card 52.
+- A Learn study plan suggests one due review, the next lesson and an optional
+  repeatable challenge. Saved single-task reviews use separate 1/3/7/14/30-day
+  intervals, preserve first answers and do not award XP or mastery. Completed
+  lessons also expose review directly; the legacy Quick Review bank is unchanged.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
   strategy feedback, per-round count checks, and five-round summaries. Each
