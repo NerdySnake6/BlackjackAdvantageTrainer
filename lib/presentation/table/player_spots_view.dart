@@ -20,24 +20,29 @@ class PlayerRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final engine = viewModel.engine;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        for (final seat in engine.seats)
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: PlayerSpot(
-                viewModel: viewModel,
-                seat: seat,
-                isActive:
-                    seat.index == engine.activeSeatIndex &&
-                    engine.phase == RoundPhase.playerTurn,
-                compact: compact,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = (constraints.maxWidth / 180).floor().clamp(1, 5);
+        final width = (constraints.maxWidth - (columns - 1) * 8) / columns;
+        return Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final seat in engine.seats)
+              SizedBox(
+                width: width,
+                child: PlayerSpot(
+                  viewModel: viewModel,
+                  seat: seat,
+                  isActive:
+                      seat.index == engine.activeSeatIndex &&
+                      engine.phase == RoundPhase.playerTurn,
+                  compact: compact,
+                ),
               ),
-            ),
-          ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
@@ -114,7 +119,7 @@ class PlayerSpot extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: accent,
-                          fontSize: 10,
+                          fontSize: 14,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
@@ -124,32 +129,21 @@ class PlayerSpot extends StatelessWidget {
                 const SizedBox(height: 3),
                 if (seat.hands.isEmpty ||
                     viewModel.visibleCardsForSeat(seat.index) == 0)
-                  SizedBox(height: compact ? 52 : 59)
+                  const SizedBox(height: 80)
                 else
-                  SizedBox(
-                    height: compact ? 52 : 59,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          for (
-                            var handIndex = 0;
-                            handIndex < seat.hands.length;
-                            handIndex++
-                          )
-                            if (handIndex > 0) const SizedBox(width: 3),
-                          for (final handState in seat.hands.take(2))
-                            PlayerHandView(
-                              viewModel: viewModel,
-                              seatIndex: seat.index,
-                              handState: handState,
-                              isActive: isActive,
-                            ),
-                        ],
-                      ),
+                  for (final entry in seat.hands.indexed) ...[
+                    if (seat.hands.length > 1)
+                      Text(strings.tableHandNumber(entry.$1 + 1)),
+                    PlayerHandView(
+                      viewModel: viewModel,
+                      seatIndex: seat.index,
+                      handState: entry.$2,
+                      isActive:
+                          isActive &&
+                          entry.$1 == viewModel.engine.activeHandIndex,
                     ),
-                  ),
+                    const SizedBox(height: 8),
+                  ],
                 if (!compact && !usesLargeText) ...[
                   const SizedBox(height: 3),
                   PracticeUnitChip(label: strings.practiceUnits, color: accent),
@@ -183,16 +177,21 @@ class PlayerHandView extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CompactHandView(
-          hand: handState.hand,
-          cardWidth: 32,
-          visibleCardCount: viewModel.visibleCardsForSeat(seatIndex),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: CompactHandView(
+            hand: handState.hand,
+            cardWidth: 64,
+            visibleCardCount: viewModel.isDealing
+                ? viewModel.visibleCardsForSeat(seatIndex)
+                : null,
+          ),
         ),
         Text(
           strings.handTotal(evaluation.total),
           style: TextStyle(
             color: isActive ? AppColors.cream : Colors.white70,
-            fontSize: 9,
+            fontSize: 16,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -204,7 +203,7 @@ class PlayerHandView extends StatelessWidget {
             ),
             style: TextStyle(
               color: isWinning ? AppColors.mint : AppColors.danger,
-              fontSize: 8,
+              fontSize: 14,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -232,7 +231,7 @@ class PracticeUnitChip extends StatelessWidget {
         label,
         style: TextStyle(
           color: color,
-          fontSize: 8,
+          fontSize: 14,
           fontWeight: FontWeight.w900,
         ),
       ),

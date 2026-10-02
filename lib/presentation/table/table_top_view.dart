@@ -1,4 +1,4 @@
-/// Felt tabletop layout, dealer spot, and table markings painter.
+/// Scrollable felt layout with unclipped, readable dealer and player hands.
 library;
 
 import 'package:flutter/material.dart';
@@ -18,107 +18,31 @@ class TableTopView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final tableRadius = (constraints.maxWidth * 0.18).clamp(90.0, 220.0);
-        final compact = constraints.maxHeight < 300;
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: const RadialGradient(
-                center: Alignment(0, -0.2),
-                radius: 1.2,
-                colors: [
-                  Color(0xFF197A69),
-                  Color(0xFF0C5C4F),
-                  Color(0xFF063B35),
-                ],
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.elliptical(tableRadius, tableRadius * 0.72),
-              ),
-              border: Border.all(color: const Color(0xFF6F4A26), width: 8),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black54,
-                  blurRadius: 18,
-                  offset: Offset(0, 10),
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            color: const Color(0xFF0C5C4F),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: const Color(0xFF6F4A26), width: 3),
+          ),
+          child: SingleChildScrollView(
+            key: const ValueKey('table-content-scroll'),
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: [
+                DealerSpot(viewModel: viewModel),
+                const SizedBox(height: 12),
+                PlayerRow(
+                  viewModel: viewModel,
+                  compact: constraints.maxHeight < 300,
                 ),
+                if (viewModel.isDealing) DealingBadge(viewModel: viewModel),
               ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.elliptical(tableRadius, tableRadius * 0.72),
-              ),
-              child: CustomPaint(
-                painter: TableMarkingsPainter(),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 12,
-                      left: 0,
-                      right: 0,
-                      child: DealerSpot(viewModel: viewModel),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          12,
-                          compact ? 30 : 54,
-                          12,
-                          14,
-                        ),
-                        child: PlayerRow(
-                          viewModel: viewModel,
-                          compact: compact,
-                        ),
-                      ),
-                    ),
-                    if (viewModel.isDealing)
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 10,
-                        child: Center(
-                          child: DealingBadge(viewModel: viewModel),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
             ),
           ),
         );
       },
     );
   }
-}
-
-class TableMarkingsPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final linePaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.16)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.4;
-    final center = Offset(size.width / 2, size.height * 0.58);
-    canvas.drawArc(
-      Rect.fromCenter(
-        center: Offset(size.width / 2, size.height * 0.24),
-        width: size.width * 0.56,
-        height: size.height * 0.58,
-      ),
-      0.15,
-      2.84,
-      false,
-      linePaint,
-    );
-    canvas.drawCircle(center, size.shortestSide * 0.08, linePaint);
-    canvas.drawCircle(center, size.shortestSide * 0.055, linePaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
 class DealerSpot extends StatelessWidget {
@@ -140,8 +64,11 @@ class DealerSpot extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 8,
+          runSpacing: 8,
           children: [
             const CircleAvatar(
               radius: 15,
@@ -157,11 +84,14 @@ class DealerSpot extends StatelessWidget {
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
             ),
             const SizedBox(width: 10),
-            CompactHandView(
-              hand: engine.dealerHand,
-              cardWidth: 42,
-              visibleCardCount: visibleCards,
-              hideSecondCard: !engine.dealerHoleRevealed,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: CompactHandView(
+                hand: engine.dealerHand,
+                cardWidth: 64,
+                visibleCardCount: visibleCards,
+                hideSecondCard: !engine.dealerHoleRevealed,
+              ),
             ),
           ],
         ),

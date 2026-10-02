@@ -1090,4 +1090,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get basicStrategyCheckpointDescription =>
       '100 new decisions. All first answers must be correct.';
+
+  @override
+  String tableHandNumber(int number) {
+    return 'Hand $number';
+  }
 }

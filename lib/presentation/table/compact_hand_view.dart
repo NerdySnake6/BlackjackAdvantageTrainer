@@ -30,7 +30,7 @@ class CompactHandView extends StatelessWidget {
       return SizedBox(width: cardWidth, height: cardWidth * 1.42);
     }
     final cards = hand.cards.take(count).toList();
-    final offset = cardWidth * 0.48;
+    final offset = (cardWidth * 0.35).clamp(24.0, cardWidth);
     final width = cardWidth + (cards.length - 1) * offset;
     return SizedBox(
       width: width,
@@ -43,6 +43,7 @@ class CompactHandView extends StatelessWidget {
               child: PlayingCardView(
                 card: cards[index],
                 width: cardWidth,
+                compactIndex: true,
                 hidden: hideSecondCard && index == 1,
               ),
             ),

@@ -1896,6 +1896,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'100 new decisions. All first answers must be correct.'**
   String get basicStrategyCheckpointDescription;
+
+  /// No description provided for @tableHandNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand {number}'**
+  String tableHandNumber(int number);
 }
 
 class _AppLocalizationsDelegate

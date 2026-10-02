@@ -1092,4 +1092,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get basicStrategyCheckpointDescription =>
       '100 новых решений. Все первые ответы должны быть верными.';
+
+  @override
+  String tableHandNumber(int number) {
+    return 'Рука $number';
+  }
 }

@@ -11,6 +11,7 @@ class PlayingCardView extends StatelessWidget {
     required this.card,
     this.width = 72,
     this.hidden = false,
+    this.compactIndex = false,
     this.redColor = const Color(0xFFC73B48),
     super.key,
   });
@@ -18,6 +19,7 @@ class PlayingCardView extends StatelessWidget {
   final PlayingCard card;
   final double width;
   final bool hidden;
+  final bool compactIndex;
   final Color redColor;
 
   @override
@@ -46,7 +48,7 @@ class PlayingCardView extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsets.all(width * 0.1),
+      padding: EdgeInsets.all(compactIndex ? 3 : width * 0.1),
       decoration: BoxDecoration(
         color: AppColors.cream,
         borderRadius: BorderRadius.circular(width * 0.12),
@@ -62,7 +64,7 @@ class PlayingCardView extends StatelessWidget {
             textScaler: TextScaler.noScaling,
             style: TextStyle(
               color: cardColor,
-              fontSize: width * 0.28,
+              fontSize: compactIndex ? 14 : width * 0.28,
               fontWeight: FontWeight.w900,
               height: 1,
             ),
@@ -72,7 +74,7 @@ class PlayingCardView extends StatelessWidget {
             textScaler: TextScaler.noScaling,
             style: TextStyle(
               color: cardColor,
-              fontSize: width * 0.25,
+              fontSize: compactIndex ? 14 : width * 0.25,
               height: 1,
             ),
           ),
