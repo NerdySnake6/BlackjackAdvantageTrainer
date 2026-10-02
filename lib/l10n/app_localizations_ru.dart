@@ -969,4 +969,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String mathSample(int value) {
     return 'Фиксированный пример: $value очков';
   }
+
+  @override
+  String get countLessonsTitle => 'Hi-Lo и running count';
+
+  @override
+  String get revealChunk => 'Раскрой группу карт';
 }

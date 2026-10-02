@@ -49,10 +49,17 @@ Future<void> runPilotJourney(
       await tapPilot(tester, find.byKey(const ValueKey('pilot-hint')));
     }
     if (task.isCounting) {
-      for (var card = 0; card < task.cards.length; card++) {
+      for (
+        var card = 0;
+        card < (task.chunked ? 1 : task.cards.length);
+        card++
+      ) {
         await tapPilot(
           tester,
-          find.widgetWithText(FilledButton, strings.nextCard),
+          find.widgetWithText(
+            FilledButton,
+            task.chunked ? strings.revealChunk : strings.nextCard,
+          ),
         );
       }
       final scene = tester.widget<CancellationScene>(
@@ -134,7 +141,10 @@ Future<void> runPilotJourney(
       final wrong = task.isMathComparison
           ? task.answerKeys.firstWhere((a) => a != task.expected)
           : task.isCounting
-          ? (int.parse(task.expected) + 1).toString()
+          ? (int.parse(task.expected) == task.maximumInput
+                    ? int.parse(task.expected) - 1
+                    : int.parse(task.expected) + 1)
+                .toString()
           : task.availableActions
                 .firstWhere((action) => action.name != task.expected)
                 .name;

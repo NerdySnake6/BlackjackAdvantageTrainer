@@ -1,0 +1,511 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "hi-lo-intro",
+    "skillId": "counting.hi_lo_tags",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Hi-Lo: card tags",
+    "subtitle": "Update the count from cards, without independent-task hints.",
+    "theory": {
+      "id": "hi-lo-intro-interactive-theory",
+      "text": "Hi-Lo tags are not blackjack points: 2–6 add +1; 7–9 add 0; 10, J, Q, K and A add −1. Start running count (RC) at zero after a shuffle and add each exposed card’s tag once. For example, 5 raises RC by one and K lowers it by one. A tag does not depend on its seat or whether the hand wins. Introductory cards show tags; practice hides them unless you ask for a hint, and independent tasks have no hints. Enter the sum of all tags, including the final two-card example. This is a closed training simulation, not an external table counter."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "hi-lo-intro-interactive-01",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "5"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "5: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 5: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-02",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "K"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "K: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. K: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-03",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "2"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "2: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 2: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-04",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "A"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "A: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. A: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-05",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "7"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "7: (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 7: (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-06",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "Q"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "Q: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. Q: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-07",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "4"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "4: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 4: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-08",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "J"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "J: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. J: (-1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-09",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "9"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "9: (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 9: (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-10",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "6"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "6: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 6: (+1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-11",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "8"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "8: (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 8: (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      },
+      {
+        "id": "hi-lo-intro-interactive-12",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "10"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "3, 10: (+1) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 3, 10: (+1) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "hi-lo-chunks",
+    "skillId": "counting.chunks",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Hi-Lo: count a chunk",
+    "subtitle": "Update the count from cards, without independent-task hints.",
+    "theory": {
+      "id": "hi-lo-chunks-interactive-theory",
+      "text": "Read a chunk as one change in running count: add the tags of its 3–5 cards, then add that change to the starting count. For example, 2, 4, Q sum to +1; 2, 4, Q, A sum to 0. Neutral 7–9 do not change the sum. A chunk need not cancel to zero. Each group below appears at once so that you practise the group rather than use per-card feedback. On independent tasks no tags, cancellation markers or correct RC are shown. The cards and your first answer survive leaving the lesson."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "hi-lo-chunks-interactive-01",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "2",
+          "4",
+          "Q"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "2, 4, Q: (+1) + (+1) + (-1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 2, 4, Q: (+1) + (+1) + (-1) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-02",
+        "kind": "runningCount",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "6",
+          "9"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "A, 6, 9: (-1) + (+1) + (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. A, 6, 9: (-1) + (+1) + (+0) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-03",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "5",
+          "K",
+          "8"
+        ],
+        "initialCount": 0,
+        "expected": "1",
+        "coaching": {
+          "explanation": "3, 5, K, 8: (+1) + (+1) + (-1) + (+0) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 3, 5, K, 8: (+1) + (+1) + (-1) + (+0) = +1. Starting RC 0 plus this change gives +1. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-04",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "10",
+          "A",
+          "2"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "10, A, 2: (-1) + (-1) + (+1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 10, A, 2: (-1) + (-1) + (+1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-05",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "7",
+          "8",
+          "9",
+          "J"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "6, 7, 8, 9, J: (+1) + (+0) + (+0) + (+0) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 6, 7, 8, 9, J: (+1) + (+0) + (+0) + (+0) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-06",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "5",
+          "2",
+          "Q"
+        ],
+        "initialCount": 0,
+        "expected": "2",
+        "coaching": {
+          "explanation": "4, 5, 2, Q: (+1) + (+1) + (+1) + (-1) = +2. Starting RC 0 plus this change gives +2. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 4, 5, 2, Q: (+1) + (+1) + (+1) + (-1) = +2. Starting RC 0 plus this change gives +2. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-07",
+        "kind": "runningCount",
+        "stage": "practice",
+        "cards": [
+          "K",
+          "A",
+          "10",
+          "3",
+          "7"
+        ],
+        "initialCount": 0,
+        "expected": "-2",
+        "coaching": {
+          "explanation": "K, A, 10, 3, 7: (-1) + (-1) + (-1) + (+1) + (+0) = -2. Starting RC 0 plus this change gives -2. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. K, A, 10, 3, 7: (-1) + (-1) + (-1) + (+1) + (+0) = -2. Starting RC 0 plus this change gives -2. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-08",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "5",
+          "J",
+          "2",
+          "8",
+          "A"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "5, J, 2, 8, A: (+1) + (-1) + (+1) + (+0) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 5, J, 2, 8, A: (+1) + (-1) + (+1) + (+0) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-09",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "Q",
+          "9",
+          "K",
+          "6"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "Q, 9, K, 6: (-1) + (+0) + (-1) + (+1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. Q, 9, K, 6: (-1) + (+0) + (-1) + (+1) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-10",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "4",
+          "6",
+          "A",
+          "7"
+        ],
+        "initialCount": 0,
+        "expected": "2",
+        "coaching": {
+          "explanation": "3, 4, 6, A, 7: (+1) + (+1) + (+1) + (-1) + (+0) = +2. Starting RC 0 plus this change gives +2. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 3, 4, 6, A, 7: (+1) + (+1) + (+1) + (-1) + (+0) = +2. Starting RC 0 plus this change gives +2. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-11",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "10",
+          "J",
+          "5",
+          "9"
+        ],
+        "initialCount": 0,
+        "expected": "-1",
+        "coaching": {
+          "explanation": "10, J, 5, 9: (-1) + (-1) + (+1) + (+0) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 10, J, 5, 9: (-1) + (-1) + (+1) + (+0) = -1. Starting RC 0 plus this change gives -1. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      },
+      {
+        "id": "hi-lo-chunks-interactive-12",
+        "kind": "runningCount",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "8",
+          "4",
+          "K",
+          "Q"
+        ],
+        "initialCount": 0,
+        "expected": "0",
+        "coaching": {
+          "explanation": "2, 8, 4, K, Q: (+1) + (+0) + (+1) + (-1) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once.",
+          "contrast": "Compare 2, K (0) with 2, 3 (+2): grouping saves effort, but the signs of the tags still matter.",
+          "mistakes": {
+            "count": "Recompute the tags, not the hand total. 2, 8, 4, K, Q: (+1) + (+0) + (+1) + (-1) + (-1) = +0. Starting RC 0 plus this change gives +0. Neutral cards do not contribute; count each revealed card once."
+          }
+        },
+        "chunked": true
+      }
+    ]
+  }
+]

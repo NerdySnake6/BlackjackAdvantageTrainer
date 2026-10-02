@@ -76,6 +76,9 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
 - These optional examples vary between attempts using a persisted seed; resuming
   reproduces the same cards and actions without changing the held-out checks.
 - Resume-safe lesson sessions, deterministic answer order, 80% completion threshold, XP, streak, and lesson accuracy.
+- `hi-lo-intro` now opens saved interactive card-tag tasks; a new chunks
+  lesson reveals groups of 3–5 cards together and checks their combined count.
+  All 13 ranks are covered on EN/RU; legacy MCQ remains in Quick Review.
 - A one-deck Hi-Lo countdown drill with checkpoints every eight exposed cards.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
   strategy feedback, per-round count checks, and five-round summaries. Each

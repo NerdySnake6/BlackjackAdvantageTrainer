@@ -28,6 +28,7 @@ void main() {
             strategyLessons: _json(
               'assets/content/$locale/strategy_lessons.json',
             ),
+            countLessons: _json('assets/content/$locale/count_lessons.json'),
             mathLessons: _json('assets/content/$locale/math_lessons.json'),
             glossary: _object('assets/content/$locale/glossary.json'),
           ),

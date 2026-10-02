@@ -30,6 +30,7 @@ class PilotScenario {
           (value) => PlayerAction.values.byName(value! as String),
         ),
       ),
+      chunked = json['chunked'] as bool? ?? false,
       initialCount = json['initialCount'] as int? ?? 0,
       prompt = json['prompt'] as String? ?? '',
       afterSplit = json['afterSplit'] as bool? ?? false,
@@ -62,6 +63,7 @@ class PilotScenario {
   final List<PlayingCard> cards;
   final PlayingCard? dealer;
   final Set<PlayerAction> availableActions;
+  final bool chunked;
   final int initialCount;
   final String prompt;
   final bool afterSplit;
@@ -215,6 +217,7 @@ class PilotLesson {
           'dealer': task.dealer?.rank.label,
           'actions': task.availableActions.map((a) => a.name).toList()..sort(),
           'initialCount': task.initialCount,
+          if (task.chunked) 'chunked': true,
           'expected': task.expected,
           if (task.isMathComparison) 'comparison': task.comparison!.toJson(),
           'mistakes': task.mistakes.keys.toList()..sort(),

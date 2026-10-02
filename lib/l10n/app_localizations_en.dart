@@ -968,4 +968,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String mathSample(int value) {
     return 'Fixed example: $value points';
   }
+
+  @override
+  String get countLessonsTitle => 'Hi-Lo and running count';
+
+  @override
+  String get revealChunk => 'Reveal the chunk';
 }

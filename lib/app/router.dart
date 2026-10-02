@@ -85,6 +85,7 @@ GoRouter createRouter({required AppState appState}) {
                   [
                     ...appState.catalog.strategyLessons,
                     ...appState.catalog.mathLessons,
+                    ...appState.catalog.countLessons,
                   ].any((lesson) => lesson.id == lessonId))
               ? null
               : '/learn';

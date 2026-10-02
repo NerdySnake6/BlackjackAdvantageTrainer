@@ -1716,6 +1716,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fixed example: {value} points'**
   String mathSample(int value);
+
+  /// No description provided for @countLessonsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi-Lo and running count'**
+  String get countLessonsTitle;
+
+  /// No description provided for @revealChunk.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal the chunk'**
+  String get revealChunk;
 }
 
 class _AppLocalizationsDelegate

@@ -328,5 +328,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "countLessonsTitle": "Hi-Lo и running count",
+  "revealChunk": "Раскрой группу карт"
 }

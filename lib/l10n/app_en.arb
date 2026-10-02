@@ -400,5 +400,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "countLessonsTitle": "Hi-Lo and running count",
+  "revealChunk": "Reveal the chunk"
 }

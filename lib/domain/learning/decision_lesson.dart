@@ -194,7 +194,7 @@ class DecisionLessonSession {
         _revealed == current.revealLimit) {
       throw StateError('No card to reveal');
     }
-    _revealed++;
+    _revealed += current.chunked ? current.cards.length : 1;
   }
 
   void useHint() {
@@ -283,6 +283,9 @@ class DecisionLessonSession {
         _revealed < 0 ||
         _revealed > current.revealLimit ||
         (!current.requiresReveal && _revealed != 0) ||
+        (current.chunked &&
+            _revealed != 0 &&
+            _revealed != current.cards.length) ||
         (_countInput != null &&
             (!current.usesNumber ||
                 _revealed != current.revealLimit ||

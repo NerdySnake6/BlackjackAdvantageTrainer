@@ -14,6 +14,7 @@ class ContentValidator {
     Object? foundationLessons,
     Object? strategyLessons,
     Object? mathLessons,
+    Object? countLessons,
     required Map<String, Object?> manifest,
     required Map<String, Object?> glossary,
   }) {
@@ -28,6 +29,7 @@ class ContentValidator {
         'foundationLessons': foundationLessons,
         'strategyLessons': strategyLessons,
         'mathLessons': mathLessons,
+        'countLessons': countLessons,
       });
       validate(parsed, manifest: manifest, glossary: glossary);
       return parsed;
@@ -162,10 +164,21 @@ class ContentValidator {
         '$locale: invalid math package',
       );
     }
+    if (catalog.contentVersion >= 9 || catalog.countLessons.isNotEmpty) {
+      _require(
+        catalog.countLessons.map((l) => l.id).join(',') ==
+                'hi-lo-intro,hi-lo-chunks' &&
+            manifest['countLessonFile'] ==
+                'assets/content/$locale/count_lessons.json',
+        '$locale: invalid counting package',
+      );
+    }
     for (final lesson in catalog.playableLessons) {
       if (catalog.foundationLessons.contains(lesson) ||
           (catalog.strategyLessons.contains(lesson) &&
-              lesson.id == 'first-strategy')) {
+              lesson.id == 'first-strategy') ||
+          (catalog.countLessons.contains(lesson) &&
+              lesson.id == 'hi-lo-intro')) {
         final legacy = catalog.lessonById(lesson.id);
         _require(
           legacy.skillId == lesson.skillId,
@@ -207,6 +220,18 @@ class ContentValidator {
           _require(
             task.kind == kind,
             '$path/${task.id}: unexpected foundation mission',
+          );
+        }
+        if (catalog.countLessons.contains(lesson)) {
+          _require(
+            task.isCounting,
+            '$path/${task.id}: unexpected counting mission',
+          );
+        }
+        if (task.chunked) {
+          _require(
+            task.isCounting && task.cards.length >= 3 && task.cards.length <= 5,
+            '$path/${task.id}: invalid chunk',
           );
         }
         register(task.id);
@@ -385,6 +410,17 @@ class ContentValidator {
         source.foundationLessons[i].resumeSignature ==
             translation.foundationLessons[i].resumeSignature,
         '${translation.locale}: foundation semantics differ',
+      );
+    }
+    _require(
+      source.countLessons.length == translation.countLessons.length,
+      '${translation.locale}: counting lesson count differs',
+    );
+    for (var i = 0; i < source.countLessons.length; i++) {
+      _require(
+        source.countLessons[i].resumeSignature ==
+            translation.countLessons[i].resumeSignature,
+        '${translation.locale}: counting semantics differ',
       );
     }
     _require(

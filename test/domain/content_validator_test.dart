@@ -12,6 +12,7 @@ Map<String, dynamic> _package(String locale) => {
     ('foundationLessons', 'foundation_lessons'),
     ('strategyLessons', 'strategy_lessons'),
     ('mathLessons', 'math_lessons'),
+    ('countLessons', 'count_lessons'),
     ('manifest', 'manifest'),
     ('glossary', 'glossary'),
   ])
@@ -27,6 +28,7 @@ CourseCatalog _parse(Map<String, dynamic> raw) =>
       foundationLessons: raw['foundationLessons'],
       strategyLessons: raw['strategyLessons'],
       mathLessons: raw['mathLessons'],
+      countLessons: raw['countLessons'],
       manifest: raw['manifest'] as Map<String, Object?>,
       glossary: raw['glossary'] as Map<String, Object?>,
     );

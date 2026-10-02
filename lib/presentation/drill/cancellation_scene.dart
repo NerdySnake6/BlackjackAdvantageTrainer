@@ -18,6 +18,7 @@ class CancellationScene extends StatelessWidget {
     required this.runningCount,
     required this.onRevealNext,
     this.showExplanation = true,
+    this.chunked = false,
   });
 
   final List<PlayingCard> sequence;
@@ -25,6 +26,7 @@ class CancellationScene extends StatelessWidget {
   final int runningCount;
   final VoidCallback onRevealNext;
   final bool showExplanation;
+  final bool chunked;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class CancellationScene extends StatelessWidget {
             const SizedBox(height: 16),
             FilledButton(
               onPressed: isComplete ? null : onRevealNext,
-              child: Text(strings.nextCard),
+              child: Text(chunked ? strings.revealChunk : strings.nextCard),
             ),
           ],
         ),

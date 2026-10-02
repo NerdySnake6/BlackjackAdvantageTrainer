@@ -201,6 +201,7 @@ class _PilotBody extends StatelessWidget {
                     ignoring: vm.busy,
                     child: CancellationScene(
                       sequence: task.cards,
+                      chunked: task.chunked,
                       revealedCount: session.revealed,
                       runningCount: task.countAfter(session.revealed),
                       showExplanation: showExplanation,

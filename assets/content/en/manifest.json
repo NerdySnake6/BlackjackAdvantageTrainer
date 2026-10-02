@@ -1,5 +1,5 @@
 {
-  "contentVersion": 8,
+  "contentVersion": 9,
   "locale": "en",
   "sourceLocale": "en",
   "license": "Original educational copy created for Blackjack Advantage Trainer.",
@@ -16,5 +16,6 @@
   "foundationLessonFile": "assets/content/en/foundation_lessons.json",
   "strategyLessonFile": "assets/content/en/strategy_lessons.json",
   "glossaryFile": "assets/content/en/glossary.json",
-  "mathLessonFile": "assets/content/en/math_lessons.json"
+  "mathLessonFile": "assets/content/en/math_lessons.json",
+  "countLessonFile": "assets/content/en/count_lessons.json"
 }
