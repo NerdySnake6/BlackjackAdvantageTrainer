@@ -172,3 +172,19 @@ Hit/Stand/Double/Split/Surrender, hard/soft и RC имеют explicit term butto
 content validation, Android debug и iOS debug без codesign успешны. EN/RU
 проверяют failed hint write, неизменный первый ответ и отсутствие справки
 в independent; стратегия/галереи уроков проходят 320px/200%.
+
+## Выполнено — шаг 4
+
+Владелец одобрил реализацию всех шагов. Beginner открывает portrait стол
+игрок/дилер: один Human и четыре Empty, без скрытых ботов и их карт.
+В настройках доступны solo/full presets; full использует прежние пять мест.
+Смена блокируется во время раздачи, ходов, feedback и count check. ViewModel
+сохраняется при повороте; выход возвращает portrait. Карты solo 80 px, действия
+переносятся без FittedBox, панель действий прокручивается. RC виден на самом
+столе в Guided, включая portrait. Проверки EN/RU 320×568 и перехода 568×320
+при 200% текста защищают layout и сохранение раунда.
+
+Повторный тест на реальных Android по FREE_BETA_RUNBOOK.md остаётся открытым.
+
+Проверки шага 4: 454 теста, analyze без замечаний, domain coverage 99,2%,
+content validation и Android/iOS debug builds успешны.

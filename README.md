@@ -97,6 +97,8 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
 - A six-deck, five-seat blackjack table with Guided and Practice modes,
   strategy feedback, per-round count checks, and five-round summaries. Each
   seat can be Human, Bot, or Empty; one person can occupy all five seats.
+  Beginners start with a portrait player-and-dealer preset; the full table
+  remains available in settings between rounds.
 - Standard reference-tested profile: 6D, S17, DAS, late surrender, dealer peek, 3:2,
   and 75% penetration.
 - Pure-Dart hand evaluation, shoe, counting, basic-strategy, and round engines.
@@ -174,8 +176,9 @@ flutter test --coverage
 flutter run
 ```
 
-The table switches to landscape while open and returns the app to portrait when
-closed.
+Beginners start with a portrait player-and-dealer table (four empty seats).
+The full-table preset uses landscape; presets can change between rounds.
+Closing the table returns the app to portrait.
 
 ### Android UI review in a standalone emulator
 

@@ -347,3 +347,14 @@ keys, forms и signatures не меняются. Free scope сверяется �
 ошибка записи не открывает определение. В independent и checkpoint справки нет.
 BeginnerPrimer — optional transient демонстрации до quick-start, без изменения
 DecisionLessonSession signatures, first answers, XP или progress schema.
+
+## Preset и ориентация Table
+
+TableScreen владеет одним TableViewModel до dispose; rebuild после поворота
+не создаёт новый engine. Beginner получает Human/Empty/Empty/Empty/Empty;
+полный preset использует standard configuration. Пустые места в solo не
+отображаются и не получают карты. TableViewModel отклоняет смену preset во
+время раздачи, хода, feedback и count check. Ориентация следует фактическим
+ролям engine, включая применённые отложенные изменения: solo — portraitUp,
+остальное — landscapeLeft/right; dispose возвращает portraitUp.
+Действия переносятся и прокручиваются с системным масштабом текста.

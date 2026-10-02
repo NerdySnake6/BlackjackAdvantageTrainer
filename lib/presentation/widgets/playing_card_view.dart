@@ -64,7 +64,7 @@ class PlayingCardView extends StatelessWidget {
             textScaler: TextScaler.noScaling,
             style: TextStyle(
               color: cardColor,
-              fontSize: compactIndex ? 14 : width * 0.28,
+              fontSize: compactIndex ? (width >= 72 ? 18 : 14) : width * 0.28,
               fontWeight: FontWeight.w900,
               height: 1,
             ),
@@ -74,7 +74,7 @@ class PlayingCardView extends StatelessWidget {
             textScaler: TextScaler.noScaling,
             style: TextStyle(
               color: cardColor,
-              fontSize: compactIndex ? 14 : width * 0.25,
+              fontSize: compactIndex ? (width >= 72 ? 18 : 14) : width * 0.25,
               height: 1,
             ),
           ),

@@ -141,3 +141,8 @@ Snake case в Dart package name правилен и не должен замен
 ## Перед коммитом
 
 Минимум для Dart/UI change: форматирование изменённых Dart-файлов, `flutter analyze` и `flutter test`. Изменения platform config требуют соответствующей platform build; изменения общих runtime boundaries или release configuration — обеих сборок. Не коммитьте `build/`, `.dart_tool/`, `.idea/`, `.serena/`, `local.properties` или секреты.
+
+Проверка ориентации после исправлений 2026-10-02: beginner Table открывается
+в portrait; полный preset — в landscape. Проверять переключение между
+раундами, сохранение состояния при rebuild и возврат в portrait после выхода.
+Для этого общего runtime требуются Android и iOS builds; SDK не менялся.

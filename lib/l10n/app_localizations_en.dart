@@ -1136,4 +1136,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossaryRunningCount => 'Running count (RC)';
+
+  @override
+  String get tableSolo => 'Player and dealer';
+
+  @override
+  String get tableFull => 'Full table';
+
+  @override
+  String get tablePresetHint =>
+      'Solo practice uses one Human and four Empty seats, in portrait. The full table adds cards for count practice, in landscape. Switch presets only between rounds; no hidden bots play in solo practice.';
 }

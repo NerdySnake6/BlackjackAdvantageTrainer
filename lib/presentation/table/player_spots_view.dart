@@ -22,13 +22,17 @@ class PlayerRow extends StatelessWidget {
     final engine = viewModel.engine;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final columns = (constraints.maxWidth / 180).floor().clamp(1, 5);
+        final columns = viewModel.isSinglePlayer
+            ? 1
+            : (constraints.maxWidth / 180).floor().clamp(1, 5);
         final width = (constraints.maxWidth - (columns - 1) * 8) / columns;
         return Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
-            for (final seat in engine.seats)
+            for (final seat in engine.seats.where(
+              (s) => !viewModel.isSinglePlayer || s.role != SeatRole.empty,
+            ))
               SizedBox(
                 width: width,
                 child: PlayerSpot(
@@ -181,7 +185,7 @@ class PlayerHandView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: CompactHandView(
             hand: handState.hand,
-            cardWidth: 64,
+            cardWidth: viewModel.isSinglePlayer ? 80 : 64,
             visibleCardCount: viewModel.isDealing
                 ? viewModel.visibleCardsForSeat(seatIndex)
                 : null,

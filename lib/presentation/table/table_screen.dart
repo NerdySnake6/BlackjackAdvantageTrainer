@@ -1,4 +1,4 @@
-/// Landscape guided blackjack practice table.
+/// Portrait solo practice and landscape full-table simulation.
 library;
 
 import 'dart:async';
@@ -27,37 +27,58 @@ class TableScreen extends StatefulWidget {
 }
 
 class _TableScreenState extends State<TableScreen> {
+  late final TableViewModel _viewModel;
+  bool? _soloOrientation;
+
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations(const [
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    final appState = context.read<AppState>();
+    final experience = appState.progress.experienceLevel;
+    _viewModel = TableViewModel(
+      singlePlayer: experience == ExperienceLevel.beginner,
+      mode: experience == ExperienceLevel.experienced
+          ? TableTrainingMode.practice
+          : TableTrainingMode.guided,
+      onEvent: (name, parameters) =>
+          unawaited(appState.trackTrainingEvent(name, parameters)),
+    )..addListener(_syncOrientation);
+    _syncOrientation();
+  }
+
+  void _syncOrientation() {
+    final solo = _viewModel.isSinglePlayer;
+    if (_soloOrientation == solo) return;
+    _soloOrientation = solo;
+    unawaited(
+      SystemChrome.setPreferredOrientations(
+        solo
+            ? const [DeviceOrientation.portraitUp]
+            : const [
+                DeviceOrientation.landscapeLeft,
+                DeviceOrientation.landscapeRight,
+              ],
+      ),
+    );
   }
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations(const [DeviceOrientation.portraitUp]);
+    _viewModel.removeListener(_syncOrientation);
+    _viewModel.dispose();
+    unawaited(
+      SystemChrome.setPreferredOrientations(const [
+        DeviceOrientation.portraitUp,
+      ]),
+    );
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    final appState = context.read<AppState>();
-    final experienceLevel = appState.progress.experienceLevel;
-    return ChangeNotifierProvider(
-      create: (context) => TableViewModel(
-        mode: experienceLevel == ExperienceLevel.experienced
-            ? TableTrainingMode.practice
-            : TableTrainingMode.guided,
-        onEvent: (eventName, parameters) {
-          unawaited(appState.trackTrainingEvent(eventName, parameters));
-        },
-      ),
-      child: const _TableView(),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider.value(
+    value: _viewModel,
+    child: const _TableView(),
+  );
 }
 
 class _TableView extends StatelessWidget {
@@ -69,16 +90,25 @@ class _TableView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.ink,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 8, 14, 10),
-          child: Column(
-            children: [
-              _TableHeader(viewModel: viewModel),
-              const SizedBox(height: 8),
-              Expanded(child: TableTopView(viewModel: viewModel)),
-              const SizedBox(height: 8),
-              TableActionTray(viewModel: viewModel),
-            ],
+        child: LayoutBuilder(
+          builder: (context, constraints) => Padding(
+            padding: const EdgeInsets.fromLTRB(14, 8, 14, 10),
+            child: Column(
+              children: [
+                _TableHeader(viewModel: viewModel),
+                const SizedBox(height: 8),
+                Expanded(child: TableTopView(viewModel: viewModel)),
+                const SizedBox(height: 8),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: constraints.maxHeight * 0.4,
+                  ),
+                  child: SingleChildScrollView(
+                    child: TableActionTray(viewModel: viewModel),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -97,7 +127,8 @@ class _TableHeader extends StatelessWidget {
     final engine = viewModel.engine;
     final width = MediaQuery.sizeOf(context).width;
     final isCompact = width < 1000;
-    final isPortraitTransition = width < 480;
+    final isPortraitTransition =
+        width < 800 || MediaQuery.textScalerOf(context).scale(12) > 16;
     return Row(
       children: [
         IconButton(
@@ -127,15 +158,17 @@ class _TableHeader extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      viewModel.mode == TableTrainingMode.guided
-                          ? strings.guidedMode
-                          : strings.practiceMode,
-                      style: const TextStyle(
-                        color: AppColors.gold,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1.2,
+                    Flexible(
+                      child: Text(
+                        viewModel.mode == TableTrainingMode.guided
+                            ? strings.guidedMode
+                            : strings.practiceMode,
+                        style: const TextStyle(
+                          color: AppColors.gold,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1.2,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 3),

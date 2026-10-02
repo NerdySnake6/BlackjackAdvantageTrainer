@@ -52,11 +52,31 @@ class SeatConfigurationSheet extends StatelessWidget {
               ),
             ],
             SizedBox(height: isCompact ? 8 : 16),
-            Row(
+            Text(strings.tablePresetHint),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final solo in [true, false])
+                  OutlinedButton(
+                    key: ValueKey(
+                      solo ? 'table-preset-solo' : 'table-preset-full',
+                    ),
+                    onPressed: viewModel.canChangeMode
+                        ? () => viewModel.setSinglePlayer(solo)
+                        : null,
+                    child: Text(solo ? strings.tableSolo : strings.tableFull),
+                  ),
+              ],
+            ),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 for (final (seatIndex, role)
                     in viewModel.configuredSeatRoles.indexed)
-                  Expanded(
+                  SizedBox(
+                    width: 120,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: PopupMenuButton<SeatRole>(
@@ -96,7 +116,7 @@ class SeatConfigurationSheet extends StatelessWidget {
                               SizedBox(height: isCompact ? 2 : 5),
                               Text(
                                 strings.seat(seatIndex + 1),
-                                style: const TextStyle(fontSize: 11),
+                                style: const TextStyle(fontSize: 14),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -106,7 +126,7 @@ class SeatConfigurationSheet extends StatelessWidget {
                                       roleLabel(strings, role),
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
-                                        fontSize: 11,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w800,
                                       ),
                                     ),

@@ -9,6 +9,51 @@ import 'package:blackjack_advantage_trainer/viewmodels/table_view_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testWidgets('solo preset has no bots and cannot alter an active round', (
+    tester,
+  ) async {
+    final vm = TableViewModel(
+      singlePlayer: true,
+      mode: TableTrainingMode.practice,
+      engine: _scriptedEngine([
+        CardRank.ten,
+        CardRank.ten,
+        CardRank.seven,
+        CardRank.seven,
+      ]),
+    );
+    addTearDown(vm.dispose);
+    expect(vm.isSinglePlayer, isTrue);
+    expect(
+      vm.configuredSeatRoles.where((r) => r == SeatRole.empty),
+      hasLength(4),
+    );
+    vm.startRound();
+    final dealt = vm.engine.dealtCards;
+    final count = vm.engine.countingEngine.runningCount;
+    expect(dealt, 4);
+    expect(vm.setSinglePlayer(false), isFalse);
+    await tester.pump(const Duration(seconds: 2));
+    expect(vm.engine.phase, RoundPhase.playerTurn);
+    expect(vm.setSinglePlayer(false), isFalse);
+    expect(vm.engine.dealtCards, dealt);
+    expect(vm.engine.countingEngine.runningCount, count);
+    vm.applyAction(PlayerAction.stand);
+    expect(vm.awaitingCountCheck, isTrue);
+    expect(vm.setSinglePlayer(false), isFalse);
+    vm.submitCount();
+    vm.continueAfterCountCheck();
+    expect(vm.setSinglePlayer(false), isTrue);
+    expect(vm.isSinglePlayer, isFalse);
+    expect(
+      vm.configuredSeatRoles.where((r) => r == SeatRole.bot),
+      hasLength(4),
+    );
+    expect(vm.engine.dealtCards, dealt);
+    expect(vm.setSinglePlayer(true), isTrue);
+    expect(vm.isSinglePlayer, isTrue);
+  });
+
   testWidgets('table reveals cards in casino dealing order', (tester) async {
     final viewModel = TableViewModel(
       engine: BlackjackEngine(random: Random(14)),

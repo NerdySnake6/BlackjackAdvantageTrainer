@@ -1138,4 +1138,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get glossaryRunningCount => 'Текущий счёт (RC)';
+
+  @override
+  String get tableSolo => 'Игрок и дилер';
+
+  @override
+  String get tableFull => 'Полный стол';
+
+  @override
+  String get tablePresetHint =>
+      'Один на один: один игрок и четыре пустых места, портретный экран. Полный стол добавляет карты для практики счёта и работает горизонтально. Меняйте режим только между раундами; в одиночном режиме скрытых ботов нет.';
 }

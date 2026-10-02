@@ -551,5 +551,8 @@
     }
   },
   "glossaryTitle": "Terms: tap for an explanation",
-  "glossaryRunningCount": "Running count (RC)"
+  "glossaryRunningCount": "Running count (RC)",
+  "tableSolo": "Player and dealer",
+  "tableFull": "Full table",
+  "tablePresetHint": "Solo practice uses one Human and four Empty seats, in portrait. The full table adds cards for count practice, in landscape. Switch presets only between rounds; no hidden bots play in solo practice."
 }

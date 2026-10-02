@@ -14,7 +14,33 @@ class TableViewModel extends ChangeNotifier {
     BlackjackEngine? engine,
     this.mode = TableTrainingMode.guided,
     this.onEvent,
-  }) : engine = engine ?? BlackjackEngine();
+    bool singlePlayer = false,
+  }) : engine = engine ?? BlackjackEngine() {
+    if (singlePlayer) this.engine.configureSeats(_soloConfiguration);
+  }
+
+  static SeatConfiguration get _soloConfiguration => SeatConfiguration([
+    SeatRole.human,
+    SeatRole.empty,
+    SeatRole.empty,
+    SeatRole.empty,
+    SeatRole.empty,
+  ]);
+
+  bool get isSinglePlayer =>
+      engine.seats.where((seat) => seat.role != SeatRole.empty).length == 1 &&
+      engine.seats.any((seat) => seat.role == SeatRole.human);
+
+  /// Changes the layout preset only outside active decisions and count checks.
+  bool setSinglePlayer(bool enabled) {
+    if (!canChangeMode) return false;
+    engine.configureSeats(
+      enabled ? _soloConfiguration : SeatConfiguration.standard(),
+    );
+    _pendingSeatRoles = null;
+    notifyListeners();
+    return true;
+  }
 
   final BlackjackEngine engine;
   final void Function(String, Map<String, Object?>)? onEvent;

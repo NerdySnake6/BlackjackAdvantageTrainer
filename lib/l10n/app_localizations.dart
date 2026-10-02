@@ -1968,6 +1968,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Running count (RC)'**
   String get glossaryRunningCount;
+
+  /// No description provided for @tableSolo.
+  ///
+  /// In en, this message translates to:
+  /// **'Player and dealer'**
+  String get tableSolo;
+
+  /// No description provided for @tableFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Full table'**
+  String get tableFull;
+
+  /// No description provided for @tablePresetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Solo practice uses one Human and four Empty seats, in portrait. The full table adds cards for count practice, in landscape. Switch presets only between rounds; no hidden bots play in solo practice.'**
+  String get tablePresetHint;
 }
 
 class _AppLocalizationsDelegate

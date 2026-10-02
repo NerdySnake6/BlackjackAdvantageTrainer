@@ -70,7 +70,7 @@ class TableActionTray extends StatelessWidget {
         ),
       );
     }
-    return SizedBox(height: 48, child: ActionBar(viewModel: viewModel));
+    return ActionBar(viewModel: viewModel);
   }
 }
 
@@ -90,40 +90,16 @@ class ActionBar extends StatelessWidget {
       (PlayerAction.split, strings.split),
       (PlayerAction.surrender, strings.surrender),
     ];
-    final isCompact = MediaQuery.sizeOf(context).width < 1000;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 8,
+      runSpacing: 8,
       children: [
-        if (!isCompact) ...[
-          Text(
-            strings.turnPrompt,
-            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
-          ),
-          const SizedBox(width: 10),
-        ],
         for (final item in actions)
           if (available.contains(item.$1))
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
-                child: FilledButton.tonal(
-                  onPressed: () => viewModel.applyAction(item.$1),
-                  style: FilledButton.styleFrom(
-                    minimumSize: Size(isCompact ? 0 : 78, 42),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isCompact ? 6 : 10,
-                    ),
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      item.$2,
-                      textScaler: isCompact ? TextScaler.noScaling : null,
-                      style: TextStyle(fontSize: isCompact ? 11 : null),
-                    ),
-                  ),
-                ),
-              ),
+            FilledButton.tonal(
+              onPressed: () => viewModel.applyAction(item.$1),
+              child: Text(item.$2),
             ),
       ],
     );
@@ -151,30 +127,19 @@ class DecisionFeedbackBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.danger),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Icon(Icons.school_outlined, color: AppColors.gold),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  strings.recommendedAction(
-                    actionLabel(strings, feedback.recommendedAction),
-                  ),
-                  style: const TextStyle(fontWeight: FontWeight.w900),
-                ),
-                Text(
-                  reasonLabel(strings, feedback.reason),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.white70, fontSize: 11),
-                ),
-              ],
+          Text(
+            strings.recommendedAction(
+              actionLabel(strings, feedback.recommendedAction),
             ),
+            style: const TextStyle(fontWeight: FontWeight.w900),
           ),
-          const SizedBox(width: 8),
+          Text(
+            reasonLabel(strings, feedback.reason),
+            style: const TextStyle(color: Colors.white70, fontSize: 14),
+          ),
           FilledButton(
             onPressed: viewModel.dismissDecisionFeedback,
             child: Text(strings.continueAction),
@@ -194,55 +159,53 @@ class CountCheckBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final answered = viewModel.countWasCorrect != null;
-    return SizedBox(
-      height: 58,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            answered
-                ? viewModel.countWasCorrect!
-                      ? strings.countCorrect
-                      : strings.countIncorrect(viewModel.revealedCount!)
-                : strings.tableCountPrompt,
-            style: TextStyle(
-              color: answered && !viewModel.countWasCorrect!
-                  ? AppColors.danger
-                  : Colors.white70,
-              fontWeight: FontWeight.w800,
-              fontSize: 12,
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        Text(
+          answered
+              ? viewModel.countWasCorrect!
+                    ? strings.countCorrect
+                    : strings.countIncorrect(viewModel.revealedCount!)
+              : strings.tableCountPrompt,
+          style: TextStyle(
+            color: answered && !viewModel.countWasCorrect!
+                ? AppColors.danger
+                : Colors.white70,
+            fontWeight: FontWeight.w800,
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(width: 12),
+        if (!answered) ...[
+          IconButton.filledTonal(
+            onPressed: () => viewModel.changeSubmittedCount(-1),
+            icon: const Icon(Icons.remove),
+          ),
+          SizedBox(
+            width: 54,
+            child: Text(
+              '${viewModel.submittedCount >= 0 ? '+' : ''}${viewModel.submittedCount}',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
-          const SizedBox(width: 12),
-          if (!answered) ...[
-            IconButton.filledTonal(
-              onPressed: () => viewModel.changeSubmittedCount(-1),
-              icon: const Icon(Icons.remove),
-            ),
-            SizedBox(
-              width: 54,
-              child: Text(
-                '${viewModel.submittedCount >= 0 ? '+' : ''}${viewModel.submittedCount}',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ),
-            IconButton.filledTonal(
-              onPressed: () => viewModel.changeSubmittedCount(1),
-              icon: const Icon(Icons.add),
-            ),
-          ],
-          const SizedBox(width: 12),
-          FilledButton(
-            onPressed: answered
-                ? viewModel.continueAfterCountCheck
-                : viewModel.submitCount,
-            child: Text(
-              answered ? strings.continueAction : strings.submitCount,
-            ),
+          IconButton.filledTonal(
+            onPressed: () => viewModel.changeSubmittedCount(1),
+            icon: const Icon(Icons.add),
           ),
         ],
-      ),
+        const SizedBox(width: 12),
+        FilledButton(
+          onPressed: answered
+              ? viewModel.continueAfterCountCheck
+              : viewModel.submitCount,
+          child: Text(answered ? strings.continueAction : strings.submitCount),
+        ),
+      ],
     );
   }
 }

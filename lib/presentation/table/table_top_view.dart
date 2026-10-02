@@ -29,6 +29,17 @@ class TableTopView extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Column(
               children: [
+                Text(
+                  viewModel.isSinglePlayer
+                      ? AppLocalizations.of(context).tableSolo
+                      : AppLocalizations.of(context).tableFull,
+                ),
+                if (viewModel.showsRunningCount)
+                  Text(
+                    AppLocalizations.of(context).currentCount(
+                      viewModel.engine.countingEngine.runningCount,
+                    ),
+                  ),
                 DealerSpot(viewModel: viewModel),
                 const SizedBox(height: 12),
                 PlayerRow(
@@ -88,7 +99,7 @@ class DealerSpot extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: CompactHandView(
                 hand: engine.dealerHand,
-                cardWidth: 64,
+                cardWidth: viewModel.isSinglePlayer ? 80 : 64,
                 visibleCardCount: visibleCards,
                 hideSecondCard: !engine.dealerHoleRevealed,
               ),

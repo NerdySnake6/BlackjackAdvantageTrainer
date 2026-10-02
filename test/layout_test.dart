@@ -1,3 +1,6 @@
+import 'package:blackjack_advantage_trainer/presentation/table/table_top_view.dart';
+import 'package:blackjack_advantage_trainer/presentation/table/player_spots_view.dart';
+import 'package:flutter/services.dart';
 import 'package:blackjack_advantage_trainer/app/app.dart';
 import 'package:blackjack_advantage_trainer/core/persistence/progress_repository.dart';
 import 'package:blackjack_advantage_trainer/data/content_repository.dart';
@@ -16,6 +19,66 @@ void main() {
     _enCatalog = await ContentRepository().loadCatalog(localeCode: 'en');
     _ruCatalog = await ContentRepository().loadCatalog(localeCode: 'ru');
   });
+
+  for (final russian in [false, true]) {
+    testWidgets(
+      'solo portrait stays readable at 200% and keeps state on rotation ($russian)',
+      (tester) async {
+        tester.view.devicePixelRatio = 1;
+        tester.view.physicalSize = const Size(320, 568);
+        tester.platformDispatcher.textScaleFactorTestValue = 2;
+        addTearDown(() {
+          tester.view.reset();
+          tester.platformDispatcher.clearTextScaleFactorTestValue();
+        });
+        final orientations = <Object?>[];
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          (call) async {
+            if (call.method == 'SystemChrome.setPreferredOrientations') {
+              orientations.add(call.arguments);
+            }
+            return null;
+          },
+        );
+        addTearDown(
+          () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            SystemChannels.platform,
+            null,
+          ),
+        );
+        await tester.pumpWidget(
+          BlackjackTrainerApp(appState: _createAppState(isRussian: russian)),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(russian ? 'Стол' : 'Table'));
+        await tester.pumpAndSettle();
+        final vm = tester
+            .widget<TableTopView>(find.byType(TableTopView))
+            .viewModel;
+        expect(vm.isSinglePlayer, isTrue);
+        expect(orientations.last, ['DeviceOrientation.portraitUp']);
+        await tester.tap(
+          find.text(russian ? 'Сдать первый раунд' : 'Deal the first round'),
+        );
+        await tester.pump(const Duration(seconds: 3));
+        expect(find.byType(PlayerSpot), findsOneWidget);
+        expect(tester.takeException(), isNull);
+        final dealt = vm.engine.dealtCards;
+        tester.view.physicalSize = const Size(568, 320);
+        await tester.pump();
+        expect(
+          tester.widget<TableTopView>(find.byType(TableTopView)).viewModel,
+          same(vm),
+        );
+        expect(vm.engine.dealtCards, dealt);
+        expect(tester.takeException(), isNull);
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump();
+        expect(orientations.last, ['DeviceOrientation.portraitUp']);
+      },
+    );
+  }
 
   testWidgets('required portrait and landscape layouts fit in English', (
     tester,
@@ -71,6 +134,10 @@ void main() {
     expect(find.text('Seat 5'), findsWidgets);
     expect(tester.takeException(), isNull);
 
+    await tester.ensureVisible(find.byKey(const ValueKey('table-preset-full')));
+    await tester.tap(find.byKey(const ValueKey('table-preset-full')));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Bot').first);
     expect(find.text('Human'), findsOneWidget);
     await tester.tap(find.text('Bot').first);
     await tester.pumpAndSettle();
@@ -79,6 +146,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Human'), findsNWidgets(2));
 
+    await tester.ensureVisible(find.text('Done'));
     await tester.tap(find.text('Done'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Deal the first round'));
@@ -175,6 +243,12 @@ void main() {
       expect(find.text('Готово'), findsOneWidget);
       expect(tester.takeException(), isNull);
 
+      await tester.ensureVisible(
+        find.byKey(const ValueKey('table-preset-full')),
+      );
+      await tester.tap(find.byKey(const ValueKey('table-preset-full')));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Готово'));
       await tester.tap(find.text('Готово'));
       await tester.pumpAndSettle();
 
