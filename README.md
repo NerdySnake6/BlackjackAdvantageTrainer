@@ -57,6 +57,9 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
   including late surrender, multi-card fallbacks and a hand after Split with DAS.
   All six strategy lessons are accessible from Learn's strategy group; the
   existing soft-18 pilot and its held-out checks remain unchanged.
+- DAS pairs, unavailable-action fallbacks and mixed strategy add 36 EN/RU
+  tasks. A separate mixed-strategy checkpoint requires 100 correct first
+  decisions in one saved form; two disjoint forms cover hard, soft and pairs.
 - Three additional playable pilot lessons in Learn: hard 12, soft 18, and
   Hi-Lo cancellation. Each has theory, two unscored introductions, five practice
   tasks, five independent tasks, correction, resume, and an idempotent XP result.

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../domain/learning/mastery_check.dart';
 import '../../domain/blackjack_engine/game_rules.dart';
 import '../../domain/blackjack_engine/hand.dart';
 import '../../domain/learning/decision_lesson.dart';
@@ -138,9 +139,7 @@ class _PilotBody extends StatelessWidget {
                 PilotPerformanceSummary(lessonId: vm.lesson.id),
                 const SizedBox(height: 16),
                 Text(strings.pilotResultNote),
-                if (context.read<AppState>().catalog.pilotLessons.any(
-                      (l) => l.id == vm.lesson.id,
-                    ) &&
+                if (MasteryCheckBank.supports(vm.lesson.id) &&
                     context.read<AppState>().isLessonCompleted(vm.lesson.id))
                   FilledButton.tonal(
                     key: const ValueKey('pilot-checkpoint'),

@@ -22,7 +22,7 @@ void main() {
   });
   for (final locale in ['en', 'ru']) {
     testWidgets(
-      '$locale iteration 23 strategy lessons: 320px/200%, first-answer error, hint and storage reload',
+      '$locale iteration 24 strategy lessons: 320px/200%, first-answer error, hint and storage reload',
       (tester) async {
         tester.view.devicePixelRatio = 1;
         tester.view.physicalSize = const Size(320, 568);
@@ -55,8 +55,7 @@ void main() {
           tester.platformDispatcher.clearTextScaleFactorTestValue();
         });
         await reload();
-        for (final lesson
-            in catalogs[locale]!.strategyLessons.skip(3).take(3)) {
+        for (final lesson in catalogs[locale]!.strategyLessons.skip(6)) {
           await runPilotJourney(
             tester,
             app!,

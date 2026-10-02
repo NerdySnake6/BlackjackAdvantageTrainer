@@ -2129,5 +2129,1058 @@
         }
       }
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pairs-das",
+    "skillId": "strategy.pairs_das",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Младшие пары и DAS",
+    "subtitle": "2 знакомства · 5 тренировок · 5 самостоятельных задач",
+    "theory": {
+      "id": "pairs-das-interactive-theory",
+      "text": "В стандартном шестиколодном профиле S17 правило Double After Split (DAS) разрешает удвоение новой двухкарточной руки после разделения не тузов. Пары двоек и троек разделяются против 2–7, четвёрок — против 5–6, шестёрок — против 2–6, семёрок — против 2–7. В остальных случаях на этих парах нужен Hit. Пара 5+5 играется как жёсткие 10: Double против 2–9, иначе Hit; Split не нужен. Это правила с DAS, а не таблица для другого профиля. Например, 4+4 против 6 разделяются; получившиеся 4+5 против 6 удваиваются. После Split оцени каждую новую руку заново. Разделённые тузы получают одну карту и останавливаются. Денежный исход симуляции не оценивается."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "pairs-das-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "4",
+          "4"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "При DAS разделяй четвёрки против 5–6.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. При DAS разделяй четвёрки против 5–6.",
+            "stand": "Выбран Stand. При DAS разделяй четвёрки против 5–6.",
+            "doubleDown": "Выбран Double. При DAS разделяй четвёрки против 5–6.",
+            "surrender": "Выбран Surrender. При DAS разделяй четвёрки против 5–6.",
+            "split": "При DAS разделяй четвёрки против 5–6."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "4",
+          "5"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "doubleDown",
+        "afterSplit": true,
+        "prompt": "После разделения 4+4 эта рука получила пятёрку. Выбери следующее действие.",
+        "coaching": {
+          "explanation": "Новая рука — жёсткие 9: Double против 3–6. DAS разрешает удвоение; Surrender после Split недоступен.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. Новая рука — жёсткие 9: Double против 3–6. DAS разрешает удвоение; Surrender после Split недоступен.",
+            "stand": "Выбран Stand. Новая рука — жёсткие 9: Double против 3–6. DAS разрешает удвоение; Surrender после Split недоступен.",
+            "doubleDown": "Новая рука — жёсткие 9: Double против 3–6. DAS разрешает удвоение; Surrender после Split недоступен."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "2"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "При DAS разделяй двойки против 2–7.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. При DAS разделяй двойки против 2–7.",
+            "stand": "Выбран Stand. При DAS разделяй двойки против 2–7.",
+            "doubleDown": "Выбран Double. При DAS разделяй двойки против 2–7.",
+            "surrender": "Выбран Surrender. При DAS разделяй двойки против 2–7.",
+            "split": "При DAS разделяй двойки против 2–7."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "3"
+        ],
+        "dealer": "3",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "При DAS разделяй тройки против 2–7.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. При DAS разделяй тройки против 2–7.",
+            "stand": "Выбран Stand. При DAS разделяй тройки против 2–7.",
+            "doubleDown": "Выбран Double. При DAS разделяй тройки против 2–7.",
+            "surrender": "Выбран Surrender. При DAS разделяй тройки против 2–7.",
+            "split": "При DAS разделяй тройки против 2–7."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "4"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Граница разделения четвёрок — карта дилера 5, не 4. Нужен Hit.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Граница разделения четвёрок — карта дилера 5, не 4. Нужен Hit.",
+            "stand": "Выбран Stand. Граница разделения четвёрок — карта дилера 5, не 4. Нужен Hit.",
+            "doubleDown": "Выбран Double. Граница разделения четвёрок — карта дилера 5, не 4. Нужен Hit.",
+            "surrender": "Выбран Surrender. Граница разделения четвёрок — карта дилера 5, не 4. Нужен Hit.",
+            "split": "Выбран Split. Граница разделения четвёрок — карта дилера 5, не 4. Нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "6"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "При DAS разделяй шестёрки против 2–6. Пока Split доступен, правило обычных жёстких 12 здесь не применяется.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. При DAS разделяй шестёрки против 2–6. Пока Split доступен, правило обычных жёстких 12 здесь не применяется.",
+            "stand": "Выбран Stand. При DAS разделяй шестёрки против 2–6. Пока Split доступен, правило обычных жёстких 12 здесь не применяется.",
+            "doubleDown": "Выбран Double. При DAS разделяй шестёрки против 2–6. Пока Split доступен, правило обычных жёстких 12 здесь не применяется.",
+            "surrender": "Выбран Surrender. При DAS разделяй шестёрки против 2–6. Пока Split доступен, правило обычных жёстких 12 здесь не применяется.",
+            "split": "При DAS разделяй шестёрки против 2–6. Пока Split доступен, правило обычных жёстких 12 здесь не применяется."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "5",
+          "5"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Играй 5+5 как жёсткие 10: Double против 2–9, не Split.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. Играй 5+5 как жёсткие 10: Double против 2–9, не Split.",
+            "stand": "Выбран Stand. Играй 5+5 как жёсткие 10: Double против 2–9, не Split.",
+            "doubleDown": "Играй 5+5 как жёсткие 10: Double против 2–9, не Split.",
+            "surrender": "Выбран Surrender. Играй 5+5 как жёсткие 10: Double против 2–9, не Split.",
+            "split": "Выбран Split. Играй 5+5 как жёсткие 10: Double против 2–9, не Split."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "7"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Разделяй семёрки против 2–7; против 8 и выше действие меняется на Hit.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. Разделяй семёрки против 2–7; против 8 и выше действие меняется на Hit.",
+            "stand": "Выбран Stand. Разделяй семёрки против 2–7; против 8 и выше действие меняется на Hit.",
+            "doubleDown": "Выбран Double. Разделяй семёрки против 2–7; против 8 и выше действие меняется на Hit.",
+            "surrender": "Выбран Surrender. Разделяй семёрки против 2–7; против 8 и выше действие меняется на Hit.",
+            "split": "Разделяй семёрки против 2–7; против 8 и выше действие меняется на Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "2"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Карта дилера 8 вне диапазона разделения двоек. Нужен Hit.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Карта дилера 8 вне диапазона разделения двоек. Нужен Hit.",
+            "stand": "Выбран Stand. Карта дилера 8 вне диапазона разделения двоек. Нужен Hit.",
+            "doubleDown": "Выбран Double. Карта дилера 8 вне диапазона разделения двоек. Нужен Hit.",
+            "surrender": "Выбран Surrender. Карта дилера 8 вне диапазона разделения двоек. Нужен Hit.",
+            "split": "Выбран Split. Карта дилера 8 вне диапазона разделения двоек. Нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "3"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Карта дилера 8 вне диапазона разделения троек. Нужен Hit.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Карта дилера 8 вне диапазона разделения троек. Нужен Hit.",
+            "stand": "Выбран Stand. Карта дилера 8 вне диапазона разделения троек. Нужен Hit.",
+            "doubleDown": "Выбран Double. Карта дилера 8 вне диапазона разделения троек. Нужен Hit.",
+            "surrender": "Выбран Surrender. Карта дилера 8 вне диапазона разделения троек. Нужен Hit.",
+            "split": "Выбран Split. Карта дилера 8 вне диапазона разделения троек. Нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "4",
+          "4"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Карта дилера 5 входит в узкий диапазон разделения четвёрок при DAS.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Выбран Hit. Карта дилера 5 входит в узкий диапазон разделения четвёрок при DAS.",
+            "stand": "Выбран Stand. Карта дилера 5 входит в узкий диапазон разделения четвёрок при DAS.",
+            "doubleDown": "Выбран Double. Карта дилера 5 входит в узкий диапазон разделения четвёрок при DAS.",
+            "surrender": "Выбран Surrender. Карта дилера 5 входит в узкий диапазон разделения четвёрок при DAS.",
+            "split": "Карта дилера 5 входит в узкий диапазон разделения четвёрок при DAS."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "5",
+          "5"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Жёсткие 10 не удваиваются против 10. Не разделяй пару: нужен Hit.",
+          "contrast": "Сравни 4+4 против 4 (Hit) и 5 (Split при DAS). Не переноси это правило разделения на 5+5.",
+          "mistakes": {
+            "hit": "Жёсткие 10 не удваиваются против 10. Не разделяй пару: нужен Hit.",
+            "stand": "Выбран Stand. Жёсткие 10 не удваиваются против 10. Не разделяй пару: нужен Hit.",
+            "doubleDown": "Выбран Double. Жёсткие 10 не удваиваются против 10. Не разделяй пару: нужен Hit.",
+            "surrender": "Выбран Surrender. Жёсткие 10 не удваиваются против 10. Не разделяй пару: нужен Hit.",
+            "split": "Выбран Split. Жёсткие 10 не удваиваются против 10. Не разделяй пару: нужен Hit."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "unavailable-actions-surrender",
+    "skillId": "strategy.unavailable_actions",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Когда нужное действие недоступно",
+    "subtitle": "2 знакомства · 5 тренировок · 5 самостоятельных задач",
+    "theory": {
+      "id": "unavailable-actions-surrender-interactive-theory",
+      "text": "Сначала проверь доступные кнопки. Недоступное действие не может быть ответом. После третьей карты Double и Surrender недоступны. Замена Double на жёстких 9–11 и мягких 13–17 — Hit, но на мягких 18 против 3–6 — Stand. При недоступном Split рассматривай пару как обычную жёсткую или мягкую руку. Для 8+8 против 10 это Surrender, если он разрешён, иначе Hit; против 6 — Stand. В двух задачах действие отключено специально для отработки замены: это упражнение на доступность управления, не новый профиль правил казино. На настоящей руке после Split нельзя сдаться, а при лимите четырёх рук — разделить ещё раз. Поздняя сдача исходных жёстких 15 против 10 или 16 против 9, 10, A применяется только после проверки дилера на блэкджек. Различай недоступное действие и невыгодное доступное."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "unavailable-actions-surrender-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "prompt": "Упражнение на доступность: Split специально отключён; остальные показанные кнопки доступны.",
+        "coaching": {
+          "explanation": "В этом упражнении Split отключён, но Surrender доступен. Играй руку как жёсткие 16 против 10: Surrender.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Выбран Hit. В этом упражнении Split отключён, но Surrender доступен. Играй руку как жёсткие 16 против 10: Surrender.",
+            "stand": "Выбран Stand. В этом упражнении Split отключён, но Surrender доступен. Играй руку как жёсткие 16 против 10: Surrender.",
+            "doubleDown": "Выбран Double. В этом упражнении Split отключён, но Surrender доступен. Играй руку как жёсткие 16 против 10: Surrender.",
+            "surrender": "В этом упражнении Split отключён, но Surrender доступен. Играй руку как жёсткие 16 против 10: Surrender."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "J",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "afterSplit": true,
+        "prompt": "Это одна из четырёх рук после Split. Дальнейшие Split и Surrender недоступны.",
+        "coaching": {
+          "explanation": "Лимит разделения достигнут, рука уже получена после Split. Ни Split, ни Surrender недоступны: Hit на жёстких 16 против десятиочковой карты.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Лимит разделения достигнут, рука уже получена после Split. Ни Split, ни Surrender недоступны: Hit на жёстких 16 против десятиочковой карты.",
+            "stand": "Выбран Stand. Лимит разделения достигнут, рука уже получена после Split. Ни Split, ни Surrender недоступны: Hit на жёстких 16 против десятиочковой карты.",
+            "doubleDown": "Выбран Double. Лимит разделения достигнут, рука уже получена после Split. Ни Split, ни Surrender недоступны: Hit на жёстких 16 против десятиочковой карты."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "2",
+          "4"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "На мягких 17 три карты. Double недоступен, поэтому Hit; правило S17 дилера не является стратегией игрока.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "На мягких 17 три карты. Double недоступен, поэтому Hit; правило S17 дилера не является стратегией игрока.",
+            "stand": "Выбран Stand. На мягких 17 три карты. Double недоступен, поэтому Hit; правило S17 дилера не является стратегией игрока."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "2",
+          "5"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Мягкие 18 против 5 удваиваются на двух картах. На трёх картах замена — Stand, не Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Выбран Hit. Мягкие 18 против 5 удваиваются на двух картах. На трёх картах замена — Stand, не Hit.",
+            "stand": "Мягкие 18 против 5 удваиваются на двух картах. На трёх картах замена — Stand, не Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "3",
+          "6"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "На жёстких 11 три карты. Замени недоступное Double на Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "На жёстких 11 три карты. Замени недоступное Double на Hit.",
+            "stand": "Выбран Stand. На жёстких 11 три карты. Замени недоступное Double на Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "7"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "prompt": "Упражнение на доступность: Surrender специально отключён. Выбери доступное действие.",
+        "coaching": {
+          "explanation": "В этом упражнении Surrender специально недоступен. Замена для жёстких 16 против туза — Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "В этом упражнении Surrender специально недоступен. Замена для жёстких 16 против туза — Hit.",
+            "stand": "Выбран Stand. В этом упражнении Surrender специально недоступен. Замена для жёстких 16 против туза — Hit.",
+            "doubleDown": "Выбран Double. В этом упражнении Surrender специально недоступен. Замена для жёстких 16 против туза — Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "6"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "afterSplit": true,
+        "prompt": "Это одна из четырёх рук после Split; повторное разделение и сдача недоступны.",
+        "coaching": {
+          "explanation": "При недоступном Split из-за лимита рук играй 6+6 как жёсткие 12 против 2: Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "При недоступном Split из-за лимита рук играй 6+6 как жёсткие 12 против 2: Hit.",
+            "stand": "Выбран Stand. При недоступном Split из-за лимита рук играй 6+6 как жёсткие 12 против 2: Hit.",
+            "doubleDown": "Выбран Double. При недоступном Split из-за лимита рук играй 6+6 как жёсткие 12 против 2: Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "stand",
+        "afterSplit": true,
+        "prompt": "После Split уже играются четыре руки; дальнейшие Split и Surrender недоступны.",
+        "coaching": {
+          "explanation": "Без Split это жёсткие 16 против 6. Нужен Stand: Split не всегда заменяется на Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Выбран Hit. Без Split это жёсткие 16 против 6. Нужен Stand: Split не всегда заменяется на Hit.",
+            "stand": "Без Split это жёсткие 16 против 6. Нужен Stand: Split не всегда заменяется на Hit.",
+            "doubleDown": "Выбран Double. Без Split это жёсткие 16 против 6. Нужен Stand: Split не всегда заменяется на Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "3",
+          "4"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "На многокарточных мягких 18 против 6 замена Double — Stand.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Выбран Hit. На многокарточных мягких 18 против 6 замена Double — Stand.",
+            "stand": "На многокарточных мягких 18 против 6 замена Double — Stand."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "4",
+          "5"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "На трёхкарточных жёстких 11 Double недоступен. Против десятки дилера нужен Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "На трёхкарточных жёстких 11 Double недоступен. Против десятки дилера нужен Hit.",
+            "stand": "Выбран Stand. На трёхкарточных жёстких 11 Double недоступен. Против десятки дилера нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "9"
+        ],
+        "dealer": "Q",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "coaching": {
+          "explanation": "Это исходные две карты; после проверки дилера Surrender доступен. Жёсткие 16 против десятиочковой карты сдаются.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Выбран Hit. Это исходные две карты; после проверки дилера Surrender доступен. Жёсткие 16 против десятиочковой карты сдаются.",
+            "stand": "Выбран Stand. Это исходные две карты; после проверки дилера Surrender доступен. Жёсткие 16 против десятиочковой карты сдаются.",
+            "doubleDown": "Выбран Double. Это исходные две карты; после проверки дилера Surrender доступен. Жёсткие 16 против десятиочковой карты сдаются.",
+            "surrender": "Это исходные две карты; после проверки дилера Surrender доступен. Жёсткие 16 против десятиочковой карты сдаются."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "afterSplit": true,
+        "prompt": "Это одна из четырёх рук после Split. Дальнейшие Split и Surrender недоступны.",
+        "coaching": {
+          "explanation": "Лимит рук запрещает Split, а рука после разделения не может сдаться. Замена для жёстких 16 против туза — Hit.",
+          "contrast": "8+8 против 10: Split при доступности, иначе Surrender при разрешении, иначе Hit. На многокарточных мягких 18 против 5 замена Double — Stand.",
+          "mistakes": {
+            "hit": "Лимит рук запрещает Split, а рука после разделения не может сдаться. Замена для жёстких 16 против туза — Hit.",
+            "stand": "Выбран Stand. Лимит рук запрещает Split, а рука после разделения не может сдаться. Замена для жёстких 16 против туза — Hit.",
+            "doubleDown": "Выбран Double. Лимит рук запрещает Split, а рука после разделения не может сдаться. Замена для жёстких 16 против туза — Hit."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "mixed-basic-strategy",
+    "skillId": "strategy.mixed",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Смешанная базовая стратегия",
+    "subtitle": "2 знакомства · 5 тренировок · 5 самостоятельных задач",
+    "theory": {
+      "id": "mixed-basic-strategy-interactive-theory",
+      "text": "Теперь название урока не подсказывает семейство руки. Проверь карты, открытую карту дилера и доступные действия. Пара с доступным Split может играться иначе, чем обычная рука с той же суммой; туз может стоить 11 или 1. В этом профиле S17 мягкие 19 и 20 остаются против любой карты дилера, включая мягкие 19 против 6. На других мягких суммах различай Double с заменой на Hit и мягкие 18 с заменой на Stand. На многокарточных руках нет Double и Surrender. Применяй те же правила независимо от денежного исхода прошлого решения в симуляции. После практики отдельная проверка базовой стратегии требует 100 правильных первых решений подряд на новых задачах. Оценка урока и XP не заменяют эту проверку."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "mixed-basic-strategy-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "8"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "При S17 мягкие 19 остаются против любой карты дилера, включая 6.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. При S17 мягкие 19 остаются против любой карты дилера, включая 6.",
+            "stand": "При S17 мягкие 19 остаются против любой карты дилера, включая 6.",
+            "doubleDown": "Выбран Double. При S17 мягкие 19 остаются против любой карты дилера, включая 6.",
+            "surrender": "Выбран Surrender. При S17 мягкие 19 остаются против любой карты дилера, включая 6."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "9"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "На мягких 20 нужен Stand. Наличие туза не требует дальнейшего добора.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. На мягких 20 нужен Stand. Наличие туза не требует дальнейшего добора.",
+            "stand": "На мягких 20 нужен Stand. Наличие туза не требует дальнейшего добора.",
+            "doubleDown": "Выбран Double. На мягких 20 нужен Stand. Наличие туза не требует дальнейшего добора.",
+            "surrender": "Выбран Surrender. На мягких 20 нужен Stand. Наличие туза не требует дальнейшего добора."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "6"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "При DAS шестёрки разделяются только против 2–6. Против 7 нужен Hit.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "При DAS шестёрки разделяются только против 2–6. Против 7 нужен Hit.",
+            "stand": "Выбран Stand. При DAS шестёрки разделяются только против 2–6. Против 7 нужен Hit.",
+            "doubleDown": "Выбран Double. При DAS шестёрки разделяются только против 2–6. Против 7 нужен Hit.",
+            "surrender": "Выбран Surrender. При DAS шестёрки разделяются только против 2–6. Против 7 нужен Hit.",
+            "split": "Выбран Split. При DAS шестёрки разделяются только против 2–6. Против 7 нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "7",
+          "7"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Семёрки разделяются против 2–7. Против 8 нужен Hit.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Семёрки разделяются против 2–7. Против 8 нужен Hit.",
+            "stand": "Выбран Stand. Семёрки разделяются против 2–7. Против 8 нужен Hit.",
+            "doubleDown": "Выбран Double. Семёрки разделяются против 2–7. Против 8 нужен Hit.",
+            "surrender": "Выбран Surrender. Семёрки разделяются против 2–7. Против 8 нужен Hit.",
+            "split": "Выбран Split. Семёрки разделяются против 2–7. Против 8 нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "5",
+          "5"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Играй 5+5 как жёсткие 10 и удваивай против 8; Split не нужен.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. Играй 5+5 как жёсткие 10 и удваивай против 8; Split не нужен.",
+            "stand": "Выбран Stand. Играй 5+5 как жёсткие 10 и удваивай против 8; Split не нужен.",
+            "doubleDown": "Играй 5+5 как жёсткие 10 и удваивай против 8; Split не нужен.",
+            "surrender": "Выбран Surrender. Играй 5+5 как жёсткие 10 и удваивай против 8; Split не нужен.",
+            "split": "Выбран Split. Играй 5+5 как жёсткие 10 и удваивай против 8; Split не нужен."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "3",
+          "6"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "После третьей карты жёсткие 11 не могут удвоиться. Нужен Hit.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "После третьей карты жёсткие 11 не могут удвоиться. Нужен Hit.",
+            "stand": "Выбран Stand. После третьей карты жёсткие 11 не могут удвоиться. Нужен Hit."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "3"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Это жёсткие 12 против 5. Нужен Stand, несмотря на небольшую сумму.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. Это жёсткие 12 против 5. Нужен Stand, несмотря на небольшую сумму.",
+            "stand": "Это жёсткие 12 против 5. Нужен Stand, несмотря на небольшую сумму.",
+            "doubleDown": "Выбран Double. Это жёсткие 12 против 5. Нужен Stand, несмотря на небольшую сумму.",
+            "surrender": "Выбран Surrender. Это жёсткие 12 против 5. Нужен Stand, несмотря на небольшую сумму."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "2",
+          "6"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Туз всё ещё стоит 11: это мягкие 19. Нужен Stand даже против туза.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. Туз всё ещё стоит 11: это мягкие 19. Нужен Stand даже против туза.",
+            "stand": "Туз всё ещё стоит 11: это мягкие 19. Нужен Stand даже против туза."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "3",
+          "6"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Туз стоит 11, сумма равна 20. Нужен Stand.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. Туз стоит 11, сумма равна 20. Нужен Stand.",
+            "stand": "Туз стоит 11, сумма равна 20. Нужен Stand."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "Q"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Это жёсткие 19, не мягкая рука и не пара. Нужен Stand.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. Это жёсткие 19, не мягкая рука и не пара. Нужен Stand.",
+            "stand": "Это жёсткие 19, не мягкая рука и не пара. Нужен Stand.",
+            "doubleDown": "Выбран Double. Это жёсткие 19, не мягкая рука и не пара. Нужен Stand.",
+            "surrender": "Выбран Surrender. Это жёсткие 19, не мягкая рука и не пара. Нужен Stand."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "3"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Жёсткие 10 на двух картах удваиваются против 2–9, включая 7.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. Жёсткие 10 на двух картах удваиваются против 2–9, включая 7.",
+            "stand": "Выбран Stand. Жёсткие 10 на двух картах удваиваются против 2–9, включая 7.",
+            "doubleDown": "Жёсткие 10 на двух картах удваиваются против 2–9, включая 7.",
+            "surrender": "Выбран Surrender. Жёсткие 10 на двух картах удваиваются против 2–9, включая 7."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "При доступном Split применяй правило пары восьмёрок раньше правила сдачи обычных жёстких 16.",
+          "contrast": "Сравни мягкие 19 против 6 (Stand) и мягкие 18 против 6 (Double на двух картах, иначе Stand). Пара шестёрок против 7 требует Hit, а не Split как против 6.",
+          "mistakes": {
+            "hit": "Выбран Hit. При доступном Split применяй правило пары восьмёрок раньше правила сдачи обычных жёстких 16.",
+            "stand": "Выбран Stand. При доступном Split применяй правило пары восьмёрок раньше правила сдачи обычных жёстких 16.",
+            "doubleDown": "Выбран Double. При доступном Split применяй правило пары восьмёрок раньше правила сдачи обычных жёстких 16.",
+            "surrender": "Выбран Surrender. При доступном Split применяй правило пары восьмёрок раньше правила сдачи обычных жёстких 16.",
+            "split": "При доступном Split применяй правило пары восьмёрок раньше правила сдачи обычных жёстких 16."
+          }
+        }
+      }
+    ]
   }
 ]

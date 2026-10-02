@@ -28,7 +28,12 @@ void main() {
     }
   });
   for (final locale in ['en', 'ru']) {
-    for (final id in ['hard-12', 'soft-18', 'hi-lo-cancellation']) {
+    for (final id in [
+      'hard-12',
+      'soft-18',
+      'hi-lo-cancellation',
+      'mixed-basic-strategy',
+    ]) {
       testWidgets(
         '$locale $id: new check works at 320px, resumes and records first answers',
         (tester) async {
@@ -78,8 +83,8 @@ void main() {
           );
           await tapPilot(tester, find.byKey(const ValueKey('check-begin')));
           final tasks = MasteryCheckBank.tasks(id, 0);
-          for (var i = 0; i < 10; i++) {
-            expect(find.text('${i + 1}/10'), findsOneWidget);
+          for (var i = 0; i < tasks.length; i++) {
+            expect(find.text('${i + 1}/${tasks.length}'), findsOneWidget);
             expect(find.byKey(const ValueKey('pilot-hint')), findsNothing);
             expect(find.byKey(const ValueKey('check-result')), findsNothing);
             final task = tasks[i];
@@ -127,9 +132,23 @@ void main() {
               await mount();
             }
           }
-          expect(find.text(strings.pilotMasteryStatus(90)), findsOneWidget);
-          expect(find.text(strings.pilotMastered), findsOneWidget);
-          expect(app.isLessonMastered(id), isTrue);
+          expect(
+            find.text(
+              strings.pilotMasteryStatus(
+                id == 'mixed-basic-strategy' ? 99 : 90,
+              ),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.text(
+              id == 'mixed-basic-strategy'
+                  ? strings.pilotMasteryPending
+                  : strings.pilotMastered,
+            ),
+            findsOneWidget,
+          );
+          expect(app.isLessonMastered(id), id != 'mixed-basic-strategy');
           expect(app.progress.xp, 150);
           expect(app.progress.lessonScores[id], 0.8);
           expect(tester.takeException(), isNull);
@@ -137,7 +156,7 @@ void main() {
           router.dispose();
           app.dispose();
         },
-        timeout: const Timeout(Duration(seconds: 30)),
+        timeout: const Timeout(Duration(seconds: 90)),
       );
     }
   }

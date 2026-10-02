@@ -2129,5 +2129,1058 @@
         }
       }
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pairs-das",
+    "skillId": "strategy.pairs_das",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Small pairs with DAS",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "pairs-das-interactive-theory",
+      "text": "In the standard six-deck S17 profile, Double After Split (DAS) allows doubling a new two-card hand after a non-ace split. Split 2s and 3s against 2–7, 4s against 5–6, 6s against 2–6, and 7s against 2–7. Otherwise Hit on these pairs. Treat 5+5 as hard 10: Double against 2–9, otherwise Hit; do not Split it. These are DAS rules, not a chart for a different profile. For example, 4+4 against 6 splits; a resulting 4+5 against 6 doubles. Split does not choose the next action for you: evaluate each new hand again. Split aces receive one card and stop. No result of a simulated wager is scored."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "pairs-das-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "4",
+          "4"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Split 4s against 5–6 with DAS.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. Split 4s against 5–6 with DAS.",
+            "stand": "You chose Stand. Split 4s against 5–6 with DAS.",
+            "doubleDown": "You chose Double. Split 4s against 5–6 with DAS.",
+            "surrender": "You chose Surrender. Split 4s against 5–6 with DAS.",
+            "split": "Split 4s against 5–6 with DAS."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "4",
+          "5"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "doubleDown",
+        "afterSplit": true,
+        "prompt": "After splitting 4+4, this hand received a 5. Choose its next action.",
+        "coaching": {
+          "explanation": "This new hand is hard 9: Double against 3–6. DAS allows it; Surrender does not apply after Split.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. This new hand is hard 9: Double against 3–6. DAS allows it; Surrender does not apply after Split.",
+            "stand": "You chose Stand. This new hand is hard 9: Double against 3–6. DAS allows it; Surrender does not apply after Split.",
+            "doubleDown": "This new hand is hard 9: Double against 3–6. DAS allows it; Surrender does not apply after Split."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "2"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "With DAS, split 2s against 2–7.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. With DAS, split 2s against 2–7.",
+            "stand": "You chose Stand. With DAS, split 2s against 2–7.",
+            "doubleDown": "You chose Double. With DAS, split 2s against 2–7.",
+            "surrender": "You chose Surrender. With DAS, split 2s against 2–7.",
+            "split": "With DAS, split 2s against 2–7."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "3",
+          "3"
+        ],
+        "dealer": "3",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "With DAS, split 3s against 2–7.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. With DAS, split 3s against 2–7.",
+            "stand": "You chose Stand. With DAS, split 3s against 2–7.",
+            "doubleDown": "You chose Double. With DAS, split 3s against 2–7.",
+            "surrender": "You chose Surrender. With DAS, split 3s against 2–7.",
+            "split": "With DAS, split 3s against 2–7."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "4",
+          "4"
+        ],
+        "dealer": "4",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "The split boundary for 4s is dealer 5, not 4. Hit.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "The split boundary for 4s is dealer 5, not 4. Hit.",
+            "stand": "You chose Stand. The split boundary for 4s is dealer 5, not 4. Hit.",
+            "doubleDown": "You chose Double. The split boundary for 4s is dealer 5, not 4. Hit.",
+            "surrender": "You chose Surrender. The split boundary for 4s is dealer 5, not 4. Hit.",
+            "split": "You chose Split. The split boundary for 4s is dealer 5, not 4. Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "6"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "With DAS, split 6s against 2–6. Do not use the hard-12 rule while Split is available.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. With DAS, split 6s against 2–6. Do not use the hard-12 rule while Split is available.",
+            "stand": "You chose Stand. With DAS, split 6s against 2–6. Do not use the hard-12 rule while Split is available.",
+            "doubleDown": "You chose Double. With DAS, split 6s against 2–6. Do not use the hard-12 rule while Split is available.",
+            "surrender": "You chose Surrender. With DAS, split 6s against 2–6. Do not use the hard-12 rule while Split is available.",
+            "split": "With DAS, split 6s against 2–6. Do not use the hard-12 rule while Split is available."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "5",
+          "5"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Treat 5+5 as hard 10: Double against 2–9, not Split.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. Treat 5+5 as hard 10: Double against 2–9, not Split.",
+            "stand": "You chose Stand. Treat 5+5 as hard 10: Double against 2–9, not Split.",
+            "doubleDown": "Treat 5+5 as hard 10: Double against 2–9, not Split.",
+            "surrender": "You chose Surrender. Treat 5+5 as hard 10: Double against 2–9, not Split.",
+            "split": "You chose Split. Treat 5+5 as hard 10: Double against 2–9, not Split."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "7"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Split 7s against 2–7; against 8 or higher the choice changes to Hit.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. Split 7s against 2–7; against 8 or higher the choice changes to Hit.",
+            "stand": "You chose Stand. Split 7s against 2–7; against 8 or higher the choice changes to Hit.",
+            "doubleDown": "You chose Double. Split 7s against 2–7; against 8 or higher the choice changes to Hit.",
+            "surrender": "You chose Surrender. Split 7s against 2–7; against 8 or higher the choice changes to Hit.",
+            "split": "Split 7s against 2–7; against 8 or higher the choice changes to Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "2"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Dealer 8 is outside the split range for 2s. Hit.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "Dealer 8 is outside the split range for 2s. Hit.",
+            "stand": "You chose Stand. Dealer 8 is outside the split range for 2s. Hit.",
+            "doubleDown": "You chose Double. Dealer 8 is outside the split range for 2s. Hit.",
+            "surrender": "You chose Surrender. Dealer 8 is outside the split range for 2s. Hit.",
+            "split": "You chose Split. Dealer 8 is outside the split range for 2s. Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "3",
+          "3"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Dealer 8 is outside the split range for 3s. Hit.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "Dealer 8 is outside the split range for 3s. Hit.",
+            "stand": "You chose Stand. Dealer 8 is outside the split range for 3s. Hit.",
+            "doubleDown": "You chose Double. Dealer 8 is outside the split range for 3s. Hit.",
+            "surrender": "You chose Surrender. Dealer 8 is outside the split range for 3s. Hit.",
+            "split": "You chose Split. Dealer 8 is outside the split range for 3s. Hit."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "4",
+          "4"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "Dealer 5 is inside the narrow split range for 4s with DAS.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "You chose Hit. Dealer 5 is inside the narrow split range for 4s with DAS.",
+            "stand": "You chose Stand. Dealer 5 is inside the narrow split range for 4s with DAS.",
+            "doubleDown": "You chose Double. Dealer 5 is inside the narrow split range for 4s with DAS.",
+            "surrender": "You chose Surrender. Dealer 5 is inside the narrow split range for 4s with DAS.",
+            "split": "Dealer 5 is inside the narrow split range for 4s with DAS."
+          }
+        }
+      },
+      {
+        "id": "pairs-das-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "5",
+          "5"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 10 does not double against 10. Keep the pair together and Hit.",
+          "contrast": "Compare 4+4 against 4 (Hit) and 5 (Split with DAS). Do not transfer that split rule to 5+5.",
+          "mistakes": {
+            "hit": "Hard 10 does not double against 10. Keep the pair together and Hit.",
+            "stand": "You chose Stand. Hard 10 does not double against 10. Keep the pair together and Hit.",
+            "doubleDown": "You chose Double. Hard 10 does not double against 10. Keep the pair together and Hit.",
+            "surrender": "You chose Surrender. Hard 10 does not double against 10. Keep the pair together and Hit.",
+            "split": "You chose Split. Hard 10 does not double against 10. Keep the pair together and Hit."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "unavailable-actions-surrender",
+    "skillId": "strategy.unavailable_actions",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "When the preferred action is unavailable",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "unavailable-actions-surrender-interactive-theory",
+      "text": "First read the available controls. An unavailable action cannot be the answer. After a third card, Double and Surrender are unavailable. Replace Double with Hit on hard 9–11 and soft 13–17, but with Stand on soft 18 against 3–6. If Split is unavailable, evaluate the pair as an ordinary hard or soft hand. For 8+8 against 10 this means Surrender if allowed, otherwise Hit; against 6 it means Stand. Two tasks explicitly disable an action just to practise this fallback: they are control-availability exercises, not a new casino rule profile. Actual hands after Split cannot Surrender, and at the four-hand limit cannot Split again. Late Surrender on an original hard 15 against 10 or hard 16 against 9, 10 or A applies only after the dealer peek. Do not confuse an unavailable choice with a bad enabled choice."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "unavailable-actions-surrender-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "prompt": "Availability exercise: Split is deliberately disabled; all other listed controls remain available.",
+        "coaching": {
+          "explanation": "Split is disabled in this exercise, but Surrender is enabled. Treat the hand as hard 16 against 10 and Surrender.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "You chose Hit. Split is disabled in this exercise, but Surrender is enabled. Treat the hand as hard 16 against 10 and Surrender.",
+            "stand": "You chose Stand. Split is disabled in this exercise, but Surrender is enabled. Treat the hand as hard 16 against 10 and Surrender.",
+            "doubleDown": "You chose Double. Split is disabled in this exercise, but Surrender is enabled. Treat the hand as hard 16 against 10 and Surrender.",
+            "surrender": "Split is disabled in this exercise, but Surrender is enabled. Treat the hand as hard 16 against 10 and Surrender."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "J",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "afterSplit": true,
+        "prompt": "This hand is one of four hands after Split. No further Split or Surrender is allowed.",
+        "coaching": {
+          "explanation": "The split limit has been reached and this is already a split hand. Neither Split nor Surrender is available: Hit on hard 16 against a ten-valued card.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "The split limit has been reached and this is already a split hand. Neither Split nor Surrender is available: Hit on hard 16 against a ten-valued card.",
+            "stand": "You chose Stand. The split limit has been reached and this is already a split hand. Neither Split nor Surrender is available: Hit on hard 16 against a ten-valued card.",
+            "doubleDown": "You chose Double. The split limit has been reached and this is already a split hand. Neither Split nor Surrender is available: Hit on hard 16 against a ten-valued card."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "2",
+          "4"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Soft 17 has three cards. Double is unavailable, so Hit; the dealer S17 rule is not the player's strategy.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "Soft 17 has three cards. Double is unavailable, so Hit; the dealer S17 rule is not the player's strategy.",
+            "stand": "You chose Stand. Soft 17 has three cards. Double is unavailable, so Hit; the dealer S17 rule is not the player's strategy."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "A",
+          "2",
+          "5"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Soft 18 against 5 would double on two cards. With three cards, its fallback is Stand, not Hit.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "You chose Hit. Soft 18 against 5 would double on two cards. With three cards, its fallback is Stand, not Hit.",
+            "stand": "Soft 18 against 5 would double on two cards. With three cards, its fallback is Stand, not Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "3",
+          "6"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 11 has three cards. Replace the unavailable Double with Hit.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "Hard 11 has three cards. Replace the unavailable Double with Hit.",
+            "stand": "You chose Stand. Hard 11 has three cards. Replace the unavailable Double with Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "7"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "prompt": "Availability exercise: Surrender is deliberately disabled. Choose an enabled action.",
+        "coaching": {
+          "explanation": "Surrender is deliberately unavailable in this exercise. Hard 16 against an ace falls back to Hit.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "Surrender is deliberately unavailable in this exercise. Hard 16 against an ace falls back to Hit.",
+            "stand": "You chose Stand. Surrender is deliberately unavailable in this exercise. Hard 16 against an ace falls back to Hit.",
+            "doubleDown": "You chose Double. Surrender is deliberately unavailable in this exercise. Hard 16 against an ace falls back to Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "6"
+        ],
+        "dealer": "2",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "afterSplit": true,
+        "prompt": "This is one of four hands after Split; it cannot be split again or surrendered.",
+        "coaching": {
+          "explanation": "With Split unavailable at the hand limit, treat 6+6 as hard 12 against 2: Hit.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "With Split unavailable at the hand limit, treat 6+6 as hard 12 against 2: Hit.",
+            "stand": "You chose Stand. With Split unavailable at the hand limit, treat 6+6 as hard 12 against 2: Hit.",
+            "doubleDown": "You chose Double. With Split unavailable at the hand limit, treat 6+6 as hard 12 against 2: Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "stand",
+        "afterSplit": true,
+        "prompt": "Four hands are already in play after Split; further Split and Surrender are unavailable.",
+        "coaching": {
+          "explanation": "Without Split, this is hard 16 against 6. Stand rather than automatically replacing Split with Hit.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "You chose Hit. Without Split, this is hard 16 against 6. Stand rather than automatically replacing Split with Hit.",
+            "stand": "Without Split, this is hard 16 against 6. Stand rather than automatically replacing Split with Hit.",
+            "doubleDown": "You chose Double. Without Split, this is hard 16 against 6. Stand rather than automatically replacing Split with Hit."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "3",
+          "4"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "On multi-card soft 18 against 6 the Double fallback is Stand.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "You chose Hit. On multi-card soft 18 against 6 the Double fallback is Stand.",
+            "stand": "On multi-card soft 18 against 6 the Double fallback is Stand."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "2",
+          "4",
+          "5"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Three-card hard 11 cannot Double. Hit against the dealer's ten.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "Three-card hard 11 cannot Double. Hit against the dealer's ten.",
+            "stand": "You chose Stand. Three-card hard 11 cannot Double. Hit against the dealer's ten."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "9"
+        ],
+        "dealer": "Q",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "surrender",
+        "coaching": {
+          "explanation": "These are the original two cards and Surrender is available after peek. Hard 16 against a ten-valued card surrenders.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "You chose Hit. These are the original two cards and Surrender is available after peek. Hard 16 against a ten-valued card surrenders.",
+            "stand": "You chose Stand. These are the original two cards and Surrender is available after peek. Hard 16 against a ten-valued card surrenders.",
+            "doubleDown": "You chose Double. These are the original two cards and Surrender is available after peek. Hard 16 against a ten-valued card surrenders.",
+            "surrender": "These are the original two cards and Surrender is available after peek. Hard 16 against a ten-valued card surrenders."
+          }
+        }
+      },
+      {
+        "id": "unavailable-actions-surrender-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown"
+        ],
+        "expected": "hit",
+        "afterSplit": true,
+        "prompt": "This is one of four hands after Split. Further Split and Surrender are unavailable.",
+        "coaching": {
+          "explanation": "The hand limit blocks Split and a split hand cannot Surrender. Hard 16 against an ace falls back to Hit.",
+          "contrast": "8+8 against 10: Split if available; otherwise Surrender if allowed; otherwise Hit. On multi-card soft 18 against 5, the Double fallback is Stand.",
+          "mistakes": {
+            "hit": "The hand limit blocks Split and a split hand cannot Surrender. Hard 16 against an ace falls back to Hit.",
+            "stand": "You chose Stand. The hand limit blocks Split and a split hand cannot Surrender. Hard 16 against an ace falls back to Hit.",
+            "doubleDown": "You chose Double. The hand limit blocks Split and a split hand cannot Surrender. Hard 16 against an ace falls back to Hit."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "mixed-basic-strategy",
+    "skillId": "strategy.mixed",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Mixed basic strategy",
+    "subtitle": "2 introductions · 5 practice · 5 independent tasks",
+    "theory": {
+      "id": "mixed-basic-strategy-interactive-theory",
+      "text": "Now the lesson name will not tell you the hand family. Check the cards, dealer upcard and available actions. A pair with Split available may use a different rule from its total; an ace may be 11 or 1. In this S17 profile, soft 19 and 20 Stand against every dealer upcard, including soft 19 against 6. For other soft totals, separate Double-or-Hit from soft 18's Double-or-Stand. Multi-card hands lose Double and Surrender. Apply the same rules even if your previous action lost a simulated round. After practice, the separate basic-strategy checkpoint requires 100 consecutive correct first answers on unseen tasks. Practice scores and XP do not replace that evidence."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "mixed-basic-strategy-interactive-1",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "8"
+        ],
+        "dealer": "6",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Soft 19 stands against every dealer upcard in S17, including 6.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. Soft 19 stands against every dealer upcard in S17, including 6.",
+            "stand": "Soft 19 stands against every dealer upcard in S17, including 6.",
+            "doubleDown": "You chose Double. Soft 19 stands against every dealer upcard in S17, including 6.",
+            "surrender": "You chose Surrender. Soft 19 stands against every dealer upcard in S17, including 6."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-2",
+        "kind": "decision",
+        "stage": "introduction",
+        "cards": [
+          "A",
+          "9"
+        ],
+        "dealer": "10",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "Soft 20 stands. The ace does not make further drawing necessary.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. Soft 20 stands. The ace does not make further drawing necessary.",
+            "stand": "Soft 20 stands. The ace does not make further drawing necessary.",
+            "doubleDown": "You chose Double. Soft 20 stands. The ace does not make further drawing necessary.",
+            "surrender": "You chose Surrender. Soft 20 stands. The ace does not make further drawing necessary."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-3",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "6",
+          "6"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Pair 6s split only against 2–6 with DAS. Against 7, Hit.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "Pair 6s split only against 2–6 with DAS. Against 7, Hit.",
+            "stand": "You chose Stand. Pair 6s split only against 2–6 with DAS. Against 7, Hit.",
+            "doubleDown": "You chose Double. Pair 6s split only against 2–6 with DAS. Against 7, Hit.",
+            "surrender": "You chose Surrender. Pair 6s split only against 2–6 with DAS. Against 7, Hit.",
+            "split": "You chose Split. Pair 6s split only against 2–6 with DAS. Against 7, Hit."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-4",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "7",
+          "7"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Pair 7s split against 2–7. Against 8, Hit.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "Pair 7s split against 2–7. Against 8, Hit.",
+            "stand": "You chose Stand. Pair 7s split against 2–7. Against 8, Hit.",
+            "doubleDown": "You chose Double. Pair 7s split against 2–7. Against 8, Hit.",
+            "surrender": "You chose Surrender. Pair 7s split against 2–7. Against 8, Hit.",
+            "split": "You chose Split. Pair 7s split against 2–7. Against 8, Hit."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-5",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "5",
+          "5"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Treat 5+5 as hard 10 and Double against 8; do not Split.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. Treat 5+5 as hard 10 and Double against 8; do not Split.",
+            "stand": "You chose Stand. Treat 5+5 as hard 10 and Double against 8; do not Split.",
+            "doubleDown": "Treat 5+5 as hard 10 and Double against 8; do not Split.",
+            "surrender": "You chose Surrender. Treat 5+5 as hard 10 and Double against 8; do not Split.",
+            "split": "You chose Split. Treat 5+5 as hard 10 and Double against 8; do not Split."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-6",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "2",
+          "3",
+          "6"
+        ],
+        "dealer": "8",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "hit",
+        "coaching": {
+          "explanation": "Hard 11 cannot Double after a third card. Hit.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "Hard 11 cannot Double after a third card. Hit.",
+            "stand": "You chose Stand. Hard 11 cannot Double after a third card. Hit."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-7",
+        "kind": "decision",
+        "stage": "practice",
+        "cards": [
+          "9",
+          "3"
+        ],
+        "dealer": "5",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "This is hard 12 against 5. Stand, even though the total is low.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. This is hard 12 against 5. Stand, even though the total is low.",
+            "stand": "This is hard 12 against 5. Stand, even though the total is low.",
+            "doubleDown": "You chose Double. This is hard 12 against 5. Stand, even though the total is low.",
+            "surrender": "You chose Surrender. This is hard 12 against 5. Stand, even though the total is low."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-8",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "2",
+          "6"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "The ace still counts as 11: soft 19. Stand even against an ace.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. The ace still counts as 11: soft 19. Stand even against an ace.",
+            "stand": "The ace still counts as 11: soft 19. Stand even against an ace."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-9",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "A",
+          "3",
+          "6"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "The ace counts as 11 and the total is 20. Stand.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. The ace counts as 11 and the total is 20. Stand.",
+            "stand": "The ace counts as 11 and the total is 20. Stand."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-10",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "9",
+          "Q"
+        ],
+        "dealer": "A",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "stand",
+        "coaching": {
+          "explanation": "This is hard 19, not a soft hand or pair. Stand.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. This is hard 19, not a soft hand or pair. Stand.",
+            "stand": "This is hard 19, not a soft hand or pair. Stand.",
+            "doubleDown": "You chose Double. This is hard 19, not a soft hand or pair. Stand.",
+            "surrender": "You chose Surrender. This is hard 19, not a soft hand or pair. Stand."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-11",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "7",
+          "3"
+        ],
+        "dealer": "7",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender"
+        ],
+        "expected": "doubleDown",
+        "coaching": {
+          "explanation": "Hard 10 on two cards doubles against 2–9, including 7.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. Hard 10 on two cards doubles against 2–9, including 7.",
+            "stand": "You chose Stand. Hard 10 on two cards doubles against 2–9, including 7.",
+            "doubleDown": "Hard 10 on two cards doubles against 2–9, including 7.",
+            "surrender": "You chose Surrender. Hard 10 on two cards doubles against 2–9, including 7."
+          }
+        }
+      },
+      {
+        "id": "mixed-basic-strategy-interactive-12",
+        "kind": "decision",
+        "stage": "independent",
+        "cards": [
+          "8",
+          "8"
+        ],
+        "dealer": "9",
+        "actions": [
+          "hit",
+          "stand",
+          "doubleDown",
+          "surrender",
+          "split"
+        ],
+        "expected": "split",
+        "coaching": {
+          "explanation": "With Split available, use the pair-of-8s rule before the surrender rule for ordinary hard 16.",
+          "contrast": "Compare soft 19 against 6 (Stand) with soft 18 against 6 (Double on two cards, otherwise Stand). A pair of 6s against 7 needs Hit, not the split used against 6.",
+          "mistakes": {
+            "hit": "You chose Hit. With Split available, use the pair-of-8s rule before the surrender rule for ordinary hard 16.",
+            "stand": "You chose Stand. With Split available, use the pair-of-8s rule before the surrender rule for ordinary hard 16.",
+            "doubleDown": "You chose Double. With Split available, use the pair-of-8s rule before the surrender rule for ordinary hard 16.",
+            "surrender": "You chose Surrender. With Split available, use the pair-of-8s rule before the surrender rule for ordinary hard 16.",
+            "split": "With Split available, use the pair-of-8s rule before the surrender rule for ordinary hard 16."
+          }
+        }
+      }
+    ]
   }
 ]

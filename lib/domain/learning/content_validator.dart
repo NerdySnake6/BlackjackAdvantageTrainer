@@ -145,7 +145,7 @@ class ContentValidator {
     if (catalog.contentVersion >= 5 || catalog.strategyLessons.isNotEmpty) {
       _require(
         catalog.strategyLessons.map((l) => l.id).join(',') ==
-                'first-strategy,dealer-upcard,hard-doubles,hard-13-16,soft-13-17,pairs-core' &&
+                'first-strategy,dealer-upcard,hard-doubles,hard-13-16,soft-13-17,pairs-core,pairs-das,unavailable-actions-surrender,mixed-basic-strategy' &&
             manifest['strategyLessonFile'] ==
                 'assets/content/$locale/strategy_lessons.json',
         '$locale: invalid strategy package',
@@ -289,6 +289,14 @@ class ContentValidator {
                 task.evaluation.total < 21,
             '$path/${task.id}: invalid decision after split',
           );
+        } else if (task.kind == LessonMissionKind.decision) {
+          _require(
+            task.drawCards.isEmpty,
+            '$path/${task.id}: unexpected decision demonstration',
+          );
+          if (task.prompt.isNotEmpty) {
+            _text(task.prompt, '$path/${task.id}/prompt');
+          }
         } else {
           _require(
             task.prompt.isEmpty && !task.afterSplit && task.drawCards.isEmpty,

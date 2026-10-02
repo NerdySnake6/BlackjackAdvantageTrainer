@@ -167,6 +167,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkpointTitle => 'Check on new tasks';
 
   @override
+  String get checkpointStrategyIntro =>
+      '100 new decisions covering hard totals, soft totals and pairs. All 100 first answers must be correct in one form. No timer, hints, feedback or extra XP. Every answer is saved. This is an internal training standard, not a guarantee of winning. Two fresh forms are available; repeating disclosed tasks cannot certify mastery.';
+
+  @override
   String get checkpointIntro =>
       '10 new tasks, at least 9 correct first answers. No timer, hints or feedback until the end. Each answer is saved; leaving resumes the same form. No additional XP. This narrow check does not certify the whole skill.';
 

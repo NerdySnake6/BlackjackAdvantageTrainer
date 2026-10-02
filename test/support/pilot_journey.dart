@@ -60,7 +60,7 @@ Future<void> runPilotJourney(
       expect(scene.showExplanation, index < 2 || index == 3);
       expect(scene.revealedCount, task.cards.length);
     } else {
-      if (task.afterSplit) {
+      if (task.prompt.isNotEmpty) {
         expect(find.text(task.prompt), findsOneWidget);
         await tester.ensureVisible(find.text(task.prompt));
         await tester.pumpAndSettle();

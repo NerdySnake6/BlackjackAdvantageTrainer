@@ -349,6 +349,12 @@ abstract class AppLocalizations {
   /// **'Check on new tasks'**
   String get checkpointTitle;
 
+  /// No description provided for @checkpointStrategyIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'100 new decisions covering hard totals, soft totals and pairs. All 100 first answers must be correct in one form. No timer, hints, feedback or extra XP. Every answer is saved. This is an internal training standard, not a guarantee of winning. Two fresh forms are available; repeating disclosed tasks cannot certify mastery.'**
+  String get checkpointStrategyIntro;
+
   /// No description provided for @checkpointIntro.
   ///
   /// In en, this message translates to:

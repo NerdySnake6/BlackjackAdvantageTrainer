@@ -20,6 +20,7 @@ List<PilotLesson> lessons(String locale) =>
             )
             as List)
         .skip(3)
+        .take(3)
         .map((l) => PilotLesson.fromJson(l as Map<String, Object?>))
         .toList();
 
@@ -179,12 +180,11 @@ void main() {
   test('changing afterSplit invalidates the saved content signature', () {
     final raw =
         (jsonDecode(
-                      File(
-                        'assets/content/en/strategy_lessons.json',
-                      ).readAsStringSync(),
-                    )
-                    as List)
-                .last
+                  File(
+                    'assets/content/en/strategy_lessons.json',
+                  ).readAsStringSync(),
+                )
+                as List)[5]
             as Map<String, Object?>;
     final lesson = PilotLesson.fromJson(raw);
     final saved = DecisionLessonSession(lesson).toJson();

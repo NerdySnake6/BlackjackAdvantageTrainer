@@ -37,7 +37,7 @@ class _CheckBody extends StatelessWidget {
     final session = vm.session;
     final task = session.current;
     final strings = AppLocalizations.of(context);
-    final lesson = vm.appState.catalog.pilotLessons.firstWhere(
+    final lesson = vm.appState.catalog.playableLessons.firstWhere(
       (l) => l.id == vm.lessonId,
     );
     final enabled = session.canAnswer && !vm.busy;
@@ -72,7 +72,11 @@ class _CheckBody extends StatelessWidget {
                   lesson.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                Text(strings.checkpointIntro),
+                Text(
+                  vm.lessonId == 'mixed-basic-strategy'
+                      ? strings.checkpointStrategyIntro
+                      : strings.checkpointIntro,
+                ),
                 if (vm.lessonId == 'soft-18') Text(strings.checkpointSoftScope),
                 FilledButton(
                   key: const ValueKey('check-begin'),

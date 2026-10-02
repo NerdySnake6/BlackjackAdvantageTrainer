@@ -4,6 +4,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../domain/learning/mastery_check.dart';
 import '../presentation/drill/count_drill_screen.dart';
 import '../presentation/home/app_shell.dart';
 import '../presentation/learn/learning_path_screen.dart';
@@ -113,7 +114,8 @@ GoRouter createRouter({required AppState appState}) {
         path: '/checkpoint/:lessonId',
         redirect: (context, state) {
           final id = state.pathParameters['lessonId']!;
-          return appState.catalog.pilotLessons.any(
+          return MasteryCheckBank.supports(id) &&
+                  appState.catalog.playableLessons.any(
                     (lesson) => lesson.id == id,
                   ) &&
                   appState.isLessonCompleted(id)

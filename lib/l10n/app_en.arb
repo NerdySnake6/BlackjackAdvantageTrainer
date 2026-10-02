@@ -45,6 +45,7 @@
   "pilotMastered": "Lesson check passed. This is not a full strategy or whole-deck certificate.",
   "pilotMasteryPending": "Lesson check not passed yet. Review the explanations before trying a fresh form.",
   "checkpointTitle": "Check on new tasks",
+  "checkpointStrategyIntro": "100 new decisions covering hard totals, soft totals and pairs. All 100 first answers must be correct in one form. No timer, hints, feedback or extra XP. Every answer is saved. This is an internal training standard, not a guarantee of winning. Two fresh forms are available; repeating disclosed tasks cannot certify mastery.",
   "checkpointIntro": "10 new tasks, at least 9 correct first answers. No timer, hints or feedback until the end. Each answer is saved; leaving resumes the same form. No additional XP. This narrow check does not certify the whole skill.",
   "checkpointSoftScope": "This form checks soft 18 with extra cards, when Double is unavailable.",
   "checkpointBegin": "Start new-task check",
