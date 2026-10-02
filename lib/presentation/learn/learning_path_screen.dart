@@ -12,6 +12,7 @@ import '../../l10n/app_localizations.dart';
 import '../../viewmodels/app_state.dart';
 import 'pilot_performance_summary.dart';
 import 'study_plan_card.dart';
+import 'glossary_help.dart';
 
 class LearningPathScreen extends StatelessWidget {
   const LearningPathScreen({super.key});
@@ -64,6 +65,7 @@ class LearningPathScreen extends StatelessWidget {
                         maintainState: true,
                         title: Text(strings.moreLearning),
                         children: [
+                          const GlossaryHelp(),
                           if (beginner)
                             OutlinedButton(
                               onPressed: () =>

@@ -337,3 +337,13 @@ mixed-basic-strategy в /checkpoint/mixed-basic-strategy; существующи
 keys, forms и signatures не меняются. Free scope сверяется с skill map:
 25 игровых уроков и одна отдельная проверка. Протокол исследования и журнал
 не включают новый runtime-сбор данных или изменения consent.
+
+
+Исправления отзывов 2026-10-02: CourseCatalog.glossary — read-only словарь
+проверенного locale asset. GlossaryHelp использует explicit term keys, а не
+разбор локализованных абзацев. Справка находится в Learn, теории/практике урока
+и настройках Table; отдельная кнопка не выполняет игрового действия.
+В оцениваемой практике PilotLessonViewModel сначала сохраняет useHint;
+ошибка записи не открывает определение. В independent и checkpoint справки нет.
+BeginnerPrimer — optional transient демонстрации до quick-start, без изменения
+DecisionLessonSession signatures, first answers, XP или progress schema.

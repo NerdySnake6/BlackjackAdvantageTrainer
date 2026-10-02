@@ -20,6 +20,7 @@ import 'adaptive_practice_card.dart';
 import 'pilot_performance_summary.dart';
 import 'foundation_scene.dart';
 import 'beginner_primer.dart';
+import 'glossary_help.dart';
 import 'math_comparison_scene.dart';
 
 class PilotLessonScreen extends StatelessWidget {
@@ -61,7 +62,53 @@ class _PilotBody extends StatelessWidget {
     return PopScope(
       canPop: !vm.busy,
       child: Scaffold(
-        appBar: AppBar(title: Text(vm.lesson.title)),
+        appBar: AppBar(
+          title: Text(vm.lesson.title),
+          actions: [
+            if (!vm.incompatibleSave && !session.isIndependent)
+              IconButton(
+                key: const ValueKey('lesson-glossary'),
+                tooltip: strings.glossaryTitle,
+                icon: const Icon(Icons.help_outline),
+                onPressed: vm.busy
+                    ? null
+                    : () => showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        showDragHandle: true,
+                        builder: (sheetContext) => SafeArea(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                GlossaryHelp(
+                                  beforeOpen: () async {
+                                    if (vm.busy || vm.session.isIndependent) {
+                                      return false;
+                                    }
+                                    if (vm.session.phase ==
+                                            DecisionLessonPhase.decision &&
+                                        !vm.session.isWarmup &&
+                                        !vm.session.hintUsed) {
+                                      await vm.hint();
+                                      return !vm.saveFailed;
+                                    }
+                                    return true;
+                                  },
+                                ),
+                                TextButton(
+                                  key: const ValueKey('lesson-glossary-close'),
+                                  onPressed: () =>
+                                      Navigator.of(sheetContext).pop(),
+                                  child: Text(strings.done),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+              ),
+          ],
+        ),
         bottomNavigationBar: vm.saveFailed
             ? SafeArea(
                 top: false,
@@ -109,6 +156,7 @@ class _PilotBody extends StatelessWidget {
                   vm.lesson.theory,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
+                const GlossaryHelp(),
                 const SizedBox(height: 20),
                 FilledButton(
                   key: const ValueKey('pilot-begin'),

@@ -30,6 +30,7 @@ class ContentValidator {
         'strategyLessons': strategyLessons,
         'mathLessons': mathLessons,
         'countLessons': countLessons,
+        'glossary': glossary,
       });
       validate(parsed, manifest: manifest, glossary: glossary);
       return parsed;

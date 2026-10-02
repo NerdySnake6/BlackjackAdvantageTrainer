@@ -1109,7 +1109,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get primerCompare =>
-      '17 beats the dealer’s 16 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.';
+      '17 loses to the dealer’s 18 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.';
 
   @override
   String get primerBust =>
@@ -1130,4 +1130,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get moreLearning => 'Other lessons and practice';
+
+  @override
+  String get glossaryTitle => 'Terms: tap for an explanation';
+
+  @override
+  String get glossaryRunningCount => 'Running count (RC)';
 }

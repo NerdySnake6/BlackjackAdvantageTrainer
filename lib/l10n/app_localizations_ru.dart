@@ -1111,7 +1111,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get primerCompare =>
-      'После завершения обеих рук ваши 17 больше 16 дилера. Взять ещё карту — Hit (добор). Закончить свою руку — Stand (остановка). Пример объясняет итог, а не выбор действия против скрытой карты дилера.';
+      'После завершения обеих рук ваши 17 меньше 18 дилера: эта рука проиграла. Взять ещё карту — Hit (добор). Закончить свою руку — Stand (остановка). Пример объясняет итог, а не выбор действия против скрытой карты дилера.';
 
   @override
   String get primerBust =>
@@ -1132,4 +1132,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get moreLearning => 'Другие уроки и практика';
+
+  @override
+  String get glossaryTitle => 'Термины: нажмите для объяснения';
+
+  @override
+  String get glossaryRunningCount => 'Текущий счёт (RC)';
 }

@@ -9,6 +9,7 @@ import '../../domain/blackjack_engine/game_rules.dart';
 import '../../l10n/app_localizations.dart';
 import '../../viewmodels/table_view_model.dart';
 import 'table_formatters.dart';
+import '../learn/glossary_help.dart';
 
 class SeatConfigurationSheet extends StatelessWidget {
   const SeatConfigurationSheet({super.key});
@@ -121,6 +122,7 @@ class SeatConfigurationSheet extends StatelessWidget {
                   ),
               ],
             ),
+            const GlossaryHelp(),
             SizedBox(height: isCompact ? 8 : 18),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(),

@@ -537,7 +537,7 @@
   "primerTitle": "Start with the basics",
   "primerGoal": "The dealer is the other side in this simulation. Your hand is your group of cards. You win by finishing with more points than the dealer, without going over 21. You do not have to reach 21. Equal totals usually mean a tie.",
   "primerValues": "Cards 2–10 use their number. J, Q and K count as 10. An ace counts as 1 or 11: use 1 when 11 would put the hand over 21. Reveal the examples before trying the lesson.",
-  "primerCompare": "17 beats the dealer’s 16 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.",
+  "primerCompare": "17 loses to the dealer’s 18 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.",
   "primerBust": "10 + 6 + 8 = 24. More than 21 is a bust: this hand loses, even if the dealer later goes over 21 too.",
   "primerBlackjack": "An ace and a ten-point card in the original two-card hand make a blackjack. It beats ordinary 21, but ties another blackjack. Three cards totalling 21 are ordinary 21. Split hands are explained in the actions lesson.",
   "primerUnscored": "These examples are optional and unscored. You can reopen them; they do not change saved answers or XP.",
@@ -549,5 +549,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "glossaryTitle": "Terms: tap for an explanation",
+  "glossaryRunningCount": "Running count (RC)"
 }

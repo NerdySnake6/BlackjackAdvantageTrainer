@@ -1924,7 +1924,7 @@ abstract class AppLocalizations {
   /// No description provided for @primerCompare.
   ///
   /// In en, this message translates to:
-  /// **'17 beats the dealer’s 16 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.'**
+  /// **'17 loses to the dealer’s 18 when both hands have finished. Taking another card is called Hit; stopping your hand is Stand. This example explains the result, not which action to choose against a hidden dealer card.'**
   String get primerCompare;
 
   /// No description provided for @primerBust.
@@ -1956,6 +1956,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other lessons and practice'**
   String get moreLearning;
+
+  /// No description provided for @glossaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms: tap for an explanation'**
+  String get glossaryTitle;
+
+  /// No description provided for @glossaryRunningCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Running count (RC)'**
+  String get glossaryRunningCount;
 }
 
 class _AppLocalizationsDelegate

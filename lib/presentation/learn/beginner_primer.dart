@@ -69,7 +69,7 @@ class _BeginnerPrimerState extends State<BeginnerPrimer> {
                 Wrap(
                   spacing: 8,
                   children: [
-                    for (final rank in ['10', '6'])
+                    for (final rank in ['10', '8'])
                       LearnCardView(
                         card: PilotScenario.cardFromLabel(rank, 0),
                         width: 64,

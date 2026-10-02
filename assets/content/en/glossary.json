@@ -1,12 +1,12 @@
 {
-  "hit": "Take one more card.",
-  "stand": "End play on the current hand without taking another card.",
-  "double": "Double the wager, take exactly one card, then stand.",
-  "split": "Separate a matching pair into two independently played hands.",
-  "surrender": "Give up the hand and lose half of its wager when the rules allow it.",
-  "hardHand": "A hand with no ace currently counted as 11.",
-  "softHand": "A hand containing an ace currently counted as 11.",
-  "runningCount": "The cumulative total of the Hi-Lo tags of every exposed card.",
+  "hit": "Take one more card. Example: 10 + 6 takes a 3 and becomes 19.",
+  "stand": "End play on the current hand without taking another card. Example: finish with 17; you receive no further cards.",
+  "double": "Double the wager, take exactly one card, then stand. Example: an initial practice unit becomes two units and you receive just one card.",
+  "split": "Separate a matching pair into two independently played hands. Example: 8 + 8 becomes two hands, each starting with one 8.",
+  "surrender": "Give up the hand and lose half of its wager when the rules allow it. Example: give up a one-unit hand and lose half a unit.",
+  "hardHand": "A hand with no ace currently counted as 11. Example: 10 + 6 is hard 16; A + 6 + 10 is hard 17.",
+  "softHand": "A hand containing an ace currently counted as 11. Example: A + 6 is soft 17; after a 10 arrives, the ace becomes 1 and the hand is hard 17.",
+  "runningCount": "The cumulative total of the Hi-Lo tags of every exposed card. Example: start at 0; exposed 2, K, 7 change the count by +1, −1, 0 and leave RC at 0.",
   "trueCount": "Running count divided by the estimated decks remaining.",
   "penetration": "The percentage of a shoe dealt before the shuffle card is reached."
 }
