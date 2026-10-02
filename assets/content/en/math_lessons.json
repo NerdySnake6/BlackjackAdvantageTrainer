@@ -1,0 +1,1694 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "house-edge-reality",
+    "skillId": "math.house_edge",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "House edge and a single outcome",
+    "subtitle": "Compare distributions, then choose independently.",
+    "theory": {
+      "id": "house-edge-reality-comparison-theory",
+      "text": "House edge is a long-run expectation under specified rules and decisions, not a prediction of your next session. In the fictional point models below, each entry is equally likely. The mean is the sum of the entries divided by their number. For example, −1, −1, +1 has mean −1/3, yet its next outcome can be +1. A positive sample does not remove a negative expectation. These are teaching distributions, not a numerical estimate of blackjack house edge; actual blackjack needs its exact rules, payouts and strategy."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "house-edge-reality-compare-01",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -1,
+            -1,
+            1
+          ],
+          "right": [
+            -1,
+            1
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            1
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = -1/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = -1/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = -1/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = -1/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-02",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -1,
+            1
+          ],
+          "right": [
+            -2,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-03",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -1,
+            1
+          ],
+          "right": [
+            -3,
+            3
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            3
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-04",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -1,
+            0,
+            1
+          ],
+          "right": [
+            -2,
+            1,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 1 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-05",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -3,
+            -1,
+            4
+          ],
+          "right": [
+            -2,
+            2
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -3,
+            2
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-06",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -1,
+            -1,
+            1,
+            1
+          ],
+          "right": [
+            -2,
+            -2,
+            2,
+            2
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            2
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-07",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -2,
+            3
+          ],
+          "right": [
+            -3,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1/2, B = 1/2 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-08",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -2,
+            0,
+            2
+          ],
+          "right": [
+            -4,
+            0,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-09",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -1,
+            -1,
+            3
+          ],
+          "right": [
+            -2,
+            1,
+            1
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            1
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-10",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -1,
+            1
+          ],
+          "right": [
+            -5,
+            5
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -1,
+            5
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-11",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -3,
+            2,
+            3
+          ],
+          "right": [
+            -4,
+            1,
+            2
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -3,
+            2
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 2/3, B = -1/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = -1/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = -1/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = -1/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "house-edge-reality-compare-12",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -2,
+            4
+          ],
+          "right": [
+            -1,
+            2
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            2
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1, B = 1/2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1, B = 1/2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1, B = 1/2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1, B = 1/2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "expected-value",
+    "skillId": "math.expected_value",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Expected value: choose the decision",
+    "subtitle": "Compare distributions, then choose independently.",
+    "theory": {
+      "id": "expected-value-comparison-theory",
+      "text": "Expected value (EV) averages every possible outcome with its probability. Choose a decision using that whole distribution, not the last result. For example, [−2,+4] averages +1 and [−1,+1] averages 0. A shown −2 for the first model does not make the second model better. These fictional points have no monetary value. The displayed sample is a fixed illustration of one possible result, not a random experiment or an estimate of blackjack action EV."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "expected-value-compare-01",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -2,
+            -2,
+            2
+          ],
+          "right": [
+            -2,
+            2
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            2
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = -2/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = -2/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = -2/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = -2/3, B = 0 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-02",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -2,
+            2
+          ],
+          "right": [
+            -4,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-03",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -2,
+            2
+          ],
+          "right": [
+            -6,
+            6
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            6
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-04",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -2,
+            0,
+            2
+          ],
+          "right": [
+            -4,
+            2,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 2 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-05",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -6,
+            -2,
+            8
+          ],
+          "right": [
+            -4,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -6,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-06",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -2,
+            -2,
+            2,
+            2
+          ],
+          "right": [
+            -4,
+            -4,
+            4,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-07",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -4,
+            6
+          ],
+          "right": [
+            -6,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1, B = 1 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1, B = 1 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1, B = 1 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1, B = 1 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-08",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -4,
+            0,
+            4
+          ],
+          "right": [
+            -8,
+            0,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-09",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -2,
+            -2,
+            6
+          ],
+          "right": [
+            -4,
+            2,
+            2
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            2
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 2/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-10",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -2,
+            2
+          ],
+          "right": [
+            -10,
+            10
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -2,
+            10
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-11",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -6,
+            4,
+            6
+          ],
+          "right": [
+            -8,
+            2,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -6,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 4/3, B = -2/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4/3, B = -2/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4/3, B = -2/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4/3, B = -2/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "expected-value-compare-12",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -4,
+            8
+          ],
+          "right": [
+            -2,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 2, B = 1 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2, B = 1 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2, B = 1 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2, B = 1 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "variance",
+    "skillId": "math.variance",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Variance: same mean, different spread",
+    "subtitle": "Compare distributions, then choose independently.",
+    "theory": {
+      "id": "variance-comparison-theory",
+      "text": "Variance measures the spread around the mean: average the squared distance of each outcome from that mean. [−1,+1] and [−3,+3] both have mean 0; their variances are 1 and 9. A larger variance does not imply a larger EV. With independent repeats the variance of the sum grows with the number of repeats; the variance of the average shrinks, but an individual outcome remains uncertain. Fixed examples below illustrate spread and do not prove that a losing run cannot happen."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "variance-compare-01",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -3,
+            -3,
+            3
+          ],
+          "right": [
+            -3,
+            3
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            3
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 8, B = 9 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 8, B = 9 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 8, B = 9 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 8, B = 9 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-02",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -3,
+            3
+          ],
+          "right": [
+            -6,
+            12
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            12
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-03",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -3,
+            3
+          ],
+          "right": [
+            -9,
+            9
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            9
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 81 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-04",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -3,
+            0,
+            3
+          ],
+          "right": [
+            -6,
+            3,
+            12
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            12
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 6, B = 54 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 6, B = 54 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 6, B = 54 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 6, B = 54 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-05",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -9,
+            -3,
+            12
+          ],
+          "right": [
+            -6,
+            6
+          ],
+          "metric": "variance",
+          "samples": [
+            -9,
+            6
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 78, B = 36 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 78, B = 36 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 78, B = 36 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 78, B = 36 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-06",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -3,
+            -3,
+            3,
+            3
+          ],
+          "right": [
+            -6,
+            -6,
+            6,
+            6
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            6
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 9, B = 36 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 36 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 36 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 36 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-07",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -6,
+            9
+          ],
+          "right": [
+            -9,
+            12
+          ],
+          "metric": "variance",
+          "samples": [
+            -6,
+            12
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 225/4, B = 441/4 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 225/4, B = 441/4 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 225/4, B = 441/4 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 225/4, B = 441/4 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-08",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -6,
+            0,
+            6
+          ],
+          "right": [
+            -12,
+            0,
+            12
+          ],
+          "metric": "variance",
+          "samples": [
+            -6,
+            12
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 24, B = 96 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 24, B = 96 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 24, B = 96 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 24, B = 96 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-09",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -3,
+            -3,
+            9
+          ],
+          "right": [
+            -6,
+            3,
+            3
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            3
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 32, B = 18 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 32, B = 18 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 32, B = 18 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 32, B = 18 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-10",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -3,
+            3
+          ],
+          "right": [
+            -15,
+            15
+          ],
+          "metric": "variance",
+          "samples": [
+            -3,
+            15
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 9, B = 225 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 225 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 225 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 9, B = 225 for variance. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-11",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -9,
+            6,
+            9
+          ],
+          "right": [
+            -12,
+            3,
+            6
+          ],
+          "metric": "variance",
+          "samples": [
+            -9,
+            6
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 62, B = 62 for variance. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 62, B = 62 for variance. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 62, B = 62 for variance. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 62, B = 62 for variance. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "variance-compare-12",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Use the fictional distributions shown below. Each entry is equally likely; the fixed samples deliberately show only one possible result. Compare the full models, not the samples.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -6,
+            12
+          ],
+          "right": [
+            -3,
+            6
+          ],
+          "metric": "variance",
+          "samples": [
+            -6,
+            6
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 81, B = 81/4 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 81, B = 81/4 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 81, B = 81/4 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 81, B = 81/4 for variance. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "advantage-play-conditions",
+    "skillId": "math.ap_conditions",
+    "version": 1,
+    "profileId": "standard_6d_s17_das_ls_peek_3to2",
+    "title": "Advantage needs conditions",
+    "subtitle": "Compare distributions, then choose independently.",
+    "theory": {
+      "id": "advantage-play-conditions-comparison-theory",
+      "text": "Advantage depends on verified rules, decisions and information about the remaining cards. A running count alone, or one good result, does not prove an edge. True count and its limitations are later topics; no threshold or betting plan is taught here. Compare fictional distributions under stated assumptions: higher EV may still allow a negative outcome, and changed assumptions can change EV or risk. No finite sample guarantees a profit. Points are only a mathematical teaching device, not a bankroll or real game."
+    },
+    "scoring": {
+      "policyId": "first_answer_v1",
+      "passCorrect": 8,
+      "starCorrect": [
+        8,
+        9,
+        10
+      ],
+      "topStarRequiresUnassisted": true
+    },
+    "scenarios": [
+      {
+        "id": "advantage-play-conditions-compare-01",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -4,
+            -4,
+            4
+          ],
+          "right": [
+            -4,
+            4
+          ],
+          "metric": "lossChance",
+          "samples": [
+            -4,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 2/3, B = 1/2 for probability of a negative outcome. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = 1/2 for probability of a negative outcome. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = 1/2 for probability of a negative outcome. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 2/3, B = 1/2 for probability of a negative outcome. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-02",
+        "kind": "mathComparison",
+        "stage": "introduction",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "right",
+        "comparison": {
+          "left": [
+            -4,
+            4
+          ],
+          "right": [
+            -8,
+            16
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            16
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 4 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 4 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 4 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 4 for expected value. Model B has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-03",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -4,
+            4
+          ],
+          "right": [
+            -12,
+            12
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            12
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-04",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -4,
+            0,
+            4
+          ],
+          "right": [
+            -8,
+            4,
+            16
+          ],
+          "metric": "lossChance",
+          "samples": [
+            -4,
+            16
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1/3, B = 1/3 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/3, B = 1/3 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/3, B = 1/3 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/3, B = 1/3 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-05",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -12,
+            -4,
+            16
+          ],
+          "right": [
+            -8,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -12,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-06",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -4,
+            -4,
+            4,
+            4
+          ],
+          "right": [
+            -8,
+            -8,
+            8,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-07",
+        "kind": "mathComparison",
+        "stage": "practice",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -8,
+            12
+          ],
+          "right": [
+            -12,
+            16
+          ],
+          "metric": "lossChance",
+          "samples": [
+            -8,
+            16
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-08",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -8,
+            0,
+            8
+          ],
+          "right": [
+            -16,
+            0,
+            16
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -8,
+            16
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 0, B = 0 for expected value. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-09",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -4,
+            -4,
+            12
+          ],
+          "right": [
+            -8,
+            4,
+            4
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -4,
+            4
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 4/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4/3, B = 0 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-10",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "equal",
+        "comparison": {
+          "left": [
+            -4,
+            4
+          ],
+          "right": [
+            -20,
+            20
+          ],
+          "metric": "lossChance",
+          "samples": [
+            -4,
+            20
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 1/2, B = 1/2 for probability of a negative outcome. Both models has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-11",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -12,
+            8,
+            12
+          ],
+          "right": [
+            -16,
+            4,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -12,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 8/3, B = -4/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 8/3, B = -4/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 8/3, B = -4/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 8/3, B = -4/3 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      },
+      {
+        "id": "advantage-play-conditions-compare-12",
+        "kind": "mathComparison",
+        "stage": "independent",
+        "cards": [],
+        "prompt": "Assume the complete fictional distributions are independently known. They are not derived from a running count and do not describe blackjack odds. A change in assumptions is represented by a change in the distribution.",
+        "expected": "left",
+        "comparison": {
+          "left": [
+            -8,
+            16
+          ],
+          "right": [
+            -4,
+            8
+          ],
+          "metric": "expectedValue",
+          "samples": [
+            -8,
+            8
+          ]
+        },
+        "coaching": {
+          "explanation": "Compare the complete distributions: A = 4, B = 2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+          "contrast": "A result is not an expectation. Keep the distribution and its assumptions fixed when comparing; changing the distribution requires a new calculation.",
+          "mistakes": {
+            "left": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4, B = 2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "right": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4, B = 2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities.",
+            "equal": "Compare all outcomes and their probabilities, not the selected sample. Compare the complete distributions: A = 4, B = 2 for expected value. Model A has the higher value, or they are equal. One possible sample cannot change these probabilities."
+          }
+        }
+      }
+    ]
+  }
+]

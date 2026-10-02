@@ -147,7 +147,7 @@ class DecisionLessonSession {
   bool get canAnswer =>
       (_phase == DecisionLessonPhase.decision ||
           (_phase == DecisionLessonPhase.coaching && !_corrected)) &&
-      (!current.requiresReveal || _revealed == current.cards.length);
+      (!current.requiresReveal || _revealed == current.revealLimit);
   int get correctAnswers => [
     for (var i = 0; i < _answers.length; i++)
       if (lesson.scenarios[i].isEvaluated &&
@@ -191,7 +191,7 @@ class DecisionLessonSession {
   void reveal() {
     if (_phase != DecisionLessonPhase.decision ||
         !current.requiresReveal ||
-        _revealed == current.cards.length) {
+        _revealed == current.revealLimit) {
       throw StateError('No card to reveal');
     }
     _revealed++;
@@ -281,16 +281,16 @@ class DecisionLessonSession {
         _answers.length != _index + (answered ? 1 : 0) ||
         _hints.length != _answers.length ||
         _revealed < 0 ||
-        _revealed > current.cards.length ||
+        _revealed > current.revealLimit ||
         (!current.requiresReveal && _revealed != 0) ||
         (_countInput != null &&
             (!current.usesNumber ||
-                _revealed != current.cards.length ||
+                _revealed != current.revealLimit ||
                 _countInput! < current.minimumInput ||
                 _countInput! > current.maximumInput)) ||
         (answered &&
             current.requiresReveal &&
-            _revealed != current.cards.length) ||
+            _revealed != current.revealLimit) ||
         (_phase == DecisionLessonPhase.theory &&
             (_index != 0 || _revealed != 0 || _hint)) ||
         (!answered && _corrected) ||

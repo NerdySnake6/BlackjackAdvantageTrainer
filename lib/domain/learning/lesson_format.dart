@@ -8,6 +8,7 @@ enum LessonMissionKind {
   handType,
   handOutcome,
   actionMeaning,
+  mathComparison,
 }
 
 enum LessonMissionStage { introduction, practice, independent }

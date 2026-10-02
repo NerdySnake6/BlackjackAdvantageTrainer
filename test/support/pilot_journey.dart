@@ -3,6 +3,7 @@ import 'package:blackjack_advantage_trainer/domain/learning/pilot_lesson.dart';
 import 'package:blackjack_advantage_trainer/l10n/app_localizations.dart';
 import 'package:blackjack_advantage_trainer/presentation/drill/cancellation_scene.dart';
 import 'package:blackjack_advantage_trainer/presentation/learn/decision_scene.dart';
+import 'package:blackjack_advantage_trainer/presentation/learn/math_comparison_scene.dart';
 import 'package:blackjack_advantage_trainer/presentation/learn/foundation_scene.dart';
 import 'package:blackjack_advantage_trainer/presentation/learn/pilot_lesson_screen.dart';
 import 'package:blackjack_advantage_trainer/presentation/table/table_formatters.dart';
@@ -59,6 +60,15 @@ Future<void> runPilotJourney(
       );
       expect(scene.showExplanation, index < 2 || index == 3);
       expect(scene.revealedCount, task.cards.length);
+    } else if (task.isMathComparison) {
+      for (var sample = 0; sample < 2; sample++) {
+        await tapPilot(tester, find.byKey(ValueKey('math-reveal-$sample')));
+      }
+      final scene = tester.widget<MathComparisonScene>(
+        find.byType(MathComparisonScene),
+      );
+      expect(scene.revealed, 2);
+      expect(scene.showExplanation, index < 2 || index == 3);
     } else {
       if (task.prompt.isNotEmpty) {
         expect(find.text(task.prompt), findsOneWidget);
@@ -107,6 +117,8 @@ Future<void> runPilotJourney(
           tester,
           find.byKey(const ValueKey('pilot-count-answer')),
         );
+      } else if (task.isMathComparison) {
+        await tapPilot(tester, find.byKey(ValueKey('math-answer-$value')));
       } else {
         await tapPilot(
           tester,
@@ -119,7 +131,9 @@ Future<void> runPilotJourney(
     }
 
     if (index == 2) {
-      final wrong = task.isCounting
+      final wrong = task.isMathComparison
+          ? task.answerKeys.firstWhere((a) => a != task.expected)
+          : task.isCounting
           ? (int.parse(task.expected) + 1).toString()
           : task.availableActions
                 .firstWhere((action) => action.name != task.expected)

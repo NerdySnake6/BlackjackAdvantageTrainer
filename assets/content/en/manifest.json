@@ -1,16 +1,20 @@
 {
-  "contentVersion": 7,
+  "contentVersion": 8,
   "locale": "en",
   "sourceLocale": "en",
   "license": "Original educational copy created for Blackjack Advantage Trainer.",
   "mathematicalSources": [
     "https://wizardofodds.com/games/blackjack/basics/",
-    "https://wizardofodds.com/games/blackjack/card-counting/high-low/"
+    "https://wizardofodds.com/games/blackjack/card-counting/high-low/",
+    "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/"
   ],
-  "supportedRuleProfiles": ["standard_6d_s17_das_ls_peek_3to2"],
+  "supportedRuleProfiles": [
+    "standard_6d_s17_das_ls_peek_3to2"
+  ],
   "lessonFile": "assets/content/en/lessons.json",
   "pilotLessonFile": "assets/content/en/pilot_lessons.json",
   "foundationLessonFile": "assets/content/en/foundation_lessons.json",
   "strategyLessonFile": "assets/content/en/strategy_lessons.json",
-  "glossaryFile": "assets/content/en/glossary.json"
+  "glossaryFile": "assets/content/en/glossary.json",
+  "mathLessonFile": "assets/content/en/math_lessons.json"
 }

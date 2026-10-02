@@ -19,6 +19,7 @@ import 'decision_scene.dart';
 import 'adaptive_practice_card.dart';
 import 'pilot_performance_summary.dart';
 import 'foundation_scene.dart';
+import 'math_comparison_scene.dart';
 
 class PilotLessonScreen extends StatelessWidget {
   const PilotLessonScreen({super.key, required this.lessonId});
@@ -169,7 +170,17 @@ class _PilotBody extends StatelessWidget {
                 ),
                 Text('${session.taskNumber}/${session.taskCount}'),
                 const SizedBox(height: 12),
-                if (task.isHandMission) ...[
+                if (task.isMathComparison) ...[
+                  MathComparisonScene(
+                    task: task,
+                    revealed: session.revealed,
+                    showExplanation: showExplanation,
+                    enabled: canAnswer,
+                    canReveal: !vm.busy && !feedback,
+                    onReveal: vm.reveal,
+                    onAnswer: vm.answer,
+                  ),
+                ] else if (task.isHandMission) ...[
                   FoundationScene(
                     task: task,
                     revealed: session.revealed,
@@ -279,7 +290,9 @@ class _PilotBody extends StatelessWidget {
                   ),
                   Text(
                     strings.pilotSelected(
-                      task.usesActions
+                      task.isMathComparison
+                          ? mathAnswerLabel(strings, session.firstAnswer!)
+                          : task.usesActions
                           ? actionLabel(
                               strings,
                               PlayerAction.values.byName(session.firstAnswer!),

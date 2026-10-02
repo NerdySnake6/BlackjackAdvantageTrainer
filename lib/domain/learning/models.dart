@@ -30,12 +30,16 @@ class CourseCatalog {
     this.pilotLessons = const [],
     this.foundationLessons = const [],
     this.strategyLessons = const [],
+    this.mathLessons = const [],
   });
 
   factory CourseCatalog.fromJson(Map<String, Object?> json) {
     return CourseCatalog(
       contentVersion: json['contentVersion']! as int,
       locale: json['locale']! as String,
+      mathLessons: (json['mathLessons'] as List<Object?>? ?? [])
+          .map((item) => PilotLesson.fromJson(item! as Map<String, Object?>))
+          .toList(growable: false),
       strategyLessons: (json['strategyLessons'] as List<Object?>? ?? [])
           .map((item) => PilotLesson.fromJson(item! as Map<String, Object?>))
           .toList(growable: false),
@@ -57,10 +61,12 @@ class CourseCatalog {
   final List<PilotLesson> pilotLessons;
   final List<PilotLesson> foundationLessons;
   final List<PilotLesson> strategyLessons;
+  final List<PilotLesson> mathLessons;
   Iterable<PilotLesson> get playableLessons => [
     ...pilotLessons,
     ...foundationLessons,
     ...strategyLessons,
+    ...mathLessons,
   ];
 
   List<LessonDefinition> get lessons => [

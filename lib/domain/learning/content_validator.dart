@@ -13,6 +13,7 @@ class ContentValidator {
     required Object? pilotLessons,
     Object? foundationLessons,
     Object? strategyLessons,
+    Object? mathLessons,
     required Map<String, Object?> manifest,
     required Map<String, Object?> glossary,
   }) {
@@ -26,6 +27,7 @@ class ContentValidator {
         'pilotLessons': pilotLessons,
         'foundationLessons': foundationLessons,
         'strategyLessons': strategyLessons,
+        'mathLessons': mathLessons,
       });
       validate(parsed, manifest: manifest, glossary: glossary);
       return parsed;
@@ -151,6 +153,15 @@ class ContentValidator {
         '$locale: invalid strategy package',
       );
     }
+    if (catalog.contentVersion >= 8 || catalog.mathLessons.isNotEmpty) {
+      _require(
+        catalog.mathLessons.map((l) => l.id).join(',') ==
+                'house-edge-reality,expected-value,variance,advantage-play-conditions' &&
+            manifest['mathLessonFile'] ==
+                'assets/content/$locale/math_lessons.json',
+        '$locale: invalid math package',
+      );
+    }
     for (final lesson in catalog.playableLessons) {
       if (catalog.foundationLessons.contains(lesson) ||
           (catalog.strategyLessons.contains(lesson) &&
@@ -174,6 +185,12 @@ class ContentValidator {
         '$path: unverified rule profile',
       );
       for (final task in lesson.scenarios) {
+        if (catalog.mathLessons.contains(lesson)) {
+          _require(
+            task.isMathComparison,
+            '$path/${task.id}: unexpected math mission',
+          );
+        }
         if (catalog.strategyLessons.contains(lesson)) {
           _require(
             task.kind == LessonMissionKind.decision,
@@ -224,7 +241,19 @@ class ContentValidator {
             '$path/${task.id}: unavailable two-card action',
           );
         }
-        if (task.isHandMission ||
+        if (task.isMathComparison) {
+          _text(task.prompt, '$path/${task.id}/prompt');
+          _require(
+            task.cards.isEmpty &&
+                task.dealer == null &&
+                task.availableActions.isEmpty &&
+                task.initialCount == 0 &&
+                !task.afterSplit &&
+                task.drawCards.isEmpty &&
+                task.expected == task.comparison!.expected,
+            '$path/${task.id}: invalid math comparison',
+          );
+        } else if (task.isHandMission ||
             task.kind == LessonMissionKind.actionMeaning) {
           _text(task.prompt, '$path/${task.id}/prompt');
           _require(
@@ -356,6 +385,17 @@ class ContentValidator {
         source.foundationLessons[i].resumeSignature ==
             translation.foundationLessons[i].resumeSignature,
         '${translation.locale}: foundation semantics differ',
+      );
+    }
+    _require(
+      source.mathLessons.length == translation.mathLessons.length,
+      '${translation.locale}: math lesson count differs',
+    );
+    for (var i = 0; i < source.mathLessons.length; i++) {
+      _require(
+        source.mathLessons[i].resumeSignature ==
+            translation.mathLessons[i].resumeSignature,
+        '${translation.locale}: math lesson semantics differ',
       );
     }
     _require(

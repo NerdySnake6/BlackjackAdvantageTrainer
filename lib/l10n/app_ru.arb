@@ -273,5 +273,60 @@
       }
     }
   },
-  "strategyLessonsTitle": "Решения стратегии"
+  "strategyLessonsTitle": "Решения стратегии",
+  "mathLessonsTitle": "Математика и реальность",
+  "mathLeft": "Модель A",
+  "mathRight": "Модель B",
+  "mathEqual": "Равны",
+  "mathChooseMean": "Выбери модель с большим математическим ожиданием.",
+  "mathChooseVariance": "Выбери модель с большей дисперсией.",
+  "mathChooseLoss": "Выбери модель с большей вероятностью отрицательного исхода.",
+  "mathModelNote": "Вымышленные очки; каждый элемент равновероятен. Фиксированные примеры не оценивают шансы блэкджека.",
+  "mathReveal": "Покажи возможный исход",
+  "mathOutcomes": "Равновероятных элементов: {count}",
+  "@mathOutcomes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mathProbability": "{value} очков: {count}/{total}",
+  "@mathProbability": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "mathMean": "Математическое ожидание: {value}",
+  "@mathMean": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "mathVariance": "Дисперсия: {value}",
+  "@mathVariance": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "mathSample": "Фиксированный пример: {value} очков",
+  "@mathSample": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  }
 }

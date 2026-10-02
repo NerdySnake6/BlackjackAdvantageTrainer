@@ -7,6 +7,7 @@ import '../blackjack_engine/card.dart';
 import '../blackjack_engine/game_rules.dart';
 import '../blackjack_engine/hand.dart';
 import 'lesson_format.dart';
+import 'math_comparison.dart';
 
 class PilotScenario {
   PilotScenario.fromJson(Map<String, Object?> json)
@@ -37,11 +38,17 @@ class PilotScenario {
           (entry) => cardFromLabel(entry.$2 as String, entry.$1 + 8),
         ),
       ),
+      comparison = json['comparison'] == null
+          ? null
+          : MathComparison.fromJson(
+              json['comparison']! as Map<String, Object?>,
+            ),
       expected = json['expected']! as String,
       coaching = LessonCoaching.fromJson(
         json['coaching']! as Map<String, Object?>,
       ) {
-    if (cards.isEmpty ||
+    if ((cards.isEmpty && !isMathComparison) ||
+        isMathComparison != (comparison != null) ||
         usesActions != (dealer != null) ||
         (!usesActions && availableActions.isNotEmpty) ||
         !accepts(expected)) {
@@ -59,6 +66,7 @@ class PilotScenario {
   final String prompt;
   final bool afterSplit;
   final List<PlayingCard> drawCards;
+  final MathComparison? comparison;
   final String expected;
   final LessonCoaching coaching;
 
@@ -66,6 +74,8 @@ class PilotScenario {
   String get contrast => coaching.contrast;
   Map<String, String> get mistakes => coaching.mistakes;
 
+  bool get isMathComparison => kind == LessonMissionKind.mathComparison;
+  int get revealLimit => isMathComparison ? 2 : cards.length;
   bool get isCounting => kind == LessonMissionKind.runningCount;
   bool get isHandMission => const {
     LessonMissionKind.handTotal,
@@ -75,7 +85,7 @@ class PilotScenario {
   bool get usesActions =>
       kind == LessonMissionKind.decision ||
       kind == LessonMissionKind.actionMeaning;
-  bool get requiresReveal => isCounting || isHandMission;
+  bool get requiresReveal => isCounting || isHandMission || isMathComparison;
   bool get usesNumber => isCounting || kind == LessonMissionKind.handTotal;
   int get minimumInput => isCounting ? initialCount - cards.length : 0;
   int get maximumInput =>
@@ -83,6 +93,7 @@ class PilotScenario {
   Set<String> get answerKeys => switch (kind) {
     LessonMissionKind.runningCount => {'count'},
     LessonMissionKind.handTotal => {'total'},
+    LessonMissionKind.mathComparison => {'left', 'right', 'equal'},
     LessonMissionKind.handType => {'hard', 'soft'},
     LessonMissionKind.handOutcome => {'natural', 'twentyOne', 'bust', 'inPlay'},
     _ => availableActions.map((a) => a.name).toSet(),
@@ -205,6 +216,7 @@ class PilotLesson {
           'actions': task.availableActions.map((a) => a.name).toList()..sort(),
           'initialCount': task.initialCount,
           'expected': task.expected,
+          if (task.isMathComparison) 'comparison': task.comparison!.toJson(),
           'mistakes': task.mistakes.keys.toList()..sort(),
           if (task.kind == LessonMissionKind.decision && task.afterSplit)
             'afterSplit': true,

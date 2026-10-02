@@ -57,6 +57,9 @@ class ContentRepository {
           'assets/content/$locale/strategy_lessons.json',
         ),
       ),
+      mathLessons: jsonDecode(
+        await _bundle.loadString('assets/content/$locale/math_lessons.json'),
+      ),
       glossary: glossary,
     );
   }

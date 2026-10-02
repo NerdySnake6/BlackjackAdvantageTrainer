@@ -1632,6 +1632,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Strategy decisions'**
   String get strategyLessonsTitle;
+
+  /// No description provided for @mathLessonsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Math & Reality'**
+  String get mathLessonsTitle;
+
+  /// No description provided for @mathLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Model A'**
+  String get mathLeft;
+
+  /// No description provided for @mathRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Model B'**
+  String get mathRight;
+
+  /// No description provided for @mathEqual.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal'**
+  String get mathEqual;
+
+  /// No description provided for @mathChooseMean.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the model with the higher expected value.'**
+  String get mathChooseMean;
+
+  /// No description provided for @mathChooseVariance.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the model with the higher variance.'**
+  String get mathChooseVariance;
+
+  /// No description provided for @mathChooseLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the model with the higher probability of a negative outcome.'**
+  String get mathChooseLoss;
+
+  /// No description provided for @mathModelNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Fictional points; each entry is equally likely. Fixed examples are not estimates of blackjack odds.'**
+  String get mathModelNote;
+
+  /// No description provided for @mathReveal.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal a possible outcome'**
+  String get mathReveal;
+
+  /// No description provided for @mathOutcomes.
+  ///
+  /// In en, this message translates to:
+  /// **'Equally likely entries: {count}'**
+  String mathOutcomes(int count);
+
+  /// No description provided for @mathProbability.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} points: {count}/{total}'**
+  String mathProbability(int value, int count, int total);
+
+  /// No description provided for @mathMean.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected value: {value}'**
+  String mathMean(String value);
+
+  /// No description provided for @mathVariance.
+  ///
+  /// In en, this message translates to:
+  /// **'Variance: {value}'**
+  String mathVariance(String value);
+
+  /// No description provided for @mathSample.
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed example: {value} points'**
+  String mathSample(int value);
 }
 
 class _AppLocalizationsDelegate

@@ -913,4 +913,59 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get strategyLessonsTitle => 'Strategy decisions';
+
+  @override
+  String get mathLessonsTitle => 'Math & Reality';
+
+  @override
+  String get mathLeft => 'Model A';
+
+  @override
+  String get mathRight => 'Model B';
+
+  @override
+  String get mathEqual => 'Equal';
+
+  @override
+  String get mathChooseMean =>
+      'Choose the model with the higher expected value.';
+
+  @override
+  String get mathChooseVariance => 'Choose the model with the higher variance.';
+
+  @override
+  String get mathChooseLoss =>
+      'Choose the model with the higher probability of a negative outcome.';
+
+  @override
+  String get mathModelNote =>
+      'Fictional points; each entry is equally likely. Fixed examples are not estimates of blackjack odds.';
+
+  @override
+  String get mathReveal => 'Reveal a possible outcome';
+
+  @override
+  String mathOutcomes(int count) {
+    return 'Equally likely entries: $count';
+  }
+
+  @override
+  String mathProbability(int value, int count, int total) {
+    return '$value points: $count/$total';
+  }
+
+  @override
+  String mathMean(String value) {
+    return 'Expected value: $value';
+  }
+
+  @override
+  String mathVariance(String value) {
+    return 'Variance: $value';
+  }
+
+  @override
+  String mathSample(int value) {
+    return 'Fixed example: $value points';
+  }
 }

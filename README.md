@@ -60,6 +60,9 @@ passed; Free-beta, Pro and independent mathematical-review gates remain.
 - DAS pairs, unavailable-action fallbacks and mixed strategy add 36 EN/RU
   tasks. A separate mixed-strategy checkpoint requires 100 correct first
   decisions in one saved form; two disjoint forms cover hard, soft and pairs.
+- Four Math & Reality lessons compare exact fictional point distributions
+  for expectation, variance and loss probability, with fixed examples and
+  independently checked EN/RU tasks. They do not estimate blackjack odds.
 - Three additional playable pilot lessons in Learn: hard 12, soft 18, and
   Hi-Lo cancellation. Each has theory, two unscored introductions, five practice
   tasks, five independent tasks, correction, resume, and an idempotent XP result.

@@ -914,4 +914,59 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get strategyLessonsTitle => 'Решения стратегии';
+
+  @override
+  String get mathLessonsTitle => 'Математика и реальность';
+
+  @override
+  String get mathLeft => 'Модель A';
+
+  @override
+  String get mathRight => 'Модель B';
+
+  @override
+  String get mathEqual => 'Равны';
+
+  @override
+  String get mathChooseMean =>
+      'Выбери модель с большим математическим ожиданием.';
+
+  @override
+  String get mathChooseVariance => 'Выбери модель с большей дисперсией.';
+
+  @override
+  String get mathChooseLoss =>
+      'Выбери модель с большей вероятностью отрицательного исхода.';
+
+  @override
+  String get mathModelNote =>
+      'Вымышленные очки; каждый элемент равновероятен. Фиксированные примеры не оценивают шансы блэкджека.';
+
+  @override
+  String get mathReveal => 'Покажи возможный исход';
+
+  @override
+  String mathOutcomes(int count) {
+    return 'Равновероятных элементов: $count';
+  }
+
+  @override
+  String mathProbability(int value, int count, int total) {
+    return '$value очков: $count/$total';
+  }
+
+  @override
+  String mathMean(String value) {
+    return 'Математическое ожидание: $value';
+  }
+
+  @override
+  String mathVariance(String value) {
+    return 'Дисперсия: $value';
+  }
+
+  @override
+  String mathSample(int value) {
+    return 'Фиксированный пример: $value очков';
+  }
 }
