@@ -338,3 +338,14 @@ Blackjack Apprenticeship — коммерческий источник и ори
 
 - [Apple App Review Guidelines, раздел 5.3](https://developer.apple.com/app-store/review/guidelines/)
 - [Firebase Crashlytics: crash-free metrics](https://firebase.google.com/docs/crashlytics/crash-free-metrics)
+
+
+## Подготовка Free-beta — итерация 30
+
+2026-10-02 владелец сообщил о наличии тестировщиков и поручил подготовить
+протокол. Подготовлены FREE_BETA_RUNBOOK, памятка участнику и пустой
+обезличенный журнал. Free включает 25 игровых уроков + basic-strategy checkpoint
+как 26-ю учебную единицу; явный узел Learn открывает прежний банк и сохраняет
+ключ mixed-basic-strategy. Получены качественные отзывы; формальная проверка физических Android, недельные данные
+30–50 участников, результаты обучения/возврата/ухода и решение о выпуске ещё
+не получены. Подготовка не завершает пользовательский gate итерации 30.

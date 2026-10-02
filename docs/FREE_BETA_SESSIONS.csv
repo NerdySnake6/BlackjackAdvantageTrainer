@@ -1,0 +1,1 @@
+participant_code,session_code,started_at_utc,local_day_index,app_build,locale,device_model,android_version,research_consent,analytics_opt_in,crash_opt_in,visit_type,first_lesson_completed,learning_activity,session_type,first_answer_accuracy,hints_used,help_requests,completed,top_friction,bug_severity,issue_id,redacted_note

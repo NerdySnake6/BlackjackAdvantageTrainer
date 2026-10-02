@@ -1878,6 +1878,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Active time: {seconds} s (feedback and background excluded).'**
   String combinedTime(int seconds);
+
+  /// No description provided for @basicStrategyCheckpointTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic strategy checkpoint'**
+  String get basicStrategyCheckpointTitle;
+
+  /// No description provided for @basicStrategyCheckpointLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete mixed basic strategy to open the 100-decision check.'**
+  String get basicStrategyCheckpointLocked;
+
+  /// No description provided for @basicStrategyCheckpointDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'100 new decisions. All first answers must be correct.'**
+  String get basicStrategyCheckpointDescription;
 }
 
 class _AppLocalizationsDelegate

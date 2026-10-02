@@ -522,5 +522,8 @@
         "type": "int"
       }
     }
-  }
+  },
+  "basicStrategyCheckpointTitle": "Basic strategy checkpoint",
+  "basicStrategyCheckpointLocked": "Complete mixed basic strategy to open the 100-decision check.",
+  "basicStrategyCheckpointDescription": "100 new decisions. All first answers must be correct."
 }

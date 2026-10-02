@@ -32,6 +32,9 @@ and agents. Read them before changing the product or code:
 - [Playable pilot lessons and checks](docs/ITERATION_9_PILOT_LESSONS.md)
 - [Pilot recruitment and feedback protocol](docs/PILOT_RECRUITMENT.md)
 - [Iteration 10 pilot runbook](docs/ITERATION_10_PILOT_RUNBOOK.md)
+- [Free-beta study protocol](docs/FREE_BETA_RUNBOOK.md)
+- [Free-beta participant guide](docs/FREE_BETA_PARTICIPANT_GUIDE.md)
+- [Tester feedback fix plan](docs/TESTER_FEEDBACK_FIX_PLAN.md)
 - [QA sprint plan and verification log](docs/QA_SPRINT.md)
 - [Development environment and commands](docs/DEVELOPMENT_SETUP.md)
 

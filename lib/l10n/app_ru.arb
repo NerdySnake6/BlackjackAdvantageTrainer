@@ -450,5 +450,8 @@
         "type": "int"
       }
     }
-  }
+  },
+  "basicStrategyCheckpointTitle": "Проверка basic strategy",
+  "basicStrategyCheckpointLocked": "Пройдите смешанную basic strategy, чтобы открыть проверку на 100 решений.",
+  "basicStrategyCheckpointDescription": "100 новых решений. Все первые ответы должны быть верными."
 }

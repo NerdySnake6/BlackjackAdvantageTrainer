@@ -79,6 +79,13 @@ GoRouter createRouter({required AppState appState}) {
         ],
       ),
       GoRoute(
+        path: '/lesson/basic-strategy-checkpoint',
+        redirect: (context, state) =>
+            appState.isLessonCompleted('mixed-basic-strategy')
+            ? '/checkpoint/mixed-basic-strategy'
+            : '/learn',
+      ),
+      GoRoute(
         path: '/lesson/:lessonId',
         redirect: (context, state) {
           final lessonId = state.pathParameters['lessonId'];

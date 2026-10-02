@@ -111,6 +111,30 @@ class LearningPathScreen extends StatelessWidget {
                               onTap: () => context.push('/lesson/${lesson.id}'),
                             ),
                           ),
+                        Card(
+                          child: ListTile(
+                            key: const ValueKey('basic-strategy-checkpoint'),
+                            title: Text(strings.basicStrategyCheckpointTitle),
+                            subtitle: Text(
+                              appState.isLessonCompleted('mixed-basic-strategy')
+                                  ? strings.basicStrategyCheckpointDescription
+                                  : strings.basicStrategyCheckpointLocked,
+                            ),
+                            trailing: Icon(
+                              appState.isLessonMastered('mixed-basic-strategy')
+                                  ? Icons.workspace_premium
+                                  : Icons.chevron_right,
+                            ),
+                            onTap:
+                                appState.isLessonCompleted(
+                                  'mixed-basic-strategy',
+                                )
+                                ? () => context.push(
+                                    '/lesson/basic-strategy-checkpoint',
+                                  )
+                                : null,
+                          ),
+                        ),
                         const SizedBox(height: 12),
                       ],
                       if (appState.catalog.pilotLessons.isNotEmpty) ...[

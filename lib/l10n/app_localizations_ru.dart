@@ -1081,4 +1081,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String combinedTime(int seconds) {
     return 'Активное время: $seconds с (без разбора и времени в фоне).';
   }
+
+  @override
+  String get basicStrategyCheckpointTitle => 'Проверка basic strategy';
+
+  @override
+  String get basicStrategyCheckpointLocked =>
+      'Пройдите смешанную basic strategy, чтобы открыть проверку на 100 решений.';
+
+  @override
+  String get basicStrategyCheckpointDescription =>
+      '100 новых решений. Все первые ответы должны быть верными.';
 }

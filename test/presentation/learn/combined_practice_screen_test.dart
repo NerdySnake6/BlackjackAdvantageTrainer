@@ -8,6 +8,7 @@ import 'package:blackjack_advantage_trainer/domain/learning/models.dart';
 import 'package:blackjack_advantage_trainer/l10n/app_localizations.dart';
 import 'package:blackjack_advantage_trainer/viewmodels/app_state.dart';
 import 'package:blackjack_advantage_trainer/viewmodels/combined_practice_view_model.dart';
+import 'package:blackjack_advantage_trainer/presentation/learn/mastery_check_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -168,6 +169,64 @@ void main() {
         await tapPilot(tester, find.byKey(const ValueKey('combined-repeat')));
         expect(vm().session.attempt, 2);
         expect(vm().session.started, isFalse);
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
+  for (final locale in ['en', 'ru']) {
+    testWidgets(
+      '$locale explicit checkpoint preserves old bank and result key',
+      (tester) async {
+        tester.view.devicePixelRatio = 1;
+        tester.view.physicalSize = const Size(320, 568);
+        final repository = _Repository(
+          const ProgressSnapshot(
+            experienceLevel: ExperienceLevel.experienced,
+            hasSeenTelemetryConsent: true,
+            lessonScores: {'mixed-basic-strategy': 0.8},
+          ),
+        );
+        final app = AppState(
+          catalog: catalogs[locale]!,
+          progress: repository.snapshot,
+          progressRepository: repository,
+        );
+        final router = createRouter(appState: app);
+        addTearDown(() async {
+          await tester.pumpWidget(const SizedBox());
+          router.dispose();
+          app.dispose();
+          tester.view.reset();
+        });
+        await tester.pumpWidget(
+          ChangeNotifierProvider.value(
+            value: app,
+            child: MaterialApp.router(
+              routerConfig: router,
+              theme: buildAppTheme(),
+              locale: Locale(locale),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: const TextScaler.linear(2)),
+                child: child!,
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+        await tapPilot(
+          tester,
+          find.byKey(const ValueKey('basic-strategy-checkpoint')),
+        );
+        expect(find.byType(MasteryCheckScreen), findsOneWidget);
+        expect(app.progress.lessonScores, {'mixed-basic-strategy': 0.8});
+        expect(app.progress.masteryChecks, isEmpty);
+        router.go('/lesson/basic-strategy-checkpoint');
+        await tester.pumpAndSettle();
+        expect(find.byType(MasteryCheckScreen), findsOneWidget);
         expect(tester.takeException(), isNull);
       },
     );

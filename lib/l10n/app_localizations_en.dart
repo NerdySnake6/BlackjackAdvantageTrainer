@@ -1079,4 +1079,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String combinedTime(int seconds) {
     return 'Active time: $seconds s (feedback and background excluded).';
   }
+
+  @override
+  String get basicStrategyCheckpointTitle => 'Basic strategy checkpoint';
+
+  @override
+  String get basicStrategyCheckpointLocked =>
+      'Complete mixed basic strategy to open the 100-decision check.';
+
+  @override
+  String get basicStrategyCheckpointDescription =>
+      '100 new decisions. All first answers must be correct.';
 }
